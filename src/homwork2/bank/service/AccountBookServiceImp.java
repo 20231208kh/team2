@@ -59,9 +59,37 @@ public class AccountBookServiceImp implements AccountBookService {
 	}
 
 	@Override
-	public boolean searchByMoney() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean searchByMoney(int min, int max) {
+		if(bankList == null || bankList.size() == 0) {
+			System.out.println("");
+			return false;
+		}
+		bankList.stream()
+				.filter(b-> min<=Math.abs(b.getMoney()) && max >= Math.abs(b.getMoney()))
+				.forEach(l->System.out.print(l));
+		return true;
+	}
+	
+	public boolean searchByMoney(int min) {
+		if(bankList == null || bankList.size() == 0) {
+			System.out.println("");
+			return false;
+		}
+		bankList.stream()
+				.filter(b-> min<=Math.abs(b.getMoney()))
+				.forEach(l->System.out.print(l));
+		return true;
+	}
+	
+	public boolean searchByMoney(int max, String m) {
+		if(bankList == null || bankList.size() == 0) {
+			System.out.println("");
+			return false;
+		}
+		bankList.stream()
+				.filter(b->  max >= Math.abs(b.getMoney()))
+				.forEach(l->System.out.print(l));
+		return true;
 	}
 
 	@Override

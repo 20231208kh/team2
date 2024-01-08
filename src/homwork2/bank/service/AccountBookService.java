@@ -29,7 +29,7 @@ public interface AccountBookService {
 	//1000원이하 지출
 	//1000원이상 10000원이하 지출
 	//10000이상 지출
-	boolean searchByMoney();
+	boolean searchByMoney(int min, int max);
 	
 	//전체 조회
 	boolean searchAll();
