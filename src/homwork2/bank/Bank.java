@@ -15,7 +15,14 @@ public class Bank {
 	@Override
 	public String toString() {
 		DecimalFormat df = new DecimalFormat("###,###");
-			return "금액 : " + df.format(Math.abs(money)) + "원 / 출처 : " + usage + " / 날짜 : " + today +"\n";
+		if(money>=0) {
+			return "수입 : " + df.format(Math.abs(money)) + "원"
+					+ " / 출처 : " + usage + " / 날짜 : " + today +"\n";
+		}
+		else {
+			return "지출 : " + df.format(Math.abs(money)) + "원"
+					+ " / 출처 : " + usage + " / 날짜 : " + today +"\n";
+		}
 	}
 	
 	// 생성자
