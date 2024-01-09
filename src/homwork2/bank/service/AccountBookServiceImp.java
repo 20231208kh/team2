@@ -1,5 +1,6 @@
 package homwork2.bank.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import homwork2.bank.Bank;
@@ -9,7 +10,6 @@ import lombok.Data;
 public class AccountBookServiceImp implements AccountBookService {
 
 	private List<Bank> bankList;
-	
 	
 	
 	@Override
@@ -98,6 +98,10 @@ public class AccountBookServiceImp implements AccountBookService {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	String arr [] = new String [10];
+	
+	
 
 	@Override
 	//수입 지출 구분 출력

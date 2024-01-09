@@ -10,6 +10,7 @@ import lombok.Data;
 public class Bank {
 	private int money;
 	private String usage;
+	Date date = new Date();
 	private String today;
 	
 	@Override
@@ -23,8 +24,7 @@ public class Bank {
 	public Bank(int money, String usage) {
 		this.money = money;
 		this.usage = usage;
-		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-		this.today = format.format(new Date());
+		this.today = new SimpleDateFormat("yyyy/MM/dd").format(date);
 	}
 	
 	

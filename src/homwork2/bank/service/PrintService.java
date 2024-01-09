@@ -12,4 +12,6 @@ public interface PrintService {
 	
 	void printExit();
 
+	void printSetWithdrawMenu();
+
 }

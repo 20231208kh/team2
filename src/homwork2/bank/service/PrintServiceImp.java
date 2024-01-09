@@ -33,5 +33,11 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("================");
 		
 	}
+
+	@Override
+	public void printSetWithdrawMenu() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
