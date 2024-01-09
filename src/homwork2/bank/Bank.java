@@ -8,21 +8,15 @@ import lombok.Data;
 
 @Data
 public class Bank {
-	int money;
-	String usage;
-	String today;
+	private int money;
+	private String usage;
+	private String today;
 	
 	@Override
 	public String toString() {
 		DecimalFormat df = new DecimalFormat("###,###");
-		if(money>=0) {
-			return "수입 : " + df.format(Math.abs(money)) + "원"
+			return "금액 : " + df.format(Math.abs(money)) + "원"
 					+ " / 출처 : " + usage + " / 날짜 : " + today +"\n";
-		}
-		else {
-			return "지출 : " + df.format(Math.abs(money)) + "원"
-					+ " / 출처 : " + usage + " / 날짜 : " + today +"\n";
-		}
 	}
 	
 	// 생성자

@@ -1,5 +1,9 @@
 package homwork2.bank.service;
 
+import java.util.List;
+
+import homwork2.bank.Bank;
+
 public interface AccountBookService {
 
 	
@@ -29,9 +33,15 @@ public interface AccountBookService {
 	//1000원이하 지출
 	//1000원이상 10000원이하 지출
 	//10000이상 지출
-	boolean searchByMoney(int min, int max);
+	boolean searchByMoney(int min, int max, List<Bank> tmpList);
 	
 	//전체 조회
 	boolean searchAll();
+	
+	
+	//수입, 지출 출력
+	void printCome(List<Bank> tmpList);
+	//정렬
+	void sort(List<Bank> tmpList);
 	
 }
