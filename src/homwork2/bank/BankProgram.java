@@ -1,27 +1,21 @@
 package homwork2.bank;
 
-<<<<<<< Updated upstream
-=======
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import homwork2.bank.service.AccountBookService;
 import homwork2.bank.service.AccountBookServiceImp;
->>>>>>> Stashed changes
 import homwork2.bank.service.PrintService;
 import homwork2.bank.service.PrintServiceImp;
 import program.Program;
 
 public class BankProgram implements Program{
 	private PrintService printService= new PrintServiceImp();
-<<<<<<< Updated upstream
-=======
 	private AccountBookService abs = new AccountBookServiceImp();
 	private final int EXIT = 4;
 	private Scanner scan = new Scanner(System.in);
 	int id = 1;
->>>>>>> Stashed changes
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -30,8 +24,6 @@ public class BankProgram implements Program{
 
 	@Override
 	public void runMenu(int menu) {
-<<<<<<< Updated upstream
-=======
 		switch(menu) {
 		case 1:
 			manageDeposit();
@@ -77,7 +69,6 @@ public class BankProgram implements Program{
 		//카테고리 출력
 		System.out.println("1.급여"+"\n2.불로소득"+"\n3.실비"+"\n4.용돈"+"\n5.기타");
 		System.out.print("카테고리 선택 : ");
-
 		//카테고리 선택
 		int user = scan.nextInt();
 		
@@ -123,10 +114,10 @@ public class BankProgram implements Program{
 		System.out.println("1.급여"+"\n2.불로소득"+"\n3.실비"+"\n4.용돈"+"\n5.기타");
 		//카테고리 선택
 		int user = scan.nextInt();
-		//객체생성
 		Bank categori = new Bank(user);
 		//해당 카테고리만 bankList 출력
-		
+		if(abs.printCategori(categori));
+		System.out.println("삭제할 ID 선택 : ");
 		//유저 삭제 원하는 id 입력한다.
 		int id = scan.nextInt();
 		Bank bank = new Bank(id);
@@ -275,7 +266,6 @@ public class BankProgram implements Program{
 	}
 
 	private void manageSearch() {
->>>>>>> Stashed changes
 		// TODO Auto-generated method stub
 		
 	}

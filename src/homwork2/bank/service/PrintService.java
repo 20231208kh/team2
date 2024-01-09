@@ -12,4 +12,9 @@ public interface PrintService {
 	
 	void printExit();
 
+	void printSetDepositMenu();
+
+	void printSetWithdrawMenu();
+
+
 }

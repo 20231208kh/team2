@@ -1,9 +1,9 @@
 package homwork2.bank;
 
-public class Bank {
-<<<<<<< Updated upstream
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-=======
+public class Bank {
 	
 	
 	private String arr1[] = new String[]{"병원비","식비","교통비","유흥비","보험료","기타"}; //대분류(지출)
@@ -52,5 +52,4 @@ public class Bank {
 	
 
 	
->>>>>>> Stashed changes
 }

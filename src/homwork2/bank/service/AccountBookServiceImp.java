@@ -23,7 +23,9 @@ public class AccountBookServiceImp implements AccountBookService {
 		}
 		return false;
 	}
-
+	//카테고리 입력받고 해당 카테고리와 일치하는 값이 입력된 리스트가 있다면 for문이로 걔들 출력
+	
+	
 	@Override
 	public boolean deleteDeposit(Bank bank) {
 		if(bankList == null) {
@@ -38,6 +40,19 @@ public class AccountBookServiceImp implements AccountBookService {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean printCategori(Bank bank) {
+		if(bankList == null) {
+			System.out.println("등록된 내역이 없습니다.");
+			return false;
+		} else {
+			if(bankList.contains(bank)) {
+				int index = bankList.indexOf(bank);
+				System.out.println(bankList.get(index));
+			}
+			return true;
+		}
 	}
 	
 	public boolean updateDepositMoney() {

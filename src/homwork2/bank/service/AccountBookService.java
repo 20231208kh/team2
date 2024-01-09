@@ -16,7 +16,7 @@ public interface AccountBookService {
 	//3. 용도/출처 
 	boolean setDeposit();
 	boolean deleteDeposit(Bank bank);
-	
+	boolean printCategori(Bank bank);
 	//가계부 지출 관리 : 박석훈
 	boolean addWithdraw();
 	boolean setWithdraw();
