@@ -4,6 +4,7 @@ package homwork2.bank;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import homwork2.bank.service.AccountBookServiceImp;
 import homwork2.bank.service.PrintService;
 import homwork2.bank.service.PrintServiceImp;
 import program.Program;
@@ -11,6 +12,7 @@ import program.Program;
 public class BankProgram implements Program{
 	private PrintService printService= new PrintServiceImp();
 	private final int EXIT = 4;
+	private int num = 0;
 	private Scanner scan = new Scanner(System.in);
 	@Override
 	public void run() {
@@ -73,8 +75,13 @@ public class BankProgram implements Program{
 	}
 
 	private void addDeposit() {
-		// TODO Auto-generated method stub
 		
+		System.out.println("급여(1)/불로소득(2)/실비(3)/용돈(4)기타(5)");
+		System.out.print("카테고리를 입력해주세요 : ");
+		
+		
+		
+
 	}
 
 	private void setDeposit() {

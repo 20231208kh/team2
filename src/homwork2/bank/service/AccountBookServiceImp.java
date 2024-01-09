@@ -10,8 +10,14 @@ public class AccountBookServiceImp implements AccountBookService {
 	
 	
 	
+	
+	
 	@Override
-	public boolean addDeposit() {
+	public boolean addDeposit(Bank bank) {
+		if(!bankList.contains(bank)) {
+			bankList.add(bank);
+			return true;
+		}
 		// TODO Auto-generated method stub
 		return false;
 	}

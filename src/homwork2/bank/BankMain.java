@@ -1,7 +1,6 @@
 package homwork2.bank;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
 /*
 		[소켓통신] (미정)
@@ -42,12 +41,19 @@ import java.util.List;
 				
 		[종료]
 		*/
+
+
+
 public class BankMain {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
+		Scanner scan = new Scanner(System.in);
 
+//		if(user<=0); 
+//		bank.getArr1().length;
+	
 		
 		BankProgram bp = new BankProgram();
 		bp.run();

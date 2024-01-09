@@ -1,12 +1,14 @@
 package homwork2.bank.service;
 
+import homwork2.bank.Bank;
+
 public interface AccountBookService {
 
 	
 	//회원가입 : 김준수, 박성훈
 	
 	//가계부 수입 관리 : 김태원
-	boolean addDeposit();
+	boolean addDeposit(Bank bank);
 	//수정
 	//날짜+용도
 	//1. 금액
