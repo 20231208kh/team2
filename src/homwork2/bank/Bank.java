@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import lombok.Data;
 
@@ -23,7 +24,7 @@ public class Bank {
 	private String today;
 	private String categori; //뽑아올거
 	Date date = new Date();
-	private int num;
+	private int id;
 	
 	
 	
@@ -33,19 +34,18 @@ public class Bank {
 	@Override
 	public String toString() {
 		
-		return categori+"//"+money+"//"+usage+"//"+today;
 		
-//		if (money<0) {
-//			return "[지출 금액 : "+Math.abs(money)+"] [지출 용도 : "+usage+", 날짜 : "+today+"]\n";
-//		}
-//			return"[수입 : " + money +"] [ 지출용도 : "+usage+", 날짜 : "+today+"]\n";
+		if (money<0) {
+			return "[번호 : "+id+"] [카테고리 : "+categori+"] [ 지출 금액 : "+Math.abs(money)+"] [상세 내역 : "+usage+", 날짜 : "+today+"]\n";
+		}
+		return "[번호 : "+id+"] [카테고리 : "+categori+"] [ 수입 금액 : "+Math.abs(money)+"] [상세 내역 : "+usage+", 날짜 : "+today+"]\n";
 	}
 
 
-	public Bank(int num,int user,int money, String usage) {
+	public Bank(int id,int user,int money, String usage) {
 		super();
 		
-		this.num = num;
+		this.id = id;
 		if (money<0) {
 			this.categori = arr1[user-1];
 		}else {
@@ -55,6 +55,33 @@ public class Bank {
 		this.money = money;
 		this.usage = usage;
 		this.today = new SimpleDateFormat("yyyy/MM/dd").format(date);
+	}
+	
+	
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Bank other = (Bank) obj;
+		return id == other.id;
+	}
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+
+	public Bank(int id) {
+		super();
+		this.id = id;
 	}
 	
 

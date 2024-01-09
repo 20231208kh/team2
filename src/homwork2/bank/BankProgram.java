@@ -4,6 +4,7 @@ package homwork2.bank;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import homwork2.bank.service.AccountBookService;
 import homwork2.bank.service.AccountBookServiceImp;
 import homwork2.bank.service.PrintService;
 import homwork2.bank.service.PrintServiceImp;
@@ -11,8 +12,9 @@ import program.Program;
 
 public class BankProgram implements Program{
 	private PrintService printService= new PrintServiceImp();
+	private AccountBookServiceImp absi = new AccountBookServiceImp();
 	private final int EXIT = 4;
-	private int num = 0;
+	private int id = 1;
 	private Scanner scan = new Scanner(System.in);
 	@Override
 	public void run() {
@@ -75,12 +77,22 @@ public class BankProgram implements Program{
 	}
 
 	private void addDeposit() {
-		
-		System.out.println("급여(1)/불로소득(2)/실비(3)/용돈(4)기타(5)");
-		System.out.print("카테고리를 입력해주세요 : ");
-		
-		
-		
+//		
+//		System.out.println("급여(1)/불로소득(2)/실비(3)/용돈(4)기타(5)");
+//		System.out.print("카테고리를 입력해주세요 : ");
+//		int user = scan.nextInt();
+//		System.out.print("수입 금액을 입력해주세요 : ");
+//		int money = scan.nextInt();
+//		System.out.println("상세 내역을 입력해주세요 : ");
+//		scan.nextLine();
+//		String usage = scan.nextLine();
+//		Bank bank = new Bank(id,user,money,usage);
+//		if(absi.addDeposit(bank)) {
+//			System.out.println("등록에 성공하였습니다.");
+//			id ++;
+//			return;
+//		}
+//		System.out.println("등록에 실패하였습니다. ");
 
 	}
 
@@ -92,7 +104,7 @@ public class BankProgram implements Program{
 			updateDepositMoney();
 			break;
 		case 2:
-			updateDepositUsage();
+			updateDepositCategori();
 			break;
 		case 3:
 			updateDepositDate();
@@ -105,11 +117,25 @@ public class BankProgram implements Program{
 	}
 
 	private void updateDepositMoney() {
-		// TODO Auto-generated method stub
+//		System.out.println(absi.getBankList());
+//		System.out.print("수정할 id를 입력 : ");
+//		int userId = scan.nextInt();
+//		System.out.print("금액 수정 : ");
+//		int userMoney =scan.nextInt();
+//		if (userMoney < 0 ) {
+//			System.out.println("지출 내역 수정을 이용해주세요.");
+//			return;
+//		}
+//		Bank bank = new Bank(userId);
+//		if(absi.updateDepositMoney(bank,userMoney)) {
+//			System.out.println("등록 성공");
+//		}
+//		System.out.println("등록 되지 않은 내역입니다.");
+//		System.out.println(absi.getBankList());
 		
 	}
 
-	private void updateDepositUsage() {
+	private void updateDepositCategori() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -120,7 +146,12 @@ public class BankProgram implements Program{
 	}
 
 	private void deleteDeposit() {
-		// TODO Auto-generated method stub
+//		System.out.println(absi.getBankList());
+//		System.out.print("삭제할 id를 입력 : ");
+//		int userId = scan.nextInt();
+//		Bank bank = new Bank(userId);
+//		
+//		absi.deleteDeposit(bank);
 		
 	}
 
@@ -160,7 +191,7 @@ public class BankProgram implements Program{
 			updateWithdrawMoney();
 			break;
 		case 2:
-			updateWithdrawUsage();
+			updateWithdrawCategori();
 			break;
 		case 3:
 			updateWithdrawDate();
@@ -180,7 +211,7 @@ public class BankProgram implements Program{
 		
 	}
 
-	private void updateWithdrawUsage() {
+	private void updateWithdrawCategori() {
 		// TODO Auto-generated method stub
 		
 	}
