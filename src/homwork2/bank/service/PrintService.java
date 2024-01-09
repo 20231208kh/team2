@@ -14,4 +14,6 @@ public interface PrintService {
 
 	void printSetWithdrawMenu();
 
+	void printSetDepositMenu();
+
 }

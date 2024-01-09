@@ -39,5 +39,11 @@ public class PrintServiceImp implements PrintService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void printSetDepositMenu() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
