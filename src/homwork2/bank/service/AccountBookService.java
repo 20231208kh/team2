@@ -26,10 +26,12 @@ public interface AccountBookService {
 	
 	//가계부 조회 관리 : 박석훈
 	boolean searchByDate();
+	
+	boolean serchByCategori(String categori, List<Bank> tmpBankList );
 	//출처별 조회
 	//지출 용도
 	//수입 출처
-	boolean searchByUsage();
+	boolean searchByUsage(String useage, List<Bank> tmpBankList );
 	//1000원이하 지출
 	//1000원이상 10000원이하 지출
 	//10000이상 지출

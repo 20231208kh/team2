@@ -28,7 +28,7 @@ public class PrintServiceImp implements PrintService {
 	public void printSetDepositMenu() {
 		System.out.println("----수입 내역 수정----");
 		System.out.println("1. 수입 금액 수정");
-		System.out.println("2. 수입 출처 수정");
+		System.out.println("2. 수입 출처 수정"); 
 		System.out.println("3. 수입 날짜 수정");
 		System.out.println("4. 뒤로 가기");
 		System.out.print("메뉴 선택 : ");

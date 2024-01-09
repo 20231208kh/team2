@@ -53,10 +53,30 @@ public class AccountBookServiceImp implements AccountBookService {
 		return false;
 	}
 
+	
 	@Override
-	public boolean searchByUsage() {
+	public boolean serchByCategori(String categori, List<Bank> tmpBankList ) {
 		// TODO Auto-generated method stub
+		
+		
+		
 		return false;
+	}
+	
+	
+
+	@Override
+	// 상세 내역별 출력
+	public boolean searchByUsage(String useage, List<Bank> tmpBankList ) {
+		if(bankList == null || bankList.size() == 0) {
+			System.out.println("가계부가 없습니다.");
+			return false;
+		}
+		bankList.stream().filter(b->b.getUsage().equals(useage)).forEach(l->tmpBankList.add(l));
+		if(tmpBankList == null || tmpBankList.size() == 0) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
@@ -122,6 +142,6 @@ public class AccountBookServiceImp implements AccountBookService {
 	public void sort(List<Bank> tmpList) {
 		tmpList.sort((l1,l2)-> l1.getToday().compareTo(l2.getToday()));
 	}
-	
+
 	
 }

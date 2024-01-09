@@ -3,6 +3,7 @@ package homwork2.bank;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 import lombok.Data;
 
@@ -18,7 +19,7 @@ public class Bank {
 	private String today;
 	private String categori; //뽑아올거
 	Date date = new Date();
-	private int num;
+	private int id;
 	
 	
 	
@@ -29,16 +30,18 @@ public class Bank {
 	public String toString() {
 		DecimalFormat df = new DecimalFormat("###,###");
 		if (money<0) {
-			return "[지출 금액 : "+df.format(Math.abs(money))+"] [지출 용도 : "+usage+", 날짜 : "+today+"]\n";
+			return "[지출 금액 : "+df.format(Math.abs(money))+"] [ 분류 : "+ categori 
+					+ " 상세내역, : "+usage+", 날짜 : "+today+"]\n";
 		}
-		return"[수입 : " + money +"] [ 지출용도 : "+usage+", 날짜 : "+today+"]\n";
+		return "[수입 : "+df.format(money) +"] [ 분류 : "+ categori 
+				+ ", 상세내역 : "+usage+", 날짜 : "+today+"]\n";
 	}
 
 
-	public Bank(int num,int user,int money, String usage) {
+	public Bank(int id,int user,int money, String usage) {
 		super();
 		
-		this.num = num;
+		this.id = id;
 		if (money<0) {
 			this.categori = arr1[user-1];
 		}else {
@@ -49,6 +52,26 @@ public class Bank {
 		this.usage = usage;
 		this.today = new SimpleDateFormat("yyyy/MM/dd").format(date);
 	}
+
+	// equals 와 hashCode
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Bank other = (Bank) obj;
+		return Objects.equals(categori, other.categori) && id == other.id && money == other.money
+				&& Objects.equals(today, other.today) && Objects.equals(usage, other.usage);
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(categori, id, money, today, usage);
+	}
+	
+	
 	
 
 	
