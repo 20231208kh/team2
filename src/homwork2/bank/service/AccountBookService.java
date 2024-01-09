@@ -15,12 +15,12 @@ public interface AccountBookService {
 	boolean setDeposit();
 	boolean deleteDeposit();
 	
-	//가계부 지출 관리 : 김태원
+	//가계부 지출 관리 : 박석훈
 	boolean addWithdraw();
 	boolean setWithdraw();
 	boolean deleteWithdraw();
 	
-	//가계부 조회 관리 : 박석훈
+	//가계부 조회 관리 : 박성훈,김준수
 	boolean searchByDate();
 	//출처별 조회
 	//지출 용도
@@ -33,5 +33,10 @@ public interface AccountBookService {
 	
 	//전체 조회
 	boolean searchAll();
+	
+	
+	//추가기능?
+	//1. 빈도수가 가장 많은 지출 용도
+	//2. 
 	
 }

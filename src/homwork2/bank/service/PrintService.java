@@ -6,7 +6,11 @@ public interface PrintService {
 	
 	void printDepositMenu();
 	
+	void printSetDepositMenu();
+	
 	void printWithdrawMenu();
+	
+	void printSetWithdrawMenu();
 	
 	void printSearchMenu();
 	
