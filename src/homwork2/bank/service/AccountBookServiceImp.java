@@ -1,6 +1,5 @@
 package homwork2.bank.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import homwork2.bank.Bank;
@@ -69,7 +68,7 @@ public class AccountBookServiceImp implements AccountBookService {
 			return false;
 		}
 		bankList.stream()
-				.filter(b-> min<=Math.abs(b.getMoney()) && max >= Math.abs(b.getMoney()))
+				.filter(b-> min <= Math.abs(b.getMoney()) && max >= Math.abs(b.getMoney()))
 				.forEach(l->tmpBankList.add(l));
 		if(tmpBankList == null || tmpBankList.size() == 0) {
 			System.out.println("해당하는 기록이 없습니다.");
@@ -84,7 +83,7 @@ public class AccountBookServiceImp implements AccountBookService {
 			return false;
 		}
 		bankList.stream()
-				.filter(b-> min<=Math.abs(b.getMoney()))
+				.filter(b-> min <= Math.abs(b.getMoney()))
 				.forEach(l->tmpBankList.add(l));
 		if(tmpBankList == null || tmpBankList.size() == 0) {
 			System.out.println("조건에 맞는 기록이 없습니다.");
@@ -98,10 +97,6 @@ public class AccountBookServiceImp implements AccountBookService {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	String arr [] = new String [10];
-	
-	
 
 	@Override
 	//수입 지출 구분 출력
@@ -123,6 +118,7 @@ public class AccountBookServiceImp implements AccountBookService {
 	}
 
 	@Override
+	//리스트 정렬
 	public void sort(List<Bank> tmpList) {
 		tmpList.sort((l1,l2)-> l1.getToday().compareTo(l2.getToday()));
 	}
