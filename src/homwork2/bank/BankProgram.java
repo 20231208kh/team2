@@ -286,7 +286,7 @@ public class BankProgram implements Program{
 		List<Bank> tmp = new ArrayList<Bank>();
 		System.out.print("조회할 최소 금액 : ");
 		int min = scan.nextInt();
-		System.out.print("조회할 최대 금액 : ");
+		System.out.print("최대 금액 : ");
 		int max = scan.nextInt();
 		if(absi.searchByMoney(min, max, tmp)) {
 			absi.printCome(tmp); // 혹은 그냥 람다를 이용한 출력
@@ -352,6 +352,10 @@ public class BankProgram implements Program{
 		System.out.println();
 		System.out.print("입력 : ");
 		int user = scan.nextInt();
+		if(user<1||user>10) {
+			System.out.println("없는 카테고리 번호 입니다.");
+			return;
+		}
 		String categori = arr[user-1];
 		if(absi.serchByCategori(categori, tmp)) {
 			absi.printCome(tmp);
@@ -389,7 +393,6 @@ public class BankProgram implements Program{
 		default:
 			throw new InputMismatchException();	
 		}
-		
 	}
 
 	private void searchByYear() {
@@ -412,7 +415,6 @@ public class BankProgram implements Program{
 			absi.printCome(tmp);
 			return;
 		}
-		
 	}
 
 	private void searchByDay() {
@@ -427,20 +429,16 @@ public class BankProgram implements Program{
 			absi.printCome(tmp);
 			return;
 		}
-
-		
 	}
 
 	@Override
 	public void printMenu() {
 		printService.printMainMenu();
-		
 	}
 
 	@Override
 	public void exitMenu() {
 		printService.printExit();
-		
 	}
 
 }

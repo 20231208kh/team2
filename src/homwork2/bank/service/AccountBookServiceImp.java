@@ -98,7 +98,8 @@ public class AccountBookServiceImp implements AccountBookService {
 			return false;
 		}
 		bankList.stream()
-				.filter(b-> min <= Math.abs(b.getMoney()) && max >= Math.abs(b.getMoney()))
+				.filter(b-> min <= Math.abs(b.getMoney()) 
+						&& max >= Math.abs(b.getMoney()))
 				.forEach(l->tmpBankList.add(l));
 		if(tmpBankList == null || tmpBankList.size() == 0) {
 			System.out.println("조건에 맞는 기록이 없습니다.");
