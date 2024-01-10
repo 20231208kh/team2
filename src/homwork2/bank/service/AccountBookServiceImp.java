@@ -3,85 +3,95 @@ package homwork2.bank.service;
 import java.util.List;
 
 import homwork2.bank.Bank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class AccountBookServiceImp implements AccountBookService {
 
 	private List<Bank> bankList;
 	
 	
+	
 	@Override
-	public boolean addDeposit() {
+	public boolean addDeposit(Bank bank) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean setDeposit() {
+	public boolean deleteDeposit(Bank bank) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean deleteDeposit() {
+	public boolean updateDepositMoney(Bank bank, int money) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public boolean updateDepositCategori(Bank bank, String categori) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateDepositDate(Bank bank, String date) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateWithdrawMoney(Bank bank, int money) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateWithdrawCategori(Bank bank, String categori) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateWithdrawDate(Bank bank, String date) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean deleteWithdraw(Bank bank) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 	@Override
 	public boolean addWithdraw() {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	@Override
-	public boolean setWithdraw() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean deleteWithdraw() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean searchByDate() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	
-	@Override
-	public boolean serchByCategori(String categori, List<Bank> tmpBankList ) {
-		// TODO Auto-generated method stub
-		
-		
-		
-		return false;
-	}
 	
 	
-
 	@Override
-	// 상세 내역별 출력
-	public boolean searchByUsage(String useage, List<Bank> tmpBankList ) {
+	// 전체조회
+	public boolean searchAll(List<Bank> tmpBankList) {
 		if(bankList == null || bankList.size() == 0) {
 			System.out.println("가계부가 없습니다.");
 			return false;
 		}
-		bankList.stream().filter(b->b.getUsage().equals(useage)).forEach(l->tmpBankList.add(l));
-		if(tmpBankList == null || tmpBankList.size() == 0) {
-			return false;
-		}
+		bankList.stream().forEach(b->tmpBankList.add(b));
 		return true;
 	}
 
 	@Override
-	// min ~ max 사이 조회, min이 0이면 자동으로 max 이하, max가 없으면 자동으로 min 이상으로 조회됨
-	// 메뉴 1. 최대 최소(min max 입력) 2. 최소(max 제외)  3. 최대(min = 0)
+	// 금액 조회
+	// 최소 ~ 최대 금액 조회
 	public boolean searchByMoney(int min, int max, List<Bank> tmpBankList) {
 		if(bankList == null || bankList.size() == 0) {
 			System.out.println("가계부가 없습니다.");
@@ -91,11 +101,12 @@ public class AccountBookServiceImp implements AccountBookService {
 				.filter(b-> min <= Math.abs(b.getMoney()) && max >= Math.abs(b.getMoney()))
 				.forEach(l->tmpBankList.add(l));
 		if(tmpBankList == null || tmpBankList.size() == 0) {
-			System.out.println("해당하는 기록이 없습니다.");
+			System.out.println("조건에 맞는 기록이 없습니다.");
 			return false;
 		}
 		return true;
 	}
+	@Override
 	// min 이상 조회
 	public boolean searchByMoney(int min, List<Bank> tmpBankList) {
 		if(bankList == null || bankList.size() == 0) {
@@ -112,11 +123,95 @@ public class AccountBookServiceImp implements AccountBookService {
 		return true;
 	}
 
+	
+	
 	@Override
-	public boolean searchAll() {
-		// TODO Auto-generated method stub
-		return false;
+	// 일자별 조회
+	// 연 내역 조회
+	public boolean searchByDate(String year, List<Bank> tmpBankList) {
+		if(bankList == null || bankList.size() == 0) {
+			System.out.println("가계부가 없습니다.");
+			return false;
+		}
+		bankList.stream()
+		.filter(b->b.getToday().substring(0, 3).equals(year))
+		.forEach(l->tmpBankList.add(l));
+		if(tmpBankList == null || tmpBankList.size() == 0) {
+			System.out.println("조건에 맞는 기록이 없습니다.");
+			return false;
+		}
+		return true;
 	}
+	
+	@Override
+	// 월 내역 조회
+	public boolean searchByDate(String year, String month, List<Bank> tmpBankList) {
+		if(bankList == null || bankList.size() == 0) {
+			System.out.println("가계부가 없습니다.");
+			return false;
+		}
+		bankList.stream()
+				.filter(b-> b.getToday().substring(0, 3).equals(year) 
+						&& b.getToday().substring(5, 6).equals(month))
+				.forEach(l->tmpBankList.add(l));
+		if(tmpBankList == null || tmpBankList.size() == 0) {
+			System.out.println("조건에 맞는 기록이 없습니다.");
+			return false;
+		}
+		return true;
+	}
+	
+	@Override
+	// 일 내역 조회
+	public boolean searchByDate(String year, String month, String day, List<Bank> tmpBankList) {
+		if(bankList == null || bankList.size() == 0) {
+			System.out.println("가계부가 없습니다.");
+			return false;
+		}
+		bankList.stream()
+				.filter(b-> b.getToday().substring(0, 3).equals(year) 
+						&& b.getToday().substring(5, 6).equals(month) 
+						&& b.getToday().substring(8, 9).equals(day))
+				.forEach(l->tmpBankList.add(l));
+		if(tmpBankList == null || tmpBankList.size() == 0) {
+			System.out.println("조건에 맞는 기록이 없습니다.");
+			return false;
+		}
+		return true;
+	}
+	
+	
+	@Override
+	// 카테고리별 조회
+	public boolean serchByCategori(String categori, List<Bank> tmpBankList ) {
+		if(bankList == null || bankList.size() == 0) {
+			System.out.println("가계부가 없습니다.");
+			return false;
+		}
+		bankList.stream().filter(b->b.getCategori().equals(categori)).forEach(l->tmpBankList.add(l));
+		if(tmpBankList == null || tmpBankList.size() == 0) {
+			System.out.println("조건에 맞는 기록이 없습니다.");
+			return false;
+		}
+		return true;
+	}
+	@Override
+	// 상세내역별 조회
+	public boolean searchByUsage(String useage, List<Bank> tmpBankList ) {
+		if(bankList == null || bankList.size() == 0) {
+			System.out.println("가계부가 없습니다.");
+			return false;
+		}
+		bankList.stream().filter(b->b.getUsage().equals(useage)).forEach(l->tmpBankList.add(l));
+		if(tmpBankList == null || tmpBankList.size() == 0) {
+			System.out.println("조건에 맞는 기록이 없습니다.");
+			return false;
+		}
+		return true;
+	}
+
+	
+	
 
 	@Override
 	//수입 지출 구분 출력
@@ -138,10 +233,14 @@ public class AccountBookServiceImp implements AccountBookService {
 	}
 
 	@Override
-	//리스트 정렬
+	//리스트 정렬 - 날짜 수정시에만 추가해 줄것
 	public void sort(List<Bank> tmpList) {
 		tmpList.sort((l1,l2)-> l1.getToday().compareTo(l2.getToday()));
 	}
+
+	
+
+	
 
 	
 }

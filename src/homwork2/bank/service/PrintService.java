@@ -16,4 +16,10 @@ public interface PrintService {
 
 	void printSetDepositMenu();
 
+	void printSearchByMoney();
+
+	void printSearchByType();
+
+	void printSearchByDate();
+
 }

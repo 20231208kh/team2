@@ -28,13 +28,12 @@ public class Bank {
 	//toString 메서드 오버라이딩
 	@Override
 	public String toString() {
-		DecimalFormat df = new DecimalFormat("###,###");
+		
+		
 		if (money<0) {
-			return "[지출 금액 : "+df.format(Math.abs(money))+"] [ 분류 : "+ categori 
-					+ " 상세내역, : "+usage+", 날짜 : "+today+"]\n";
+			return "[번호 : "+id+"] [카테고리 : "+categori+"] [ 지출 금액 : "+Math.abs(money)+"] [상세 내역 : "+usage+", 날짜 : "+today+"]\n";
 		}
-		return "[수입 : "+df.format(money) +"] [ 분류 : "+ categori 
-				+ ", 상세내역 : "+usage+", 날짜 : "+today+"]\n";
+		return "[번호 : "+id+"] [카테고리 : "+categori+"] [ 수입 금액 : "+Math.abs(money)+"] [상세 내역 : "+usage+", 날짜 : "+today+"]\n";
 	}
 
 
@@ -52,8 +51,10 @@ public class Bank {
 		this.usage = usage;
 		this.today = new SimpleDateFormat("yyyy/MM/dd").format(date);
 	}
+	
+	
 
-	// equals 와 hashCode
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -63,16 +64,22 @@ public class Bank {
 		if (getClass() != obj.getClass())
 			return false;
 		Bank other = (Bank) obj;
-		return Objects.equals(categori, other.categori) && id == other.id && money == other.money
-				&& Objects.equals(today, other.today) && Objects.equals(usage, other.usage);
+		return id == other.id;
 	}
+
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(categori, id, money, today, usage);
+		return Objects.hash(id);
 	}
-	
-	
+
+
+	public Bank(int id) {
+		super();
+		this.id = id;
+	}
 	
 
 	
 }
+

@@ -7,43 +7,47 @@ import homwork2.bank.Bank;
 public interface AccountBookService {
 
 	
-	//회원가입 : 김준수, 박성훈
+	//가계부 수입 관리 : (김태원, 박성훈)
+	boolean addDeposit(Bank bank);
 	
-	//가계부 수입 관리 : 김태원
-	boolean addDeposit();
-	//수정
-	//날짜+용도
-	//1. 금액
-	//2. 날짜
-	//3. 용도/출처 
-	boolean setDeposit();
-	boolean deleteDeposit();
+	//수입 내역 삭제
+	boolean deleteDeposit(Bank bank);
 	
-	//가계부 지출 관리 : 김태원
+	//수입 내역 각종수정 (김태원, 박성훈)
+	boolean updateDepositMoney(Bank bank, int money);
+	boolean updateDepositCategori(Bank bank, String categori);
+	boolean updateDepositDate(Bank bank, String date);
+	
+	//가계부 지출 관리 : (박석훈, 박성훈)
 	boolean addWithdraw();
-	boolean setWithdraw();
-	boolean deleteWithdraw();
 	
-	//가계부 조회 관리 : 박석훈
-	boolean searchByDate();
+	//지출 내역 각종 수정(박석훈, 박성훈)
+	boolean updateWithdrawMoney(Bank bank, int money);
+	boolean updateWithdrawCategori(Bank bank, String categori);
+	boolean updateWithdrawDate(Bank bank,String date);
 	
-	boolean serchByCategori(String categori, List<Bank> tmpBankList );
-	//출처별 조회
-	//지출 용도
-	//수입 출처
-	boolean searchByUsage(String useage, List<Bank> tmpBankList );
-	//1000원이하 지출
-	//1000원이상 10000원이하 지출
-	//10000이상 지출
-	boolean searchByMoney(int min, int max, List<Bank> tmpList);
+	boolean deleteWithdraw(Bank bank);
+	
+	
 	
 	//전체 조회
-	boolean searchAll();
+	boolean searchAll(List<Bank> tmpBankList);
+	//금액 조회
+	boolean searchByMoney(int min, int max, List<Bank> tmpList);
+	boolean searchByMoney(int min, List<Bank> tmpList);
+	//분류 조회
+	boolean serchByCategori(String categori, List<Bank> tmpBankList );
+	boolean searchByUsage(String useage, List<Bank> tmpBankList );
+	//일자 조회
+	boolean searchByDate(String year, List<Bank> tmpBankList);
+	boolean searchByDate(String year, String month , List<Bank> tmpBankList);
+	boolean searchByDate(String year, String month , String day , List<Bank> tmpBankList);
 	
 	
 	//수입, 지출 출력
 	void printCome(List<Bank> tmpList);
 	//정렬
 	void sort(List<Bank> tmpList);
+
 	
 }
