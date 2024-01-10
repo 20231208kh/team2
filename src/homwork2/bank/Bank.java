@@ -2,7 +2,13 @@ package homwork2.bank;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
 public class Bank {
 	
 	
@@ -25,6 +31,25 @@ public class Bank {
 //		}
 //			return"[수입 : " + money +"] [ 지출용도 : "+usage+", 날짜 : "+today+"]\n";
 	}
+	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Bank other = (Bank) obj;
+		return id == other.id;
+	}
 
 
 	public Bank(int id,int user,int money, String usage) {
@@ -42,14 +67,12 @@ public class Bank {
 		this.today = new SimpleDateFormat("yyyy/MM/dd").format(date);
 	}
 
-
 	public Bank(int id) {
 		super();
 		this.id = id;
 	}
-	
-	
-	
 
-	
+	public Bank(){
+		
+	}
 }
