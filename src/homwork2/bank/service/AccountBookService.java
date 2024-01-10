@@ -15,10 +15,10 @@ public interface AccountBookService {
 	//2. 날짜
 	//3. 용도/출처 
 	boolean setDeposit(Bank bank);
-	
-	
 	boolean deleteDeposit(Bank bank);
-	boolean printCategori(Bank bank);
+	boolean printCategori(int user);
+	
+	
 	
 	
 	

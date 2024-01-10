@@ -35,23 +35,23 @@ public class AccountBookServiceImp implements AccountBookService {
 		}
 	}
 	
-	/*
-	public boolean printCategori(int categori) {
+	@Override
+	public boolean printCategori(int user) {
 		if(bankList == null) {
 			System.out.println("등록된 내역이 없습니다.");
 			return false;
 		} 
 		//정수값을 입력받고 그게 banklist의 arr1의 index
-		if(bankList.contains(categori)) {
+		if(bankList.contains(user)) {
 			for(int i = 0; i < bankList.size(); i++) {
-			int index = bankList.indexOf(categori);
-			System.out.println(bankList.get(index));
+				int index = bankList.indexOf(bank.getArr2()[user-1]);
+				System.out.println(bankList.get(index));
 			}
 			return true;
 		}
 		return false;
 	}
-	*/
+	
 	
 	@Override
 	public boolean setDeposit(Bank bank) {
@@ -76,49 +76,23 @@ public class AccountBookServiceImp implements AccountBookService {
 	}
 	
 	public boolean updateDepositDate(Bank bank, int money) {
-		if(bankList == null || bankList.size() == 0) {
-			System.out.println("등록된 내역이 없습니다.");
-			return false;
-		} else {
-			if(bankList.contains(bank)) {
-				int index = bankList.indexOf(bank);
-				bankList.get(index).setDate(null);
-				return true;
-			}
-		}
 		return false;
 	}
 	
-	public boolean updateDepositCategori(Bank bank, String categori, String usage) {
+	public boolean updateDepositCategori(Bank bank, int user, String usage) {
 		if(bankList == null || bankList.size() == 0) {
 			System.out.println("등록된 내역이 없습니다.");
 			return false;
 		} else {
 			if(bankList.contains(bank)) {
 				int index = bankList.indexOf(bank);
-				bankList.get(index).setCategori(categori);
-				bankList.get(index).setUsage(usage);
-				return true;
-				
-			}
-		}
-		return false;
-	}
-	
-	public boolean updateDepositUsage(Bank bank, String usage) {
-		if(bankList == null || bankList.size() == 0) {
-			System.out.println("등록된 내역이 없습니다.");
-			return false;
-		} else {
-			if(bankList.contains(bank)) {
-				int index = bankList.indexOf(bank);
+				bankList.get(index).setCategori(bank.getArr2()[user-1]);
 				bankList.get(index).setUsage(usage);
 				return true;
 			}
 		}
 		return false;
 	}
-	
 	
 
 	@Override
@@ -163,12 +137,5 @@ public class AccountBookServiceImp implements AccountBookService {
 		return false;
 	}
 
-	@Override
-	public boolean printCategori(Bank id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	
 	
 }

@@ -119,17 +119,21 @@ public class BankProgram implements Program{
 
 	 */
 
-	/*
+	
+		
+		//카테고리 선택
+		
+		//정수값을 입력받고 그게 banklist의 arr1의 index
+		
+		//해당 카테고리만 bankList 출력
+		
+	
+	private void deleteDeposit() {
 		System.out.println("1.급여"+"\n2.불로소득"+"\n3.실비"+"\n4.용돈"+"\n5.기타");
 		System.out.print("카테고리 선택 : ");
-		//카테고리 선택
-		String categori = scan.next();
-		//정수값을 입력받고 그게 banklist의 arr1의 index
-		Bank c = new Bank(categori);
-		//해당 카테고리만 bankList 출력
-		abs.printCategori(c);
-	 */
-	private void deleteDeposit() {
+		int user = scan.nextInt();
+		abs.printCategori(user);
+		
 		System.out.println("삭제할 ID 선택 : ");
 		//유저 삭제 원하는 id 입력한다.
 		int id = scan.nextInt();
@@ -211,14 +215,14 @@ public class BankProgram implements Program{
 		abs.printList();
 		System.out.print("수정할 ID 입력 : ");
 		int id = scan.nextInt();
+		System.out.println("1.급여"+"\n2.불로소득"+"\n3.실비"+"\n4.용돈"+"\n5.기타");
 		System.out.print("수정할 출처 입력 : ");
-		scan.nextLine();
-		String categori = scan.nextLine();
-		System.out.print("수정할 출처 입력 : ");
+		int user = scan.nextInt();
+		System.out.print("수정할 세부출처 입력 : ");
 		scan.nextLine();
 		String usage = scan.nextLine();
 		Bank bank = new Bank(id);
-		abs.updateDepositCategori(bank, categori, usage);
+		abs.updateDepositCategori(bank, user, usage);
 		//확인용
 		abs.printList();
 	}
