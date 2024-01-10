@@ -12,13 +12,24 @@ import program.Program;
 
 public class BankProgram implements Program{
 	private PrintService printService= new PrintServiceImp();
-	private AccountBookService abs = new AccountBookServiceImp();
+	private AccountBookServiceImp absi = new AccountBookServiceImp();
 	private final int EXIT = 4;
+	private int id = 1;
 	private Scanner scan = new Scanner(System.in);
-	int id = 1;
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		int menu = 0;
+		
+		do {
+			printMenu();
+			try {
+				menu = scan.nextInt();
+				runMenu(menu);
+			}catch(InputMismatchException e){
+				System.out.println("잘못된 메뉴 선택입니다.");
+				scan.nextLine();
+			}
+		}while(menu!=EXIT);
 		
 	}
 
@@ -66,95 +77,22 @@ public class BankProgram implements Program{
 	}
 
 	private void addDeposit() {
-		//카테고리 출력
-		System.out.println("1.급여"+"\n2.불로소득"+"\n3.실비"+"\n4.용돈"+"\n5.기타");
-		System.out.print("카테고리 선택 : ");
-		//카테고리 선택
-		int user = scan.nextInt();
-		
-		//카테고리에 해당하는 금액 입력
-		System.out.println("금액 입력 : ");
-		int money = scan.nextInt();
-		//상세 출처 입력
-		System.out.println("용도 입력 : ");
-		scan.nextLine();
-		String usage = scan.nextLine();
-		//입력값을 bank에 저장
-		Bank bank = new Bank(id,user,money,usage);
-		//banklist에 bank값이 없으면 저장
-		abs.addDeposit(bank);
-		id++;
-		//num(1) [카테고리 : 카테고리] [금액 : ] [상세내역 : ] [날짜 : ]
-		//입력된 금액만큼 수입 total에 (+)로 추가
-		System.out.println(bank);
-	}
-	
-	/* 
-	 * 입력받은 bankList 내역
-	 * List [1,병원 , 2000, 정형외과] , [2,병원, 2000, 정형외과] [3,식비, 3000,제일식당] [4,교통비,1000,버스비] [5,4, 병원,2000,정형외과]
-	 * 
-	 * user = scan.nextInt();
-	 * 
-	 * Bank bank = new bank(user);
-	 * 
-	 * bankList.contains(bank)
-	 * 
-	 * int index = bankList.indexof(bank);
-	 * 
-	 * bankList.get(index).setMoney , setDate, setCategori, setUsage
-	 * 
-
-	 */
-	
-	private void deleteDeposit() {
-		//수입내역 삭제
-		//출력을 원하는 카테고리 선택
-		//카테고리 출력
-		System.out.println("카테고리 선택 : ");
-		System.out.println("1.급여"+"\n2.불로소득"+"\n3.실비"+"\n4.용돈"+"\n5.기타");
-		//카테고리 선택
-		int user = scan.nextInt();
-		Bank categori = new Bank(user);
-		//해당 카테고리만 bankList 출력
-		if(abs.printCategori(categori));
-		System.out.println("삭제할 ID 선택 : ");
-		//유저 삭제 원하는 id 입력한다.
-		int id = scan.nextInt();
-		Bank bank = new Bank(id);
-		//해당되는 id와 banklist의 아이디가 같은지 확인
-		if(abs.deleteDeposit(bank)) {
-			System.out.println("삭제되었습니다.");
-		}
-		
-		
-		/* 
-		 * 입력받은 bankList 내역
-		 * List [1,병원 , 2000, 정형외과] , [2,병원, 2000, 정형외과] [3,식비, 3000,제일식당] [4,교통비,1000,버스비] [5, 병원,2000,정형외과]
-		 * 
-		 * 카테고리 = scan.next();
-		 * 
-		 * bankList에서 입력받은 카테고리 인것만 출력
-		 * 
-		 * [1, 병원,2000,정형외과]
-		 * [2, 병원,2000,정형외과]
-		 * [5,병원,2000,정형외과]
-		 * 
-		 * 
-		 * 
-		 * userId = scan.nextInt();
-		 * 
-		 * Bank bank = new bank(userId);
-		 * 
-		 * bankList.contains(bank)
-		 * 
-		 * int index = bankList.indexOf(bank);
-		 * 
-		 * setMoney 
-		 * 
-		 * 
-		 * 
-
-		 */
+//		
+//		System.out.println("급여(1)/불로소득(2)/실비(3)/용돈(4)기타(5)");
+//		System.out.print("카테고리를 입력해주세요 : ");
+//		int user = scan.nextInt();
+//		System.out.print("수입 금액을 입력해주세요 : ");
+//		int money = scan.nextInt();
+//		System.out.println("상세 내역을 입력해주세요 : ");
+//		scan.nextLine();
+//		String usage = scan.nextLine();
+//		Bank bank = new Bank(id,user,money,usage);
+//		if(absi.addDeposit(bank)) {
+//			System.out.println("등록에 성공하였습니다.");
+//			id ++;
+//			return;
+//		}
+//		System.out.println("등록에 실패하였습니다. ");
 
 	}
 
@@ -166,7 +104,7 @@ public class BankProgram implements Program{
 			updateDepositMoney();
 			break;
 		case 2:
-			updateDepositUsage();
+			updateDepositCategori();
 			break;
 		case 3:
 			updateDepositDate();
@@ -179,11 +117,25 @@ public class BankProgram implements Program{
 	}
 
 	private void updateDepositMoney() {
-		// TODO Auto-generated method stub
+//		System.out.println(absi.getBankList());
+//		System.out.print("수정할 id를 입력 : ");
+//		int userId = scan.nextInt();
+//		System.out.print("금액 수정 : ");
+//		int userMoney =scan.nextInt();
+//		if (userMoney < 0 ) {
+//			System.out.println("지출 내역 수정을 이용해주세요.");
+//			return;
+//		}
+//		Bank bank = new Bank(userId);
+//		if(absi.updateDepositMoney(bank,userMoney)) {
+//			System.out.println("등록 성공");
+//		}
+//		System.out.println("등록 되지 않은 내역입니다.");
+//		System.out.println(absi.getBankList());
 		
 	}
 
-	private void updateDepositUsage() {
+	private void updateDepositCategori() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -193,6 +145,15 @@ public class BankProgram implements Program{
 		
 	}
 
+	private void deleteDeposit() {
+//		System.out.println(absi.getBankList());
+//		System.out.print("삭제할 id를 입력 : ");
+//		int userId = scan.nextInt();
+//		Bank bank = new Bank(userId);
+//		
+//		absi.deleteDeposit(bank);
+		
+	}
 
 	private void manageWithdraw() {
 		printService.printWithdrawMenu();
@@ -230,7 +191,7 @@ public class BankProgram implements Program{
 			updateWithdrawMoney();
 			break;
 		case 2:
-			updateWithdrawUsage();
+			updateWithdrawCategori();
 			break;
 		case 3:
 			updateWithdrawDate();
@@ -250,7 +211,7 @@ public class BankProgram implements Program{
 		
 	}
 
-	private void updateWithdrawUsage() {
+	private void updateWithdrawCategori() {
 		// TODO Auto-generated method stub
 		
 	}
