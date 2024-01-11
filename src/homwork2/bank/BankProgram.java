@@ -1,5 +1,8 @@
 package homwork2.bank;
 
+import java.text.Format;
+import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -220,8 +223,7 @@ public class BankProgram implements Program{
 			System.out.print("수정할 상세내역 입력 : ");
 			scan.nextLine();
 			String usage = scan.nextLine();
-			Bank use = new Bank(id);
-			if(abs.updateDepositUsage(use, usage)) {
+			if(abs.updateDepositUsage(bank, usage)) {
 				System.out.println("수정 성공.");
 				abs.printList();
 				return;
@@ -237,11 +239,19 @@ public class BankProgram implements Program{
 		abs.printDeposit();
 		System.out.print("수정할 ID 입력 : ");
 		int id = scan.nextInt();
-		System.out.print("수정할 날짜(yyyy/MM/dd) 입력 : ");
-		scan.nextLine();
-		String today = scan.nextLine();
+		//데시멀포멧 "####/##/##" 2024/01/11
+		
+		System.out.print("수정할 연도 입력 : ");
+		String year = scan.next();
+		System.out.print("수정할 월 입력 : ");
+		String month = scan.next();
+		System.out.print("수정할 일 입력 : ");
+		String day = scan.next();
+		String p = "{0}/{1}/{2}";
+		String date = MessageFormat.format(p,year,month,day);
+		
 		Bank bank = new Bank(id);
-		if(abs.updateDepositDate(bank, today)) {
+		if(abs.updateDepositDate(bank, date)) {
 			System.out.println("수정 성공.");
 			abs.printList();
 			return;
