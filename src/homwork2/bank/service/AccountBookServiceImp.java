@@ -51,7 +51,7 @@ public class AccountBookServiceImp implements AccountBookService {
 			}
 			bankList.get(index).setMoney(money);
 			return true;
-			}
+		}
 		return false;
 	}
 	
@@ -65,10 +65,10 @@ public class AccountBookServiceImp implements AccountBookService {
 			int index = bankList.indexOf(bank);
 			if(bankList.get(index).getMoney()<0) {
 				return false;
-				}
+			}
 			bankList.get(index).setToday(today);
 			return true;
-			}
+		}
 		return false;
 	}
 	
@@ -85,13 +85,17 @@ public class AccountBookServiceImp implements AccountBookService {
 			System.out.println("등록된 내역이 없습니다.");
 			return false;
 		}
-		if(bankList.contains(bank)) {
-			int index = bankList.indexOf(bank);
-			if(bankList.get(index).getMoney()<0) {
-				return false;
+		try {
+				if(bankList.contains(bank)) {
+					int index = bankList.indexOf(bank);
+					if(bankList.get(index).getMoney()<0) {
+						return false;
 				}
-			bankList.get(index).setCategori(bank.getArr2()[user-1]);
-			return true;
+				bankList.get(index).setCategori(bank.getArr2()[user-1]);
+				return true;
+				}
+			}catch(IndexOutOfBoundsException e) {
+				System.out.println("잘못 선택한 카테고리입니다.");
 			}
 		return false;
 	}
@@ -106,11 +110,10 @@ public class AccountBookServiceImp implements AccountBookService {
 			int index = bankList.indexOf(bank);
 			if(bankList.get(index).getMoney()<0) {
 				return false;
-				}
+			}
 			bankList.get(index).setUsage(usage);
 			return true;
-			}
-		
+		}
 		return false;
 	}
 	

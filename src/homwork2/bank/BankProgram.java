@@ -90,17 +90,19 @@ public class BankProgram implements Program{
 			System.out.println("0 혹은 음수는 입력이 불가합니다.");
 			return;
 		}
-		
 		//상세 출처 입력
 		System.out.println("상세내역 입력 : ");
 		scan.nextLine();
 		String usage = scan.nextLine();
-		//입력값을 bank에 저장
-		Bank bank = new Bank(id,user,money,usage);
-		//banklist에 bank값이 없으면 저장
-		abs.addDeposit(bank);
-		id++;
-		abs.printDeposit();
+		try {
+			//입력값을 bank에 저장
+			Bank bank = new Bank(id,user,money,usage);
+			abs.addDeposit(bank);
+			id++;
+			abs.printDeposit();
+		} catch(IndexOutOfBoundsException e) {
+			System.out.println("잘못 선택된 카테고리입니다.");
+		}
 	}
 	
 	private void deleteDeposit() {
@@ -167,19 +169,19 @@ public class BankProgram implements Program{
 		if(abs.updateDepositCategori(bank, user)) {
 			System.out.println("수정 성공.");
 			abs.printDeposit();
-		}
-		System.out.print("상세내역을 수정하시겠습니까?(y/n) : ");
-		ask = scan.next().charAt(0);
-		if(ask == 'y') {
-			System.out.print("수정할 상세내역 입력 : ");
-			scan.nextLine();
-			String usage = scan.nextLine();
-			if(abs.updateDepositUsage(bank, usage)) {
-				System.out.println("수정 성공.");
-				abs.printDeposit();
-				return;
+			System.out.print("상세내역을 수정하시겠습니까?(y/n) : ");
+			ask = scan.next().charAt(0);
+			if(ask == 'y') {
+				System.out.print("수정할 상세내역 입력 : ");
+				scan.nextLine();
+				String usage = scan.nextLine();
+				if(abs.updateDepositUsage(bank, usage)) {
+					System.out.println("수정 성공.");
+					abs.printDeposit();
+					return;
+				}
+				System.out.println("잘못된 ID입력");
 			}
-			System.out.println("잘못된 ID입력");
 		}
 		System.out.println("메뉴로 돌아갑니다.");
 	}
