@@ -31,21 +31,21 @@ public interface AccountBookService {
 	boolean deleteWithdraw(Bank bank);
 	
 	
-	//전체 조회 : 김준수
+	//전체 조회 
 	boolean searchAll(List<Bank> tmpBankList);
-	//금액 조회 : 김준수
+	//금액 조회
 	boolean searchByMoney(int min, int max, List<Bank> tmpList);
 	boolean searchByMoney(int min, List<Bank> tmpList);
-	//분류 조회 : 김준수
+	//분류 조회 
 	boolean serchByCategori(String categori, List<Bank> tmpBankList );
 	boolean searchByUsage(String useage, List<Bank> tmpBankList );
-	//일자 조회 : 김준수
+	//일자 조회 
 	boolean searchByDate(String year, List<Bank> tmpBankList);
 	boolean searchByDate(String year, String month , List<Bank> tmpBankList);
 	boolean searchByDate(String year, String month , String day , List<Bank> tmpBankList);
 	
 	
-	//수입, 지출 출력 : 김준수
+	//수입, 지출 출력
 	void printCome(List<Bank> tmpList);
 	//정렬
 	void sort(List<Bank> tmpList);
