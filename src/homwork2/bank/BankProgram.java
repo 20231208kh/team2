@@ -1,8 +1,5 @@
 package homwork2.bank;
 
-//예외처리
-//카테고리에 yes or no 적용
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -102,7 +99,7 @@ public class BankProgram implements Program{
 		//banklist에 bank값이 없으면 저장
 		abs.addDeposit(bank);
 		id++;
-		abs.printList();
+		abs.printDeposit();
 	}
 	
 	/* 
@@ -205,22 +202,35 @@ public class BankProgram implements Program{
 	}
 
 	private void updateDepositCategori() {
+		char ask = 'n';
 		abs.printDeposit();
 		System.out.print("수정할 ID 입력 : ");
 		int id = scan.nextInt();
 		System.out.println("1.급여"+"\n2.불로소득"+"\n3.실비"+"\n4.용돈"+"\n5.기타");
 		System.out.print("수정할 출처 입력 : ");
 		int user = scan.nextInt();
-		System.out.print("수정할 상세내역 입력 : ");
-		scan.nextLine();
-		String usage = scan.nextLine();
 		Bank bank = new Bank(id);
-		if(abs.updateDepositCategori(bank, user, usage)) {
+		if(abs.updateDepositCategori(bank, user)) {
 			System.out.println("수정 성공.");
 			abs.printList();
+		}
+		System.out.print("상세내역을 수정하시겠습니까?(y/n) : ");
+		ask = scan.next().charAt(0);
+		if(ask == 'y') {
+			System.out.print("수정할 상세내역 입력 : ");
+			scan.nextLine();
+			String usage = scan.nextLine();
+			Bank use = new Bank(id);
+			if(abs.updateDepositUsage(use, usage)) {
+				System.out.println("수정 성공.");
+				abs.printList();
+				return;
+			}
+			System.out.println("잘못된 ID입력");
+		}else {
+			System.out.println("메뉴로 돌아갑니다.");
 			return;
 		}
-		System.out.println("잘못된 ID입력");
 	}
 
 	private void updateDepositDate() {

@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import homwork2.bank.Bank;
 import lombok.Data;
+
 @Data
 public class AccountBookServiceImp implements AccountBookService {
 	private List<Bank> bankList = new ArrayList<Bank>();
@@ -39,6 +40,9 @@ public class AccountBookServiceImp implements AccountBookService {
 		if(bankList == null || bankList.size() == 0) {
 			System.out.println("등록된 내역이 없습니다.");
 			return false;
+		} else if(!bankList.contains(bank)){
+			System.out.println("등록된 내역이 없습니다.");
+			return false;
 		} else {
 			int index = bankList.indexOf(bank);
 			//banklist의 선택한 배열에 입력된 금액이 0보다작으면 return false;
@@ -52,14 +56,21 @@ public class AccountBookServiceImp implements AccountBookService {
 	
 	@Override
 	public boolean setDeposit(Bank bank) {
-		if(bankList == null) {
+		if(bankList == null || bankList.size() == 0) {
 			System.out.println("등록된 내역이 없습니다.");
+		} else if(!bankList.contains(bank)) {
+			System.out.println("등록된 내역이 없습니다.");
+			return false;
 		}
 		return false;
 	}
 	
+	@Override
 	public boolean updateDepositMoney(Bank bank, int money) {
 		if(bankList == null || bankList.size() == 0) {
+			System.out.println("등록된 내역이 없습니다.");
+			return false;
+		} else if(!bankList.contains(bank)) {
 			System.out.println("등록된 내역이 없습니다.");
 			return false;
 		} else {
@@ -75,8 +86,12 @@ public class AccountBookServiceImp implements AccountBookService {
 		return false;
 	}
 	
+	@Override
 	public boolean updateDepositDate(Bank bank, String today) {
 		if(bankList == null || bankList.size() == 0) {
+			System.out.println("등록된 내역이 없습니다.");
+			return false;
+		} else if(!bankList.contains(bank)) {
 			System.out.println("등록된 내역이 없습니다.");
 			return false;
 		} else {
@@ -98,16 +113,36 @@ public class AccountBookServiceImp implements AccountBookService {
 		stream.filter(m->m.getMoney()>0).forEach(m->System.out.println(m));
 	}
 	
-	public boolean updateDepositCategori(Bank bank, int user, String usage) {
+	@Override
+	public boolean updateDepositCategori(Bank bank, int user) {
 		if(bankList == null || bankList.size() == 0) {
+			System.out.println("등록된 내역이 없습니다.");
+			return false;
+		} else if(!bankList.contains(bank)) {
 			System.out.println("등록된 내역이 없습니다.");
 			return false;
 		} else {
 			if(bankList.contains(bank)) {
 				int index = bankList.indexOf(bank);
 				bankList.get(index).setCategori(bank.getArr2()[user-1]);
-				//상세내역 바꿀건지 물어보고 수정
-				//1카테고리 수정할건지 2상세내역 수정할건지 물어보는 식으로
+				
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean updateDepositUsage(Bank bank, String usage) {
+		if(bankList == null || bankList.size() == 0) {
+			System.out.println("등록된 내역이 없습니다.");
+			return false;
+		} else if(!bankList.contains(bank)) {
+			System.out.println("등록된 내역이 없습니다.");
+			return false;
+		} else {
+			if(bankList.contains(bank)) {
+				int index = bankList.indexOf(bank);
 				bankList.get(index).setUsage(usage);
 				return true;
 			}

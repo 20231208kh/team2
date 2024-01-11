@@ -9,13 +9,17 @@ public interface AccountBookService {
 	
 	//가계부 수입 관리 : 김태원
 	boolean addDeposit(Bank bank);
+	boolean deleteDeposit(Bank bank);
 	//수정
 	//날짜+용도
 	//1. 금액
 	//2. 날짜
 	//3. 용도/출처 
 	boolean setDeposit(Bank bank);
-	boolean deleteDeposit(Bank bank);
+	boolean updateDepositMoney(Bank bank, int money);
+	boolean updateDepositDate(Bank bank, String today);
+	boolean updateDepositCategori(Bank bank, int user);
+	boolean updateDepositUsage(Bank bank, String usage);
 	
 	//가계부 지출 관리 : 박석훈
 	boolean addWithdraw();
