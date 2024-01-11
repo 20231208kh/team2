@@ -115,6 +115,8 @@ public class BankProgram implements Program{
 		case 4:
 			System.out.println("이전 메뉴로 돌아갑니다.");
 			break;
+		default:
+			throw new InputMismatchException();
 		}
 		
 	}
@@ -182,8 +184,22 @@ public class BankProgram implements Program{
 	}
 
 	private void addWithdraw() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("병원비(1)/식비(2)/교통비(3)/유흥비(4)/보험료(5)/기타(6)");
+		System.out.println("카테고리 번호를 선택하세요.");
+		int categorynum=scan.nextInt(); //카테고리 번호
+		System.out.println("지출한 돈을 입력하세요.");
+		int drawmoney= -scan.nextInt(); //지출한 돈
+		System.out.println("지출 상세내역을 입력하세요.");
+		scan.nextLine(); 
+		String drawusage=scan.nextLine(); //
+		Bank bank=new Bank(id, categorynum, drawmoney, drawusage);
+		if(absi.addWithdraw(bank)) {
+			System.out.println("등록에 성공하였습니다.");
+			id ++;
+		return;
+		}
+		System.out.println("등록에 실패하였습니다. ");
+		absi.printWithdraw();
 	}
 
 	private void setWithdraw() {
@@ -194,7 +210,22 @@ public class BankProgram implements Program{
 			updateWithdrawMoney();
 			break;
 		case 2:
-			updateWithdrawCategori();
+				printService.printSetCateogryorUsage();
+				menu=scan.nextInt();
+					switch(menu) {
+					
+					case 1:
+						updateWithdrawCategori();
+						break;
+					case 2:
+						updateWithdrawuage();
+						break;
+					case 3:
+						System.out.println("이전 메뉴로 돌아갑니다.");
+						break;
+					default:
+						throw new InputMismatchException();
+					}
 			break;
 		case 3:
 			updateWithdrawDate();
@@ -210,23 +241,80 @@ public class BankProgram implements Program{
 	}
 
 	private void updateWithdrawMoney() {
-		// TODO Auto-generated method stub
+		absi.printWithdraw();
+		System.out.print("수정할 번호를 입력 : ");
+		int userId = scan.nextInt();
+		System.out.println("수정할 금액을 입력 : ");
+		int usermoney=scan.nextInt();
+		if (usermoney > 0 ) {
+		System.out.println("수입 내역 수정을 이용해주세요.");
+		return;
+		}
+		Bank bank=new Bank(userId);
+		if(absi.updateWithdrawMoney(bank, usermoney)) {
+			System.out.println("수정 성공하였습니다.");
+		}
+		else
+		System.out.println("수정에 실패하였습니다.");
+		System.out.println(absi.getBankList());
 		
 	}
 
 	private void updateWithdrawCategori() {
-		// TODO Auto-generated method stub
-		
+		absi.printWithdraw();
+		System.out.print("수정할 번호를 입력 : ");
+		int userId = scan.nextInt();
+		System.out.println("[병원비,식비,교통비,유흥비,보험료,기타]");
+		System.out.println("수정할 카테고리를 입력 : ");
+		String category=scan.next();
+		Bank bank=new Bank(userId);
+		if(absi.updateWithdrawCategori(bank, category)) {
+			System.out.println("수정 성공하였습니다.");
+		}
+		else
+		System.out.println("수정에 실패하였습니다.");
+		absi.printWithdraw();
 	}
-
+	
+	private void updateWithdrawuage() {
+		absi.printWithdraw();
+		System.out.print("수정할 번호를 입력 : ");
+		int userId = scan.nextInt();
+		System.out.println("수정할 상세내역 입력 : ");
+		scan.nextLine();
+		String usage=scan.nextLine();
+		Bank bank=new Bank(userId);
+		if(absi.updateWithdrawCategori(bank, usage)) {
+			System.out.println("수정 성공하였습니다.");
+		}
+		else
+		System.out.println("수정에 실패하였습니다.");
+		absi.printWithdraw();
+	}
+	
 	private void updateWithdrawDate() {
-		// TODO Auto-generated method stub
-		
+		absi.printWithdraw();
+		System.out.print("수정할 번호를 입력 : ");
+		int userId = scan.nextInt();
+		System.out.println("수정할 날짜 입력 : ");
+		scan.nextLine();
+		String date=scan.nextLine();
+		Bank bank=new Bank(userId);
+		if(absi.updateWithdrawDate(bank, date))
+			System.out.println("수정 성공하였습니다.");
+		else
+			System.out.println("수정에 실패하였습니다.");
+		System.out.println();
+		absi.printWithdraw();
 	}
 
 	private void deleteWithdraw() {
-		// TODO Auto-generated method stub
-		
+		absi.printWithdraw();
+		System.out.print("삭제할 id를 입력 : ");
+		int userId = scan.nextInt();
+		Bank bank = new Bank(userId);
+		absi.deleteWithdraw(bank,userId);
+		absi.printWithdraw();
 	}
 
 	private void manageSearch() {

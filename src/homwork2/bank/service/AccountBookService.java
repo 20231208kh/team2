@@ -21,15 +21,17 @@ public interface AccountBookService {
 	boolean deleteDeposit(Bank bank);
 	
 	//가계부 지출 관리 : (박석훈, 박성훈)
-	boolean addWithdraw();
+	
+	//지출 내역 추가
+	boolean addWithdraw(Bank bank);
+	
+	//지출내역 삭제
+	boolean deleteWithdraw(Bank bank, int userid);
 	
 	//지출 내역 각종 수정 : (박석훈, 박성훈)
 	boolean updateWithdrawMoney(Bank bank, int money);
-	boolean updateWithdrawCategori(Bank bank, String categori);
-	boolean updateWithdrawDate(Bank bank,String date);
 	
-	//지출 내역 삭제 : (박석훈, 박성훈)
-	boolean deleteWithdraw(Bank bank);
+
 	
 	
 	//전체 조회 
@@ -44,6 +46,7 @@ public interface AccountBookService {
 	boolean searchByDate(String year, List<Bank> tmpBankList);
 	boolean searchByDate(String year, String month , List<Bank> tmpBankList);
 	boolean searchByDate(String year, String month , String day , List<Bank> tmpBankList);
+
 	
 	
 	//출력
