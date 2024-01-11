@@ -345,10 +345,7 @@ public class BankProgram implements Program{
 		List<Bank> tmp = new ArrayList<Bank>();
 		int i = 1;
 		System.out.print("카테고리 : ");
-		for(String a: arr ) {
-			System.out.print("["+ i + ". " + a + "]");
-			i++;
-		}
+		for(String a: arr ) {System.out.print("["+ i++ + "." + a + "]");}
 		System.out.println();
 		System.out.print("입력 : ");
 		int user = scan.nextInt();

@@ -223,16 +223,17 @@ public class AccountBookServiceImp implements AccountBookService {
 			System.out.println("조건에 맞는 기록이 없습니다.");
 			return;
 		}
+		DecimalFormat df = new DecimalFormat("###,###");
+		int sumDeposit = 0;
+		int sumWithdraw = 0;
 		if(tmpList.stream().filter(l->l.getMoney()>=0).count() != 0) {
 			System.out.println("수입 내역");
 			tmpList.stream().filter(l->l.getMoney()>=0).forEach(i->System.out.print(i));
 			System.out.println("---------");
 			List<Bank> sum = new ArrayList<Bank>();
 			tmpList.stream().filter(l->l.getMoney()>=0).forEach(i-> sum.add(i));
-			int sumMoney = 0;
-			for(Bank i: sum) {sumMoney += i.getMoney();}
-			DecimalFormat df = new DecimalFormat("###,###");
-			System.out.println("수입 합계 : " + df.format(sumMoney));
+			for(Bank i: sum) {sumDeposit += i.getMoney();}
+			System.out.println("수입 합계 : " + df.format(sumDeposit) + "원");
 		}
 		if(tmpList.stream().filter(l->l.getMoney()<0).count() != 0) {
 			System.out.println("지출 내역");
@@ -240,10 +241,11 @@ public class AccountBookServiceImp implements AccountBookService {
 			System.out.println("---------");
 			List<Bank> sum = new ArrayList<Bank>();
 			tmpList.stream().filter(l->l.getMoney()<0).forEach(i-> sum.add(i));
-			int sumMoney = 0;
-			for(Bank i: sum) {sumMoney += i.getMoney();}
-			DecimalFormat df = new DecimalFormat("###,###");
-			System.out.println("지출 합계 : " + df.format(Math.abs(sumMoney)));
+			for(Bank i: sum) {sumWithdraw += i.getMoney();}
+			System.out.println("지출 합계 : " + df.format(Math.abs(sumWithdraw)) + "원");
+		}
+		if(sumDeposit != 0 && sumWithdraw != 0) {
+			System.out.println("수입,지출 합계 : " + df.format(sumDeposit + sumWithdraw) + "원");
 		}
 	}
 
