@@ -1,8 +1,6 @@
 package homwork2.bank;
 
-import java.text.Format;
 import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -88,8 +86,8 @@ public class BankProgram implements Program{
 		//카테고리에 해당하는 금액 입력
 		System.out.println("금액 입력(0원 이상) : ");
 		int money = scan.nextInt();
-		//입금 금액이 양수인지 확인
-		if(!abs.moneyCheck(money)) {
+		if (money<=0) {
+			System.out.println("0 혹은 음수는 입력이 불가합니다.");
 			return;
 		}
 		
@@ -105,23 +103,6 @@ public class BankProgram implements Program{
 		abs.printDeposit();
 	}
 	
-	/* 
-	 * 입력받은 bankList 내역
-	 * List [1,병원 , 2000, 정형외과] , [2,병원, 2000, 정형외과] [3,식비, 3000,제일식당] [4,교통비,1000,버스비] [5,4, 병원,2000,정형외과]
-	 * 
-	 * user = scan.nextInt();
-	 * 
-	 * Bank bank = new bank(user);
-	 * 
-	 * bankList.contains(bank)
-	 * 
-	 * int index = bankList.indexof(bank);
-	 * 
-	 * bankList.get(index).setMoney , setDate, setCategori, setUsage
-	 * 
-
-	 */
-
 	private void deleteDeposit() {
 		abs.printDeposit();
 		System.out.println("삭제할 ID 선택 : ");
@@ -136,36 +117,6 @@ public class BankProgram implements Program{
 		System.out.println("잘못된 ID입력");
 	}
 		
-		
-	/* 
-	 * 입력받은 bankList 내역
-	 * List [1,병원 , 2000, 정형외과] , [2,병원, 2000, 정형외과] [3,식비, 3000,제일식당] [4,교통비,1000,버스비] [5, 병원,2000,정형외과]
-	 * 
-	 * 카테고리 = scan.next();
-	 * 
-	 * bankList에서 입력받은 카테고리 인것만 출력
-	 * 
-	 * [1, 병원,2000,정형외과]
-	 * [2, 병원,2000,정형외과]
-	 * [5,병원,2000,정형외과]
-	 * 
-	 * 
-	 * 
-	 * userId = scan.nextInt();
-	 * 
-	 * Bank bank = new bank(userId);
-	 * 
-	 * bankList.contains(bank)
-	 * 
-	 * int index = bankList.indexOf(bank);
-	 * 
-	 * setMoney 
-	 * 
-	 * 
-	 * 
-
-	 */
-
 	private void setDeposit() {
 		printService.printSetDepositMenu();
 		int menu = scan.nextInt();
@@ -191,8 +142,8 @@ public class BankProgram implements Program{
 		int id = scan.nextInt();
 		System.out.println("수정할 금액 입력 : ");
 		int money = scan.nextInt();
-		//수정할 금액이 양수인지 확인
-		if(!abs.moneyCheck(money)) {
+		if (money<=0) {
+			System.out.println("0혹은 음수는 입력이 불가능합니다.");
 			return;
 		}
 		Bank bank = new Bank(id);
@@ -210,7 +161,7 @@ public class BankProgram implements Program{
 		System.out.print("수정할 ID 입력 : ");
 		int id = scan.nextInt();
 		System.out.println("1.급여"+"\n2.불로소득"+"\n3.실비"+"\n4.용돈"+"\n5.기타");
-		System.out.print("수정할 출처 입력 : ");
+		System.out.print("수정할 카테고리 입력 : ");
 		int user = scan.nextInt();
 		Bank bank = new Bank(id);
 		if(abs.updateDepositCategori(bank, user)) {
@@ -229,18 +180,15 @@ public class BankProgram implements Program{
 				return;
 			}
 			System.out.println("잘못된 ID입력");
-		}else {
-			System.out.println("메뉴로 돌아갑니다.");
-			return;
 		}
+		System.out.println("메뉴로 돌아갑니다.");
 	}
 
 	private void updateDepositDate() {
 		abs.printDeposit();
 		System.out.print("수정할 ID 입력 : ");
 		int id = scan.nextInt();
-		//데시멀포멧 "####/##/##" 2024/01/11
-		
+		//메시지 포멧 "####/##/##" 2024/01/11
 		System.out.print("수정할 연도 입력 : ");
 		String year = scan.next();
 		System.out.print("수정할 월 입력 : ");

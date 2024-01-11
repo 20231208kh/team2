@@ -15,7 +15,6 @@ public interface AccountBookService {
 	//1. 금액
 	//2. 날짜
 	//3. 용도/출처 
-	boolean setDeposit(Bank bank);
 	boolean updateDepositMoney(Bank bank, int money);
 	boolean updateDepositDate(Bank bank, String today);
 	boolean updateDepositCategori(Bank bank, int user);
