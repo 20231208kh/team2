@@ -41,6 +41,7 @@ public class AccountBookServiceImp implements AccountBookService {
 			return false;
 		} else {
 			int index = bankList.indexOf(bank);
+			//banklist의 선택한 배열에 입력된 금액이 0보다작으면 return false;
 			if(bankList.get(index).getMoney()<0) {
 				return false;
 			}
@@ -64,6 +65,9 @@ public class AccountBookServiceImp implements AccountBookService {
 		} else {
 			if(bankList.contains(bank)) {
 				int index = bankList.indexOf(bank);
+				if(bankList.get(index).getMoney()<0) {
+					return false;
+				}
 				bankList.get(index).setMoney(money);
 				return true;
 			}
@@ -78,6 +82,9 @@ public class AccountBookServiceImp implements AccountBookService {
 		} else {
 			if(bankList.contains(bank)) {
 				int index = bankList.indexOf(bank);
+				if(bankList.get(index).getMoney()<0) {
+					return false;
+				}
 				bankList.get(index).setToday(today);
 				return true;
 			}

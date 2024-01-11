@@ -1,5 +1,7 @@
 package homwork2.bank;
 
+//예외처리
+//카테고리에 yes or no 적용
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -100,8 +102,6 @@ public class BankProgram implements Program{
 		//banklist에 bank값이 없으면 저장
 		abs.addDeposit(bank);
 		id++;
-		//num(1) [카테고리 : 카테고리] [금액 : ] [상세내역 : ] [날짜 : ]
-		//입력된 금액만큼 수입 total에 (+)로 추가
 		abs.printList();
 	}
 	
@@ -128,7 +128,6 @@ public class BankProgram implements Program{
 		//유저 삭제 원하는 id 입력한다.
 		int id = scan.nextInt();
 		Bank bank = new Bank(id);
-		//해당되는 id와 banklist의 아이디가 같은지 확인
 		if(abs.deleteDeposit(bank)) {
 			System.out.println("삭제 성공");
 			abs.printList();
@@ -192,14 +191,17 @@ public class BankProgram implements Program{
 		int id = scan.nextInt();
 		System.out.println("수정할 금액 입력 : ");
 		int money = scan.nextInt();
-		//입금 금액이 양수인지 확인
+		//수정할 금액이 양수인지 확인
 		if(!abs.moneyCheck(money)) {
 			return;
 		}
 		Bank bank = new Bank(id);
-		abs.updateDepositMoney(bank, money);
-		//확인용
-		abs.printList();
+		if(abs.updateDepositMoney(bank, money)) {
+			System.out.println("수정 성공.");
+			abs.printList();
+			return;
+		}
+		System.out.println("잘못된 ID입력");
 	}
 
 	private void updateDepositCategori() {
@@ -213,9 +215,12 @@ public class BankProgram implements Program{
 		scan.nextLine();
 		String usage = scan.nextLine();
 		Bank bank = new Bank(id);
-		abs.updateDepositCategori(bank, user, usage);
-		//확인용
-		abs.printList();
+		if(abs.updateDepositCategori(bank, user, usage)) {
+			System.out.println("수정 성공.");
+			abs.printList();
+			return;
+		}
+		System.out.println("잘못된 ID입력");
 	}
 
 	private void updateDepositDate() {
@@ -226,9 +231,12 @@ public class BankProgram implements Program{
 		scan.nextLine();
 		String today = scan.nextLine();
 		Bank bank = new Bank(id);
-		abs.updateDepositDate(bank, today);
-		//확인용
-		abs.printList();
+		if(abs.updateDepositDate(bank, today)) {
+			System.out.println("수정 성공.");
+			abs.printList();
+			return;
+		}
+		System.out.println("잘못된 ID입력");
 	}
 
 	private void manageWithdraw() {
