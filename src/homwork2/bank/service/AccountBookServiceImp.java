@@ -1,5 +1,7 @@
 package homwork2.bank.service;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import homwork2.bank.Bank;
@@ -215,7 +217,7 @@ public class AccountBookServiceImp implements AccountBookService {
 	
 
 	@Override
-	//수입 지출 구분 출력
+	//입력받은 리스트에 수입, 지출이 있는지 파악하고 있다면 각각 구분하여 각 내역과 합계 출력
 	public void printCome(List<Bank> tmpList) {
 		if(tmpList == null || tmpList.size() == 0) {
 			System.out.println("조건에 맞는 기록이 없습니다.");
@@ -225,11 +227,23 @@ public class AccountBookServiceImp implements AccountBookService {
 			System.out.println("수입 내역");
 			tmpList.stream().filter(l->l.getMoney()>=0).forEach(i->System.out.print(i));
 			System.out.println("---------");
+			List<Bank> sum = new ArrayList<Bank>();
+			tmpList.stream().filter(l->l.getMoney()>=0).forEach(i-> sum.add(i));
+			int sumMoney = 0;
+			for(Bank i: sum) {sumMoney += i.getMoney();}
+			DecimalFormat df = new DecimalFormat("###,###");
+			System.out.println("수입 합계 : " + df.format(sumMoney));
 		}
 		if(tmpList.stream().filter(l->l.getMoney()<0).count() != 0) {
 			System.out.println("지출 내역");
 			tmpList.stream().filter(l->l.getMoney()<0).forEach(i->System.out.print(i));
 			System.out.println("---------");
+			List<Bank> sum = new ArrayList<Bank>();
+			tmpList.stream().filter(l->l.getMoney()<0).forEach(i-> sum.add(i));
+			int sumMoney = 0;
+			for(Bank i: sum) {sumMoney += i.getMoney();}
+			DecimalFormat df = new DecimalFormat("###,###");
+			System.out.println("지출 합계 : " + df.format(Math.abs(sumMoney)));
 		}
 	}
 
