@@ -24,12 +24,10 @@ public class Bank {
 	@Override
 	public String toString() {
 		
-		return id+"//"+categori+"//"+money+"//"+usage+"//"+today;
-		
-//		if (money<0) {
-//			return "[지출 금액 : "+Math.abs(money)+"] [지출 용도 : "+usage+", 날짜 : "+today+"]\n";
-//		}
-//			return"[수입 : " + money +"] [ 지출용도 : "+usage+", 날짜 : "+today+"]\n";
+		if (money<0) {
+			return "[번호 : "+id+"] [카테고리 : "+categori+"] [ 지출 금액 : "+Math.abs(money)+"] [상세 내역 : "+usage+", 날짜 : "+today+"]\n";
+		}
+		return "[번호 : "+id+"] [카테고리 : "+categori+"] [ 수입 금액 : "+Math.abs(money)+"] [상세 내역 : "+usage+", 날짜 : "+today+"]\n";
 	}
 	
 
