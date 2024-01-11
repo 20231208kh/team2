@@ -2,6 +2,7 @@ package homwork2.bank.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import homwork2.bank.Bank;
 import lombok.Data;
@@ -10,16 +11,26 @@ public class AccountBookServiceImp implements AccountBookService {
 	private List<Bank> bankList = new ArrayList<Bank>();
 	private Bank bank = new Bank();
 	
+	//LIST에 잘 저장됐는지 확인용
 	public void printList() {
 		for(int i = 0; i<bankList.size(); i++) {
 			System.out.println(bankList.get(i));
 		}
 	}
 	
+	//입금내역이 0보다 작으면 수입금액 출력되게.
+	public boolean moneyCheck(int money) {
+		if(money < 0) {
+			System.out.println("수입 금액을 확인해주세요.");
+			return false;
+		}
+		return true;
+	}
+	
 	@Override
 	public boolean addDeposit(Bank bank) {
-			bankList.add(bank);
-			return true ;
+		bankList.add(bank);
+		return true ;
 	}
 		
 	//카테고리 입력받고 해당 카테고리와 일치하는 값이 입력된 리스트가 있다면 for문이로 걔들 출력
@@ -30,28 +41,13 @@ public class AccountBookServiceImp implements AccountBookService {
 			return false;
 		} else {
 			int index = bankList.indexOf(bank);
+			if(bankList.get(index).getMoney()<0) {
+				return false;
+			}
 			bankList.remove(index);
 			return true;
 		}
 	}
-	
-	@Override
-	public boolean printCategori(int user) {
-		if(bankList == null) {
-			System.out.println("등록된 내역이 없습니다.");
-			return false;
-		} 
-		//정수값을 입력받고 그게 banklist의 arr1의 index
-		if(bankList.contains(user)) {
-			for(int i = 0; i < bankList.size(); i++) {
-				int index = bankList.indexOf(bank.getArr2()[user-1]);
-				System.out.println(bankList.get(index));
-			}
-			return true;
-		}
-		return false;
-	}
-	
 	
 	@Override
 	public boolean setDeposit(Bank bank) {
@@ -75,8 +71,24 @@ public class AccountBookServiceImp implements AccountBookService {
 		return false;
 	}
 	
-	public boolean updateDepositDate(Bank bank, int money) {
+	public boolean updateDepositDate(Bank bank, String today) {
+		if(bankList == null || bankList.size() == 0) {
+			System.out.println("등록된 내역이 없습니다.");
+			return false;
+		} else {
+			if(bankList.contains(bank)) {
+				int index = bankList.indexOf(bank);
+				bankList.get(index).setToday(today);
+				return true;
+			}
+		}
 		return false;
+	}
+	
+	//수입내역 출력
+	public void printDeposit() {
+		Stream<Bank> stream = bankList.stream();
+		stream.filter(m->m.getMoney()>0).forEach(m->System.out.println(m));
 	}
 	
 	public boolean updateDepositCategori(Bank bank, int user, String usage) {
@@ -87,6 +99,8 @@ public class AccountBookServiceImp implements AccountBookService {
 			if(bankList.contains(bank)) {
 				int index = bankList.indexOf(bank);
 				bankList.get(index).setCategori(bank.getArr2()[user-1]);
+				//상세내역 바꿀건지 물어보고 수정
+				//1카테고리 수정할건지 2상세내역 수정할건지 물어보는 식으로
 				bankList.get(index).setUsage(usage);
 				return true;
 			}

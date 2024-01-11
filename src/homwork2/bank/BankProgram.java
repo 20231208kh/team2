@@ -84,10 +84,15 @@ public class BankProgram implements Program{
 		int user = scan.nextInt();
 		
 		//카테고리에 해당하는 금액 입력
-		System.out.println("금액 입력 : ");
+		System.out.println("금액 입력(0원 이상) : ");
 		int money = scan.nextInt();
+		//입금 금액이 양수인지 확인
+		if(!abs.moneyCheck(money)) {
+			return;
+		}
+		
 		//상세 출처 입력
-		System.out.println("용도 입력 : ");
+		System.out.println("상세내역 입력 : ");
 		scan.nextLine();
 		String usage = scan.nextLine();
 		//입력값을 bank에 저장
@@ -99,8 +104,6 @@ public class BankProgram implements Program{
 		//입력된 금액만큼 수입 total에 (+)로 추가
 		abs.printList();
 	}
-	
-	
 	
 	/* 
 	 * 입력받은 bankList 내역
@@ -119,21 +122,8 @@ public class BankProgram implements Program{
 
 	 */
 
-	
-		
-		//카테고리 선택
-		
-		//정수값을 입력받고 그게 banklist의 arr1의 index
-		
-		//해당 카테고리만 bankList 출력
-		
-	
 	private void deleteDeposit() {
-		System.out.println("1.급여"+"\n2.불로소득"+"\n3.실비"+"\n4.용돈"+"\n5.기타");
-		System.out.print("카테고리 선택 : ");
-		int user = scan.nextInt();
-		abs.printCategori(user);
-		
+		abs.printDeposit();
 		System.out.println("삭제할 ID 선택 : ");
 		//유저 삭제 원하는 id 입력한다.
 		int id = scan.nextInt();
@@ -144,37 +134,38 @@ public class BankProgram implements Program{
 			abs.printList();
 			return;
 		}
+		System.out.println("잘못된 ID입력");
 	}
 		
 		
-		/* 
-		 * 입력받은 bankList 내역
-		 * List [1,병원 , 2000, 정형외과] , [2,병원, 2000, 정형외과] [3,식비, 3000,제일식당] [4,교통비,1000,버스비] [5, 병원,2000,정형외과]
-		 * 
-		 * 카테고리 = scan.next();
-		 * 
-		 * bankList에서 입력받은 카테고리 인것만 출력
-		 * 
-		 * [1, 병원,2000,정형외과]
-		 * [2, 병원,2000,정형외과]
-		 * [5,병원,2000,정형외과]
-		 * 
-		 * 
-		 * 
-		 * userId = scan.nextInt();
-		 * 
-		 * Bank bank = new bank(userId);
-		 * 
-		 * bankList.contains(bank)
-		 * 
-		 * int index = bankList.indexOf(bank);
-		 * 
-		 * setMoney 
-		 * 
-		 * 
-		 * 
+	/* 
+	 * 입력받은 bankList 내역
+	 * List [1,병원 , 2000, 정형외과] , [2,병원, 2000, 정형외과] [3,식비, 3000,제일식당] [4,교통비,1000,버스비] [5, 병원,2000,정형외과]
+	 * 
+	 * 카테고리 = scan.next();
+	 * 
+	 * bankList에서 입력받은 카테고리 인것만 출력
+	 * 
+	 * [1, 병원,2000,정형외과]
+	 * [2, 병원,2000,정형외과]
+	 * [5,병원,2000,정형외과]
+	 * 
+	 * 
+	 * 
+	 * userId = scan.nextInt();
+	 * 
+	 * Bank bank = new bank(userId);
+	 * 
+	 * bankList.contains(bank)
+	 * 
+	 * int index = bankList.indexOf(bank);
+	 * 
+	 * setMoney 
+	 * 
+	 * 
+	 * 
 
-		 */
+	 */
 
 	private void setDeposit() {
 		printService.printSetDepositMenu();
@@ -196,13 +187,13 @@ public class BankProgram implements Program{
 	}
 	
 	private void updateDepositMoney() {
-		abs.printList();
+		abs.printDeposit();
 		System.out.println("수정할 ID 입력 : ");
 		int id = scan.nextInt();
 		System.out.println("수정할 금액 입력 : ");
 		int money = scan.nextInt();
-		if (money < 0) {
-			System.out.println("지출 내역 수정");
+		//입금 금액이 양수인지 확인
+		if(!abs.moneyCheck(money)) {
 			return;
 		}
 		Bank bank = new Bank(id);
@@ -212,13 +203,13 @@ public class BankProgram implements Program{
 	}
 
 	private void updateDepositCategori() {
-		abs.printList();
+		abs.printDeposit();
 		System.out.print("수정할 ID 입력 : ");
 		int id = scan.nextInt();
 		System.out.println("1.급여"+"\n2.불로소득"+"\n3.실비"+"\n4.용돈"+"\n5.기타");
 		System.out.print("수정할 출처 입력 : ");
 		int user = scan.nextInt();
-		System.out.print("수정할 세부출처 입력 : ");
+		System.out.print("수정할 상세내역 입력 : ");
 		scan.nextLine();
 		String usage = scan.nextLine();
 		Bank bank = new Bank(id);
@@ -228,7 +219,16 @@ public class BankProgram implements Program{
 	}
 
 	private void updateDepositDate() {
-		
+		abs.printDeposit();
+		System.out.print("수정할 ID 입력 : ");
+		int id = scan.nextInt();
+		System.out.print("수정할 날짜(yyyy/MM/dd) 입력 : ");
+		scan.nextLine();
+		String today = scan.nextLine();
+		Bank bank = new Bank(id);
+		abs.updateDepositDate(bank, today);
+		//확인용
+		abs.printList();
 	}
 
 	private void manageWithdraw() {
