@@ -218,7 +218,7 @@ public class AccountBookServiceImp implements AccountBookService {
 
 	@Override
 	//입력받은 리스트에 수입, 지출이 있는지 파악하고 있다면 각각 구분하여 각 내역과 합계 출력
-	public void printCome(List<Bank> tmpList) {
+	public void printDetail(List<Bank> tmpList) {
 		if(tmpList == null || tmpList.size() == 0) {
 			System.out.println("조건에 맞는 기록이 없습니다.");
 			return;
@@ -248,12 +248,32 @@ public class AccountBookServiceImp implements AccountBookService {
 			System.out.println("수입,지출 합계 : " + df.format(sumDeposit + sumWithdraw) + "원");
 		}
 	}
+	
+	@Override
+	// 금액조회 출력
+	public void printGroup(List<Bank> tmpList) {
+		if(tmpList == null || tmpList.size() == 0) {
+			System.out.println("조건에 맞는 기록이 없습니다.");
+			return;
+		}
+		if(tmpList.stream().filter(l->l.getMoney()>=0).count() != 0) {
+			System.out.println("수입 내역");
+			tmpList.stream().filter(l->l.getMoney()>=0).forEach(i->System.out.print(i));
+			System.out.println("---------");
+		}
+		if(tmpList.stream().filter(l->l.getMoney()<0).count() != 0) {
+			System.out.println("지출 내역");
+			tmpList.stream().filter(l->l.getMoney()<0).forEach(i->System.out.print(i));
+			System.out.println("---------");
+		}
+	}
 
 	@Override
 	//리스트 정렬 - 날짜 수정시에만 추가해 줄것
 	public void sort(List<Bank> tmpList) {
 		tmpList.sort((l1,l2)-> l1.getToday().compareTo(l2.getToday()));
 	}
+
 
 	
 

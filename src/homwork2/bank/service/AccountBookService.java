@@ -45,10 +45,18 @@ public interface AccountBookService {
 	boolean searchByDate(String year, String month , String day , List<Bank> tmpBankList);
 	
 	
-	//수입, 지출 출력
-	void printCome(List<Bank> tmpList);
+	//출력
+	
+	
+	//수입, 지출 그룹 출력
+	void printGroup(List<Bank> tmpList);
+	//수입, 지출 그룹 상세출력
+	void printDetail(List<Bank> tmpList);
+	
 	//정렬
 	void sort(List<Bank> tmpList);
+
+
 
 	
 }

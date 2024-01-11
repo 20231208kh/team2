@@ -256,7 +256,7 @@ public class BankProgram implements Program{
 	private void searchAll() {
 		List<Bank> tmp = new ArrayList<Bank>();
 		if(absi.searchAll(tmp)) {
-			absi.printCome(tmp); // 혹은 그냥 람다를 이용한 출력
+			absi.printDetail(tmp);
 			return;
 		}
 	}
@@ -289,7 +289,7 @@ public class BankProgram implements Program{
 		System.out.print("최대 금액 : ");
 		int max = scan.nextInt();
 		if(absi.searchByMoney(min, max, tmp)) {
-			absi.printCome(tmp); // 혹은 그냥 람다를 이용한 출력
+			absi.printGroup(tmp);
 			return;
 		}
 	}
@@ -300,7 +300,7 @@ public class BankProgram implements Program{
 		System.out.print("조회할 최대 금액 : ");
 		int max = scan.nextInt();
 		if(absi.searchByMoney(min, max, tmp)) {
-			absi.printCome(tmp); // 혹은 그냥 람다를 이용한 출력
+			absi.printGroup(tmp);
 			return;
 		}
 	}
@@ -310,7 +310,7 @@ public class BankProgram implements Program{
 		System.out.print("조회할 최소 금액 : ");
 		int min = scan.nextInt();
 		if(absi.searchByMoney(min, tmp)) {
-			absi.printCome(tmp); // 혹은 그냥 람다를 이용한 출력
+			absi.printGroup(tmp); 
 			return;
 		}
 	}
@@ -355,7 +355,7 @@ public class BankProgram implements Program{
 		}
 		String categori = arr[user-1];
 		if(absi.serchByCategori(categori, tmp)) {
-			absi.printCome(tmp);
+			absi.printDetail(tmp);
 			return;
 		}
 	}
@@ -366,7 +366,7 @@ public class BankProgram implements Program{
 		System.out.print("조회할 출처 : ");
 		String usage = scan.nextLine();
 		if(absi.searchByUsage(usage, tmp)) {
-			absi.printCome(tmp);
+			absi.printDetail(tmp);
 			return;
 		}
 	}
@@ -397,7 +397,7 @@ public class BankProgram implements Program{
 		System.out.print("조회할 연 입력 : ");
 		String year = scan.next();
 		if(absi.searchByDate(year, tmp)) {
-			absi.printCome(tmp);
+			absi.printDetail(tmp);
 			return;
 		}
 	}
@@ -410,7 +410,7 @@ public class BankProgram implements Program{
 		String month = scan.next();
 		if(month.length()==1) {month = "0"+month;}
 		if(absi.searchByDate(year, month, tmp)) {
-			absi.printCome(tmp);
+			absi.printDetail(tmp);
 			return;
 		}
 	}
@@ -426,7 +426,7 @@ public class BankProgram implements Program{
 		String day = scan.next();
 		if(day.length()==1) {day = "0"+day;}
 		if(absi.searchByDate(year, month, day, tmp)) {
-			absi.printCome(tmp);
+			absi.printDetail(tmp);
 			return;
 		}
 	}
