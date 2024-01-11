@@ -6,15 +6,25 @@ public interface PrintService {
 	
 	void printDepositMenu();
 	
+	void printSetDepositMenu();
+	
 	void printWithdrawMenu();
+	
+	void printSetWithdrawMenu();
 	
 	void printSearchMenu();
 	
 	void printExit();
 
-	void printSetDepositMenu();
 
-	void printSetWithdrawMenu();
+	void printSearchByMoney();
+
+	void printSearchByType();
+
+	void printSearchByDate();
+
+	void printSetCateogryorUsage();
+
 
 
 }

@@ -1,10 +1,12 @@
 package homwork2.bank;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
 import lombok.Data;
+
 
 @Data
 public class Bank {
@@ -18,33 +20,17 @@ public class Bank {
 	private String categori; //뽑아올거
 	Date date = new Date();
 	private int id;
+
+
+	
 	//toString 메서드 오버라이딩
 	@Override
 	public String toString() {
-		
+		DecimalFormat df = new DecimalFormat("###,###");
 		if (money<0) {
-			return "[번호 : "+id+"] [카테고리 : "+categori+"] [ 지출 금액 : "+Math.abs(money)+"] [상세 내역 : "+usage+", 날짜 : "+today+"]\n";
+			return "[번호 : "+id+"] [카테고리 : "+categori+"] [ 지출 금액 : "+df.format(Math.abs(money))+"] [상세 내역 : "+usage+", 날짜 : "+today+"]\n";
 		}
-		return "[번호 : "+id+"] [카테고리 : "+categori+"] [ 수입 금액 : "+Math.abs(money)+"] [상세 내역 : "+usage+", 날짜 : "+today+"]\n";
-	}
-	
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Bank other = (Bank) obj;
-		return id == other.id;
+		return "[번호 : "+id+"] [카테고리 : "+categori+"] [ 수입 금액 : "+df.format(money)+"] [상세 내역 : "+usage+", 날짜 : "+today+"]\n";
 	}
 
 
@@ -62,16 +48,27 @@ public class Bank {
 		this.usage = usage;
 		this.today = new SimpleDateFormat("yyyy/MM/dd").format(date);
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Bank other = (Bank) obj;
+		return id == other.id;
+	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+  
 	public Bank(int id) {
 		super();
 		this.id = id;
-	}
-	
-	public Bank(){
-		
-	}
-
-
-
+	}	
 }
+

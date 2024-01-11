@@ -1,6 +1,8 @@
 package homwork2.bank;
 
-		/*
+import java.util.Scanner;
+
+/*
 		[소켓통신] (미정)
 		
 				
@@ -39,10 +41,11 @@ package homwork2.bank;
 				
 		[종료]
 		*/
+
+
 public class BankMain {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		
 		BankProgram bp = new BankProgram();
 		bp.run();
@@ -50,3 +53,4 @@ public class BankMain {
 	}
 
 }
+
