@@ -1,7 +1,43 @@
 package homwork2.bank.service;
 
-public class FileServiceImp {
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import homwork2.bank.Bank;
+
+public class FileServiceImp implements FileService ,Serializable{
+	private static final long serialVersionUID = -1099578898757276127L;
+	String fileName = "src/homework2/bank/service/AccountBook.txt";
 	
+	@Override
+	public List<Bank> load() {
+		try{
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));
+			return (List<Bank>) ois.readObject();
+		}
+		catch(Exception e) {
+			System.out.println("불러오기에 실패했습니다.");
+		}
+		return new ArrayList<Bank>() ;
+	}
+
+	@Override
+	public void save(List<Bank> bankList) {
+		try{
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName));
+			oos.writeObject(bankList);
+			oos.close();
+		}
+		catch(Exception e){
+			System.out.println("저장하기에 실패했습니다.");
+		}
+	}
+
 	
 
 }
@@ -9,20 +45,4 @@ public class FileServiceImp {
 
 
 
-// 꼭 소켓통신이 아니더라도, 회원정보를 보관하는 파일을 하나 만들어서, 그 파일에 없는 회원정보라면 가계부 내역 수정에 접근 불가
-
-
-// 파일을 두개만들어서 1. 가계부의 수입, 지출내역 저장 2. 회원정보 저장
-
-// 회원가입은 정규표현식을 이용하여 비밀번호에는 숫자가 꼭 포함되게끔
-
-
-//시작메뉴는 printMainMenu 가 아닌, 회원가입과 로그인으로 구성
-
-
-//로그인에 실패할시 로그인에 실패했다는 문구 출력후 로그인창 다시 출력(반복문)
-
-//로그인에 성공할시 사용자의 로그인 정보를 바탕으로 지출,수입 내역에 사용자 정보(id)가 기재됨
-
-//
 

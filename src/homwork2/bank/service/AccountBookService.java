@@ -63,8 +63,9 @@ public interface AccountBookService {
 	
 	//정렬 : 김준수
 	void sort(List<Bank> tmpList);
+	
+	//리스트 수신
+	void listLoad(List<Bank> bankList); 
 
-
-
-
+	List<Bank> readList();
 }

@@ -1,5 +1,6 @@
 package homwork2.bank;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,8 +10,8 @@ import lombok.Data;
 
 
 @Data
-public class Bank {
-	
+public class Bank implements Serializable {
+	private static final long serialVersionUID = 5549820094779313605L;
 	
 	private String arr1[] = new String[]{"병원비","식비","교통비","유흥비","보험료","기타"}; //대분류(지출)
 	private String arr2[] = new String[]{"급여","불로소득","실비","용돈","기타"}; //대분류(수입)

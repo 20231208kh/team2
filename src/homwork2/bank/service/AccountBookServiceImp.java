@@ -1,6 +1,7 @@
 package homwork2.bank.service;
 
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
 
@@ -11,14 +12,21 @@ import java.util.stream.Stream;
 import homwork2.bank.Bank;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Data
-public class AccountBookServiceImp implements AccountBookService {
+public class AccountBookServiceImp implements AccountBookService , Serializable {
+	private static final long serialVersionUID = 6760830936819586275L;
 	private List<Bank> bankList = new ArrayList<Bank>();
-
 	@Override
 	// 수입 추가
 	public boolean addDeposit(Bank bank) {
+		if(bankList == null ) {
+			List<Bank> bankList = new ArrayList<Bank>();
+			bankList.add(bank);
+			return true ;
+		}
 		bankList.add(bank);
 		return true ;
 	}
@@ -69,6 +77,11 @@ public class AccountBookServiceImp implements AccountBookService {
 	@Override
 	// 지출 추가
 	public boolean addWithdraw(Bank bank) {	
+		if(bankList == null ) {
+			List<Bank> bankList = new ArrayList<Bank>();
+			bankList.add(bank);
+			return true ;
+		}
 		bankList.add(bank);
 		return true;
 	}
@@ -452,7 +465,15 @@ public class AccountBookServiceImp implements AccountBookService {
 		tmpList.sort((l1,l2)-> l1.getToday().compareTo(l2.getToday()));
 	}
 
-
+	@Override
+	public void listLoad(List<Bank> bankList) {
+		this.bankList = bankList;
+	}
+	
+	@Override
+	public List<Bank> readList() {
+		return bankList;
+	}
 	
 }
 	

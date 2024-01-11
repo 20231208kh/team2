@@ -1,30 +1,34 @@
 package homwork2.bank;
 
 
+import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
-
 import java.util.Scanner;
 
 import homwork2.bank.service.AccountBookService;
 import homwork2.bank.service.AccountBookServiceImp;
+import homwork2.bank.service.FileService;
+import homwork2.bank.service.FileServiceImp;
 import homwork2.bank.service.PrintService;
 import homwork2.bank.service.PrintServiceImp;
 import program.Program;
 
-public class BankProgram implements Program{
+public class BankProgram implements Program , Serializable{
+	private static final long serialVersionUID = 1416137387017570546L;
 	private PrintService printService= new PrintServiceImp();
 	private AccountBookService absi = new AccountBookServiceImp();
-  
+	private FileService fsi = new FileServiceImp(); 
+	
 	private final int EXIT = 4;
-	private int id = 1;
+	int id = 1;
 	private Scanner scan = new Scanner(System.in);
 	@Override
 	public void run() {
 		int menu = 0;
-		
+		absi.listLoad(fsi.load());
 		do {
 			printMenu();
 			try {
@@ -35,7 +39,7 @@ public class BankProgram implements Program{
 				scan.nextLine();
 			}
 		}while(menu!=EXIT);
-		
+		fsi.save(absi.readList());
 	}
 
 	@Override
@@ -104,7 +108,6 @@ public class BankProgram implements Program{
 			Bank bank = new Bank(id,user,money,usage);
 			absi.addDeposit(bank);
 			id++;
-			absi.printDeposit();
 		} catch(IndexOutOfBoundsException e) {
 			System.out.println("잘못 선택된 카테고리입니다.");
 		}
