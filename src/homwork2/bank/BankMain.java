@@ -43,17 +43,9 @@ import java.util.Scanner;
 		*/
 
 
-
 public class BankMain {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		Scanner scan = new Scanner(System.in);
-
-//		if(user<=0); 
-//		bank.getArr1().length;
-	
 		
 		BankProgram bp = new BankProgram();
 		bp.run();
@@ -61,3 +53,4 @@ public class BankMain {
 	}
 
 }
+

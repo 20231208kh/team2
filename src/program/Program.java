@@ -7,5 +7,4 @@ public interface Program {
 	void printMenu();
 	void exitMenu();
 	
-
 }
