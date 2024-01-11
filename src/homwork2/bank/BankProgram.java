@@ -411,6 +411,7 @@ public class BankProgram implements Program{
 		String year = scan.next();
 		System.out.print("월 입력 : ");
 		String month = scan.next();
+		if(month.length()==1) {month = "0"+month;}
 		if(absi.searchByDate(year, month, tmp)) {
 			absi.printCome(tmp);
 			return;
@@ -423,8 +424,10 @@ public class BankProgram implements Program{
 		String year = scan.next();
 		System.out.print("월 입력 : ");
 		String month = scan.next();
+		if(month.length()==1) {month = "0"+month;}
 		System.out.print("일 입력 : ");
 		String day = scan.next();
+		if(day.length()==1) {day = "0"+day;}
 		if(absi.searchByDate(year, month, day, tmp)) {
 			absi.printCome(tmp);
 			return;
