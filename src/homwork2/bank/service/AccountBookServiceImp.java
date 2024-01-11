@@ -70,6 +70,7 @@ public class AccountBookServiceImp implements AccountBookService {
 		if(bankList.contains(bank))
 		{			
 			bankList.remove(userid);
+			System.out.println("삭제 성공");
 			return true;
 		}
 		
@@ -131,6 +132,7 @@ public class AccountBookServiceImp implements AccountBookService {
 				return false;
 			}
 			bankList.get(index).setMoney(money);
+			System.out.println(bankList.get(index));
 			return true;
 		}
 		
@@ -141,7 +143,7 @@ public class AccountBookServiceImp implements AccountBookService {
 
 
 	@Override
-	public boolean updateWithdrawCategori(Bank bank, String categori) { //박석훈
+	public boolean updateWithdrawCategori(Bank bank, int user) { //박석훈
 
 		if (bankList.contains(bank)) {
 			int index = bankList.indexOf(bank);
@@ -149,8 +151,14 @@ public class AccountBookServiceImp implements AccountBookService {
 			if(bankList.get(index).getMoney()>0) {
 				return false;
 			}
-			bankList.get(index).setCategori(categori);
-			return true;
+			try {
+				String categori = bankList.get(index).getArr1()[user-1];
+				bankList.get(index).setCategori(categori);
+				System.out.println(bankList.get(index));
+				return true;
+			}catch(IndexOutOfBoundsException e) {
+				System.out.println("잘못된 카테고리 입력");
+			}
 		}
 		
 		return false;
@@ -165,6 +173,7 @@ public class AccountBookServiceImp implements AccountBookService {
 				return false;
 			}
 			bankList.get(index).setUsage(usage);
+			System.out.println(bankList.get(index));
 			return true;
 		}
 			return false;	

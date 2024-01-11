@@ -30,7 +30,7 @@ public interface AccountBookService {
 	boolean updateWithdrawMoney(Bank bank, int money);
 	
 	
-	boolean updateWithdrawCategori(Bank bank, String categori);  //카테고리 수정
+	boolean updateWithdrawCategori(Bank bank, int user);  //카테고리 수정
 	boolean updateWithdrawDate(Bank bank,String date);  //날짜 수정
 	boolean updateWithdrawUsage(Bank bank, String usage); //상세내역 수정 
 	
@@ -47,6 +47,8 @@ public interface AccountBookService {
 
 	//전체 조회
 	boolean searchAll();
+
+	void printWithdraw();
 
 	
 	

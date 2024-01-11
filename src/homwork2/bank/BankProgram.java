@@ -1,6 +1,7 @@
 package homwork2.bank;
 
 
+import java.text.MessageFormat;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -12,7 +13,7 @@ import program.Program;
 
 public class BankProgram implements Program{
 	private PrintService printService= new PrintServiceImp();
-	private AccountBookServiceImp absi = new AccountBookServiceImp();
+	private AccountBookService absi = new AccountBookServiceImp();
 	private final int EXIT = 4;
 	private int id = 1;
 	private Scanner scan = new Scanner(System.in);
@@ -182,21 +183,25 @@ public class BankProgram implements Program{
 
 	private void addWithdraw() {
 		System.out.println("병원비(1)/식비(2)/교통비(3)/유흥비(4)/보험료(5)/기타(6)");
-		System.out.println("카테고리 번호를 선택하세요.");
+		System.out.print("카테고리 번호를 선택하세요.");
 		int categorynum=scan.nextInt(); //카테고리 번호
-		System.out.println("지출한 돈을 입력하세요.");
+		System.out.print("지출한 돈을 입력하세요.");
 		int drawmoney= -scan.nextInt(); //지출한 돈
-		System.out.println("지출 상세내역을 입력하세요.");
+		System.out.print("지출 상세내역을 입력하세요.");
 		scan.nextLine(); 
 		String drawusage=scan.nextLine(); //
-		Bank bank=new Bank(id, categorynum, drawmoney, drawusage);
-		if(absi.addWithdraw(bank)) {
-			System.out.println("등록에 성공하였습니다.");
-			id ++;
-		return;
+		try {
+			Bank bank=new Bank(id, categorynum, drawmoney, drawusage);
+			if(absi.addWithdraw(bank)) {
+				System.out.println("등록에 성공하였습니다.");
+				id ++;
+				return;
+			}
+		}catch (IndexOutOfBoundsException e) {
+				System.out.println("잘못된 카테고리 입력");
 		}
-		System.out.println("등록에 실패하였습니다. ");
-		absi.printWithdraw();
+		System.out.println("등록 실패");
+		
 	}
 
 	private void setWithdraw() {
@@ -207,22 +212,7 @@ public class BankProgram implements Program{
 			updateWithdrawMoney();
 			break;
 		case 2:
-				printService.printSetCateogryorUsage();
-				menu=scan.nextInt();
-					switch(menu) {
-					
-					case 1:
-						updateWithdrawCategori();
-						break;
-					case 2:
-						updateWithdrawuage();
-						break;
-					case 3:
-						System.out.println("이전 메뉴로 돌아갑니다.");
-						break;
-					default:
-						throw new InputMismatchException();
-					}
+				updateWithdrawCategori();
 			break;
 		case 3:
 			updateWithdrawDate();
@@ -241,7 +231,7 @@ public class BankProgram implements Program{
 		absi.printWithdraw();
 		System.out.print("수정할 번호를 입력 : ");
 		int userId = scan.nextInt();
-		System.out.println("수정할 금액을 입력 : ");
+		System.out.print("수정할 금액을 입력 : ");
 		int usermoney=scan.nextInt();
 		if (usermoney > 0 ) {
 		System.out.println("수입 내역 수정을 이용해주세요.");
@@ -253,63 +243,73 @@ public class BankProgram implements Program{
 		}
 		else
 		System.out.println("수정에 실패하였습니다.");
-		System.out.println(absi.getBankList());
 		
 	}
 
 	private void updateWithdrawCategori() {
+		char ask = 'n';
 		absi.printWithdraw();
 		System.out.print("수정할 번호를 입력 : ");
 		int userId = scan.nextInt();
-		System.out.println("[병원비,식비,교통비,유흥비,보험료,기타]");
-		System.out.println("수정할 카테고리를 입력 : ");
-		String category=scan.next();
+		System.out.println("병원비(1)식비(2)교통비(3)유흥비(4)보험료(5)기타(6)]");
+		System.out.print("수정할 카테고리를 입력 : ");
+		int user = scan.nextInt();
 		Bank bank=new Bank(userId);
-		if(absi.updateWithdrawCategori(bank, category)) {
+		if(absi.updateWithdrawCategori(bank, user)) {
 			System.out.println("수정 성공하였습니다.");
+			return;
 		}
-		else
-		System.out.println("수정에 실패하였습니다.");
-		absi.printWithdraw();
+		System.out.print("상세내역을 수정하시겠습니까?(y/n) : ");
+		ask=scan.next().charAt(0);
+		if(ask == 'y') {
+			System.out.print("수정할 상세내역 입력 : ");
+			scan.nextLine();
+			String usage = scan.nextLine();
+			if(absi.updateWithdrawUsage(bank, usage)) {
+				System.out.println("수정 성공.");
+				absi.printWithdraw();
+				return;
+			}
+			System.out.println("잘못된 ID입력");
+		}else {
+			System.out.println("메뉴로 돌아갑니다.");
+			return;
+		}
 	}
 	
-	private void updateWithdrawuage() {
-		absi.printWithdraw();
-		System.out.print("수정할 번호를 입력 : ");
-		int userId = scan.nextInt();
-		System.out.println("수정할 상세내역 입력 : ");
-		scan.nextLine();
-		String usage=scan.nextLine();
-		Bank bank=new Bank(userId);
-		if(absi.updateWithdrawCategori(bank, usage)) {
-			System.out.println("수정 성공하였습니다.");
-		}
-		else
-		System.out.println("수정에 실패하였습니다.");
-		absi.printWithdraw();
-	}
+	
+
 	
 	private void updateWithdrawDate() {
 		absi.printWithdraw();
-		System.out.print("수정할 번호를 입력 : ");
-		int userId = scan.nextInt();
-		System.out.println("수정할 날짜 입력 : ");
-		scan.nextLine();
-		String date=scan.nextLine();
-		Bank bank=new Bank(userId);
+		System.out.print("수정할 ID 입력 : ");
+		int id = scan.nextInt();
+		//데시멀포멧 "####/##/##" 2024/01/11
+		System.out.print("수정할 연도 입력 : ");
+		String year = scan.next();
+		System.out.print("수정할 월 입력 : ");
+		String month = scan.next();
+		System.out.print("수정할 일 입력 : ");
+		String day = scan.next();
+		String p ="{0}/{1}/{2}";
+		String date = MessageFormat.format(p,year,month,day);
+		
+		Bank bank= new Bank(id);
 		if(absi.updateWithdrawDate(bank, date))
-			System.out.println("수정 성공하였습니다.");
-		else
-			System.out.println("수정에 실패하였습니다.");
-		System.out.println();
-		absi.printWithdraw();
+		{	System.out.println("수정 성공.");
+			absi.printWithdraw();
+			return;
 	}
+			System.out.println("잘못된 ID입력");
+	}
+		
 
 	private void deleteWithdraw() {
 		absi.printWithdraw();
 		System.out.print("삭제할 id를 입력 : ");
 		int userId = scan.nextInt();
 		Bank bank = new Bank(userId);
+	
 		absi.deleteWithdraw(bank,userId);
 		absi.printWithdraw();
 	}
