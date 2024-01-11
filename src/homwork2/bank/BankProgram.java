@@ -14,7 +14,7 @@ import program.Program;
 
 public class BankProgram implements Program{
 	private PrintService printService= new PrintServiceImp();
-	private AccountBookServiceImp abs = new AccountBookServiceImp();
+	private AccountBookService abs = new AccountBookServiceImp();
 	private final int EXIT = 4;
 	private int id = 1;
 	private Scanner scan = new Scanner(System.in);
@@ -130,7 +130,7 @@ public class BankProgram implements Program{
 		Bank bank = new Bank(id);
 		if(abs.deleteDeposit(bank)) {
 			System.out.println("삭제 성공");
-			abs.printList();
+			abs.printDeposit();
 			return;
 		}
 		System.out.println("잘못된 ID입력");
@@ -198,7 +198,7 @@ public class BankProgram implements Program{
 		Bank bank = new Bank(id);
 		if(abs.updateDepositMoney(bank, money)) {
 			System.out.println("수정 성공.");
-			abs.printList();
+			abs.printDeposit();
 			return;
 		}
 		System.out.println("잘못된 ID입력");
@@ -215,7 +215,7 @@ public class BankProgram implements Program{
 		Bank bank = new Bank(id);
 		if(abs.updateDepositCategori(bank, user)) {
 			System.out.println("수정 성공.");
-			abs.printList();
+			abs.printDeposit();
 		}
 		System.out.print("상세내역을 수정하시겠습니까?(y/n) : ");
 		ask = scan.next().charAt(0);
@@ -225,7 +225,7 @@ public class BankProgram implements Program{
 			String usage = scan.nextLine();
 			if(abs.updateDepositUsage(bank, usage)) {
 				System.out.println("수정 성공.");
-				abs.printList();
+				abs.printDeposit();
 				return;
 			}
 			System.out.println("잘못된 ID입력");
@@ -253,7 +253,7 @@ public class BankProgram implements Program{
 		Bank bank = new Bank(id);
 		if(abs.updateDepositDate(bank, date)) {
 			System.out.println("수정 성공.");
-			abs.printList();
+			abs.printDeposit();
 			return;
 		}
 		System.out.println("잘못된 ID입력");

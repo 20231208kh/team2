@@ -12,22 +12,6 @@ public class AccountBookServiceImp implements AccountBookService {
 	private List<Bank> bankList = new ArrayList<Bank>();
 	private Bank bank = new Bank();
 	
-	//LIST에 잘 저장됐는지 확인용
-	public void printList() {
-		for(int i = 0; i<bankList.size(); i++) {
-			System.out.println(bankList.get(i));
-		}
-	}
-	
-	//입금내역이 0보다 작으면 수입금액 출력되게.
-	public boolean moneyCheck(int money) {
-		if(money < 0) {
-			System.out.println("수입 금액을 확인해주세요.");
-			return false;
-		}
-		return true;
-	}
-	
 	@Override
 	public boolean addDeposit(Bank bank) {
 		bankList.add(bank);
@@ -40,7 +24,8 @@ public class AccountBookServiceImp implements AccountBookService {
 		if(bankList == null || bankList.size() == 0) {
 			System.out.println("등록된 내역이 없습니다.");
 			return false;
-		} else if(!bankList.contains(bank)){
+		}
+		if(!bankList.contains(bank)){
 			System.out.println("등록된 내역이 없습니다.");
 			return false;
 		} else {
@@ -58,7 +43,9 @@ public class AccountBookServiceImp implements AccountBookService {
 	public boolean setDeposit(Bank bank) {
 		if(bankList == null || bankList.size() == 0) {
 			System.out.println("등록된 내역이 없습니다.");
-		} else if(!bankList.contains(bank)) {
+			return false;
+		}
+		if(!bankList.contains(bank)) {
 			System.out.println("등록된 내역이 없습니다.");
 			return false;
 		}
@@ -70,7 +57,8 @@ public class AccountBookServiceImp implements AccountBookService {
 		if(bankList == null || bankList.size() == 0) {
 			System.out.println("등록된 내역이 없습니다.");
 			return false;
-		} else if(!bankList.contains(bank)) {
+		}
+		if(!bankList.contains(bank)) {
 			System.out.println("등록된 내역이 없습니다.");
 			return false;
 		} else {
@@ -91,7 +79,8 @@ public class AccountBookServiceImp implements AccountBookService {
 		if(bankList == null || bankList.size() == 0) {
 			System.out.println("등록된 내역이 없습니다.");
 			return false;
-		} else if(!bankList.contains(bank)) {
+		}
+		if(!bankList.contains(bank)) {
 			System.out.println("등록된 내역이 없습니다.");
 			return false;
 		} else {
@@ -108,6 +97,7 @@ public class AccountBookServiceImp implements AccountBookService {
 	}
 	
 	//수입내역 출력
+	@Override
 	public void printDeposit() {
 		Stream<Bank> stream = bankList.stream();
 		stream.filter(m->m.getMoney()>0).forEach(m->System.out.println(m));
@@ -118,7 +108,8 @@ public class AccountBookServiceImp implements AccountBookService {
 		if(bankList == null || bankList.size() == 0) {
 			System.out.println("등록된 내역이 없습니다.");
 			return false;
-		} else if(!bankList.contains(bank)) {
+		}
+		if(!bankList.contains(bank)) {
 			System.out.println("등록된 내역이 없습니다.");
 			return false;
 		} else {
@@ -137,7 +128,8 @@ public class AccountBookServiceImp implements AccountBookService {
 		if(bankList == null || bankList.size() == 0) {
 			System.out.println("등록된 내역이 없습니다.");
 			return false;
-		} else if(!bankList.contains(bank)) {
+		}
+		if(!bankList.contains(bank)) {
 			System.out.println("등록된 내역이 없습니다.");
 			return false;
 		} else {
@@ -189,6 +181,12 @@ public class AccountBookServiceImp implements AccountBookService {
 
 	@Override
 	public boolean searchAll() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean moneyCheck(int money) {
 		// TODO Auto-generated method stub
 		return false;
 	}

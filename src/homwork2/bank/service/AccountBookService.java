@@ -39,6 +39,8 @@ public interface AccountBookService {
 	
 	//전체 조회
 	boolean searchAll();
+	boolean moneyCheck(int money);
+	void printDeposit();
 	
 	
 	//추가기능?
