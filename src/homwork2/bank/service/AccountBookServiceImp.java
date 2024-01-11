@@ -166,8 +166,7 @@ public class AccountBookServiceImp implements AccountBookService {
 
 	public boolean updateWithdrawUsage(Bank bank, String usage) {
 		
-		if(bankList.contains(bank))
-		{
+		if(bankList.contains(bank)){
 			int index=bankList.indexOf(bank);
 			if(bankList.get(index).getMoney()>0) {
 				return false;

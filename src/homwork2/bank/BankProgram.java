@@ -120,21 +120,7 @@ public class BankProgram implements Program{
 	}
 
 	private void updateDepositMoney() {
-//		System.out.println(absi.getBankList());
-//		System.out.print("수정할 id를 입력 : ");
-//		int userId = scan.nextInt();
-//		System.out.print("금액 수정 : ");
-//		int userMoney =scan.nextInt();
-//		if (userMoney < 0 ) {
-//			System.out.println("지출 내역 수정을 이용해주세요.");
-//			return;
-//		}
-//		Bank bank = new Bank(userId);
-//		if(absi.updateDepositMoney(bank,userMoney)) {
-//			System.out.println("등록 성공");
-//		}
-//		System.out.println("등록 되지 않은 내역입니다.");
-//		System.out.println(absi.getBankList());
+
 		
 	}
 
@@ -149,12 +135,7 @@ public class BankProgram implements Program{
 	}
 
 	private void deleteDeposit() {
-//		System.out.println(absi.getBankList());
-//		System.out.print("삭제할 id를 입력 : ");
-//		int userId = scan.nextInt();
-//		Bank bank = new Bank(userId);
-//		
-//		absi.deleteDeposit(bank);
+
 		
 	}
 
@@ -212,7 +193,7 @@ public class BankProgram implements Program{
 			updateWithdrawMoney();
 			break;
 		case 2:
-				updateWithdrawCategori();
+			updateWithdrawCategori();
 			break;
 		case 3:
 			updateWithdrawDate();
@@ -232,16 +213,13 @@ public class BankProgram implements Program{
 		System.out.print("수정할 번호를 입력 : ");
 		int userId = scan.nextInt();
 		System.out.print("수정할 금액을 입력 : ");
-		int usermoney=scan.nextInt();
-		if (usermoney > 0 ) {
-		System.out.println("수입 내역 수정을 이용해주세요.");
-		return;
-		}
+		int usermoney= -scan.nextInt();
+		
 		Bank bank=new Bank(userId);
 		if(absi.updateWithdrawMoney(bank, usermoney)) {
 			System.out.println("수정 성공하였습니다.");
+			return;
 		}
-		else
 		System.out.println("수정에 실패하였습니다.");
 		
 	}
@@ -251,7 +229,7 @@ public class BankProgram implements Program{
 		absi.printWithdraw();
 		System.out.print("수정할 번호를 입력 : ");
 		int userId = scan.nextInt();
-		System.out.println("병원비(1)식비(2)교통비(3)유흥비(4)보험료(5)기타(6)]");
+		System.out.println("병원비(1)식비(2)교통비(3)유흥비(4)보험료(5)기타(6)");
 		System.out.print("수정할 카테고리를 입력 : ");
 		int user = scan.nextInt();
 		Bank bank=new Bank(userId);
@@ -267,14 +245,13 @@ public class BankProgram implements Program{
 			String usage = scan.nextLine();
 			if(absi.updateWithdrawUsage(bank, usage)) {
 				System.out.println("수정 성공.");
-				absi.printWithdraw();
 				return;
 			}
 			System.out.println("잘못된 ID입력");
-		}else {
-			System.out.println("메뉴로 돌아갑니다.");
-			return;
 		}
+		
+		System.out.println("메뉴로 돌아갑니다.");
+			
 	}
 	
 	
@@ -295,12 +272,11 @@ public class BankProgram implements Program{
 		String date = MessageFormat.format(p,year,month,day);
 		
 		Bank bank= new Bank(id);
-		if(absi.updateWithdrawDate(bank, date))
-		{	System.out.println("수정 성공.");
-			absi.printWithdraw();
+		if(absi.updateWithdrawDate(bank, date)){
+			System.out.println("수정 성공.");
 			return;
 	}
-			System.out.println("잘못된 ID입력");
+		System.out.println("잘못된 ID입력");
 	}
 		
 
@@ -310,8 +286,13 @@ public class BankProgram implements Program{
 		int userId = scan.nextInt();
 		Bank bank = new Bank(userId);
 	
-		absi.deleteWithdraw(bank,userId);
-		absi.printWithdraw();
+		if(absi.deleteWithdraw(bank,userId)) {
+			System.out.println("삭제 성공");
+			absi.printWithdraw();
+			return;
+		}
+		System.out.println("삭제 실패");
+		
 	}
 
 	private void manageSearch() {
