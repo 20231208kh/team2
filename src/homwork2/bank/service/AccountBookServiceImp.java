@@ -137,7 +137,7 @@ public class AccountBookServiceImp implements AccountBookService {
 			return false;
 		}
 		bankList.stream()
-		.filter(b->b.getToday().substring(0, 3).equals(year))
+		.filter(b->b.getToday().substring(0, 4).equals(year))
 		.forEach(l->tmpBankList.add(l));
 		if(tmpBankList == null || tmpBankList.size() == 0) {
 			System.out.println("조건에 맞는 기록이 없습니다.");
@@ -154,8 +154,8 @@ public class AccountBookServiceImp implements AccountBookService {
 			return false;
 		}
 		bankList.stream()
-				.filter(b-> b.getToday().substring(0, 3).equals(year) 
-						&& b.getToday().substring(5, 6).equals(month))
+				.filter(b-> b.getToday().substring(0, 4).equals(year) 
+						&& b.getToday().substring(5, 7).equals(month))
 				.forEach(l->tmpBankList.add(l));
 		if(tmpBankList == null || tmpBankList.size() == 0) {
 			System.out.println("조건에 맞는 기록이 없습니다.");
@@ -172,9 +172,9 @@ public class AccountBookServiceImp implements AccountBookService {
 			return false;
 		}
 		bankList.stream()
-				.filter(b-> b.getToday().substring(0, 3).equals(year) 
-						&& b.getToday().substring(5, 6).equals(month) 
-						&& b.getToday().substring(8, 9).equals(day))
+				.filter(b-> b.getToday().substring(0, 4).equals(year) 
+						&& b.getToday().substring(5, 7).equals(month) 
+						&& b.getToday().substring(8).equals(day))
 				.forEach(l->tmpBankList.add(l));
 		if(tmpBankList == null || tmpBankList.size() == 0) {
 			System.out.println("조건에 맞는 기록이 없습니다.");
