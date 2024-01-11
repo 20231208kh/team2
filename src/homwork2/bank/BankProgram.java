@@ -58,7 +58,7 @@ public class BankProgram implements Program{
 		}
 		
 	}
-
+	
 	private void manageDeposit() {
 		printService.printDepositMenu();
 		int menu = scan.nextInt();
@@ -89,36 +89,36 @@ public class BankProgram implements Program{
 		int user = scan.nextInt();
 		
 		//카테고리에 해당하는 금액 입력
-		System.out.println("금액 입력(0원 이상) : ");
+		System.out.print("금액 입력(0원 이상) : ");
 		int money = scan.nextInt();
 		if (money<=0) {
 			System.out.println("0 혹은 음수는 입력이 불가합니다.");
 			return;
 		}
 		//상세 출처 입력
-		System.out.println("상세내역 입력 : ");
+		System.out.print("상세내역 입력 : ");
 		scan.nextLine();
 		String usage = scan.nextLine();
 		try {
 			//입력값을 bank에 저장
 			Bank bank = new Bank(id,user,money,usage);
-			abs.addDeposit(bank);
+			absi.addDeposit(bank);
 			id++;
-			abs.printDeposit();
+			absi.printDeposit();
 		} catch(IndexOutOfBoundsException e) {
 			System.out.println("잘못 선택된 카테고리입니다.");
 		}
 	}
 	
 	private void deleteDeposit() {
-		abs.printDeposit();
-		System.out.println("삭제할 ID 선택 : ");
+		absi.printDeposit();
+		System.out.print("삭제할 ID 선택 : ");
 		//유저 삭제 원하는 id 입력한다.
 		int id = scan.nextInt();
 		Bank bank = new Bank(id);
-		if(abs.deleteDeposit(bank)) {
+		if(absi.deleteDeposit(bank)) {
 			System.out.println("삭제 성공");
-			abs.printDeposit();
+			absi.printDeposit();
 			return;
 		}
 		System.out.println("잘못된 ID입력");
@@ -146,19 +146,19 @@ public class BankProgram implements Program{
 	}
 	
 	private void updateDepositMoney() {
-		abs.printDeposit();
-		System.out.println("수정할 ID 입력 : ");
+		absi.printDeposit();
+		System.out.print("수정할 ID 입력 : ");
 		int id = scan.nextInt();
-		System.out.println("수정할 금액 입력 : ");
+		System.out.print("수정할 금액 입력 : ");
 		int money = scan.nextInt();
 		if (money<=0) {
 			System.out.println("0혹은 음수는 입력이 불가능합니다.");
 			return;
 		}
 		Bank bank = new Bank(id);
-		if(abs.updateDepositMoney(bank, money)) {
+		if(absi.updateDepositMoney(bank, money)) {
 			System.out.println("수정 성공.");
-			abs.printDeposit();
+			absi.printDeposit();
 			return;
 		}
 		System.out.println("잘못된 ID입력");
@@ -166,25 +166,25 @@ public class BankProgram implements Program{
 
 	private void updateDepositCategori() {
 		char ask = 'n';
-		abs.printDeposit();
+		absi.printDeposit();
 		System.out.print("수정할 ID 입력 : ");
 		int id = scan.nextInt();
 		System.out.println("1.급여"+"\n2.불로소득"+"\n3.실비"+"\n4.용돈"+"\n5.기타");
 		System.out.print("수정할 카테고리 입력 : ");
 		int user = scan.nextInt();
 		Bank bank = new Bank(id);
-		if(abs.updateDepositCategori(bank, user)) {
+		if(absi.updateDepositCategori(bank, user)) {
 			System.out.println("수정 성공.");
-			abs.printDeposit();
+			absi.printDeposit();
 			System.out.print("상세내역을 수정하시겠습니까?(y/n) : ");
 			ask = scan.next().charAt(0);
 			if(ask == 'y') {
 				System.out.print("수정할 상세내역 입력 : ");
 				scan.nextLine();
 				String usage = scan.nextLine();
-				if(abs.updateDepositUsage(bank, usage)) {
+				if(absi.updateDepositUsage(bank, usage)) {
 					System.out.println("수정 성공.");
-					abs.printDeposit();
+					absi.printDeposit();
 					return;
 				}
 				System.out.println("잘못된 ID입력");
@@ -194,7 +194,7 @@ public class BankProgram implements Program{
 	}
 
 	private void updateDepositDate() {
-		abs.printDeposit();
+		absi.printDeposit();
 		System.out.print("수정할 ID 입력 : ");
 		int id = scan.nextInt();
 		//메시지 포멧 "####/##/##" 2024/01/11
@@ -208,9 +208,9 @@ public class BankProgram implements Program{
 		String date = MessageFormat.format(p,year,month,day);
 		
 		Bank bank = new Bank(id);
-		if(abs.updateDepositDate(bank, date)) {
+		if(absi.updateDepositDate(bank, date)) {
 			System.out.println("수정 성공.");
-			abs.printDeposit();
+			absi.printDeposit();
 			return;
 		}
 		System.out.println("잘못된 ID입력");
@@ -239,10 +239,6 @@ public class BankProgram implements Program{
 		
 	}
 
-	private void addWithdraw() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	private void setWithdraw() {
 		printService.printSetWithdrawMenu();
@@ -269,38 +265,13 @@ public class BankProgram implements Program{
 
 
 	
-
-
-	private void manageWithdraw() {
-		printService.printWithdrawMenu();
-		int menu = scan.nextInt();
-		switch(menu) {
-		case 1:
-			addWithdraw();
-			break;
-		case 2:
-			setWithdraw();
-			break;
-		case 3:
-			deleteWithdraw();
-			break;
-		case 4:
-			System.out.println("이전 메뉴로 돌아갑니다.");
-			break;
-		default:
-			throw new InputMismatchException();
-		}
-		
-		
-	}
-
 	private void addWithdraw() {
-		System.out.println("병원비(1)/식비(2)/교통비(3)/유흥비(4)/보험료(5)/기타(6)");
-		System.out.print("카테고리 번호를 선택하세요.");
+		System.out.println("1.병원비\n2.식비\n3.교통비\n4.유흥비\n5.보험료\n6.기타");
+		System.out.print("카테고리 번호를 선택하세요 : ");
 		int categorynum=scan.nextInt(); //카테고리 번호
-		System.out.print("지출한 돈을 입력하세요.");
+		System.out.print("지출한 돈을 입력하세요 : ");
 		int drawmoney= -scan.nextInt(); //지출한 돈
-		System.out.print("지출 상세내역을 입력하세요.");
+		System.out.print("지출 상세내역을 입력하세요 : ");
 		scan.nextLine(); 
 		String drawusage=scan.nextLine(); //
 		try {
@@ -317,28 +288,6 @@ public class BankProgram implements Program{
 		
 	}
 
-	private void setWithdraw() {
-		printService.printSetWithdrawMenu();
-		int menu = scan.nextInt();
-		switch(menu) {
-		case 1:
-			updateWithdrawMoney();
-			break;
-		case 2:
-			updateWithdrawCategori();
-			break;
-		case 3:
-			updateWithdrawDate();
-			break;
-		case 4:
-			System.out.println("이전 메뉴로 돌아갑니다.");
-			break;
-		default:
-			throw new InputMismatchException();
-			
-		}
-		
-	}
 
 	private void updateWithdrawMoney() {
 		absi.printWithdraw();
@@ -361,7 +310,7 @@ public class BankProgram implements Program{
 		absi.printWithdraw();
 		System.out.print("수정할 번호를 입력 : ");
 		int userId = scan.nextInt();
-		System.out.println("병원비(1)식비(2)교통비(3)유흥비(4)보험료(5)기타(6)");
+		System.out.println("1.병원비\n2.식비\n3.교통비\n4.유흥비\n5.보험료\n6.기타");
 		System.out.print("수정할 카테고리를 입력 : ");
 		int user = scan.nextInt();
 		Bank bank=new Bank(userId);

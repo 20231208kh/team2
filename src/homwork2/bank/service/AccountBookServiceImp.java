@@ -15,9 +15,9 @@ import lombok.Data;
 @Data
 public class AccountBookServiceImp implements AccountBookService {
 	private List<Bank> bankList = new ArrayList<Bank>();
-	private Bank bank = new Bank();
 
 	@Override
+	// 수입 추가
 	public boolean addDeposit(Bank bank) {
 		bankList.add(bank);
 		return true ;
@@ -25,6 +25,7 @@ public class AccountBookServiceImp implements AccountBookService {
 
 	//카테고리 입력받고 해당 카테고리와 일치하는 값이 입력된 리스트가 있다면 for문이로 걔들 출력
 	@Override
+	// 수입 내역 삭제
 	public boolean deleteDeposit(Bank bank) {
 		if(bankList == null || bankList.size() == 0) {
 			System.out.println("등록된 내역이 없습니다.");
@@ -44,6 +45,7 @@ public class AccountBookServiceImp implements AccountBookService {
 	
 	
 	@Override
+	// 수입 금액 수정
 	public boolean updateDepositMoney(Bank bank, int money) {
 		if(bankList == null || bankList.size() == 0) {
 			System.out.println("등록된 내역이 없습니다.");
@@ -65,6 +67,7 @@ public class AccountBookServiceImp implements AccountBookService {
 
 
 	@Override
+	// 지출 추가
 	public boolean addWithdraw(Bank bank) {	
 		bankList.add(bank);
 		return true;
@@ -72,6 +75,7 @@ public class AccountBookServiceImp implements AccountBookService {
 
 
 	@Override
+	// 지출 내역 삭제
 	public boolean deleteWithdraw(Bank bank,int userid) {
 		
 		if(bankList==null||bankList.size()==0) {
@@ -92,22 +96,11 @@ public class AccountBookServiceImp implements AccountBookService {
 	}
 
 
-	@Override
-	public boolean updateDepositCategori(Bank bank, String categori) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean updateDepositDate(Bank bank, String date) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 
 
 	@Override
-
+	// 지출 금액 수정
 	public boolean updateWithdrawMoney(Bank bank, int money) { //박석훈
 		
 		if (bankList.contains(bank)) {
@@ -125,6 +118,7 @@ public class AccountBookServiceImp implements AccountBookService {
 
 	
 	@Override
+	// 수입 일자 수정
 	public boolean updateDepositDate(Bank bank, String today) {
 		if(bankList == null || bankList.size() == 0) {
 			System.out.println("등록된 내역이 없습니다.");
@@ -136,6 +130,7 @@ public class AccountBookServiceImp implements AccountBookService {
 				return false;
 			}
 			bankList.get(index).setToday(today);
+			sort(bankList);
 			return true;
 		}
 		return false;
@@ -144,6 +139,7 @@ public class AccountBookServiceImp implements AccountBookService {
 	
 	
 	@Override
+	// 수입 카테고리 수정
 	public boolean updateDepositCategori(Bank bank, int user) {
 		if(bankList == null || bankList.size() == 0) {
 			System.out.println("등록된 내역이 없습니다.");
@@ -165,6 +161,7 @@ public class AccountBookServiceImp implements AccountBookService {
 	}
 	
 	@Override
+	// 수입 상세내역 수정
 	public boolean updateDepositUsage(Bank bank, String usage) {
 		if(bankList == null || bankList.size() == 0) {
 			System.out.println("등록된 내역이 없습니다.");
@@ -183,6 +180,7 @@ public class AccountBookServiceImp implements AccountBookService {
 
 
 	@Override
+	// 지출 카테고리 수정
 	public boolean updateWithdrawCategori(Bank bank, int user) { //박석훈
 
 		if (bankList.contains(bank)) {
@@ -210,6 +208,7 @@ public class AccountBookServiceImp implements AccountBookService {
 	
 	
 	@Override
+	// 지출 일자수정
 	public boolean updateWithdrawDate(Bank bank, String date) {  //박석훈
 		if(bankList.contains(bank)) {
 			int index=bankList.indexOf(bank);
@@ -220,7 +219,7 @@ public class AccountBookServiceImp implements AccountBookService {
 			System.out.println(bankList.get(index));
 
 			bankList.get(index).setToday(date);
-
+			sort(bankList);
 			return true;
 		}
 		return false;	
@@ -230,7 +229,8 @@ public class AccountBookServiceImp implements AccountBookService {
 
 
 
-
+	@Override
+	//지출 상세내역 수정
 	public boolean updateWithdrawUsage(Bank bank, String usage) {
 		
 		if(bankList.contains(bank))
@@ -440,7 +440,7 @@ public class AccountBookServiceImp implements AccountBookService {
 		Stream<Bank> stream = bankList.stream();
 		stream.filter(m->m.getMoney()>=0).forEach(m->System.out.print(m));
 	}
-  //지출내역 
+  //지출내역 출력
   public void printWithdraw() {
 		Stream<Bank> stream = bankList.stream();
 		stream.filter(m->m.getMoney()<0).forEach(m->System.out.print(m));

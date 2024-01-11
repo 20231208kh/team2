@@ -12,10 +12,9 @@ public interface PrintService {
 	
 	void printSetWithdrawMenu();
 	
-	void printSearchMenu();
-	
-	void printExit();
+	void printSetCateogryorUsage();
 
+	void printSearchMenu();
 
 	void printSearchByMoney();
 
@@ -23,7 +22,7 @@ public interface PrintService {
 
 	void printSearchByDate();
 
-	void printSetCateogryorUsage();
+	void printExit();
 
 
 
