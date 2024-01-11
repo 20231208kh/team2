@@ -16,4 +16,6 @@ public interface PrintService {
 	
 	void printExit();
 
+	void printSetCateogryorUsage();
+
 }
