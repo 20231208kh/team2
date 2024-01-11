@@ -28,12 +28,12 @@ public class Bank {
 	//toString 메서드 오버라이딩
 	@Override
 	public String toString() {
-		
+		DecimalFormat df = new DecimalFormat("###,###");
 		
 		if (money<0) {
-			return "[번호 : "+id+"] [카테고리 : "+categori+"] [ 지출 금액 : "+Math.abs(money)+"] [상세 내역 : "+usage+", 날짜 : "+today+"]\n";
+			return "[번호 : "+id+"] [카테고리 : "+categori+"] [ 지출 금액 : "+df.format(Math.abs(money))+"] [상세 내역 : "+usage+", 날짜 : "+today+"]\n";
 		}
-		return "[번호 : "+id+"] [카테고리 : "+categori+"] [ 수입 금액 : "+Math.abs(money)+"] [상세 내역 : "+usage+", 날짜 : "+today+"]\n";
+		return "[번호 : "+id+"] [카테고리 : "+categori+"] [ 수입 금액 : "+df.format(money)+"] [상세 내역 : "+usage+", 날짜 : "+today+"]\n";
 	}
 
 
