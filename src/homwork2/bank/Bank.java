@@ -1,11 +1,14 @@
 package homwork2.bank;
 
-import java.text.DecimalFormat;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import lombok.Data;
+
 
 @Data
 
@@ -29,7 +32,6 @@ public class Bank {
 	@Override
 	public String toString() {
 		DecimalFormat df = new DecimalFormat("###,###");
-		
 		if (money<0) {
 			return "[번호 : "+id+"] [카테고리 : "+categori+"] [ 지출 금액 : "+df.format(Math.abs(money))+"] [상세 내역 : "+usage+", 날짜 : "+today+"]\n";
 		}
@@ -52,9 +54,6 @@ public class Bank {
 		this.today = new SimpleDateFormat("yyyy/MM/dd").format(date);
 	}
 	
-	
-
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -67,19 +66,14 @@ public class Bank {
 		return id == other.id;
 	}
 
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
-
+  
 	public Bank(int id) {
 		super();
 		this.id = id;
-	}
-	
-
-	
+	}	
 }
 

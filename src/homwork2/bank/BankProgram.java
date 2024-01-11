@@ -1,5 +1,6 @@
 package homwork2.bank;
 
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -14,6 +15,7 @@ import program.Program;
 public class BankProgram implements Program{
 	private PrintService printService= new PrintServiceImp();
 	private AccountBookService absi = new AccountBookServiceImp();
+
 	private final int EXIT = 4;
 	private int id = 1;
 	private Scanner scan = new Scanner(System.in);
@@ -208,6 +210,26 @@ public class BankProgram implements Program{
 	}
 
 	private void updateWithdrawMoney() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void updateWithdrawCategori() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void updateWithdrawDate() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void deleteWithdraw() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void manageSearch() {
 		// TODO Auto-generated method stub
 		
 	}
