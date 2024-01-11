@@ -17,6 +17,7 @@ public interface PrintService {
 	void printExit();
 
 
+
 	void printSetWithdrawMenu();
 
 	void printSetDepositMenu();
@@ -28,6 +29,7 @@ public interface PrintService {
 	void printSearchByDate();
 
 	void printSetCateogryorUsage();
+
 
 
 }

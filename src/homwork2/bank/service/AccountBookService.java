@@ -30,9 +30,10 @@ public interface AccountBookService {
 	
 	//지출 내역 각종 수정 : (박석훈, 박성훈)
 	boolean updateWithdrawMoney(Bank bank, int money);
-	
+	boolean updateWithdrawCategori(Bank bank, int user);  //카테고리 수정
+	boolean updateWithdrawDate(Bank bank,String date);  //날짜 수정
+	boolean updateWithdrawUsage(Bank bank, String usage); //상세내역 수정 
 
-	
 	
 	//전체 조회 
 	boolean searchAll(List<Bank> tmpBankList);
@@ -46,6 +47,8 @@ public interface AccountBookService {
 	boolean searchByDate(String year, List<Bank> tmpBankList);
 	boolean searchByDate(String year, String month , List<Bank> tmpBankList);
 	boolean searchByDate(String year, String month , String day , List<Bank> tmpBankList);
+
+	void printWithdraw();
 
 	
 	
