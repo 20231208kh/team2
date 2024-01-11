@@ -18,10 +18,6 @@ public interface PrintService {
 
 
 
-	void printSetWithdrawMenu();
-
-	void printSetDepositMenu();
-
 	void printSearchByMoney();
 
 	void printSearchByType();

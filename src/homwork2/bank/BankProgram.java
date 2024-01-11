@@ -299,25 +299,6 @@ public class BankProgram implements Program{
 		
 	}
 
-	private void manageSearch() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void updateWithdrawCategori() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void updateWithdrawDate() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void deleteWithdraw() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	
 	

@@ -107,4 +107,13 @@ public class PrintServiceImp implements PrintService {
 		
 	}
 
+	@Override
+	public void printSetCateogryorUsage() {
+		System.out.println("------지출 카테고리 또는 상세 내역 수정------");
+		System.out.println("1.지출 카테고리 수정");
+		System.out.println("2.상세 내역 수정");
+		System.out.println("3.뒤로 가기");
+		System.out.print("메뉴 선택 : ");
+	}
+
 }

@@ -85,17 +85,6 @@ public class AccountBookServiceImp implements AccountBookService {
 		
 	}
 
-	@Override
-	public boolean deleteDeposit(Bank bank) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean updateDepositMoney(Bank bank, int money) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public boolean updateDepositCategori(Bank bank, String categori) {
@@ -157,25 +146,23 @@ public class AccountBookServiceImp implements AccountBookService {
 	
 	@Override
 	public boolean updateWithdrawDate(Bank bank, String date) {  //박석훈
-		if(bankList.contains(bank))
-		{
+		if(bankList.contains(bank)) {
 			int index=bankList.indexOf(bank);
 			if(bankList.get(index).getMoney()>0) {
 				return false;
 			}
 
-			bankList.get(index).setUsage(usage);
 			System.out.println(bankList.get(index));
 
 			bankList.get(index).setToday(date);
 
 			return true;
 		}
-			return false;	
+		return false;	
 	}
 	
 
-}
+
 
 
 
@@ -395,8 +382,6 @@ public class AccountBookServiceImp implements AccountBookService {
 
 
 	
-
-	
-
+}
 	
 
