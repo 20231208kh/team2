@@ -17,7 +17,6 @@ public interface PrintService {
 	void printExit();
 
 
-
 	void printSearchByMoney();
 
 	void printSearchByType();

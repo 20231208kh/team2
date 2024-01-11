@@ -8,14 +8,16 @@ import homwork2.bank.Bank;
 public interface AccountBookService {
 
 	
+
 	//가계부 수입 관리 : (김태원, 박성훈)
 	boolean addDeposit(Bank bank);
 	
 	
 	//수입 내역 각종수정 : (김태원, 박성훈)
 	boolean updateDepositMoney(Bank bank, int money);
-	boolean updateDepositCategori(Bank bank, String categori);
-	boolean updateDepositDate(Bank bank, String date);
+	boolean updateDepositDate(Bank bank, String today);
+	boolean updateDepositCategori(Bank bank, int user);
+	boolean updateDepositUsage(Bank bank, String usage);
 	
 	//수입 내역 삭제 : (김태원, 박성훈)
 	boolean deleteDeposit(Bank bank);
@@ -62,5 +64,6 @@ public interface AccountBookService {
 	
 	//정렬
 	void sort(List<Bank> tmpList);
+
 
 }

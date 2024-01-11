@@ -1,6 +1,5 @@
 package homwork2.bank;
 
-
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,7 +9,6 @@ import lombok.Data;
 
 
 @Data
-
 public class Bank {
 	
 	
@@ -22,9 +20,7 @@ public class Bank {
 	private String categori; //뽑아올거
 	Date date = new Date();
 	private int id;
-	
-	
-	
+
 
 	
 	//toString 메서드 오버라이딩

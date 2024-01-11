@@ -1,11 +1,11 @@
 package homwork2.bank;
 
 
-
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
+
 import java.util.Scanner;
 
 import homwork2.bank.service.AccountBookService;
@@ -17,7 +17,7 @@ import program.Program;
 public class BankProgram implements Program{
 	private PrintService printService= new PrintServiceImp();
 	private AccountBookService absi = new AccountBookServiceImp();
-
+  
 	private final int EXIT = 4;
 	private int id = 1;
 	private Scanner scan = new Scanner(System.in);
@@ -82,24 +82,48 @@ public class BankProgram implements Program{
 	}
 
 	private void addDeposit() {
-//		
-//		System.out.println("급여(1)/불로소득(2)/실비(3)/용돈(4)기타(5)");
-//		System.out.print("카테고리를 입력해주세요 : ");
-//		int user = scan.nextInt();
-//		System.out.print("수입 금액을 입력해주세요 : ");
-//		int money = scan.nextInt();
-//		System.out.println("상세 내역을 입력해주세요 : ");
-//		scan.nextLine();
-//		String usage = scan.nextLine();
-//		Bank bank = new Bank(id,user,money,usage);
-//		if(absi.addDeposit(bank)) {
-//			System.out.println("등록에 성공하였습니다.");
-//			id ++;
-//			return;
-//		}
-//		System.out.println("등록에 실패하였습니다. ");
-
+		//카테고리 출력
+		System.out.println("1.급여"+"\n2.불로소득"+"\n3.실비"+"\n4.용돈"+"\n5.기타");
+		System.out.print("카테고리 선택 : ");
+		//카테고리 선택
+		int user = scan.nextInt();
+		
+		//카테고리에 해당하는 금액 입력
+		System.out.println("금액 입력(0원 이상) : ");
+		int money = scan.nextInt();
+		if (money<=0) {
+			System.out.println("0 혹은 음수는 입력이 불가합니다.");
+			return;
+		}
+		//상세 출처 입력
+		System.out.println("상세내역 입력 : ");
+		scan.nextLine();
+		String usage = scan.nextLine();
+		try {
+			//입력값을 bank에 저장
+			Bank bank = new Bank(id,user,money,usage);
+			abs.addDeposit(bank);
+			id++;
+			abs.printDeposit();
+		} catch(IndexOutOfBoundsException e) {
+			System.out.println("잘못 선택된 카테고리입니다.");
+		}
 	}
+	
+	private void deleteDeposit() {
+		abs.printDeposit();
+		System.out.println("삭제할 ID 선택 : ");
+		//유저 삭제 원하는 id 입력한다.
+		int id = scan.nextInt();
+		Bank bank = new Bank(id);
+		if(abs.deleteDeposit(bank)) {
+			System.out.println("삭제 성공");
+			abs.printDeposit();
+			return;
+		}
+		System.out.println("잘못된 ID입력");
+	}
+		
 
 	private void setDeposit() {
 		printService.printSetDepositMenu();
@@ -117,31 +141,135 @@ public class BankProgram implements Program{
 		case 4:
 			System.out.println("이전 메뉴로 돌아갑니다.");
 			break;
+
+		}
+	}
+	
+	private void updateDepositMoney() {
+		abs.printDeposit();
+		System.out.println("수정할 ID 입력 : ");
+		int id = scan.nextInt();
+		System.out.println("수정할 금액 입력 : ");
+		int money = scan.nextInt();
+		if (money<=0) {
+			System.out.println("0혹은 음수는 입력이 불가능합니다.");
+			return;
+		}
+		Bank bank = new Bank(id);
+		if(abs.updateDepositMoney(bank, money)) {
+			System.out.println("수정 성공.");
+			abs.printDeposit();
+			return;
+		}
+		System.out.println("잘못된 ID입력");
+	}
+
+	private void updateDepositCategori() {
+		char ask = 'n';
+		abs.printDeposit();
+		System.out.print("수정할 ID 입력 : ");
+		int id = scan.nextInt();
+		System.out.println("1.급여"+"\n2.불로소득"+"\n3.실비"+"\n4.용돈"+"\n5.기타");
+		System.out.print("수정할 카테고리 입력 : ");
+		int user = scan.nextInt();
+		Bank bank = new Bank(id);
+		if(abs.updateDepositCategori(bank, user)) {
+			System.out.println("수정 성공.");
+			abs.printDeposit();
+			System.out.print("상세내역을 수정하시겠습니까?(y/n) : ");
+			ask = scan.next().charAt(0);
+			if(ask == 'y') {
+				System.out.print("수정할 상세내역 입력 : ");
+				scan.nextLine();
+				String usage = scan.nextLine();
+				if(abs.updateDepositUsage(bank, usage)) {
+					System.out.println("수정 성공.");
+					abs.printDeposit();
+					return;
+				}
+				System.out.println("잘못된 ID입력");
+			}
+		}
+		System.out.println("메뉴로 돌아갑니다.");
+	}
+
+	private void updateDepositDate() {
+		abs.printDeposit();
+		System.out.print("수정할 ID 입력 : ");
+		int id = scan.nextInt();
+		//메시지 포멧 "####/##/##" 2024/01/11
+		System.out.print("수정할 연도 입력 : ");
+		String year = scan.next();
+		System.out.print("수정할 월 입력 : ");
+		String month = scan.next();
+		System.out.print("수정할 일 입력 : ");
+		String day = scan.next();
+		String p = "{0}/{1}/{2}";
+		String date = MessageFormat.format(p,year,month,day);
+		
+		Bank bank = new Bank(id);
+		if(abs.updateDepositDate(bank, date)) {
+			System.out.println("수정 성공.");
+			abs.printDeposit();
+			return;
+		}
+		System.out.println("잘못된 ID입력");
+	}
+
+	private void manageWithdraw() {
+		printService.printWithdrawMenu();
+		int menu = scan.nextInt();
+		switch(menu) {
+		case 1:
+			addWithdraw();
+			break;
+		case 2:
+			setWithdraw();
+			break;
+		case 3:
+			deleteWithdraw();
+			break;
+		case 4:
+			System.out.println("이전 메뉴로 돌아갑니다.");
+			break;
 		default:
 			throw new InputMismatchException();
 		}
 		
-	}
-
-	private void updateDepositMoney() {
-
 		
 	}
 
-	private void updateDepositCategori() {
+	private void addWithdraw() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void updateDepositDate() {
-		// TODO Auto-generated method stub
+	private void setWithdraw() {
+		printService.printSetWithdrawMenu();
+		int menu = scan.nextInt();
+		switch(menu) {
+		case 1:
+			updateWithdrawMoney();
+			break;
+		case 2:
+			updateWithdrawCategori();
+			break;
+		case 3:
+			updateWithdrawDate();
+			break;
+		case 4:
+			System.out.println("이전 메뉴로 돌아갑니다.");
+			break;
+		default:
+			throw new InputMismatchException();
+			
+		}
 		
 	}
 
-	private void deleteDeposit() {
 
-		
-	}
+	
+
 
 	private void manageWithdraw() {
 		printService.printWithdrawMenu();
