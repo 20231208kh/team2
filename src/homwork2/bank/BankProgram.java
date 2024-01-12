@@ -210,8 +210,10 @@ public class BankProgram implements Program , Serializable{
 		String year = scan.next();
 		System.out.print("수정할 월 입력 : ");
 		String month = scan.next();
+		if(month.length()==1) {month = "0"+month;}
 		System.out.print("수정할 일 입력 : ");
 		String day = scan.next();
+		if(day.length()==1) {day = "0"+day;}
 		String p = "{0}/{1}/{2}";
 		String date = MessageFormat.format(p,year,month,day);
 		
@@ -357,8 +359,10 @@ public class BankProgram implements Program , Serializable{
 		String year = scan.next();
 		System.out.print("수정할 월 입력 : ");
 		String month = scan.next();
+		if(month.length()==1) {month = "0"+month;}
 		System.out.print("수정할 일 입력 : ");
 		String day = scan.next();
+		if(day.length()==1) {day = "0"+day;}
 		String p ="{0}/{1}/{2}";
 		String date = MessageFormat.format(p,year,month,day);
 		

@@ -62,8 +62,8 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 				return false;
 			}
 			bankList.get(index).setToday(today);
-			sort(bankList);
 			System.out.print(bankList.get(index));
+			sort(bankList);
 			return true;
 		}
 		return false;
@@ -204,10 +204,9 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 			if(bankList.get(index).getMoney()>0) {
 				return false;
 			}
-			System.out.print(bankList.get(index));
 			bankList.get(index).setToday(date);
-			sort(bankList);
 			System.out.print(bankList.get(index));
+			sort(bankList);
 			return true;
 		}
 		return false;	
