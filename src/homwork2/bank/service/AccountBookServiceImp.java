@@ -43,6 +43,7 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 				return false;
 			}
 			bankList.get(index).setMoney(money);
+			System.out.print(bankList.get(index));
 			return true;
 		}
 		return false;
@@ -62,6 +63,7 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 			}
 			bankList.get(index).setToday(today);
 			sort(bankList);
+			System.out.print(bankList.get(index));
 			return true;
 		}
 		return false;
@@ -83,6 +85,7 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 						return false;
 				}
 				bankList.get(index).setCategori(bank.getArr2()[user-1]);
+				System.out.print(bankList.get(index));
 				return true;
 				}
 			}catch(IndexOutOfBoundsException e) {
@@ -104,6 +107,7 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 				return false;
 			}
 			bankList.get(index).setUsage(usage);
+			System.out.print(bankList.get(index));
 			return true;
 		}
 		return false;
@@ -158,7 +162,7 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 				return false;
 			}
 			bankList.get(index).setMoney(money);
-			System.out.println(bankList.get(index));
+			System.out.print(bankList.get(index));
 			return true;
 		}
 		return false;
@@ -178,7 +182,7 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 			try {
 				String categori = bankList.get(index).getArr1()[user-1];
 				bankList.get(index).setCategori(categori);
-				System.out.println(bankList.get(index));
+				System.out.print(bankList.get(index));
 				return true;
 			}catch(IndexOutOfBoundsException e) {
 				System.out.println("잘못된 카테고리 입력");
@@ -200,9 +204,10 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 			if(bankList.get(index).getMoney()>0) {
 				return false;
 			}
-			System.out.println(bankList.get(index));
+			System.out.print(bankList.get(index));
 			bankList.get(index).setToday(date);
 			sort(bankList);
+			System.out.print(bankList.get(index));
 			return true;
 		}
 		return false;	
@@ -221,6 +226,7 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 				return false;
 			}
 			bankList.get(index).setUsage(usage);
+			System.out.print(bankList.get(index));
 			return true;
 		}
 		return false;	
@@ -386,6 +392,7 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 	//입력받은 리스트에 수입, 지출이 있는지 파악하고 있다면 각각 구분하여 각 내역과 합계 출력
 	public void printDetail(List<Bank> tmpList) {
 		if(tmpList == null || tmpList.size() == 0) {
+			System.out.println("----------------");
 			System.out.println("조건에 맞는 기록이 없습니다.");
 			return;
 		}
@@ -393,24 +400,27 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 		int sumDeposit = 0;
 		int sumWithdraw = 0;
 		if(tmpList.stream().filter(l->l.getMoney()>=0).count() != 0) {
+			System.out.println("----------------");
 			System.out.println("수입 내역");
 			tmpList.stream().filter(l->l.getMoney()>=0).forEach(i->System.out.print(i));
-			System.out.println("---------");
+			System.out.println("----------------");
 			List<Bank> sum = new ArrayList<Bank>();
 			tmpList.stream().filter(l->l.getMoney()>=0).forEach(i-> sum.add(i));
 			for(Bank i: sum) {sumDeposit += i.getMoney();}
 			System.out.println("수입 합계 : " + df.format(sumDeposit) + "원");
 		}
 		if(tmpList.stream().filter(l->l.getMoney()<0).count() != 0) {
+			System.out.println("----------------");
 			System.out.println("지출 내역");
 			tmpList.stream().filter(l->l.getMoney()<0).forEach(i->System.out.print(i));
-			System.out.println("---------");
+			System.out.println("----------------");
 			List<Bank> sum = new ArrayList<Bank>();
 			tmpList.stream().filter(l->l.getMoney()<0).forEach(i-> sum.add(i));
 			for(Bank i: sum) {sumWithdraw += i.getMoney();}
 			System.out.println("지출 합계 : " + df.format(Math.abs(sumWithdraw)) + "원");
 		}
 		if(sumDeposit != 0 && sumWithdraw != 0) {
+			System.out.println("----------------");
 			System.out.println("수입,지출 합계 : " + df.format(sumDeposit + sumWithdraw) + "원");
 		}
 	}
@@ -419,18 +429,21 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 	//금액조회 출력
 	public void printGroup(List<Bank> tmpList) {
 		if(tmpList == null || tmpList.size() == 0) {
+			System.out.println("----------------");
 			System.out.println("조건에 맞는 기록이 없습니다.");
 			return;
 		}
 		if(tmpList.stream().filter(l->l.getMoney()>=0).count() != 0) {
+			System.out.println("----------------");
 			System.out.println("수입 내역");
 			tmpList.stream().filter(l->l.getMoney()>=0).forEach(i->System.out.print(i));
-			System.out.println("---------");
+			System.out.println("----------------");
 		}
 		if(tmpList.stream().filter(l->l.getMoney()<0).count() != 0) {
+			System.out.println("----------------");
 			System.out.println("지출 내역");
 			tmpList.stream().filter(l->l.getMoney()<0).forEach(i->System.out.print(i));
-			System.out.println("---------");
+			System.out.println("----------------");
 		}
 	}
 

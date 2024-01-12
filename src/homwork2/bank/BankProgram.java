@@ -166,7 +166,6 @@ public class BankProgram implements Program , Serializable{
 		Bank bank = new Bank(id);
 		if(absi.updateDepositMoney(bank, money)) {
 			System.out.println("수정 성공.");
-			absi.printDeposit();
 			return;
 		}
 		System.out.println("잘못된 ID입력");
@@ -193,7 +192,6 @@ public class BankProgram implements Program , Serializable{
 				String usage = scan.nextLine();
 				if(absi.updateDepositUsage(bank, usage)) {
 					System.out.println("수정 성공.");
-					absi.printDeposit();
 					return;
 				}
 				System.out.println("잘못된 ID입력");
@@ -220,7 +218,6 @@ public class BankProgram implements Program , Serializable{
 		Bank bank = new Bank(id);
 		if(absi.updateDepositDate(bank, date)) {
 			System.out.println("수정 성공.");
-			absi.printDeposit();
 			return;
 		}
 		System.out.println("잘못된 ID입력");
