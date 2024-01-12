@@ -48,7 +48,7 @@ public interface AccountBookService {
 	boolean searchByDate(String year, String month , String day , List<Bank> tmpBankList);
 
 
-	
+	boolean reset();
 	
 	//출력
 	//수입 출력 : 박성훈

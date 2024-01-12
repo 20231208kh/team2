@@ -8,7 +8,8 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("1. 가계부 수입 내역 관리");
 		System.out.println("2. 가계부 지출 내역 관리");
 		System.out.println("3. 가계부 조회");
-		System.out.println("4. 프로그램 종료");
+		System.out.println("4. 가계부 초기화");
+		System.out.println("5. 프로그램 종료");
 		System.out.print("메뉴 선택 : ");
 		
 	}

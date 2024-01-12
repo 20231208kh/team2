@@ -14,6 +14,7 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 	private static final long serialVersionUID = 6760830936819586275L;
 	private List<Bank> bankList = new ArrayList<Bank>();
 	private int id = 1;
+	
 	@Override
 	//수입 추가
 	public boolean addDeposit(Bank bank) {
@@ -28,8 +29,6 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 		return true ;
 	}
 
-	
-	
 	@Override
 	//수입 금액 수정
 	public boolean updateDepositMoney(Bank bank, int money) {
@@ -68,8 +67,6 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 		}
 		return false;
 	}
-	
-	
 	
 	@Override
 	//수입 카테고리 수정
@@ -122,7 +119,6 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 		}
 		if(bankList.contains(bank)){
 			int index = bankList.indexOf(bank);
-			//banklist의 선택한 배열에 입력된 금액이 0보다작으면 return false;
 			if(bankList.get(index).getMoney()<0) {
 				return false;
 			}
@@ -132,13 +128,11 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 		}
 		return false;
 	}
-	
-
 
 	@Override
 	//지출 추가
 	public boolean addWithdraw(Bank bank) {	
-		if(bankList == null ) {
+		if(bankList == null) {
 			List<Bank> bankList = new ArrayList<Bank>();
 			bank.setId(id++);
 			bankList.add(bank);
@@ -192,11 +186,6 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 		return false;
 	}
 
-
-
-	
-	
-	
 	@Override
 	//지출 일자수정
 	public boolean updateWithdrawDate(Bank bank, String date) {  //박석훈
@@ -213,10 +202,6 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 		return false;	
 	}
 	
-
-
-
-
 	@Override
 	//지출 상세내역 수정
 	public boolean updateWithdrawUsage(Bank bank, String usage) {
@@ -232,8 +217,6 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 		return false;	
 	}
 	
-	
-
 	@Override
 	//지출 내역 삭제
 	public boolean deleteWithdraw(Bank bank,int userid) {
@@ -250,8 +233,6 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 		return false;
 	}
 
-	
-	
 	@Override
 	//전체조회
 	public boolean searchAll(List<Bank> tmpBankList) {
@@ -262,7 +243,6 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 		bankList.stream().forEach(b->tmpBankList.add(b));
 		return true;
 	}
-
 
 	@Override
 	//금액 조회
@@ -282,6 +262,7 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 		}
 		return true;
 	}
+	
 	@Override
 	//min 이상 조회
 	public boolean searchByMoney(int min, List<Bank> tmpBankList) {
@@ -299,8 +280,6 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 		return true;
 	}
 
-	
-	
 	@Override
 	//일자별 조회
 	//연 내역 조회
@@ -461,10 +440,9 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 	}
   
 	@Override
-	//리스트 정렬 - 내역 삭제, 날짜 수정시에만 추가해 줄것
+	//리스트 정렬
 	public void sort(List<Bank> tmpList) {
 		tmpList.sort((l1,l2)-> l1.getToday().compareTo(l2.getToday()));
-		// 소트와 동시에 bank id를 인덱스 +1 값과  id를 현재 list.size()+1로 수정해주면 해결
 		for(int i = 0 ; i< tmpList.size(); i++) {
 			tmpList.get(i).setId(i+1);
 		}
@@ -476,6 +454,22 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 	public void fileLoad(AccountBookServiceImp abis) {
 		bankList = abis.bankList;
 		id = abis.id;
+	}
+	
+	 
+	
+	@Override
+	public boolean reset() {
+		if(bankList == null) {
+			System.out.println("내역 없음");
+			return false;
+		}
+		
+		bankList.removeAll(bankList);
+		System.out.println("초기화 완료");
+		id = 1;
+		return true;
+		
 	}
 	
 }

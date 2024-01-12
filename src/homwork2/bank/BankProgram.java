@@ -25,7 +25,7 @@ public class BankProgram implements Program , Serializable{
 	private FileService fsi = new FileServiceImp(); 
 	
 	private String fileName = "src/homwork2/bank/service/AccountBook.txt";
-	private final int EXIT = 4;
+	private final int EXIT = 5;
 	
 	@Override
 	public void run() {
@@ -57,6 +57,9 @@ public class BankProgram implements Program , Serializable{
 			manageSearch();
 			break;
 		case 4:
+			absi.reset();
+			break;
+		case 5:
 			exitMenu();
 			break;
 		default:
@@ -95,7 +98,6 @@ public class BankProgram implements Program , Serializable{
 		System.out.print("카테고리 선택 : ");
 		//카테고리 선택
 		int user = scan.nextInt();
-		
 		//카테고리에 해당하는 금액 입력
 		System.out.print("금액 입력(0원 이상) : ");
 		int money = scan.nextInt();
@@ -120,7 +122,6 @@ public class BankProgram implements Program , Serializable{
 	private void deleteDeposit() {
 		absi.printDeposit();
 		System.out.print("삭제할 ID 선택 : ");
-		//유저 삭제 원하는 id 입력한다.
 		int id = scan.nextInt();
 		Bank bank = new Bank(id);
 		if(absi.deleteDeposit(bank)) {
@@ -205,7 +206,6 @@ public class BankProgram implements Program , Serializable{
 		absi.printDeposit();
 		System.out.print("수정할 ID 입력 : ");
 		int id = scan.nextInt();
-		//메시지 포멧 "####/##/##" 2024/01/11
 		System.out.print("수정할 연도 입력 : ");
 		String year = scan.next();
 		System.out.print("수정할 월 입력 : ");
@@ -354,7 +354,6 @@ public class BankProgram implements Program , Serializable{
 		absi.printWithdraw();
 		System.out.print("수정할 ID 입력 : ");
 		int id = scan.nextInt();
-		//데시멀포멧 "####/##/##" 2024/01/11
 		System.out.print("수정할 연도 입력 : ");
 		String year = scan.next();
 		System.out.print("수정할 월 입력 : ");
