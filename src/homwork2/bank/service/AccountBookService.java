@@ -2,7 +2,6 @@ package homwork2.bank.service;
 
 
 import java.util.List;
-
 import homwork2.bank.Bank;
 
 public interface AccountBookService {
@@ -13,7 +12,7 @@ public interface AccountBookService {
 	boolean addDeposit(Bank bank);
 	
 	
-	//수입 내역 각종수정 : (김태원, 박성훈)
+	//수입 내역 각종 수정 : (김태원, 박성훈)
 	boolean updateDepositMoney(Bank bank, int money);
 	boolean updateDepositDate(Bank bank, String today);
 	boolean updateDepositCategori(Bank bank, int user);
@@ -52,9 +51,9 @@ public interface AccountBookService {
 	
 	
 	//출력
-	//수입출력 : 박성훈
+	//수입 출력 : 박성훈
 	void printDeposit();
-	//지출출력 : 박성훈
+	//지출 출력 : 박성훈
 	void printWithdraw();
 	//수입, 지출 그룹 출력 : 김준수
 	void printGroup(List<Bank> tmpList);
@@ -64,8 +63,7 @@ public interface AccountBookService {
 	//정렬 : 김준수
 	void sort(List<Bank> tmpList);
 	
-	//리스트 수신
-	void listLoad(List<Bank> bankList); 
+	//파일 수신 : 김준수
+	void fileLoad(AccountBookServiceImp abis); 
 
-	List<Bank> readList();
 }

@@ -14,21 +14,23 @@ import homwork2.bank.service.FileService;
 import homwork2.bank.service.FileServiceImp;
 import homwork2.bank.service.PrintService;
 import homwork2.bank.service.PrintServiceImp;
+
 import program.Program;
 
 public class BankProgram implements Program , Serializable{
 	private static final long serialVersionUID = 1416137387017570546L;
+	private Scanner scan = new Scanner(System.in);
 	private PrintService printService= new PrintServiceImp();
 	private AccountBookService absi = new AccountBookServiceImp();
 	private FileService fsi = new FileServiceImp(); 
 	
+	private String fileName = "src/homwork2/bank/service/AccountBook.txt";
 	private final int EXIT = 4;
-	int id = 1;
-	private Scanner scan = new Scanner(System.in);
+	
 	@Override
 	public void run() {
 		int menu = 0;
-		absi.listLoad(fsi.load());
+		absi.fileLoad(fsi.load(fileName));
 		do {
 			printMenu();
 			try {
@@ -39,7 +41,7 @@ public class BankProgram implements Program , Serializable{
 				scan.nextLine();
 			}
 		}while(menu!=EXIT);
-		fsi.save(absi.readList());
+		fsi.save((AccountBookServiceImp) absi, fileName);
 	}
 
 	@Override
@@ -63,6 +65,7 @@ public class BankProgram implements Program , Serializable{
 		
 	}
 	
+	
 	private void manageDeposit() {
 		printService.printDepositMenu();
 		int menu = scan.nextInt();
@@ -84,7 +87,8 @@ public class BankProgram implements Program , Serializable{
 		}
 		
 	}
-
+	
+	// 수입 내역 추가
 	private void addDeposit() {
 		//카테고리 출력
 		System.out.println("1.급여"+"\n2.불로소득"+"\n3.실비"+"\n4.용돈"+"\n5.기타");
@@ -105,14 +109,14 @@ public class BankProgram implements Program , Serializable{
 		String usage = scan.nextLine();
 		try {
 			//입력값을 bank에 저장
-			Bank bank = new Bank(id,user,money,usage);
+			Bank bank = new Bank(user,money,usage);
 			absi.addDeposit(bank);
-			id++;
 		} catch(IndexOutOfBoundsException e) {
 			System.out.println("잘못 선택된 카테고리입니다.");
 		}
 	}
 	
+	// 수입 내역 삭제
 	private void deleteDeposit() {
 		absi.printDeposit();
 		System.out.print("삭제할 ID 선택 : ");
@@ -127,7 +131,7 @@ public class BankProgram implements Program , Serializable{
 		System.out.println("잘못된 ID입력");
 	}
 		
-
+	
 	private void setDeposit() {
 		printService.printSetDepositMenu();
 		int menu = scan.nextInt();
@@ -148,6 +152,7 @@ public class BankProgram implements Program , Serializable{
 		}
 	}
 	
+	// 수입 내역 금액 수정
 	private void updateDepositMoney() {
 		absi.printDeposit();
 		System.out.print("수정할 ID 입력 : ");
@@ -167,6 +172,7 @@ public class BankProgram implements Program , Serializable{
 		System.out.println("잘못된 ID입력");
 	}
 
+	// 수입 내역 분류 수정
 	private void updateDepositCategori() {
 		char ask = 'n';
 		absi.printDeposit();
@@ -195,7 +201,8 @@ public class BankProgram implements Program , Serializable{
 		}
 		System.out.println("메뉴로 돌아갑니다.");
 	}
-
+	
+	// 수입 내역 일자 수정
 	private void updateDepositDate() {
 		absi.printDeposit();
 		System.out.print("수정할 ID 입력 : ");
@@ -219,6 +226,9 @@ public class BankProgram implements Program , Serializable{
 		System.out.println("잘못된 ID입력");
 	}
 
+	
+	
+	
 	private void manageWithdraw() {
 		printService.printWithdrawMenu();
 		int menu = scan.nextInt();
@@ -267,7 +277,7 @@ public class BankProgram implements Program , Serializable{
 	}
 
 
-	
+	//지출 내역 추가
 	private void addWithdraw() {
 		System.out.println("1.병원비\n2.식비\n3.교통비\n4.유흥비\n5.보험료\n6.기타");
 		System.out.print("카테고리 번호를 선택하세요 : ");
@@ -278,10 +288,9 @@ public class BankProgram implements Program , Serializable{
 		scan.nextLine(); 
 		String drawusage=scan.nextLine(); //
 		try {
-			Bank bank=new Bank(id, categorynum, drawmoney, drawusage);
+			Bank bank=new Bank(categorynum, drawmoney, drawusage);
 			if(absi.addWithdraw(bank)) {
 				System.out.println("등록에 성공하였습니다.");
-				id ++;
 				return;
 			}
 		}catch (IndexOutOfBoundsException e) {
@@ -291,7 +300,7 @@ public class BankProgram implements Program , Serializable{
 		
 	}
 
-
+	//지출 내역 금액 수정
 	private void updateWithdrawMoney() {
 		absi.printWithdraw();
 		System.out.print("수정할 번호를 입력 : ");
@@ -307,7 +316,8 @@ public class BankProgram implements Program , Serializable{
 		System.out.println("수정에 실패하였습니다.");
 		
 	}
-
+	
+	//지출 내역 분류 수정
 	private void updateWithdrawCategori() {
 		char ask = 'n';
 		absi.printWithdraw();
@@ -340,7 +350,7 @@ public class BankProgram implements Program , Serializable{
 	
 	
 
-	
+	//지출 내역 일자 수정
 	private void updateWithdrawDate() {
 		absi.printWithdraw();
 		System.out.print("수정할 ID 입력 : ");
@@ -363,7 +373,7 @@ public class BankProgram implements Program , Serializable{
 		System.out.println("잘못된 ID입력");
 	}
 		
-
+	//지출 내역 삭제
 	private void deleteWithdraw() {
 		absi.printWithdraw();
 		System.out.print("삭제할 id를 입력 : ");
@@ -406,6 +416,7 @@ public class BankProgram implements Program , Serializable{
 		}
 	}
 
+	//전체 조회
 	private void searchAll() {
 		List<Bank> tmp = new ArrayList<Bank>();
 		if(absi.searchAll(tmp)) {
@@ -413,7 +424,8 @@ public class BankProgram implements Program , Serializable{
 			return;
 		}
 	}
-
+	
+	
 	private void searchByMoney() {
 		printService.printSearchByMoney();
 		int menu = scan.nextInt();
@@ -435,6 +447,7 @@ public class BankProgram implements Program , Serializable{
 		}
 	}
 
+	//최소 ~ 최대 금액 조회
 	private void searchByMinMax() {
 		List<Bank> tmp = new ArrayList<Bank>();
 		System.out.print("조회할 최소 금액 : ");
@@ -446,7 +459,8 @@ public class BankProgram implements Program , Serializable{
 			return;
 		}
 	}
-
+	
+	//	max 이하 조회
 	private void searchByMax() {
 		List<Bank> tmp = new ArrayList<Bank>();
 		int min = 0;
@@ -458,6 +472,7 @@ public class BankProgram implements Program , Serializable{
 		}
 	}
 
+	//	min 이상 조회
 	private void searchByMin() {
 		List<Bank> tmp = new ArrayList<Bank>();
 		System.out.print("조회할 최소 금액 : ");
@@ -492,7 +507,7 @@ public class BankProgram implements Program , Serializable{
 	
 	
 	
-	
+	//분류별 조회
 	private void searchByCategori() {
 		String arr[] = new String[]{"급여","불로소득","실비","용돈","병원비","식비","교통비","유흥비","보험료","기타"};
 		List<Bank> tmp = new ArrayList<Bank>();
@@ -513,6 +528,7 @@ public class BankProgram implements Program , Serializable{
 		}
 	}
 
+	//상세 출처 조회
 	private void searchByUsage() {
 		scan.nextLine();
 		List<Bank> tmp = new ArrayList<Bank>();
@@ -523,7 +539,7 @@ public class BankProgram implements Program , Serializable{
 			return;
 		}
 	}
-
+	
 	private void searchByDate() {
 		printService.printSearchByDate();
 		int menu = scan.nextInt();
@@ -545,6 +561,7 @@ public class BankProgram implements Program , Serializable{
 		}
 	}
 
+	//연 조회
 	private void searchByYear() {
 		List<Bank> tmp = new ArrayList<Bank>();
 		System.out.print("조회할 연 입력 : ");
@@ -554,7 +571,8 @@ public class BankProgram implements Program , Serializable{
 			return;
 		}
 	}
-
+	
+	//월 조회
 	private void searchByMonth() {
 		List<Bank> tmp = new ArrayList<Bank>();
 		System.out.print("조회할 연 입력 : ");
@@ -567,7 +585,8 @@ public class BankProgram implements Program , Serializable{
 			return;
 		}
 	}
-
+	
+	//일 조회
 	private void searchByDay() {
 		List<Bank> tmp = new ArrayList<Bank>();
 		System.out.print("조회할 연 입력 : ");

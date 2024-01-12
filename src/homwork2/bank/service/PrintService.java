@@ -24,6 +24,4 @@ public interface PrintService {
 
 	void printExit();
 
-
-
 }
