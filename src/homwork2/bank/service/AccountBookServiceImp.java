@@ -127,6 +127,7 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 				return false;
 			}
 			bankList.remove(index);
+			sort(bankList);
 			return true;
 		}
 		return false;
@@ -243,6 +244,7 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 		if(bankList.contains(bank)){			
 			bankList.remove(userid);
 			System.out.println("삭제 성공");
+			sort(bankList);
 			return true;
 		}
 		return false;
@@ -459,9 +461,14 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 	}
   
 	@Override
-	//리스트 정렬 - 날짜 수정시에만 추가해 줄것
+	//리스트 정렬 - 내역 삭제, 날짜 수정시에만 추가해 줄것
 	public void sort(List<Bank> tmpList) {
 		tmpList.sort((l1,l2)-> l1.getToday().compareTo(l2.getToday()));
+		// 소트와 동시에 bank id를 인덱스 +1 값과  id를 현재 list.size()+1로 수정해주면 해결
+		for(int i = 0 ; i< tmpList.size(); i++) {
+			tmpList.get(i).setId(i+1);
+		}
+		id = tmpList.size()+1;
 	}
 
 	@Override
