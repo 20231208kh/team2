@@ -13,6 +13,13 @@ import lombok.Data;
 public class Bank implements Serializable {
 	private static final long serialVersionUID = 5549820094779313605L;
 	
+	/* 강사 피드백
+	 * - 2차원 배열로 처리하면 더 좋음. 0번지에는 지출, 1번지에는 수입 
+	 * private final int INCOME_CATEGORY = 1;
+	 * private final int EXPENSE_CATEGORY = 0;
+	 * - 로 선언하여 활용하면 좋을 듯
+	 * - 카테고리 이외에 수입 지출 여부를 알 수 있는 변수가 있으면 좋을 듯. 없어서 다른 곳에서 금액으로 확인하는 불편함 발생.
+	 * - boolean 타입으로 하면 더 편할 듯*/
 	private String arr1[] = new String[]{"병원비","식비","교통비","유흥비","보험료","기타"}; //대분류(지출)
 	private String arr2[] = new String[]{"급여","불로소득","실비","용돈","기타"}; //대분류(수입)
 	private int money;
@@ -24,6 +31,8 @@ public class Bank implements Serializable {
 
 
 	//추가를 위한 생성자
+	/* 강사 피드백
+	 * - user가 분류의 번지를 의미? 변수명 신경 쓸것.*/
 	public Bank(int user,int money, String usage) {
 		super();
 		if (money<0) {
@@ -51,6 +60,12 @@ public class Bank implements Serializable {
 	//toString
 	public String toString() {
 		DecimalFormat df = new DecimalFormat("###,###");
+		/* 강사 피드백
+		 * - 지출/ 수입 째고는 같기 때문에
+		 * String type = money < 0 ? "지출" : "수입";
+		 * return "[번호 : "+id+"] [카테고리 : "+categori+"] [ "+ type +" 금액 : "+df.format(Math.abs(money))+"] [상세 내역 : "+usage+", 날짜 : "+today+"]\n";
+		 * 로 수정 가능
+		 * */
 		if (money<0) {
 			return "[번호 : "+id+"] [카테고리 : "+categori+"] [ 지출 금액 : "+df.format(Math.abs(money))+"] [상세 내역 : "+usage+", 날짜 : "+today+"]\n";
 		}

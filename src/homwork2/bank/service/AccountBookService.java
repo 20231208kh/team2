@@ -64,6 +64,9 @@ public interface AccountBookService {
 	void sort(List<Bank> tmpList);
 	
 	//파일 수신 : 김준수
-	void fileLoad(AccountBookServiceImp abis); 
+	void fileLoad(AccountBookServiceImp abis);
+
+
+	boolean searchByDate(String... date); 
 
 }

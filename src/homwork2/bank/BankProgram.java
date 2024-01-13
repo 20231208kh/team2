@@ -182,6 +182,30 @@ public class BankProgram implements Program , Serializable{
 		System.out.print("수정할 카테고리 입력 : ");
 		int user = scan.nextInt();
 		Bank bank = new Bank(id);
+		/* 강사 피드백 ! 연산자를 이용하면 다중 if문을 해결할 수 있음
+		 * 	if(!absi.updateDepositCategori(bank, user)) {
+		 * 		System.out.println("메뉴로 돌아갑니다.");
+		 * 		return;
+		 * 	}
+		 * 	System.out.println("수정 성공.");
+			absi.printDeposit();
+			System.out.print("상세내역을 수정하시겠습니까?(y/n) : ");
+			ask = scan.next().charAt(0);
+			if(ask == 'n') {
+				System.out.println("메뉴로 돌아갑니다.");
+				return;
+			}
+		 * 	System.out.print("수정할 상세내역 입력 : ");
+			scan.nextLine();
+			String usage = scan.nextLine();
+			if(absi.updateDepositUsage(bank, usage)) {
+				System.out.println("수정 성공.");
+				return;
+			}
+			System.out.println("잘못된 ID입력");
+		 * 
+		 * 
+		 * */
 		if(absi.updateDepositCategori(bank, user)) {
 			System.out.println("수정 성공.");
 			absi.printDeposit();
@@ -317,6 +341,8 @@ public class BankProgram implements Program , Serializable{
 	}
 	
 	//지출 내역 분류 수정
+	/* 강사 피드백
+	 * - 조건문을 잘 처리하면 다중 if문을 단일 if문으로 해결 가능 위 피드백 참고*/
 	private void updateWithdrawCategori() {
 		char ask = 'n';
 		absi.printWithdraw();

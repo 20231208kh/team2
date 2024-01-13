@@ -6,9 +6,13 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
+
 import homwork2.bank.Bank;
 import lombok.Data;
 
+/* 강사 피드백 
+ * - 서비스는 멤버 변수를 가지지 않는 것이 좋음.
+ * - 전체적으로 index가 -1일 때 처리를 안함.*/
 @Data
 public class AccountBookServiceImp implements AccountBookService , Serializable {
 	private static final long serialVersionUID = 6760830936819586275L;
@@ -17,9 +21,16 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 	
 	@Override
 	//수입 추가
+	/* 강사 피드백
+	 * - 메서드에서 무조건 true로 리턴하는데 return이 필요할까요?
+	 * - bank가 null때 처리가 없음.*/
 	public boolean addDeposit(Bank bank) {
 		if(bankList == null ) {
 			List<Bank> bankList = new ArrayList<Bank>();
+			/* 강사 피드백
+			 * - 여기서 아이디 값을 설정하는게 의미가 있나요?
+			 * - 어차피 sort에서 아이디를 몰라도 다시 정렬해주는데..
+			 * */
 			bank.setId(id++);
 			bankList.add(bank);
 			return true ;
@@ -36,6 +47,9 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 			System.out.println("등록된 내역이 없습니다.");
 			return false;
 		}
+		/* 강사 피드백
+		 * - 들여쓰기...
+		 * - index가 -1일 때 처리 필요*/
 		if (bankList.contains(bank)) {
 			int index = bankList.indexOf(bank);
       if(bankList.get(index).getMoney()<0) {
@@ -56,6 +70,8 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 			return false;
 		}
 		if(bankList.contains(bank)) {
+			/* 강사 피드백
+			 * - 위와 동일하게 index -1 처리 필요*/
 			int index = bankList.indexOf(bank);
 			if(bankList.get(index).getMoney()<0) {
 				return false;
@@ -77,6 +93,9 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 		}
 		try {
 				if(bankList.contains(bank)) {
+					/* 강사 피드백
+					 * - 위와 마찬가지로 index -1 처리 필요
+					 * - 들여쓰기*/
 					int index = bankList.indexOf(bank);
 					if(bankList.get(index).getMoney()<0) {
 						return false;
@@ -99,6 +118,9 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 			return false;
 		}
 		if(bankList.contains(bank)) {
+			/* 강사 피드백
+			 * - 위와 마찬가디로 index가 -1일 때 처리 필요
+			 * */
 			int index = bankList.indexOf(bank);
 			if(bankList.get(index).getMoney()<0) {
 				return false;
@@ -118,6 +140,11 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 			return false;
 		}
 		if(bankList.contains(bank)){
+			/* 강사 피드백
+			 * - 위와 마찬가디로 index가 -1일 때 처리 필요
+			 * - 내역을 삭제하는데 금액 확인이 필요??
+			 * - 수입인지 지출인지 확인하려는 목적은 이해. Bank 피드백 참고
+			 * */
 			int index = bankList.indexOf(bank);
 			if(bankList.get(index).getMoney()<0) {
 				return false;
@@ -233,6 +260,8 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 		return false;
 	}
 
+	/* 강사 피드백
+	 * - 출력 관련 기능은 printService에 모아 놓으면 좋을듯.*/
 	@Override
 	//전체조회
 	public boolean searchAll(List<Bank> tmpBankList) {
@@ -247,6 +276,9 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 	@Override
 	//금액 조회
 	//최소 ~ 최대 금액 조회
+	/* 강사 피드백
+	 * - 매개변수 tmpBankList를 제거 후 지역 변수로 전환
+	 * - 호출하는 메서드 보니 임의로 빈 배열 넘겨줌. 그러면 굳이 넘길 필요가? */
 	public boolean searchByMoney(int min, int max, List<Bank> tmpBankList) {
 		if(bankList == null || bankList.size() == 0) {
 			System.out.println("가계부가 없습니다.");
@@ -265,6 +297,9 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 	
 	@Override
 	//min 이상 조회
+	/* 강사 피드백
+	 * - 위에 min~max 조회가 있기 때문에 여기서
+	 * searchByMoeny(min,Integer.MAX_VALUE)를 이용하면 쉽게 처리 가능 */
 	public boolean searchByMoney(int min, List<Bank> tmpBankList) {
 		if(bankList == null || bankList.size() == 0) {
 			System.out.println("가계부가 없습니다.");
@@ -283,6 +318,9 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 	@Override
 	//일자별 조회
 	//연 내역 조회
+	/* 강사 피드백
+	 * - 여기서도 tmpBankList가 필요 없이 지역변수로 선언 
+	 * - 목적이 기록이 없는 경우를 출력하려는 것이기 때문에.*/
 	public boolean searchByDate(String year, List<Bank> tmpBankList) {
 		if(bankList == null || bankList.size() == 0) {
 			System.out.println("가계부가 없습니다.");
@@ -300,6 +338,28 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 	
 	@Override
 	//월 내역 조회
+	/* 강사 피드백
+	 * - 위와 피드백 같음
+	 * - 가변 매개변수를 이용하면 년, 년+월, 년+월+일을 쉽게 처리 가능
+	 * 아래 추가한 메서드 참고 */
+	//새로 추가된 메서드(강사가 임의로 작업, 아래 코드는 복붙하면 되서 생략
+	public boolean searchByDate(String ...date) {
+		if(bankList == null || bankList.size() == 0) {
+			System.out.println("가계부가 없습니다.");
+			return false;
+		}
+		String dateStr = "";
+		for(int i = 0; i<date.length; i++) {
+			dateStr += date[i] + (i < date.length-1 ? "/" : "");
+		}
+		List<Bank> tmpBankList = new ArrayList<Bank>();
+		final String res = dateStr;//람다식에선 지역변수 사용 불가, final 변수만 사용 가능
+		bankList.stream().filter(b->b.getToday().substring(0,res.length()).equals(res))
+		//이하 생략
+			.forEach(null);
+		return true;
+		
+	}
 	public boolean searchByDate(String year, String month, List<Bank> tmpBankList) {
 		if(bankList == null || bankList.size() == 0) {
 			System.out.println("가계부가 없습니다.");
@@ -318,6 +378,8 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 	
 	@Override
 	//일 내역 조회
+	/* 강사 피드백
+	 * - 위와 피드백 같음*/
 	public boolean searchByDate(String year, String month, String day, List<Bank> tmpBankList) {
 		if(bankList == null || bankList.size() == 0) {
 			System.out.println("가계부가 없습니다.");
@@ -367,7 +429,7 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 
 	
 	
-
+	
 	@Override
 	//입력받은 리스트에 수입, 지출이 있는지 파악하고 있다면 각각 구분하여 각 내역과 합계 출력
 	public void printDetail(List<Bank> tmpList) {
