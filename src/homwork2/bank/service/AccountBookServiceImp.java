@@ -15,7 +15,6 @@ import lombok.Data;
 @Data
 public class AccountBookServiceImp implements AccountBookService {
 	private List<Bank> bankList = new ArrayList<Bank>();
-	private Bank bank = new Bank();
 
 	@Override
 	public boolean addDeposit(Bank bank) {
@@ -51,7 +50,7 @@ public class AccountBookServiceImp implements AccountBookService {
 		}
 		if (bankList.contains(bank)) {
 			int index = bankList.indexOf(bank);
-      if(bankList.get(index).getMoney()<0) {
+			if(bankList.get(index).getMoney()<0) {
 				return false;
 			}
 			bankList.get(index).setMoney(money);
@@ -90,21 +89,6 @@ public class AccountBookServiceImp implements AccountBookService {
 			return false;
 		
 	}
-
-
-	@Override
-	public boolean updateDepositCategori(Bank bank, String categori) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean updateDepositDate(Bank bank, String date) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
 
 	@Override
 
@@ -435,11 +419,11 @@ public class AccountBookServiceImp implements AccountBookService {
 	}
 
   //수입내역 출력
-	@Override
 	public void printDeposit() {
 		Stream<Bank> stream = bankList.stream();
 		stream.filter(m->m.getMoney()>=0).forEach(m->System.out.print(m));
 	}
+	
   //지출내역 
   public void printWithdraw() {
 		Stream<Bank> stream = bankList.stream();
