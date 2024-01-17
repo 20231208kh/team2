@@ -21,7 +21,7 @@ public class PrintServiceImp implements PrintService {
 		
 		System.out.println("----교수 메뉴---");
 		System.out.println("1. 교수 관리 ");
-		System.out.println("2. 교수가 학생에게 주는 성적 관리 ");
+		System.out.println("2. 교수가 학생에게 성적 부여 관리 ");
 		System.out.println("3. 교수 전공 관리 ");
 		System.out.println("4. 교수 강의 관리 ");
 		System.out.println("5. 뒤로 가기");
@@ -55,7 +55,7 @@ public class PrintServiceImp implements PrintService {
 	@Override
 	public void printScoreManagementMenu() {
 		
-		System.out.println("----교수가 학생에게 주는 성적 관리---");
+		System.out.println("----교수가 학생에게 성적 부여 관리---");
 		System.out.println("1. 성적 추가");
 		System.out.println("2. 성적 수정");
 		System.out.println("3. 성적 삭제");
@@ -154,6 +154,7 @@ public class PrintServiceImp implements PrintService {
 		
 	}
 
+	//프로그램 종료
 	@Override
 	public void printExit() {
 		System.out.println("================");
@@ -165,7 +166,6 @@ public class PrintServiceImp implements PrintService {
 	//학생 조회
 	@Override
 	public void StudentSearchMenu() {
-		
 	}
 	
 	//교수 조회

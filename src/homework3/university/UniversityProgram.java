@@ -55,20 +55,21 @@ public class UniversityProgram implements Program{
 		
 	}
 
-	private void professorMenu() { //교수 메뉴 
+	//교수 메뉴 
+	private void professorMenu() { 
 		
 		printService.printProfessorMenu();
 		int menu = scan.nextInt();
 		
 			switch(menu) {
 			case 1:
-				professorManagement();
+				professorManagement(); //교수 관리
 				break;
 			case 2:
-				professorGiveScore();
+				professorGiveStudentScore(); //교수가 학생에게 성적 부여 관리
 				break;
 			case 3:
-				professorMajorManagement();
+				professorMajorManagement(); //교수 전공 관리
 				break;
 			case 4:
 				professorLectureManagement();
@@ -158,8 +159,8 @@ public class UniversityProgram implements Program{
 		
 	}
 
-	//교수 학생에게 주는 성적 관리
-	private void professorGiveScore() {
+	//교수가 학생에게 성적 부여 관리
+	private void professorGiveStudentScore() {
 		
 		printService.printScoreManagementMenu();
 		int menu=scan.nextInt();
@@ -184,17 +185,17 @@ public class UniversityProgram implements Program{
 }
 	
 	
-	//교수가 학생에 주는 성적 관리 : 성적 추가
+	//교수가 학생에게 성적 관리 : 성적 추가
 	private void addScore() {
 		
 	}
 
-	//교수가 학생에 주는 성적 관리 : 성적 수정
+	//교수가 학생에게 성적 관리 : 성적 수정
 	private void setScore() {
 		
 	}
 	
-	//교수가 학생에 주는 성적 관리 : 성적 삭제
+	//교수가 학생에게 성적 관리 : 성적 삭제
 	private void deleteScore() {
 		
 	}
@@ -207,13 +208,13 @@ public class UniversityProgram implements Program{
 		
 			switch(menu) {
 				case 1:
-					addMajor(); //전공 추가
+					professorAddMajor(); //전공 추가
 					break;
 				case 2:
-					setMajor();//전공 수정
+					professorSetMajor();//전공 수정
 					break;
 				case 3:
-					deleteMajor(); //전공 삭제
+					professorDelteMajor(); //전공 삭제
 					break;
 				case 4:
 					System.out.println("이전 메뉴로 돌아갑니다.");
@@ -226,17 +227,17 @@ public class UniversityProgram implements Program{
 	}
 
 	//교수 전공 관리: 전공 추가
-	private void addMajor() {
+	private void professorAddMajor() {
 		
 	}
 
 	//교수 전공 관리: 전공 수정
-	private void setMajor() {
+	private void professorSetMajor() {
 		
 	}
 
 	//교수 전공 관리: 전공 삭제
-	private void deleteMajor() {
+	private void professorDelteMajor() {
 		
 	}
 	
@@ -247,13 +248,13 @@ public class UniversityProgram implements Program{
 			
 				switch(menu) {
 					case 1:
-						addLecture(); //강의 추가
+						professorAddLecture(); //강의 추가
 						break;
 					case 2:
-						setLecture();//강의 수정
+						professorSetLecture();//강의 수정
 						break;
 					case 3:
-						deleteLecture(); //강의 삭제
+						professorDeleteLecture(); //강의 삭제
 						break;
 					case 4:
 						System.out.println("이전 메뉴로 돌아갑니다.");
@@ -265,29 +266,22 @@ public class UniversityProgram implements Program{
 		
 		}
 	
+		//교수 강의 관리: 강의 추가
+		private void professorAddLecture() {
+			
+			
+		}
 	
-	//교수 강의 관리: 강의 추가
-	private void addLecture() {
+		//교수 강의 관리: 강의 수정
+		private void professorSetLecture() {
 			
+		}
+		
+		//교수 강의 관리: 강의 삭제
+		private void professorDeleteLecture() {
 		
 		}
 
-	//교수 강의 관리: 강의 수정
-	private void setLecture() {
-			
-		
-		}
-
-	//교수 강의 관리: 강의 삭제
-	private void deleteLecture() {
-			
-		
-		}
-
-	private void managestudent() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	//학생 메뉴
 	private void studentMenu() { 
@@ -345,13 +339,13 @@ public class UniversityProgram implements Program{
 		
 			switch(menu) {
 				case 1:
-					addStudent(); //학생 학번 수정
+					setStudentStudNum(); //학생 학번 수정
 					break;
 				case 2:
-					setStudent(); //학생 나이 수정
+					setStudentAge(); //학생 나이 수정
 					break;
 				case 3:
-					deleteStudent(); //학생 이름 수정
+					setStudentName(); //학생 이름 수정
 					break;
 				case 4:
 					System.out.println("이전 메뉴로 돌아갑니다.");
@@ -359,6 +353,23 @@ public class UniversityProgram implements Program{
 				default:
 					throw new InputMismatchException();
 			}
+		
+	}
+
+	
+	
+	//학생 학번 수정
+	private void setStudentStudNum() {	
+		
+	}
+
+	//학생 나이 수정
+	private void setStudentAge() { 
+		
+	}
+
+	//학생 이름 수정
+	private void setStudentName() { 
 		
 	}
 
@@ -453,7 +464,7 @@ public class UniversityProgram implements Program{
 		printService.printMainMenu();
 		
 	}
-
+	
 	@Override
 	public void exitMenu() {
 		
