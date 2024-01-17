@@ -35,11 +35,11 @@ public class PrintServiceImp implements PrintService {
 	@Override
 	public void printUniversityMenu() {
 		System.out.println("-------학사메뉴-------");
-		System.out.println("1. 수강신청");
-		System.out.println("2. 성적조회");
-		System.out.println("2. 성적조회");
-		System.out.println("2. 성적조회");
-		System.out.println("3. 종료");
+		System.out.println("1. 교수 관리");
+		System.out.println("2. 학생 관리");
+		System.out.println("3. 전공 관리");
+		System.out.println("4. 조회");
+		System.out.println("5. 종료");
 		System.out.println("-------------------");
 		System.out.println("메뉴 선택 : ");
 	}
@@ -119,32 +119,10 @@ public class PrintServiceImp implements PrintService {
 	}
 
 	@Override
-	public void printSearchStudent() {
-		System.out.println("-------학생조회-------");
-		System.out.println("1. 전체 학생 조회");
-		System.out.println("2. 학과별 학생 조회");
-		System.out.println("3. 종료");
-		System.out.println("-------------------");
-		System.out.println("메뉴 선택 : ");
-	}
-
-	@Override
-	public void printSearchProfessor() {
-		System.out.println("-------교수조회-------");
-		System.out.println("1. 전체 교수 조회");
-		System.out.println("2. 학과별 교수 조회");
-		System.out.println("3. 종료");
-		System.out.println("-------------------");
-		System.out.println("메뉴 선택 : ");
-	}
-
-	@Override
 	public void printExitMenu() {
 		System.out.println("-----------------");
 		System.out.println("프로그램을 종료합니다.");
 		System.out.println("-----------------");
 	}
 
-
-	
 }

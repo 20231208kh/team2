@@ -21,10 +21,6 @@ public interface UniversityService {
 	boolean searchByProfessorMajor();
 	//학생 전공별 조회
 	boolean searchByStudentMajor();
-	//교수 전체 조회
-	boolean searchAllProfessor();
-	//학생 전체 조회
-	boolean searchAllStudent();
 	//학생 학번 조회
 	boolean searchByStudentId();
 	

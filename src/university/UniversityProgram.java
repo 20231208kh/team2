@@ -98,7 +98,7 @@ public class UniversityProgram implements Program{
 		}while(menu != 3);
 	}
 	
-	//조회 실행
+	//전공별 조회 실행
 	private void runSearch(int menu) {
 		switch(menu) {
 		case 1:
@@ -120,82 +120,14 @@ public class UniversityProgram implements Program{
 	
 	//학생 조회
 	private void searchStudent() {
-		int menu;
-		do {
-			printService.printSearchStudent();
-			menu = scan.nextInt();
-			runSearchStudentList(menu);
-		}while(menu != 3);
-	}
-	
-	//학생 조회 메뉴 실행
-	private void runSearchStudentList(int menu) {
-		switch(menu) {
-		case 1:
-			//전체 조회
-			searchAllStudent();
-			break;
-		case 2:
-			//학과별 조회
-			searchByStudentMajor();
-			break;
-		case 3:
-			System.out.println("돌아가기.");
-			break;
-		default:
-			throw new InputMismatchException();
-		}
-	}
-	
-	//전체 학생 조회
-	private void searchAllStudent() {
 		
 	}
 	
-	//학과별 학생 조회
-	private void searchByStudentMajor() {
-		
-	}
-
 	//교수 조회
 	private void searchProfessor() {
-		int menu;
-		do {
-			printService.printSearchProfessor();
-			menu = scan.nextInt();
-			runSearchProfessor(menu);
-		}while(menu != 3);
-	}
-	
-	//교수 조회 메뉴 실행
-	private void runSearchProfessor(int menu) {
-		switch(menu) {
-		case 1:
-			//전체조회
-			searchAllProfessor();
-			break;
-		case 2:
-			//학과별 교수 조회
-			searchByProfessorMajor();
-			break;
-		case 3:
-			System.out.println("돌아가기.");
-			break;
-		default:
-			throw new InputMismatchException();
-		}
-	}
-
-	//전체 조회
-	private void searchAllProfessor() {
 		
 	}
 	
-	//전공별 조회
-	private void searchByProfessorMajor() {
-
-	}
-
 	//전공 관리
 	private void manageMajor() {
 		int menu;
