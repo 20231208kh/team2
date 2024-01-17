@@ -3,6 +3,8 @@ package university.service;
 public interface PrintService {
 	//메뉴출력
 	void printMenu();
+	//죵료 출력
+	void printExitMenu();
 	
 	//학생사용메뉴
 	void printStudentMenu();
