@@ -50,56 +50,6 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 	}
 
 
-
-
-
-
-	@Override
-	public boolean addWithdraw(Bank bank) {	
-		bankList.add(bank);
-		return true;
-	}
-
-
-	@Override
-	public boolean deleteWithdraw(Bank bank,int userid) {
-		
-		if(bankList==null||bankList.size()==0) {
-			
-			System.out.println("입력된 내역이 없습니다.");
-			return false;
-		}
-		
-		if(bankList.contains(bank))
-		{			
-			bankList.remove(userid);
-			System.out.println("삭제 성공");
-			return true;
-		}
-		
-			return false;
-		
-	}
-
-	@Override
-
-	public boolean updateWithdrawMoney(Bank bank, int money) { //박석훈
-		
-		if (bankList.contains(bank)) {
-			int index = bankList.indexOf(bank);
-			if(bankList.get(index).getMoney()>0) {
-				return false;
-			}
-			bankList.get(index).setMoney(money);
-			System.out.println(bankList.get(index));
-
-			return true;
-		}
-		return false;
-	}
-
-	
-
 	@Override
 	//수입 일자 수정
 	public boolean updateDepositDate(Bank bank, String today) {
