@@ -13,8 +13,9 @@ import lombok.Data;
 public class AccountBookServiceImp implements AccountBookService , Serializable {
 	private static final long serialVersionUID = 6760830936819586275L;
 	private List<Bank> bankList = new ArrayList<Bank>();
+
 	private int id = 1;
-	
+
 	@Override
 	//수입 추가
 	public boolean addDeposit(Bank bank) {
@@ -38,7 +39,7 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 		}
 		if (bankList.contains(bank)) {
 			int index = bankList.indexOf(bank);
-      if(bankList.get(index).getMoney()<0) {
+			if(bankList.get(index).getMoney()<0) {
 				return false;
 			}
 			bankList.get(index).setMoney(money);
@@ -47,6 +48,57 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 		}
 		return false;
 	}
+
+
+
+
+
+
+	@Override
+	public boolean addWithdraw(Bank bank) {	
+		bankList.add(bank);
+		return true;
+	}
+
+
+	@Override
+	public boolean deleteWithdraw(Bank bank,int userid) {
+		
+		if(bankList==null||bankList.size()==0) {
+			
+			System.out.println("입력된 내역이 없습니다.");
+			return false;
+		}
+		
+		if(bankList.contains(bank))
+		{			
+			bankList.remove(userid);
+			System.out.println("삭제 성공");
+			return true;
+		}
+		
+			return false;
+		
+	}
+
+	@Override
+
+	public boolean updateWithdrawMoney(Bank bank, int money) { //박석훈
+		
+		if (bankList.contains(bank)) {
+			int index = bankList.indexOf(bank);
+			if(bankList.get(index).getMoney()>0) {
+				return false;
+			}
+			bankList.get(index).setMoney(money);
+			System.out.println(bankList.get(index));
+
+			return true;
+		}
+		return false;
+	}
+
+	
 
 	@Override
 	//수입 일자 수정
@@ -433,6 +485,8 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 		Stream<Bank> stream = bankList.stream();
 		stream.filter(m->m.getMoney()>=0).forEach(m->System.out.print(m));
 	}
+
+  
 	//지출내역 출력
 	public void printWithdraw() {
 		Stream<Bank> stream = bankList.stream();
