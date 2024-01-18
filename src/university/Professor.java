@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import lombok.Data;
 
+@Data
 public class Professor {
 	
 	//성함
@@ -16,5 +17,40 @@ public class Professor {
 	String professorMajor;
 	//과목 정보
 	List<Lecture> lectureList = new ArrayList<Lecture>();
+	
+	
+	public Professor(String professorName, String professorId, String professorMajor) {
+		this.professorName = professorName;
+		this.professorId = professorId;
+		this.professorMajor = professorMajor;
+	}
+
+	public Professor(String professorId) {
+		super();
+		this.professorId = professorId;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Professor other = (Professor) obj;
+		return Objects.equals(professorId, other.professorId);
+	}
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(professorId);
+	}
+
+
+	
+	
+	
 	
 }

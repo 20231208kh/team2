@@ -26,7 +26,12 @@ public interface PrintService {
 	void printManageMajor();
 	//교수관리
 	void printManageProfessor();
+	//교수수정
+	void printUpdateProfessor();
+
+	
 	//학생관리
 	void printManageStudent();
+		
 
 }

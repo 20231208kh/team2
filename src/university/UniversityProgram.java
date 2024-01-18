@@ -6,9 +6,12 @@ import java.util.Scanner;
 import program.Program;
 import university.service.PrintService;
 import university.service.PrintServiceImp;
+import university.service.UniversityService;
+import university.service.UniversityServiceImp;
 
 public class UniversityProgram implements Program{
 	private PrintService printService = new PrintServiceImp();
+	private UniversityService usi = new UniversityServiceImp();
 	Scanner scan = new Scanner(System.in);
 	int EXIT_PROGRAM = 4;
 	
@@ -244,7 +247,9 @@ public class UniversityProgram implements Program{
 			break;
 		case 2:
 			//교수 수정
-			updateProfessor();
+			printService.printUpdateProfessor();
+			int subMenu = scan.nextInt();
+			runUpdateProfessor(subMenu);
 			break;
 		case 3:
 			//교수 삭제
@@ -260,12 +265,42 @@ public class UniversityProgram implements Program{
 	
 	//교수 추가
 	private void addProfessor() {
-		
+		System.out.print("등록할 교수 이름 : ");
+		String professorName = scan.next();
+		System.out.print("등록할 교수 ID : ");
+		String professorID = scan.next();
+		System.out.print("등록할 교수 전공 : ");
+		String professorMajor = scan.next();
+		if(usi.addProfessor(professorName, professorID, professorMajor)) {
+			System.out.println(professorName+"교수 등록 완료");
+			return;
+		}
+		System.out.println("등록된 ID 입니다.");
 	}
 	
-	//교수 수정
-	private void updateProfessor() {
-		
+	//교수 수정 실행
+	private void runUpdateProfessor(int subMenu) {
+		System.out.print("수정할 교수의 ID 입력 : ");
+		String professorID = scan.next();
+		Professor tmp = usi.updateProfessor(professorID);
+		switch(subMenu) {
+		case 1:
+			System.out.print(tmp.getProfessorId()+"교수의 수정할 이름 : ");
+			String newName = scan.next();
+			if(usi.updateProfessorName(tmp, newName)) {
+				System.out.println(newName +"로 이름이 수정되었습니다.");
+				return;
+			}
+			
+			break;
+		case 2: 
+			break;
+		case 3: 
+			break;
+		case 4: 
+			break;
+		default:
+		}
 	}
 	
 	//교수 삭제
