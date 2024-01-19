@@ -1,6 +1,11 @@
 package university.service;
 
+import java.util.List;
+
+import university.Professor;
+
 public class PrintServiceImp implements PrintService {
+	UniversityService usi = new UniversityServiceImp();
 	
 	@Override
 	public void printMenu() {
@@ -134,6 +139,17 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("-----------------");
 		System.out.println("프로그램을 종료합니다.");
 		System.out.println("-----------------");
+	}
+
+	@Override
+	//등록된 교수를 전부 출력
+	public void printProfessorList() {
+		List<Professor> tmp = usi.sendProfessorList();
+		tmp.stream().forEach(p->{
+			System.out.println((tmp.indexOf(p)+1)+". " + p.getProfessorName() 
+			 +"/ 전공 : " + p.getProfessorMajor() + "/ ID : "+p.getProfessorId());
+		});
+		
 	}
 
 	

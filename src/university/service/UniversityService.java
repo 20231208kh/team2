@@ -1,5 +1,7 @@
 package university.service;
 
+import java.util.List;
+
 import university.Professor;
 
 public interface UniversityService {
@@ -22,12 +24,13 @@ public interface UniversityService {
 	//교수 등록 : 김준수
 	boolean addProfessor(String name, String id, String major);
 	//교수 수정 : 김준수
-	Professor updateProfessor(String id);
+	Professor selectUpdateProfessor(String id);
 	boolean updateProfessorName(Professor tmp ,String name);
 	boolean updateProfessorID(Professor tmp ,String newID);
 	boolean updateProfessorMajor(Professor tmp ,String major);
 	//교수 삭제 : 김준수
-	boolean deleteProfessor();
+	List<Professor> sendProfessorList();
+	boolean deleteProfessor(int num);
 	
 	//강의 등록 : 김준수
 	boolean addLecture();

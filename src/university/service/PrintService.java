@@ -33,5 +33,6 @@ public interface PrintService {
 	//학생관리
 	void printManageStudent();
 		
-
+	//등록된 교수 출력
+	void printProfessorList();
 }

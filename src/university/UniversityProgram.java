@@ -282,10 +282,10 @@ public class UniversityProgram implements Program{
 	private void runUpdateProfessor(int subMenu) {
 		System.out.print("수정할 교수의 ID 입력 : ");
 		String professorID = scan.next();
-		Professor tmp = usi.updateProfessor(professorID);
+		Professor tmp = usi.selectUpdateProfessor(professorID);
 		switch(subMenu) {
 		case 1:
-			System.out.print(tmp.getProfessorId()+"교수의 수정할 이름 : ");
+			System.out.print(tmp.getProfessorName()+"교수의 수정할 이름 : ");
 			String newName = scan.next();
 			if(usi.updateProfessorName(tmp, newName)) {
 				System.out.println(newName +"로 이름이 수정되었습니다.");
@@ -294,7 +294,7 @@ public class UniversityProgram implements Program{
 			System.out.println("이름 수정에 실패했습니다.");
 			break;
 		case 2: 
-			System.out.print(tmp.getProfessorId()+"교수의 수정할 ID : ");
+			System.out.print(tmp.getProfessorName()+"교수의 수정할 ID : ");
 			String newID = scan.next();
 			if(usi.updateProfessorID(tmp, newID)) {
 				System.out.println("ID가 "+newID +"로 수정되었습니다.");
@@ -303,7 +303,7 @@ public class UniversityProgram implements Program{
 			System.out.println("ID 수정에 실패했습니다.");
 			break;
 		case 3: 
-			System.out.print(tmp.getProfessorId()+"교수의 수정할 전공 : ");
+			System.out.print(tmp.getProfessorName()+"교수의 수정할 전공 : ");
 			String newMajor = scan.next();
 			if(usi.updateProfessorMajor(tmp, newMajor)) {
 				System.out.println("전공이 수정되었습니다 : " + newMajor);
@@ -321,7 +321,14 @@ public class UniversityProgram implements Program{
 	
 	//교수 삭제
 	private void deleteProfessor() {
-		
+		printService.printProfessorList();
+		System.out.print("삭제할 교수의 번호를 입력해주세요 : ");
+		int num = scan.nextInt();
+		if(usi.deleteProfessor(num)) {
+			System.out.println("삭제 됐습니다.");
+			return;
+		}
+		System.out.println("삭제에 실패했습니다.");
 	}
 	
 	//학생 사용 메뉴

@@ -61,7 +61,7 @@ public class UniversityServiceImp implements UniversityService{
 	
 	@Override
 	//수정할 교수 특정
-	public Professor updateProfessor(String id) {
+	public Professor selectUpdateProfessor(String id) {
 		if(professorList == null || professorList.size()==0) {
 			return null;
 		}
@@ -105,13 +105,22 @@ public class UniversityServiceImp implements UniversityService{
 		return true;
 	}
 	
-	
+	@Override
+	//교수 리스트를 보내는 메서드
+	public List<Professor> sendProfessorList() {
+		return professorList;
+	}
+
 	
 	
 	@Override
-	public boolean deleteProfessor() {
-		// TODO Auto-generated method stub
-		return false;
+	// 교수 삭제
+	public boolean deleteProfessor(int num) {
+		if(professorList == null || professorList.size()==0) {
+			return false;
+		}
+		professorList.remove(--num);
+		return true;
 	}
 
 	@Override
@@ -162,6 +171,7 @@ public class UniversityServiceImp implements UniversityService{
 		return false;
 	}
 
+	
 	
 	
 }
