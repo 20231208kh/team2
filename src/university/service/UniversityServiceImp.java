@@ -20,23 +20,48 @@ public class UniversityServiceImp implements UniversityService {
 	
 	@Override
 	public boolean addStudent(Student student) {
-		if(majorList ==null) {
+		
+		if(studentList.contains(student)) {
+			System.out.println("중복된 학번 입력입니다.");
 			return false;
 		}
+		
 		studentList.add(student);
 		System.out.println(studentList);
 		return true;
 	}
 
 	@Override
-	public boolean updateStudent() {
-		// TODO Auto-generated method stub
+	public boolean updateStudentName(Student student,String name) {
+		
+		if(studentList==null) {
+			return false;
+		}
+		
+		if(studentList.contains(student)) {
+			int index = studentList.indexOf(student);
+			if(index==-1) {
+				return false;
+			}
+			studentList.get(index).setStudentName(name);
+			System.out.println(studentList.get(index));
+			return true;
+		}
+		
+		
 		return false;
 	}
 
 	@Override
-	public boolean deleteStudent() {
-		// TODO Auto-generated method stub
+	public boolean deleteStudent(Student student) {
+		if(studentList == null) {
+			return false;
+		}
+		
+		if(studentList.contains(student)) {
+			return studentList.remove(student);
+			
+		}
 		return false;
 	}
 
@@ -55,10 +80,17 @@ public class UniversityServiceImp implements UniversityService {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 	@Override
-	public boolean deleteMajor() {
-		// TODO Auto-generated method stub
+	public boolean deleteMajor(Major major) {
+		if(majorList == null) {
+			return false;
+		}
+		
+		if(majorList.contains(major)) {
+			return majorList.remove(major);
+			
+		}
 		return false;
 	}
 
@@ -116,6 +148,74 @@ public class UniversityServiceImp implements UniversityService {
 			System.out.println((i+1)+" : "+majorList.get(i));
 		}
 		
+	}
+
+	@Override
+	public List<Student> getStudent() {
+		return studentList;
+	}
+
+	@Override
+	public boolean updateStudentMajor(Student student, Major major) {
+		if(majorList==null || studentList==null) {
+			return false;
+		}
+		
+		if(majorList.contains(major)) {
+			int index= studentList.indexOf(student);
+			
+			if(index == -1) {
+				return false;
+			}
+			
+			studentList.get(index).setMajor(major);
+			
+			System.out.println(studentList.get(index));
+			return true;
+			
+		}
+		
+		return false;
+	}
+
+	@Override
+	public boolean updateStudentAge(Student student, int studentAge) {
+		if(studentList==null) {
+			return false;
+		}
+		
+		if(studentList.contains(student)) {
+			int index = studentList.indexOf(student);
+			if(index==-1) {
+				return false;
+			}
+			studentList.get(index).setAge(studentAge);
+			System.out.println(studentList.get(index));
+			return true;
+		}
+		
+		
+		return false;
+	}
+
+	@Override
+	public boolean updateStudentGrade(Student student, int grade) {
+		if(studentList==null) {
+			return false;
+		}
+		
+		if(studentList.contains(student)) {
+			int index = studentList.indexOf(student);
+			if(index==-1) {
+				return false;
+			}
+			studentList.get(index).setGrade(grade);
+			System.out.println(studentList.get(index));
+			return true;
+		}
+		
+		
+		return false;
 	}
 	
 }

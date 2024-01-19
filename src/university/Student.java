@@ -22,6 +22,11 @@ public class Student {
 	int year;
 	//점수
 	int avgScore;
+	
+	int age;
+	
+	String lastNum;
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -38,17 +43,24 @@ public class Student {
 		return Objects.hash(studentId);
 	}
 	
-	public Student(String studentName,int grade, int year, Major major) {
+	
+	
+	public Student(String studentName,int grade, int year, int age, Major major,String lastNum) {
 		super();
 		this.major = major;
 		this.studentName = studentName;
 		this.grade = grade;
 		this.year = year;
-		this.studentId = year+major.getMajorId();
+		this.age = age;
+		this.studentId = year+major.getMajorId()+lastNum;
 	}
 	@Override
 	public String toString() {
 		return "학번 : "+studentId+ " 이름 : "+studentName+" 학년 : "+grade+ " 전공 : "+major.getMajorName()+" 수강중인 강의 : "+lectureList;
+	}
+	public Student(String studentId) {
+		super();
+		this.studentId = studentId;
 	}
 	
 	

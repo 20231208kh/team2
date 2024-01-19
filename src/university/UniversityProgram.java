@@ -13,7 +13,7 @@ public class UniversityProgram implements Program{
 	private PrintService printService = new PrintServiceImp();
 	private UniversityService usi = new UniversityServiceImp();
 	Scanner scan = new Scanner(System.in);
-	int EXIT_PROGRAM = 4;
+	private final int EXIT_PROGRAM = 4;
 	
 	@Override
 	public void run() {
@@ -159,6 +159,7 @@ public class UniversityProgram implements Program{
 		case 4:
 			//돌아가기
 			System.out.println("돌아가기.");
+			break;
 		default:
 			throw new InputMismatchException();
 		}
@@ -182,11 +183,41 @@ public class UniversityProgram implements Program{
 	
 	//전공 수정
 	private void updateMajor() {
+		if(usi.getMajor().size()<=0) {
+			System.out.println("등록된 전공이 없습니다.");
+			return;
+		}
+		System.out.print("수정할 전공 이름 : ");
+		String majorName = scan.next();
+		System.out.print("수정할 전공 번호 : ");
+		String majorId = scan.next();
 		
+		Major major = new Major(majorName,majorId);
+		System.out.println("무엇을 수정하시겠습니까?");
+		System.out.print("전공 이름(1) / 전공 번호(2)/ ");
+		int menu=scan.nextInt();
+		
+	
 	}
 	
 	//전공 삭제
 	private void deleteMajor() {
+		if(usi.getMajor().size()<=0) {
+			System.out.println("등록된 전공이 없습니다.");
+			return;
+		}
+		
+		System.out.print("삭제할 전공 이름 : ");
+		String majorName = scan.next();
+		System.out.print("삭제할 전공 번호 : ");
+		String majorId = scan.next();
+		
+		Major major = new Major(majorName,majorId);
+		if(usi.deleteMajor(major)) {
+			System.out.println("삭제 성공!");
+			return;
+		}
+		System.out.println("삭제 실패");
 		
 	}
 
@@ -218,6 +249,7 @@ public class UniversityProgram implements Program{
 		case 4:
 			//돌아가기
 			System.out.println("돌아가기.");
+			break;
 		default:
 			throw new InputMismatchException();
 		}
@@ -225,20 +257,28 @@ public class UniversityProgram implements Program{
 	
 	//학생 등록
 	private void addStudent() {
+		if(usi.getMajor().size()<=0) {
+			System.out.println("전공을 먼저 등록해주세요.");
+			return;
+		}
 		System.out.print("학생 이름 : ");
 		String studentName = scan.next();
 		System.out.print("입학 연도 : ");
 		int year = scan.nextInt();
 		System.out.print("학년 : ");
 		int grade = scan.nextInt();
+		System.out.print("나이 : ");
+		int studentAge = scan.nextInt();
 		
 		usi.printMajorList();
 		System.out.print("전공 선택 : ");
 		int index = scan.nextInt();
-
+		System.out.print("학번 마지막 두자리 입력 : ");
+		String lastNum = scan.next();
+		
 		try{
 			Major major = usi.getMajor().get(index-1);
-			Student student = new Student(studentName,grade,year,major);
+			Student student = new Student(studentName,grade,year,studentAge,major,lastNum);
 			if(usi.addStudent(student)) {
 				System.out.println("학생 등록 성공 !");
 				return;
@@ -246,26 +286,70 @@ public class UniversityProgram implements Program{
 		}catch(IndexOutOfBoundsException e) {
 			System.out.println("목록에 없는 전공 선택");
 			return;
-		}
-		
-		
-		System.out.println("전공을 먼저 등록해주세요");
-		
-		
-		
-		
-		
-		
+		}	
 		
 	}
 	
 	//학생 수정
 	private void updateStudent() {
+		//학번 입력
+		System.out.print("수정할 학생의 학번을 입력 : ");
+		//인스턴스 생성
+		String studentId = scan.next();
+		Student student = new Student(studentId);
+		if(!usi.getStudent().contains(student)) {
+			System.out.println("잘못된 학번 입력");
+			return;
+		}
+		//이름,나이,학년,전공 수정 택1
+		System.out.println("무엇을 수정하시겠습니까?");
+		System.out.print("이름(1) / 나이(2) / 학년(3) / 전공(4) : ");
+		int menu = scan.nextInt();
+		switch(menu) {
+		case 1:
+			System.out.print("학생 이름 입력(수정) : ");
+			String studentName = scan.next();
+			usi.updateStudentName(student, studentName);
+			break;
+		case 2:
+			System.out.print("학생 나이 입력(수정) : ");
+			int studentAge = scan.nextInt();
+			usi.updateStudentAge(student, studentAge);
+			break;
+		case 3:
+			System.out.print("학생 학년 입력(수정) : ");
+			int grade = scan.nextInt();
+			usi.updateStudentGrade(student, grade);
+			break;
+		case 4:
+			try {
+			usi.printMajorList();
+				System.out.print("학생 전공 선택(수정) : ");
+				int index = scan.nextInt();
+				Major major = usi.getMajor().get(index-1);
+				usi.updateStudentMajor(student,major);
+				break;
+			}catch(IndexOutOfBoundsException e) {
+				System.out.println("목록에 없는 전공 선택");
+				break;
+			}
+		default:
+			throw new InputMismatchException();
+		}
+		
 		
 	}
 	
 	//학생 삭제
 	private void deleteStudent() {
+		System.out.print("삭제할 학생의 학번을 입력 : ");
+		String studentId = scan.next();
+		Student student = new Student(studentId);
+		if(usi.deleteStudent(student)) {
+			System.out.println("삭제 성공 !");
+			return;
+		}
+		System.out.println("삭제 실패");
 		
 	}
 	

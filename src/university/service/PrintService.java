@@ -11,6 +11,8 @@ public interface PrintService {
 	//수강관리
 	void printManageSignUp();
 	
+	void manageUpdateStudent();
+	
 	//교수사용메뉴
 	void printProfessorMenu();
 	//성적관리

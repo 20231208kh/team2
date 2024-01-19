@@ -12,9 +12,15 @@ public interface UniversityService {
 	//학생 등록
 	boolean addStudent(Student student);
 	//학생 수정
-	boolean updateStudent();
+	boolean updateStudentName(Student student,String name);
+	
+	boolean updateStudentMajor(Student student, Major major);
+	
+	List<Student> getStudent();
+	
+	
 	//학생 삭제
-	boolean deleteStudent();
+	boolean deleteStudent(Student student);
 	
 	void printMajorList() ;
 	
@@ -23,7 +29,7 @@ public interface UniversityService {
 	//전공 수정
 	boolean UpdateMajor();
 	//전공 삭제
-	boolean deleteMajor();
+	boolean deleteMajor(Major major);
 	
 	//교수 전공별 조회
 	boolean searchByProfessorMajor();
@@ -41,5 +47,10 @@ public interface UniversityService {
 	boolean addLecture();
 	//강의 수정
 	boolean updateLecture();
+
+	boolean updateStudentAge(Student student, int studentAge);
+
+	boolean updateStudentGrade(Student student, int grade);
+
 	
 }
