@@ -1,11 +1,9 @@
 package university;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import lombok.Data;
 
 public class Lecture {
+	
 	
 	//과목명
 	String lectureName;

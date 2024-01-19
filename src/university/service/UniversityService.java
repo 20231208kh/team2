@@ -1,5 +1,7 @@
 package university.service;
 
+import university.Professor;
+
 public interface UniversityService {
 	
 	
