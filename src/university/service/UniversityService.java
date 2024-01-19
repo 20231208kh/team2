@@ -24,7 +24,7 @@ public interface UniversityService {
 	//교수 수정 : 김준수
 	Professor updateProfessor(String id);
 	boolean updateProfessorName(Professor tmp ,String name);
-	boolean updateProfessorId(Professor tmp ,String newID);
+	boolean updateProfessorID(Professor tmp ,String newID);
 	boolean updateProfessorMajor(Professor tmp ,String major);
 	//교수 삭제 : 김준수
 	boolean deleteProfessor();

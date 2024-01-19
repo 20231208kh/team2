@@ -48,7 +48,7 @@ public class UniversityServiceImp implements UniversityService{
 
 	@Override
 	public boolean addProfessor(String name, String id, String major) {
-		if(professorList==null) {
+		if(professorList == null) {
 			professorList = new ArrayList<Professor>();
 		}
 		if(professorList.contains(new Professor(id))) {
@@ -58,10 +58,11 @@ public class UniversityServiceImp implements UniversityService{
 		professorList.add(tmp);
 		return true;
 	}
-	// 교수 수정 : 이름, id, 전공
+	
 	@Override
+	//수정할 교수 특정
 	public Professor updateProfessor(String id) {
-		if(professorList ==null || professorList.size()==0) {
+		if(professorList == null || professorList.size()==0) {
 			return null;
 		}
 		Professor tmp = new Professor(id);
@@ -71,23 +72,37 @@ public class UniversityServiceImp implements UniversityService{
 	}
 
 	@Override
+	//교수 이름 수정
 	public boolean updateProfessorName(Professor tmp ,String name) {
-		if(tmp.equals(null)|| professorList ==null || professorList.size()==0) {
-			
+		if(tmp == null|| professorList == null || professorList.size()==0) {
+			return false;
 		}
-		return false;
+		final Professor res = tmp;
+		professorList.stream().filter(p->p.equals(res)).forEach(p->p.setProfessorName(name));
+		return true;
 	}
 
 	@Override
-	public boolean updateProfessorId(Professor tmp ,String newID) {
-		// TODO Auto-generated method stub
-		return false;
+	//교수 ID 수정
+	public boolean updateProfessorID(Professor tmp ,String newID) {
+		if(tmp == null|| professorList == null || professorList.size()==0) {
+			return false;
+		}
+		final Professor res = tmp;
+		professorList.stream().filter(p->p.equals(res)).forEach(p->p.setProfessorId(newID));
+		return true;
+
 	}
 
 	@Override
+	//교수 전공 수정
 	public boolean updateProfessorMajor(Professor tmp , String major) {
-		// TODO Auto-generated method stub
-		return false;
+		if(tmp == null|| professorList == null || professorList.size()==0) {
+			return false;
+		}
+		final Professor res = tmp;
+		professorList.stream().filter(p->p.equals(res)).forEach(p->p.setProfessorMajor(major));
+		return true;
 	}
 	
 	

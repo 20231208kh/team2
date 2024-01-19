@@ -291,15 +291,31 @@ public class UniversityProgram implements Program{
 				System.out.println(newName +"로 이름이 수정되었습니다.");
 				return;
 			}
-			
+			System.out.println("이름 수정에 실패했습니다.");
 			break;
 		case 2: 
+			System.out.print(tmp.getProfessorId()+"교수의 수정할 ID : ");
+			String newID = scan.next();
+			if(usi.updateProfessorID(tmp, newID)) {
+				System.out.println("ID가 "+newID +"로 수정되었습니다.");
+				return;
+			}
+			System.out.println("ID 수정에 실패했습니다.");
 			break;
 		case 3: 
+			System.out.print(tmp.getProfessorId()+"교수의 수정할 전공 : ");
+			String newMajor = scan.next();
+			if(usi.updateProfessorMajor(tmp, newMajor)) {
+				System.out.println("전공이 수정되었습니다 : " + newMajor);
+				return;
+			}
+			System.out.println("전공 수정에 실패했습니다.");
 			break;
 		case 4: 
+			System.out.println("메인 메뉴로 돌아갑니다.");
 			break;
 		default:
+			throw new InputMismatchException();
 		}
 	}
 	
