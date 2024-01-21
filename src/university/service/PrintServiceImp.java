@@ -142,17 +142,21 @@ public class PrintServiceImp implements PrintService {
 	}
 
 	@Override
-	//등록된 교수를 전부 출력
+	//등록된 교수 번호 붙어 출력
 	public void printProfessorList() {
-		List<Professor> tmp = usi.sendProfessorList();
-		tmp.stream().forEach(p->{
-			System.out.println((tmp.indexOf(p)+1)+". " + p.getProfessorName() 
-			 +"/ 전공 : " + p.getProfessorMajor() + "/ ID : "+p.getProfessorId());
+		usi.sendProfessorList().stream().forEach(p->{
+			System.out.println((usi.sendProfessorList().indexOf(p)+1)+". " + p.getProfessorName() + " / 담당학과 : " 
+			+ p.getPorfessorBTM().getMajorName()+" / 교수전공 : " + p.getProfessorMajor() + " / ID : "+p.getProfessorId());
 		});
-		
 	}
 
-	
+	@Override
+	//등록된 전공 번호 붙여 출력
+	public void printMajorList() {
+		usi.sendMajorList().stream().forEach(m->{
+			System.out.println((usi.sendMajorList().indexOf(m)+1) + ". " + m.getMajorName());
+		});
+	}
 
 	
 }

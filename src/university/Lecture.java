@@ -2,6 +2,7 @@ package university;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import lombok.Data;
 @Data
@@ -22,5 +23,37 @@ public class Lecture {
 	int lectureLT; // 1~3
 	//점수
 	int lectureScore; // 학생인스턴스의 과목리스트에 넣을 점수
+	
+	// 강의 등록 생성자
+	public Lecture(String lectureName, int lectureMaxCount, String lectureDay, int lectureST, int lectureLT) {
+		this.lectureName = lectureName;
+		this.lectureMaxCount = lectureMaxCount;
+		this.lectureDay = lectureDay;
+		this.lectureST = lectureST;
+		this.lectureLT = lectureLT;
+		lectureCount = 0;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Lecture other = (Lecture) obj;
+		return lectureId == other.lectureId;
+	}
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(lectureId);
+	}
+	
+	
+	
 	
 }

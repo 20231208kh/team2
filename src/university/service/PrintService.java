@@ -35,4 +35,7 @@ public interface PrintService {
 		
 	//등록된 교수 출력
 	void printProfessorList();
+	
+	//등록된 전공 출력
+	void printMajorList();
 }

@@ -2,7 +2,10 @@ package university.service;
 
 import java.util.List;
 
+import university.Lecture;
+import university.Major;
 import university.Professor;
+import university.Student;
 
 public interface UniversityService {
 	
@@ -29,7 +32,6 @@ public interface UniversityService {
 	boolean updateProfessorID(Professor tmp ,String newID);
 	boolean updateProfessorMajor(Professor tmp ,String major);
 	//교수 삭제 : 김준수
-	List<Professor> sendProfessorList();
 	boolean deleteProfessor(int num);
 	
 	//강의 등록 : 김준수
@@ -52,6 +54,9 @@ public interface UniversityService {
 	//성적 수정
 	boolean updateScore();
 	
-	
-	
+	//리스트 보내기
+	List<Professor> sendProfessorList();
+	List<Lecture> sendLectureList();
+	List<Student> sendStudentList();
+	List<Major> sendMajorList();
 }

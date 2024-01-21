@@ -3,12 +3,17 @@ package university.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import university.Lecture;
+import university.Major;
 import university.Professor;
+import university.Student;
 
 
 public class UniversityServiceImp implements UniversityService{
 	List<Professor> professorList = new ArrayList<Professor>();
-	
+	List<Lecture> lectureList = new ArrayList<Lecture>(); 
+	List<Student> studentList = new ArrayList<Student>();
+	List<Major> majorList = new ArrayList<Major>();
 	
 	@Override
 	public boolean addStudent() {
@@ -105,11 +110,7 @@ public class UniversityServiceImp implements UniversityService{
 		return true;
 	}
 	
-	@Override
-	//교수 리스트를 보내는 메서드
-	public List<Professor> sendProfessorList() {
-		return professorList;
-	}
+	
 
 	
 	
@@ -124,18 +125,21 @@ public class UniversityServiceImp implements UniversityService{
 	}
 
 	@Override
+	// 강의 등록
 	public boolean addLecture() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
+	// 강의 수정
 	public boolean updateLecture() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
+	// 강의 삭제
 	public boolean deleteLecture() {
 		// TODO Auto-generated method stub
 		return false;
@@ -169,6 +173,28 @@ public class UniversityServiceImp implements UniversityService{
 	public boolean updateScore() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	
+	@Override
+	//교수 리스트를 보내는 메서드
+	public List<Professor> sendProfessorList() {
+		return professorList;
+	}
+	
+	@Override
+	public List<Lecture> sendLectureList() {
+		return lectureList;
+	}
+
+	@Override
+	public List<Student> sendStudentList() {
+		return studentList;
+	}
+
+	@Override
+	public List<Major> sendMajorList() {
+		return majorList;
 	}
 
 	
