@@ -6,8 +6,11 @@ import java.util.Scanner;
 import program.Program;
 import university.service.PrintService;
 import university.service.PrintServiceImp;
+import university.service.UniversityService;
+import university.service.UniversityServiceImp;
 
 public class UniversityProgram implements Program{
+	private UniversityService unis = new UniversityServiceImp();
 	private PrintService printService = new PrintServiceImp();
 	Scanner scan = new Scanner(System.in);
 	int EXIT_PROGRAM = 4;
@@ -95,7 +98,7 @@ public class UniversityProgram implements Program{
 			printService.printSearch();
 			menu = scan.nextInt();
 			runSearch(menu);
-		}while(menu != 3);
+		}while(menu != 5);
 	}
 	
 	//전공별 조회 실행
@@ -110,6 +113,43 @@ public class UniversityProgram implements Program{
 			searchStudent();
 			break;
 		case 3:
+			//전공 조회
+			searchMajor();
+			break;
+		case 4:
+			//학생 조회
+			searchLecture();
+			break;
+		case 5:
+			//돌아가기
+			System.out.println("돌아가기.");
+			break;
+		default:
+			throw new InputMismatchException();
+		}
+	}
+
+	//학생 조회
+	private void searchStudent() {
+		int menu;
+		do {
+			printService.printSearchStudentMenu();
+			menu = scan.nextInt();
+			runSearchStudent(menu);
+		}while(menu != 3);
+	}
+	
+	private void runSearchStudent(int menu) {
+		switch(menu) {
+		case 1:
+			//학번으로 조회
+			searchStudentId();
+			break;
+		case 2:
+			//이름으로 조회
+			searchStudentName();
+			break;
+		case 3:
 			//돌아가기
 			System.out.println("돌아가기.");
 			break;
@@ -118,16 +158,54 @@ public class UniversityProgram implements Program{
 		}
 	}
 	
-	//학생 조회
-	private void searchStudent() {
+	//학생 이름으로 조회
+	private void searchStudentName() {
+		//학번 입력
+		System.out.print("학생 이름 입력 : ");
+		String stdName = scan.next();
+		//객체 생성
+		Student studentName = new Student();
+		//serviceimp
+		unis.searchByStudentId(studentName);
+		return;
 		
 	}
 	
+	//학번으로 조회
+	private void searchStudentId() {
+		//학번 입력
+		System.out.print("학번 입력 : ");
+		String stdId = scan.next();
+		//객체 생성
+		Student studentId = new Student();
+		//serviceimp
+		unis.searchByStudentId(studentId);
+		return;
+	}
+
+	//전공 조회
+	private void searchMajor() {
+		//전공명 입력
+		scan.nextLine();
+		System.out.print("전공명 입력 : ");
+		String mName = scan.nextLine();
+		//객체 생성
+		Major majorName = new Major();
+		//serviceimp
+		unis.searchByMajor(majorName);
+		return;
+	}
+
 	//교수 조회
 	private void searchProfessor() {
 		
 	}
 	
+	//강의 조회
+	private void searchLecture() {
+		
+	}
+
 	//전공 관리
 	private void manageMajor() {
 		int menu;

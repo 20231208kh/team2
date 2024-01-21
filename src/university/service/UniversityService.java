@@ -1,5 +1,8 @@
 package university.service;
 
+import university.Major;
+import university.Student;
+
 public interface UniversityService {
 	
 	
@@ -20,9 +23,11 @@ public interface UniversityService {
 	//교수 전공별 조회
 	boolean searchByProfessorMajor();
 	//학생 전공별 조회
-	boolean searchByStudentMajor();
-	//학생 학번 조회
-	boolean searchByStudentId();
+	boolean searchByMajor(Major majorName);
+	//학생 이름으로 조회
+	boolean searchByStudentName(Student studentName);
+	//학생 학번으로 조회
+	boolean searchByStudentId(Student studentId);
 	
 	//성적 입력
 	boolean insertScore();

@@ -125,4 +125,14 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("-----------------");
 	}
 
+	@Override
+	public void printSearchStudentMenu() {
+		System.out.println("-----학생조회메뉴-----");
+		System.out.println("1. 학번으로 조회");
+		System.out.println("2. 이름으로 조회");
+		System.out.println("3. 종료");
+		System.out.println("-------------------");
+		System.out.println("메뉴 선택 : ");
+	}
+
 }
