@@ -241,7 +241,17 @@ public class UniversityProgram implements Program{
 	
 	//전공 추가
 	private void addMajor() {
-		
+		System.out.print("전공 이름 : ");
+		scan.nextLine();
+		String majorName = scan.nextLine();
+		System.out.print("전공 번호 : ");
+		String majorNum = scan.next();
+		Major major = new Major(majorName,majorNum);
+		if(unis.addMajor(major)) {
+			System.out.println("전공 등록 성공!");
+			return;
+		}
+		System.out.println("전공 등록 실패");
 	}
 	
 	//전공 수정

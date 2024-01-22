@@ -121,5 +121,11 @@ public class UniversityServiceImp implements UniversityService{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public boolean addMajor(Major major) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }

@@ -39,4 +39,6 @@ public interface UniversityService {
 	//강의 수정
 	boolean updateLecture();
 	
+	boolean addMajor(Major major);
+	
 }
