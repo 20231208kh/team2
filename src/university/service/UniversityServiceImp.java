@@ -35,7 +35,7 @@ public class UniversityServiceImp implements UniversityService{
 		}
 		if(studentList.contains(studentId)){
 			Stream<Student> stream = studentList.stream();
-			stream.filter(m->m.equals(studentId)).forEach(m->System.out.print(m));
+			stream.forEach(m->System.out.print(m));
 			return true;
 		}
 		return false;
