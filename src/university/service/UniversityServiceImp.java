@@ -14,14 +14,18 @@ public class UniversityServiceImp implements UniversityService{
 	//전공 조회
 	@Override
 	public boolean searchByMajor(Major majorName) {
-		if(majorList == null || majorList.size() < 0) {
+		if(majorList == null) {
 			System.out.println("등록된 전공이 없습니다.");
 			return false;
 		}
 		int index = majorList.indexOf(majorName);
-		if(majorList.size() < 0) {
+		if(index == -1) {
+			System.out.println("일치하는 전공이 없습니다.");
+			return false;
+		}
 		System.out.print(majorList.get(index));
-		
+		return true;
+	}
 //		//indexOf
 //		int index = majorList.indexOf(majorName);
 //		System.out.print(majorList.get(index).printMajorCount()); 
@@ -32,8 +36,6 @@ public class UniversityServiceImp implements UniversityService{
 //			stream.filter(m->m.equals(majorName)).forEach(m->System.out.print(m));
 //			return true;
 //		}
-		return false;
-	}
 	
 	//학번으로 학생 조회
 	@Override
@@ -46,6 +48,10 @@ public class UniversityServiceImp implements UniversityService{
 			Stream<Student> stream = studentList.stream();
 			stream.filter(m->m.equals(studentId)).forEach(m->System.out.print(m));
 			return true;
+		}
+		if(studentList.size() == 0){
+			System.out.println("일치하는 학번이 없습니다.");
+			return false;
 		}
 		return false;
 	}
@@ -62,6 +68,17 @@ public class UniversityServiceImp implements UniversityService{
 			stream.filter(m->m.equals(studentName)).forEach(m->System.out.print(m));
 			return true;
 		}
+		if(studentList.size() == 0){
+			System.out.println("일치하는 학번이 없습니다.");
+			return false;
+		}
+		return false;
+	}
+	
+	//성적 출력
+	@Override
+	public boolean printScore() {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -139,5 +156,5 @@ public class UniversityServiceImp implements UniversityService{
 		majorList.add(major);
 		return true;
 	}
-	
+
 }

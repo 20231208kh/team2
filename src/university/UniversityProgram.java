@@ -440,7 +440,16 @@ public class UniversityProgram implements Program{
 	
 	//성적 조회
 	private void searchScore() {
-		
+		//학번 입력
+		System.out.print("학번 입력 : ");
+		String stdId = scan.next();
+		//객체 생성
+		Student studentId = new Student(stdId);
+		//serviceimp
+		if(unis.searchByStudentId(studentId)) {
+			
+		};
+		return;
 	}
 	
 	//교수 사용 메뉴

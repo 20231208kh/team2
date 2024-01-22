@@ -33,6 +33,8 @@ public interface UniversityService {
 	boolean insertScore();
 	//성적 수정
 	boolean updateScore();
+	//성적 출력
+	boolean printScore();
 	
 	//강의 등록
 	boolean addLecture();

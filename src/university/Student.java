@@ -11,6 +11,7 @@ public class Student {
 	
 	List<Lecture> lectureList = new ArrayList<Lecture>();
 	Major major = new Major();
+	Lecture lecture = new Lecture();
 	
 	//학생 이름
 	String studentName;
@@ -22,6 +23,14 @@ public class Student {
 	int year;
 	//점수
 	int avgScore;
+	
+	public Student(String stdId) {
+		this.studentId = stdId;
+	}
+	
+	public Student(String stdName) {
+		this.studentName = stdName;
+	}
 	
 	@Override
 	public int hashCode() {
@@ -45,4 +54,13 @@ public class Student {
 		return "[학번 : " + studentId + " ] " + "[이름 : " + studentName + " ] " + "[전공 : " + major.majorName + " ] " + "[입학년도 : " + year + " ] " + "[평균학점 : " + avgScore + " ] ";
 	}
 	
+	public boolean printScore() {
+		if(lectureList == null) {
+			System.out.println("등록된 정보가 없습니다.");
+			return false;
+		}
+		System.out.println("[학번 : " + studentId + " ] " + "[이름 : " + studentName + " ] " + "[전공 : " + major.majorName + " ] " + lectureList);
+		return false;
+	}
+
 }

@@ -15,5 +15,10 @@ public class Lecture {
 	//점수
 	int lectureScore;
 	
+	@Override
+	public String toString() {
+		return "[강의번호 : " + lectureId + " ] " + "[강의명 : " + lectureName + " ] " + "[점수 : " + lectureScore + " ] ";
+	}
+	
 	
 }
