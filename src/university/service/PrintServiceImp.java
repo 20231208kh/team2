@@ -158,5 +158,24 @@ public class PrintServiceImp implements PrintService {
 		});
 	}
 
-	
+	@Override
+	public void printManageUpdateLecture() {
+		System.out.println("-------강의수정-------");
+		System.out.println("1. 강의명 수정");
+		System.out.println("2. 최대 수강인원 수정");
+		System.out.println("3. 강의 요일 수정");
+		System.out.println("4. 강의 시간 수정");
+		System.out.println("5. 종료");
+		System.out.println("-------------------");
+		System.out.print("메뉴 선택 : ");
+		
+	}
+
+	//교수별 등록된 강의 출력
+	@Override
+	public void printProfessorLectureList(Professor tmp) {
+		tmp.getLectureList().stream().forEach(l->{
+			System.out.println((tmp.getLectureList().indexOf(l)+1)+". " +l);
+		});
+	}
 }

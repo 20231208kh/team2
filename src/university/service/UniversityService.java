@@ -35,9 +35,12 @@ public interface UniversityService {
 	boolean deleteProfessor(int num);
 	
 	//강의 등록 : 김준수
-	boolean addLecture();
+	boolean addLecture(String professorID, String lectureName, int lectureMaxCount, String lectureDay, int lectureST, int lectureLT);
 	//강의 수정 : 김준수
-	boolean updateLecture();
+	void updateLectureName(Lecture tmpLecture, String professorID, String newLectureName);
+	boolean updateLectureMaxCount(Lecture tmpLecture, String professorID, int newLectureMaxCount);
+	boolean updateLectureDay(Lecture tmpLecture, String professorID,String newLectureDay);
+	boolean updateLectureTime(Lecture tmpLecture, String professorID,int newLectureST, int newLectureLT);
 	//강의 삭제 : 김준수
 	boolean deleteLecture();
 	
@@ -59,4 +62,10 @@ public interface UniversityService {
 	List<Lecture> sendLectureList();
 	List<Student> sendStudentList();
 	List<Major> sendMajorList();
+	
+	public boolean isProfessorID(String professorID);
+	public List<Lecture> sendProfessorLectureList();
+		
+	
+	
 }

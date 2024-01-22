@@ -1,6 +1,7 @@
 package university;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 import program.Program;
@@ -406,23 +407,30 @@ public class UniversityProgram implements Program{
 	//교수 사용 메뉴
 	private void professorMenu() {
 		int menu;
-		do {
-			printService.printProfessorMenu();
-			menu = scan.nextInt();
-			runProfessorMenu(menu);
-		}while(menu != 3);
+		System.out.print("아이디를 입력해주세요 : ");
+		String professorID = scan.next();
+		if(usi.isProfessorID(professorID)) {
+			System.out.println("로그인 성공");
+			do {
+				printService.printProfessorMenu();
+				menu = scan.nextInt();
+				runProfessorMenu(menu , professorID);
+			}while(menu != 3);
+			return;
+		}
+		System.out.println("로그인 실패");
 	}
 	
 	//교수 사용 메뉴 실행
-	private void runProfessorMenu(int menu) {
+	private void runProfessorMenu(int menu, String professorID) {
 		switch(menu) {
 		case 1:
 			//강의 관리
-			manageLecture();
+			manageLecture(professorID);
 			break;
 		case 2:
 			//성적 관리
-			manageScore();
+			manageScore(professorID);
 			break;
 		case 3:
 			System.out.println("돌아가기.");
@@ -433,25 +441,25 @@ public class UniversityProgram implements Program{
 	}
 
 	//강의 관리
-	private void manageLecture() {
+	private void manageLecture(String professorID) {
 		int menu;
 		do {
 			printService.printManageLecture();
 			menu = scan.nextInt();
-			runManageLecture(menu);
+			runManageLecture(menu, professorID);
 		}while(menu != 4);
 	}
 	
 	//강의 관리 실행
-	private void runManageLecture(int menu) {
+	private void runManageLecture(int menu, String professorID) {
 		switch(menu) {
 		case 1:
 			//강의 등록
-			addLecture();
+			addLecture(professorID);
 			break;
 		case 2:
 			//강의 수정
-			updateLecture();
+			manageUpdateLecture(professorID);
 			break;
 		case 3:
 			//강의 삭제
@@ -466,32 +474,128 @@ public class UniversityProgram implements Program{
 	}
 	
 	//강의 등록
-	private void addLecture() {
-		
+	private void addLecture(String professorID) {
+		scan.nextLine();
+		System.out.print("등록할 강의 명 : ");
+		String lectureName = scan.nextLine();
+		System.out.print("최대 수강인원 : ");
+		int lectureMaxCount = scan.nextInt();
+		System.out.print("강의 요일 : ");
+		String lectureDay = ""+scan.next().charAt(0);
+		System.out.print("강의 시작 교시 (1~7) : ");
+		int lectureST = scan.nextInt();
+		System.out.print("강의 시간 (1~3) : ");
+		int lectureLT = scan.nextInt();
+		if(usi.addLecture(professorID, lectureName, lectureMaxCount, lectureDay, lectureST, lectureLT)) {
+			System.out.println("강의가 등록되었습니다.");
+			return;
+		}
+		System.out.println("강의 등록에 실패했습니다.");
 	}
 
 	//강의 수정
-	private void updateLecture() {
+	private void manageUpdateLecture(String professorID) {
+		Professor tmp = usi.selectUpdateProfessor(professorID);
+		if(tmp.getLectureList()==null ||tmp.getLectureList().size() ==0 ) {
+			System.out.println("강의를 등록하지 않은 교수입니다.");
+			return;
+		}
+		printService.printProfessorLectureList(tmp);
+		System.out.print("수정할 강의 번호 입력 : ");
+		int lectureIndex = scan.nextInt()-1;
+		Lecture tmpLecture = tmp.lectureList.get(lectureIndex);
+		int menu;
+		do {
+			printService.printManageUpdateLecture();
+			menu = scan.nextInt();
+			runUpdateLecture(menu , tmpLecture , professorID);
+		}while(menu != 5);
+	}
+	
+	private void runUpdateLecture(int menu, Lecture tmpLecture, String professorID) {
+		switch(menu) {
+		case 1: 
+			// 강의명 수정
+			updateLectureName(tmpLecture, professorID);
+			break;
+		case 2: 
+			// 최대 수강인원 수정
+			updateLectureMaxCount(tmpLecture, professorID);
+			break;
+		case 3: 
+			// 강의 요일 수정
+			updateLectureDay(tmpLecture, professorID);
+			break;
+		case 4: 
+			// 강의 시간 수정
+			updateLectureTime(tmpLecture, professorID);
+			break;
+		case 5: 
+			// 뒤로가기
+			break;
+		default:
+			throw new InputMismatchException();
+		}
 		
 	}
 	
+	private void updateLectureName(Lecture tmpLecture, String professorID) {
+		scan.nextLine();
+		System.out.print("수정할 이름 : ");
+		String newLectureName = scan.nextLine();
+		usi.updateLectureName(tmpLecture, professorID, newLectureName);
+		System.out.println("강의명 수정에 성공했습니다.");
+	}
+
+	private void updateLectureMaxCount(Lecture tmpLecture, String professorID) {
+		System.out.print("수정할 최대 수강인원 : ");
+		int newLectureMaxCount = scan.nextInt();
+		if(usi.updateLectureMaxCount(tmpLecture, professorID, newLectureMaxCount)) {
+			System.out.println("최대 수강인원 수정에 성공했습니다.");
+			return;
+		}
+		System.out.println("최대 수강인원은 현 수강인원보다 작을 수 없습니다.");
+	}
+
+	private void updateLectureDay(Lecture tmpLecture, String professorID) {
+		System.out.print("수정할 강의 요일 : ");
+		String newLectureDay = ""+scan.next().charAt(0);
+		if(usi.updateLectureDay(tmpLecture,  professorID, newLectureDay)) {
+			System.out.println("강의 요일 수정에 성공했습니다.");
+			return;
+		}
+		System.out.println("수정하고자 하는 요일에 겹치는 강의가 있습니다.");
+	}
+
+	private void updateLectureTime(Lecture tmpLecture, String professorID) {
+		System.out.print("수정할 강의 시작교시 : ");
+		int newLectureST = scan.nextInt();
+		System.out.print("수정할 강의 시간 : ");
+		int newLectureLT = scan.nextInt();
+		usi.updateLectureTime(tmpLecture, professorID, newLectureST, newLectureLT);
+		System.out.println("강의 요일 수정에 성공했습니다.");
+		
+	}
+
+	
+
 	//강의 삭제
 	private void deleteLecture() {
 		
 	}
 	
 	//성적 관리
-	private void manageScore() {
+	private void manageScore(String professorID) {
 		int menu;
 		do {
 			printService.printManageScore();
 			menu = scan.nextInt();
-			runManageScore(menu);
+			runManageScore(menu , professorID);
 		}while(menu != 3);
 	}
 	
 	//성적 관리 실행
-	private void runManageScore(int menu) {
+	private void runManageScore(int menu, String professorID) {
 		switch(menu) {
 		case 1:
 			//성적 등록

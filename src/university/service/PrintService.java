@@ -1,5 +1,7 @@
 package university.service;
 
+import university.Professor;
+
 public interface PrintService {
 	//메뉴출력
 	void printMenu();
@@ -38,4 +40,9 @@ public interface PrintService {
 	
 	//등록된 전공 출력
 	void printMajorList();
+	
+	void printManageUpdateLecture();
+	
+	//교수의 등록강의 리스트 출력
+	public void printProfessorLectureList(Professor tmp);
 }
