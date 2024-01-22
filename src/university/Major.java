@@ -14,10 +14,12 @@ public class Major {
 	//의문점.
 	//전공 찾아서 뭐할건데?...
 	
-	public Major(String majorName2, String majorNum) {
-		// TODO Auto-generated constructor stub
+	public Major(String majorName, String majorNum) {
+		this.majorName = majorName;
+		this.ma
 	}
 	public Major() {
+		
 	}
 	@Override
 	public int hashCode() {

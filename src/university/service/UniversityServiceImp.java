@@ -124,8 +124,11 @@ public class UniversityServiceImp implements UniversityService{
 
 	@Override
 	public boolean addMajor(Major major) {
-		// TODO Auto-generated method stub
-		return false;
+		if(majorList.contains(major)) {
+			return false;
+		}
+		majorList.add(major);
+		return true;
 	}
 	
 }
