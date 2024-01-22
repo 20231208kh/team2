@@ -1,10 +1,7 @@
 package university;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import lombok.Data;
-
+@Data
 public class Lecture {
 	
 	//과목명
@@ -17,5 +14,6 @@ public class Lecture {
 	int lectureMaxCount;
 	//점수
 	int lectureScore;
+	
 	
 }

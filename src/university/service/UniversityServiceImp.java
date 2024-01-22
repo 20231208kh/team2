@@ -11,18 +11,27 @@ public class UniversityServiceImp implements UniversityService{
 	List<Student> studentList = new ArrayList<Student>();
 	List<Major> majorList = new ArrayList<Major>();
 	
-	//전공을 먼저 검색하고 학생을 찾는것이 아니기 때문에 studentMajor => Major로 변경하여 교수, 학생 등 다양하게 사용가능할 것 같음.
+	//전공 조회
 	@Override
 	public boolean searchByMajor(Major majorName) {
-		if(majorList == null) {
+		if(majorList == null || majorList.size() < 0) {
 			System.out.println("등록된 전공이 없습니다.");
 			return false;
 		}
-		if(majorList.contains(majorName)){
-			Stream<Major> stream = majorList.stream();
-			stream.forEach(m->System.out.print(m));
-			return true;
-		}
+		int index = majorList.indexOf(majorName);
+		if(majorList.size() < 0) {
+		System.out.print(majorList.get(index));
+		
+//		//indexOf
+//		int index = majorList.indexOf(majorName);
+//		System.out.print(majorList.get(index).printMajorCount()); 
+		
+//		if(majorList.contains(majorName)){
+//			Stream<Major> stream = majorList.stream();
+//			//filter(majorName)
+//			stream.filter(m->m.equals(majorName)).forEach(m->System.out.print(m));
+//			return true;
+//		}
 		return false;
 	}
 	
@@ -35,7 +44,7 @@ public class UniversityServiceImp implements UniversityService{
 		}
 		if(studentList.contains(studentId)){
 			Stream<Student> stream = studentList.stream();
-			stream.forEach(m->System.out.print(m));
+			stream.filter(m->m.equals(studentId)).forEach(m->System.out.print(m));
 			return true;
 		}
 		return false;
@@ -50,7 +59,7 @@ public class UniversityServiceImp implements UniversityService{
 		}
 		if(studentList.contains(studentName)){
 			Stream<Student> stream = studentList.stream();
-			stream.forEach(m->System.out.print(m));
+			stream.filter(m->m.equals(studentName)).forEach(m->System.out.print(m));
 			return true;
 		}
 		return false;

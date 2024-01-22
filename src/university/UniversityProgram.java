@@ -56,11 +56,16 @@ public class UniversityProgram implements Program{
 	
 	//학교 사용 메뉴
 	private void universityMenu() {
-		int menu;
+		int menu = 0;
 		do {
 			printService.printUniversityMenu();
-			menu = scan.nextInt();
-			runUniversityMenu(menu);
+			try {
+				menu = scan.nextInt();
+				runUniversityMenu(menu);
+			}catch(InputMismatchException e) {
+				System.out.println("잘못된 메뉴 선택입니다.");
+				scan.nextLine();
+			}
 		}while(menu != 5);
 	}
 	
@@ -93,11 +98,16 @@ public class UniversityProgram implements Program{
 	
 	//조회
 	private void search() {
-		int menu;
+		int menu = 0;
 		do {
 			printService.printSearch();
-			menu = scan.nextInt();
-			runSearch(menu);
+			try {
+				menu = scan.nextInt();
+				runSearch(menu);
+			}catch(InputMismatchException e) {
+				System.out.println("잘못된 메뉴 선택입니다.");
+				scan.nextLine();
+			}
 		}while(menu != 5);
 	}
 	
@@ -117,7 +127,7 @@ public class UniversityProgram implements Program{
 			searchMajor();
 			break;
 		case 4:
-			//학생 조회
+			//강의 조회
 			searchLecture();
 			break;
 		case 5:
@@ -131,11 +141,11 @@ public class UniversityProgram implements Program{
 
 	//학생 조회
 	private void searchStudent() {
-		int menu;
+		int menu = 0;
 		do {
 			printService.printSearchStudentMenu();
-			menu = scan.nextInt();
-			runSearchStudent(menu);
+				menu = scan.nextInt();
+				runSearchStudent(menu);				
 		}while(menu != 3);
 	}
 	
@@ -188,9 +198,9 @@ public class UniversityProgram implements Program{
 		//전공명 입력
 		scan.nextLine();
 		System.out.print("전공명 입력 : ");
-		String mName = scan.nextLine();
+		String mName = scan.next();
 		//객체 생성
-		Major majorName = new Major();
+		Major majorName = new Major(mName);
 		//serviceimp
 		unis.searchByMajor(majorName);
 		return;
@@ -368,7 +378,7 @@ public class UniversityProgram implements Program{
 			printService.printStudentMenu();
 			menu = scan.nextInt();
 			runStudentMenu(menu);
-		}while(menu != 4);
+		}while(menu != 3);
 	}
 	
 	//학생 사용 메뉴 실행

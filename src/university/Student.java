@@ -25,7 +25,7 @@ public class Student {
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(studentId);
+		return Objects.hash(studentId, studentName);
 	}
 	
 	@Override
@@ -37,11 +37,12 @@ public class Student {
 		if (getClass() != obj.getClass())
 			return false;
 		Student other = (Student) obj;
-		return Objects.equals(studentId, other.studentId);
+		return Objects.equals(studentId, other.studentId) && Objects.equals(studentName, other.studentName);
 	}
 	
 	@Override
 	public String toString() {
 		return "[학번 : " + studentId + " ] " + "[이름 : " + studentName + " ] " + "[전공 : " + major.majorName + " ] " + "[입학년도 : " + year + " ] " + "[평균학점 : " + avgScore + " ] ";
 	}
+	
 }

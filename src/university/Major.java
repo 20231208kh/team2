@@ -2,29 +2,37 @@ package university;
 
 import java.util.Objects;
 
+import lombok.Data;
+
+@Data
 public class Major {
 	
 	//전공명
 	String majorName;
 	//전공번호
-	int majorId;
+	String majorId;
 	//현재 인원
 	int majorCount;
 	
-	//의문점.
-	//전공 찾아서 뭐할건데?...
-	
-	public Major(String majorName, String majorNum) {
-		this.majorName = majorName;
-		this.ma
-	}
 	public Major() {
 		
 	}
+	
+	public Major(String majorName, String majorId) {
+		this.majorName = majorName;
+		this.majorId = majorId;
+	}
+	
+	public Major(String majorName) {
+		this.majorName = majorName;
+	}
+	
+	
 	@Override
 	public int hashCode() {
-		return Objects.hash(majorId, majorName);
+		return Objects.hash(majorName);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -34,12 +42,22 @@ public class Major {
 		if (getClass() != obj.getClass())
 			return false;
 		Major other = (Major) obj;
-		return majorId == other.majorId && Objects.equals(majorName, other.majorName);
+		return Objects.equals(majorName, other.majorName);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "[전공번호 : " + majorId + " ] " + "[전공명 : " + majorName + " ] " + "[현재인원 : " + majorCount + " ] ";
 	} 
+	
+	//현재 인원만(특정 정보만) 뽑고싶을때(indexOf사용시)
+	public boolean printMajorCount() {
+		if(majorCount == 0) {
+			System.out.println("0명입니다.");
+			return false;
+		}
+		System.out.print("[현재인원 : " + majorCount + " ] ");
+		return true;
+	}
 	
 }
