@@ -259,6 +259,7 @@ public class UniversityProgram implements Program{
 		case 4:
 			//돌아가기
 			System.out.println("돌아가기.");
+			break;
 		default:
 			throw new InputMismatchException();
 		}
@@ -572,9 +573,11 @@ public class UniversityProgram implements Program{
 		int newLectureST = scan.nextInt();
 		System.out.print("수정할 강의 시간 : ");
 		int newLectureLT = scan.nextInt();
-		usi.updateLectureTime(tmpLecture, professorID, newLectureST, newLectureLT);
-		System.out.println("강의 요일 수정에 성공했습니다.");
-		
+		if(usi.updateLectureTime(tmpLecture, professorID, newLectureST, newLectureLT)) {
+			System.out.println("강의 요일 수정에 성공했습니다.");
+			return;
+		}
+		System.out.println("수정하고자 하는 시간에 이미 강의가 등록되어 있습니다.");	
 	}
 
 	
