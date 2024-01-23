@@ -200,6 +200,10 @@ public class UniversityProgram implements Program{
 
 	//전공 조회
 	private void searchMajor() {
+		int menu;
+		do {
+			menu = scan.nextInt();
+		}while(menu != 3);
 		//전공명 입력
 		scan.nextLine();
 		System.out.print("전공명 입력 : ");
