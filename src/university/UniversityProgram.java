@@ -1,5 +1,6 @@
 package university;
 
+import java.text.DecimalFormat;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -171,7 +172,9 @@ public class UniversityProgram implements Program{
 		scan.nextLine();
 		String majorName = scan.nextLine();
 		System.out.print("전공 번호 : ");
-		String majorNum = scan.next();
+		int num = scan.nextInt();
+		DecimalFormat df = new DecimalFormat("00");
+		String majorNum = df.format(num);
 		Major major = new Major(majorName,majorNum);
 		if(usi.addMajor(major)) {
 			System.out.println("전공 등록 성공!");
@@ -187,14 +190,13 @@ public class UniversityProgram implements Program{
 			System.out.println("등록된 전공이 없습니다.");
 			return;
 		}
-		System.out.print("수정할 전공 이름 : ");
-		String majorName = scan.next();
-		System.out.print("수정할 전공 번호 : ");
+
+		System.out.print("전공 번호 : ");
 		String majorId = scan.next();
 		
-		Major major = new Major(majorName,majorId);
+		Major major = new Major(majorId);
 		System.out.println("무엇을 수정하시겠습니까?");
-		System.out.print("전공 이름(1) / 전공 번호(2)/ ");
+		System.out.print("전공 이름(1) / / ");
 		int menu=scan.nextInt();
 		
 	
@@ -206,13 +208,12 @@ public class UniversityProgram implements Program{
 			System.out.println("등록된 전공이 없습니다.");
 			return;
 		}
+		System.out.println(usi.getMajor());
 		
-		System.out.print("삭제할 전공 이름 : ");
-		String majorName = scan.next();
 		System.out.print("삭제할 전공 번호 : ");
 		String majorId = scan.next();
 		
-		Major major = new Major(majorName,majorId);
+		Major major = new Major(majorId);
 		if(usi.deleteMajor(major)) {
 			System.out.println("삭제 성공!");
 			return;
@@ -327,7 +328,9 @@ public class UniversityProgram implements Program{
 				System.out.print("학생 전공 선택(수정) : ");
 				int index = scan.nextInt();
 				Major major = usi.getMajor().get(index-1);
-				usi.updateStudentMajor(student,major);
+				if(usi.updateStudentMajor(student,major)) {
+					return;
+				}
 				break;
 			}catch(IndexOutOfBoundsException e) {
 				System.out.println("목록에 없는 전공 선택");

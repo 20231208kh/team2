@@ -6,6 +6,10 @@ import lombok.Data;
 @Data
 public class Lecture {
 	
+	Professor professor;
+	
+	
+	
 	//과목명
 	String lectureName;
 	//과목식별번호

@@ -16,9 +16,11 @@ public class Major {
 	
 	//전공 사무실(행정실), 학과장, 대표번호 등
 	
+	
+	
 	@Override
 	public String toString() {
-		return "전공번호 : "+majorId+" 전공 이름 : "+majorName;
+		return "전공번호 : "+majorId+" 전공 이름 : "+majorName+"\n";
 	}
 
 	@Override
@@ -30,13 +32,20 @@ public class Major {
 		if (getClass() != obj.getClass())
 			return false;
 		Major other = (Major) obj;
-		return Objects.equals(majorId, other.majorId) && Objects.equals(majorName, other.majorName);
+		return Objects.equals(majorId, other.majorId);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(majorId, majorName);
+		return Objects.hash(majorId);
 	}
+
+	public Major(String majorId) {
+		super();
+		this.majorId = majorId;
+	}
+
+
 
 	
 	

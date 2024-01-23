@@ -168,7 +168,15 @@ public class UniversityServiceImp implements UniversityService {
 				return false;
 			}
 			
+			String id = studentList.get(index).getStudentId();
+			String newId = id.substring(0,4) + major.getMajorId()+id.substring(6);
+			Student tmp = new Student(newId);
+			if (studentList.contains(tmp)){
+				System.out.println("중복된 학번, 마지막 두자리 수정 필요");
+				return false;
+			}
 			studentList.get(index).setMajor(major);
+			studentList.get(index).setStudentId(newId);
 			
 			System.out.println(studentList.get(index));
 			return true;
