@@ -20,12 +20,6 @@ public class Professor {
 	//과목 정보
 	List<Lecture> lectureList = new ArrayList<Lecture>();
 
-	
-	
-	
-
-
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -67,14 +61,8 @@ public class Professor {
 	public String toString() {
 		
 		return "교수 [ 교수 이름 : " + professorName + ", 교수 번호 : " + professorId + ", 교수 전공 : "
-				+ professorMajor + ", 교수 강의 : " + lectureList + "]";
+				+ professorMajor + ", 교수 강의 : " + lectureList + "] \n";
 	}
-	
-	
-
-
-
-
 	
 	
 }

@@ -12,7 +12,7 @@ public class UniversityServiceImp implements UniversityService {
 
 	@Override
 	public boolean addStudent() {
-		// TODO Auto-generated method stub
+	
 		return false;
 	}
 
@@ -77,12 +77,6 @@ public class UniversityServiceImp implements UniversityService {
 	}
 
 	@Override
-	public boolean addLecture() {
-		
-		return false;
-	}
-
-	@Override
 	public boolean updateLecture() {
 		
 		return false;
@@ -93,31 +87,91 @@ public class UniversityServiceImp implements UniversityService {
 		return false;
 	}
 
+	//전체 조회
 	@Override
 	public boolean searchAllProfessor() {
+		if(professorList == null || professorList.size() == 0)
+		{
+			System.out.println("조회할 수 없습니다.");
+			return false;
+		}
 		
-		    
-		      
-		      for(int i=0; i<professorList.size(); i++)
-		      {
-		    	  professorList.get(i);
-		      }
-		      	return true;
-		      
-		      
-//		      //indexOf
-//		      int index = majorList.indexOf(majorName);
-//		      System.out.print(majorList.get(index).printMajorCount()); 
-		      
-//		      if(majorList.contains(majorName)){
-//		         Stream<Major> stream = majorList.stream();
-//		         //filter(majorName)
-//		         stream.filter(m->m.equals(majorName)).forEach(m->System.out.print(m));
-//		         return true;
-//		      }
-		      
-		   
+		  System.out.println(professorList);	
+		  return true;	   
 	}
+	
+	
+
+	//교수 추가 임시->지울것
+	@Override
+	public boolean addProfessor(Professor professor) {
+		professorList.add(professor);
+		return true;
+		
+	}
+
+	//교수 강의 조회
+	@Override
+	public boolean searchProfessorLecture() {
+		if(professorList == null || professorList.size() == 0)
+		{
+			System.out.println("조회할 수 없습니다.");
+			return false;
+		}
+		
+		for(int i=0; i<professorList.size(); i++)
+		{
+			System.out.println("강의 이름" + professorList.get(i).getLectureList());
+		}
+		
+		return true;
+	}
+
+	//교수 이름 조회
+	@Override
+	public boolean searchProfessorName() {
+		if(professorList == null || professorList.size() == 0)
+		{
+			System.out.println("조회할 수 없습니다.");
+			return false;
+		}
+		
+		for(int i=0; i<professorList.size(); i++)
+		{
+			System.out.println("교수 이름 : " + professorList.get(i).getProfessorName());
+			
+		}
+		return true;
+	}
+
+	//교수 번호 조회
+	@Override
+	public boolean searchProfessorId() {
+		if(professorList == null || professorList.size() == 0)
+		{
+			System.out.println("조회할 수 없습니다.");
+			return false;
+		}
+		
+		for(int i=0; i<professorList.size(); i++)
+		{
+			
+			System.out.println("교수 번호 : "+ professorList.get(i).getProfessorId());
+		}
+		
+		return true;
+	}
+
+	//강의 추가 임시->지울것
+	@Override
+	public boolean addLecture(Lecture lecture) {
+
+		lectureList.add(lecture);
+		return true;
+		
+	}
+	
+	
 	
 	
 

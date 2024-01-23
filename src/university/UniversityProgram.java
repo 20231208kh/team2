@@ -45,7 +45,7 @@ public class UniversityProgram implements Program{
 			studentMenu();
 			break;
 		case 3:
-			//학교 메뉴
+			//학사 메뉴
 			universityMenu();
 			break;
 		case 4:
@@ -101,7 +101,7 @@ public class UniversityProgram implements Program{
 			printService.printSearch();
 			menu = scan.nextInt();
 			runSearch(menu);
-		}while(menu != 3);
+		}while(menu != 5);
 	}
 	
 	//전공별 조회 실행
@@ -116,6 +116,14 @@ public class UniversityProgram implements Program{
 			searchStudent();
 			break;
 		case 3:
+			//전공 조회
+			searchMajor();
+			break;
+		case 4:
+			//강의 조회
+			searchLecture();
+			break;
+		case 5:
 			//돌아가기
 			System.out.println("돌아가기.");
 			break;
@@ -125,73 +133,87 @@ public class UniversityProgram implements Program{
 	}
 	
 	//교수 조회
-	private void searchProfessor() {
-		int menu;
-		do {
-		printService.printProfessorSearch();
-		menu=scan.nextInt();
-		runsearchProfessor(menu);
-		}while(menu!=3);//메뉴 숫자 변경 될 수 있음
-	}
-	
-	//교수 조회 실행
-	private void runsearchProfessor(int menu) {
-		
-		switch(menu) {
-		case 1:
-			//교수 전체 조회
-			searchAllProfessor();
-			break;
-		case 2:
-			//교수 이름 조회
-			searchProfessorName();
-			break;
-		case 3:
-			//교수 번호 조회
-			searchProfessorId();
-			System.out.println("돌아가기.");
-			break;
-		default:
-			throw new InputMismatchException();
+		private void searchProfessor() {
+			int menu;
+			do {
+			printService.printProfessorSearch();
+			menu=scan.nextInt();
+			runsearchProfessor(menu);
+			}while(menu!=5);//메뉴 숫자 변경 될 수 있음
 		}
-	}
-	
-	//교수 전체 조회
-	private void searchAllProfessor() {
-	
-		unis.searchAllProfessor();
 		
+		//교수 조회 실행
+		private void runsearchProfessor(int menu) {
+			
+			switch(menu) {
+			case 1:
+				searchAllProfessor();  //교수 전체 조회
+				break;
+			case 2:
+				searchProfessorId(); 	//교수 번호 조회
+				break;
+			case 3:
+				searchProfessorName(); 	//교수 이름 조회
+				break;
+			case 4:
+				searchProfessorLecture(); //교수 강의 조회
+			case 5:
+				break;
+			default:
+				throw new InputMismatchException();
+			}
+		}
 		
-	}
-	
-	//교수 이름 조회
-	private void searchProfessorName() {
+		//교수 전체 조회
+		private void searchAllProfessor() {
 		
+			unis.searchAllProfessor();
+		}
 		
-	}
 
-	//교수 번호 조회
-	private void searchProfessorId() {
-		
-		
-	}
+		//교수 번호 조회
+		private void searchProfessorId() {
+			
+			unis.searchProfessorId();
+		}
 
-
-	//학생 조회
-	private void searchStudent() {
+		//교수 이름 조회
+		private void searchProfessorName() {
+			
+			unis.searchProfessorName();
+			
+		}
 		
-	}
+		//교수 강의 조회
+		private void searchProfessorLecture() {
+			unis.searchProfessorLecture();
+		}
 	
-	//전공 관리
-	private void manageMajor() {
-		int menu;
-		do {
-			printService.printManageMajor();
-			menu = scan.nextInt();
-			runManageMajor(menu);
-		}while(menu != 4);
-	}
+		//학생 조회
+		private void searchStudent() {
+			
+		}
+		
+		//전공 조회
+		private void searchMajor() {
+			
+		}
 	
+		//강의 조회
+		private void searchLecture() {
+			
+		}
+		
+		//전공 관리
+		private void manageMajor() {
+			int menu;
+			do {
+				printService.printManageMajor();
+				menu = scan.nextInt();
+				runManageMajor(menu);
+			}while(menu != 4);
+		}
+		
 	//전공 관리 실행
 	private void runManageMajor(int menu) {
 		switch(menu) {
@@ -312,7 +334,7 @@ public class UniversityProgram implements Program{
 		}
 	}
 	
-	//교수 등록	//임시 추가 하는 것
+	//교수 등록	//임시 추가 하는 것 지울 예정
 	private void addProfessor() {
 		System.out.println("교수 이름 입력:");
 		String professorName=scan.next();
@@ -323,9 +345,9 @@ public class UniversityProgram implements Program{
 		
 		Professor professor=new Professor(professorName, professorID, professorMajor);
 		
-		List<Professor> profList=new ArrayList<Professor>();
 		
-		profList.add(professor);
+		unis.addProfessor(professor);
+		
 	}
 	
 	//교수 수정
@@ -479,10 +501,20 @@ public class UniversityProgram implements Program{
 	//강의 등록
 	private void addLecture() {
 		
+		System.out.println("강의 번호 입력:");
+		int lectureId=scan.nextInt();
+		scan.nextLine();
+		System.out.println("강의 이름 입력:");
+		String lectureName=scan.next();
+		
+		Lecture lecture=new Lecture(lectureName,lectureId);
+		
+		unis.addLecture(lecture);
 	}
 
 	//강의 수정
 	private void updateLecture() {
+		
 		
 	}
 	

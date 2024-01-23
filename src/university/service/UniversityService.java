@@ -1,5 +1,6 @@
 package university.service;
 
+import university.Lecture;
 import university.Professor;
 
 public interface UniversityService {
@@ -32,11 +33,28 @@ public interface UniversityService {
 	boolean updateScore();
 	
 	//강의 등록
-	boolean addLecture();
+	boolean addLecture(Lecture lecture);
 	//강의 수정
 	boolean updateLecture();
 	
+	//교수 등록 지울 것 테스트 용
+	boolean addProfessor(Professor professor);
+	
 	//교수 전체 조회
 	boolean searchAllProfessor();
+	
+	//교수 번호 조회
+	boolean searchProfessorId();
+	
+	//교수 이름 조회
+	boolean searchProfessorName();
+	
+	//교수 강의 조회
+	boolean searchProfessorLecture();
+	
+	
+	
+	
+
 	
 }

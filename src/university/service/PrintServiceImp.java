@@ -105,7 +105,7 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("2. 학생 조회");
 		System.out.println("3. 전공 조회");
 		System.out.println("4. 강의 조회");
-		System.out.println("3. 종료");
+		System.out.println("5. 종료");
 		System.out.println("-------------------");
 		System.out.println("메뉴 선택 : ");
 	}
@@ -130,9 +130,10 @@ public class PrintServiceImp implements PrintService {
 	public void printProfessorSearch() {
 		System.out.println("--------교수 조회--------");
 		System.out.println("1. 교수 전체 조회");
-		System.out.println("2. 교수 이름 조회");
-		System.out.println("3. 교수 번호 조회");
-		System.out.println("4. 종료");
+		System.out.println("2. 교수 번호 조회");
+		System.out.println("3. 교수 이름 조회");
+		System.out.println("4. 교수 강의 조회");
+		System.out.println("5. 종료");
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
 		
