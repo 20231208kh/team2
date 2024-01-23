@@ -565,7 +565,7 @@ public class UniversityProgram implements Program{
 			System.out.println("강의 요일 수정에 성공했습니다.");
 			return;
 		}
-		System.out.println("수정하고자 하는 요일에 겹치는 강의가 있습니다.");
+		System.out.println("수정하고자 하는 요일에 강의 시간이 겹치는 강의가 있습니다.");
 	}
 
 	private void updateLectureTime(Lecture tmpLecture, String professorID) {
