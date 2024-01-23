@@ -42,7 +42,7 @@ public interface UniversityService {
 	boolean updateLectureDay(Lecture tmpLecture, String professorID,String newLectureDay);
 	boolean updateLectureTime(Lecture tmpLecture, String professorID,int newLectureST, int newLectureLT);
 	//강의 삭제 : 김준수
-	boolean deleteLecture();
+	boolean deleteLecture(Lecture tmpLecture, Professor tmp);
 	
 	
 	//교수 전공별 조회

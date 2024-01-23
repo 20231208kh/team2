@@ -55,8 +55,8 @@ public class Lecture {
 
 	@Override
 	public String toString() {
-		return  lectureName +  " " + lectureDay + "요일 " + lectureST + " ~ "
-				+ (lectureLT+lectureST-1)+ "교시 (" + lectureCount + " / " + lectureMaxCount +")";
+		return  lectureName +  " / " + lectureDay + "요일 / 강의 시작 " + lectureST + "교시, 종료 "
+				+ (lectureLT+lectureST-1) + "교시, "+ lectureLT +"H (" + lectureCount + " / " + lectureMaxCount +")";
 	}
 
 	

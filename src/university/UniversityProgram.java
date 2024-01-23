@@ -464,7 +464,7 @@ public class UniversityProgram implements Program{
 			break;
 		case 3:
 			//강의 삭제
-			deleteLecture();
+			deleteLecture(professorID);
 			break;
 		case 4:
 			//돌아가기
@@ -583,8 +583,21 @@ public class UniversityProgram implements Program{
 	
 
 	//강의 삭제
-	private void deleteLecture() {
-		
+	private void deleteLecture(String professorID) {
+		Professor tmp = usi.selectUpdateProfessor(professorID);
+		if(tmp.getLectureList()==null ||tmp.getLectureList().size() ==0 ) {
+			System.out.println("강의를 등록하지 않은 교수입니다.");
+			return;
+		}
+		printService.printProfessorLectureList(tmp);
+		System.out.print("삭제할 강의 번호 입력 : ");
+		int lectureIndex = scan.nextInt()-1;
+		Lecture tmpLecture = tmp.lectureList.get(lectureIndex);
+		if(usi.deleteLecture(tmpLecture, tmp)) {
+			System.out.println("선택한 강의가 삭제되었습니다.");
+			return;
+		}
+		System.out.println("강의 삭제에 실패했습니다.");
 	}
 	
 	//성적 관리

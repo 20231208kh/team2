@@ -180,9 +180,10 @@ public class UniversityServiceImp implements UniversityService{
 		Lecture thisLecture = lectureList.get(lectureList.indexOf(tmpLecture));
 		for(int i =0 ; i <tmp.getLectureList().size() ; i++) {
 			Lecture tmpI = tmp.getLectureList().get(i);
-			if(thisLecture.getLectureST()< tmpI.getLectureST()+ tmpI.getLectureLT()
-				&& tmpI.getLectureST() < thisLecture.getLectureST()+ thisLecture.getLectureLT()
-				&& tmpI.getLectureDay().equals(newLectureDay)) {
+			if(i != lectureList.indexOf(tmpLecture)
+				&& tmpI.getLectureDay().equals(newLectureDay)
+				&& thisLecture.getLectureST()< tmpI.getLectureST()+ tmpI.getLectureLT()
+				&& tmpI.getLectureST() < thisLecture.getLectureST()+ thisLecture.getLectureLT()) {
 				return false;
 			}
 		}
@@ -200,9 +201,9 @@ public class UniversityServiceImp implements UniversityService{
 		for(int i =0 ; i <tmp.getLectureList().size() ; i++) {
 			Lecture tmpI = tmp.getLectureList().get(i);
 			if(i != lectureList.indexOf(tmpLecture)
+				&& tmpI.getLectureDay().equals(thisLecture.getLectureDay())
 				&& newLectureST< tmpI.getLectureST() + tmpI.getLectureLT()
-				&& tmpI.getLectureST() < newLectureST + newLectureLT
-				&& tmpI.getLectureDay().equals(thisLecture.getLectureDay())) {
+				&& tmpI.getLectureST() < newLectureST + newLectureLT) {
 				return false;
 			}
 		}
@@ -218,9 +219,14 @@ public class UniversityServiceImp implements UniversityService{
 	
 	@Override
 	// 강의 삭제
-	public boolean deleteLecture() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteLecture(Lecture tmpLecture, Professor tmp) {
+		if(!tmp.getLectureList().contains(tmpLecture) || !lectureList.contains(tmpLecture)) {
+			return false;
+		}
+		int index = professorList.indexOf(tmp);
+		professorList.get(index).getLectureList().remove(tmpLecture);
+		lectureList.remove(tmpLecture);
+		return true;
 	}
 
 	@Override
