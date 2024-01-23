@@ -7,14 +7,14 @@ public interface UniversityService {
 	
 	
 	//학생 등록
-	boolean addStudent();
+	boolean addStudent(Student student);
 	//학생 수정
 	boolean updateStudent();
 	//학생 삭제
 	boolean deleteStudent();
 	
 	//전공 등록
-	boolean addMajor();
+	boolean addMajor(Major major);
 	//전공 수정
 	boolean UpdateMajor();
 	//전공 삭제
@@ -25,9 +25,9 @@ public interface UniversityService {
 	//학생 전공별 조회
 	boolean searchByMajor(Major majorName);
 	//학생 이름으로 조회
-	boolean searchByStudentName(Student studentName);
+	boolean searchByStudentName(Student student);
 	//학생 학번으로 조회
-	boolean searchByStudentId(Student studentId);
+	boolean searchStudent(Student student);
 	
 	//성적 입력
 	boolean insertScore();
@@ -40,7 +40,5 @@ public interface UniversityService {
 	boolean addLecture();
 	//강의 수정
 	boolean updateLecture();
-	
-	boolean addMajor(Major major);
 	
 }

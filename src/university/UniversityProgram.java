@@ -111,7 +111,7 @@ public class UniversityProgram implements Program{
 		}while(menu != 5);
 	}
 	
-	//전공별 조회 실행
+	//조회 실행
 	private void runSearch(int menu) {
 		switch(menu) {
 		case 1:
@@ -125,6 +125,9 @@ public class UniversityProgram implements Program{
 		case 3:
 			//전공 조회
 			searchMajor();
+			//1. 교수
+			//2. 학생
+			//3. 전공
 			break;
 		case 4:
 			//강의 조회
@@ -144,8 +147,8 @@ public class UniversityProgram implements Program{
 		int menu = 0;
 		do {
 			printService.printSearchStudentMenu();
-				menu = scan.nextInt();
-				runSearchStudent(menu);				
+			menu = scan.nextInt();
+			runSearchStudent(menu);				
 		}while(menu != 3);
 	}
 	
@@ -168,28 +171,30 @@ public class UniversityProgram implements Program{
 		}
 	}
 	
-	//학생 이름으로 조회
-	private void searchStudentName() {
-		//학번 입력
+	//학번과 학생이름으로 1명 조회
+	private void searchStudentId() {
+		//이름 입력
 		System.out.print("학생 이름 입력 : ");
 		String stdName = scan.next();
-		//객체 생성
-		Student studentName = new Student();
-		//serviceimp
-		unis.searchByStudentId(studentName);
-		return;
-		
-	}
-	
-	//학번으로 조회
-	private void searchStudentId() {
 		//학번 입력
 		System.out.print("학번 입력 : ");
 		String stdId = scan.next();
 		//객체 생성
-		Student studentId = new Student();
+		Student student = new Student(stdName, stdId);
 		//serviceimp
-		unis.searchByStudentId(studentId);
+		unis.searchStudent(student);
+		return;
+	}
+	
+	//중복되는 학생 이름 전체조회
+	private void searchStudentName() {
+		//이름 입력
+		System.out.print("학생 이름 입력 : ");
+		String stdName = scan.next();
+		//객체 생성
+		Student student = new Student(stdName);
+		//serviceimp
+		unis.searchByStudentName(student);
 		return;
 	}
 
@@ -309,7 +314,17 @@ public class UniversityProgram implements Program{
 	
 	//학생 등록
 	private void addStudent() {
-		
+		System.out.print("학생 이름 입력 : ");
+		scan.nextLine();
+		String studentName = scan.nextLine();
+		System.out.print("학번 입력 : ");
+		String studentId = scan.next();
+		Student student = new Student(studentName,studentId);
+		if(unis.addStudent(student)) {
+			System.out.println("학생 등록 성공!");
+			return;
+		}
+		System.out.println("학생 등록 실패");
 	}
 	
 	//학생 수정
@@ -446,7 +461,7 @@ public class UniversityProgram implements Program{
 		//객체 생성
 		Student studentId = new Student(stdId);
 		//serviceimp
-		if(unis.searchByStudentId(studentId)) {
+		if(unis.searchStudent(studentId)) {
 			
 		};
 		return;

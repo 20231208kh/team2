@@ -26,53 +26,49 @@ public class UniversityServiceImp implements UniversityService{
 		System.out.print(majorList.get(index));
 		return true;
 	}
-//		//indexOf
-//		int index = majorList.indexOf(majorName);
-//		System.out.print(majorList.get(index).printMajorCount()); 
-		
-//		if(majorList.contains(majorName)){
-//			Stream<Major> stream = majorList.stream();
-//			//filter(majorName)
-//			stream.filter(m->m.equals(majorName)).forEach(m->System.out.print(m));
-//			return true;
-//		}
+	/*
+	//indexOf
+	int index = majorList.indexOf(majorName);
+	System.out.print(majorList.get(index).printMajorCount()); 
 	
-	//학번으로 학생 조회
+	if(majorList.contains(majorName)){
+		Stream<Major> stream = majorList.stream();
+		//filter(majorName)
+		stream.filter(m->m.equals(majorName)).forEach(m->System.out.print(m));
+		return true;
+	}
+	*/
+	
+	//학번이랑 이름 받아서 학생 조회(1명)
 	@Override
-	public boolean searchByStudentId(Student studentId) {
+	public boolean searchStudent(Student student) {
 		if(studentList == null) {
 			System.out.println("등록된 학번이 없습니다.");
 			return false;
 		}
-		if(studentList.contains(studentId)){
-			Stream<Student> stream = studentList.stream();
-			stream.filter(m->m.equals(studentId)).forEach(m->System.out.print(m));
-			return true;
-		}
-		if(studentList.size() == 0){
-			System.out.println("일치하는 학번이 없습니다.");
+		int index = studentList.indexOf(student);
+		if(index == -1) {
+			System.out.println("일치하는 학생이 없습니다.");
 			return false;
 		}
-		return false;
+		System.out.print(studentList.get(index));
+		return true;
 	}
 	
 	//학생 이름으로 조회(등록된 동명이인 모두 출력. 앞에 번호 1 --- 2 --- 이런식으로 출력되게)
 	@Override
-	public boolean searchByStudentName(Student studentName) {
+	public boolean searchByStudentName(Student student) {
 		if(studentList == null) {
 			System.out.println("등록된 학생이 없습니다.");
 			return false;
 		}
-		if(studentList.contains(studentName)){
-			Stream<Student> stream = studentList.stream();
-			stream.filter(m->m.equals(studentName)).forEach(m->System.out.print(m));
-			return true;
-		}
-		if(studentList.size() == 0){
-			System.out.println("일치하는 학번이 없습니다.");
+		int index = studentList.indexOf(student);
+		if(index == -1) {
+			System.out.println("일치하는 학생이 없습니다.");
 			return false;
 		}
-		return false;
+		System.out.print(studentList.get(index));
+		return true;
 	}
 	
 	//성적 출력
@@ -83,9 +79,12 @@ public class UniversityServiceImp implements UniversityService{
 	}
 
 	@Override
-	public boolean addStudent() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean addStudent(Student student) {
+		if(studentList.contains(student)) {
+			return false;
+		}
+		studentList.add(student);
+		return true;
 	}
 
 	@Override
@@ -100,11 +99,6 @@ public class UniversityServiceImp implements UniversityService{
 		return false;
 	}
 
-	@Override
-	public boolean addMajor() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public boolean UpdateMajor() {

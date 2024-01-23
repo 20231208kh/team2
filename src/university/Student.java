@@ -24,12 +24,13 @@ public class Student {
 	//점수
 	int avgScore;
 	
-	public Student(String stdId) {
-		this.studentId = stdId;
+	public Student(String stdname) {
+		this.studentName = stdname;
 	}
 	
-	public Student(String stdName) {
+	public Student(String stdName, String stdId) {
 		this.studentName = stdName;
+		this.studentId = stdId;
 	}
 	
 	@Override
@@ -48,7 +49,7 @@ public class Student {
 		Student other = (Student) obj;
 		return Objects.equals(studentId, other.studentId) && Objects.equals(studentName, other.studentName);
 	}
-	
+		
 	@Override
 	public String toString() {
 		return "[학번 : " + studentId + " ] " + "[이름 : " + studentName + " ] " + "[전공 : " + major.majorName + " ] " + "[입학년도 : " + year + " ] " + "[평균학점 : " + avgScore + " ] ";
@@ -62,5 +63,7 @@ public class Student {
 		System.out.println("[학번 : " + studentId + " ] " + "[이름 : " + studentName + " ] " + "[전공 : " + major.majorName + " ] " + lectureList);
 		return false;
 	}
+	
+
 
 }
