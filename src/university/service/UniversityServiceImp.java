@@ -157,6 +157,7 @@ public class UniversityServiceImp implements UniversityService{
 		int index = tmp.getLectureList().indexOf(tmpLecture);
 		professorList.get(professorList.indexOf(new Professor(professorID))).getLectureList().get(index).setLectureName(newLectureName);
 		lectureList.get(lectureList.indexOf(tmpLecture)).setLectureName(newLectureName);
+		
 	}
 	
 	@Override
