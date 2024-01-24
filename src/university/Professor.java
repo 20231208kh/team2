@@ -28,7 +28,6 @@ public class Professor {
 	}
 
 	public Professor(String professorId) {
-		super();
 		this.professorId = professorId;
 	}
 

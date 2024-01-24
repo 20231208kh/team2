@@ -64,7 +64,7 @@ public interface UniversityService {
 	List<Major> sendMajorList();
 	
 	public boolean isProfessorID(String professorID);
-	public List<Lecture> sendProfessorLectureList();
+	public boolean isLectureEmpty(Lecture tmpLecture);
 		
 	
 	

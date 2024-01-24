@@ -281,12 +281,6 @@ public class UniversityServiceImp implements UniversityService{
 		return majorList;
 	}
 	
-	
-	@Override
-	public List<Lecture> sendProfessorLectureList(){
-		return null;
-	}
-	
 	@Override
 	public boolean isProfessorID(String professorID) {
 		if(professorList == null || professorList.size()==0) {
@@ -297,8 +291,14 @@ public class UniversityServiceImp implements UniversityService{
 		}
 		return false;
 	}
-
 	
+	@Override
+	public boolean isLectureEmpty(Lecture tmpLecture) {
+		if(lectureList.get(lectureList.indexOf(tmpLecture)).getLectureCount()!=0) {
+			return false;			
+		}
+		return true;
+	}
 
 	
 	

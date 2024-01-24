@@ -476,17 +476,50 @@ public class UniversityProgram implements Program{
 	
 	//강의 등록
 	private void addLecture(String professorID) {
+		String lectureDay = "";
+		int lectureST = 0;
+		int lectureLT = 0;
 		scan.nextLine();
-		System.out.print("등록할 강의 명 : ");
+		System.out.print("등록할 강의명 : ");
 		String lectureName = scan.nextLine();
 		System.out.print("최대 수강인원 : ");
 		int lectureMaxCount = scan.nextInt();
-		System.out.print("강의 요일 : ");
-		String lectureDay = ""+scan.next().charAt(0);
-		System.out.print("강의 시작 교시 (1~7) : ");
-		int lectureST = scan.nextInt();
-		System.out.print("강의 시간 (1~3) : ");
-		int lectureLT = scan.nextInt();
+		boolean ok = false;
+		while(!ok) {
+			System.out.print("강의 요일 : ");
+			lectureDay = ""+scan.next().charAt(0);
+			switch(lectureDay) {
+			case "월", "화", "수", "목", "금": 
+				ok = true; 
+				break;
+			default:
+				System.out.println("잘못 입력했습니다");
+			}
+		}
+		ok = false;
+		while(!ok) {
+			System.out.print("강의 시작 교시 (1~7) : ");
+			lectureST = scan.nextInt();
+			switch(lectureST) {
+			case 1, 2, 3, 4, 5, 6, 7: 
+				ok = true; 
+				break;
+			default:
+				System.out.println("잘못 입력했습니다");
+			}
+		}
+		ok = false;
+		while(!ok) {
+			System.out.print("강의 시간 (1~3) : ");
+			lectureLT = scan.nextInt();
+			switch(lectureLT) {
+			case 1, 2, 3: 
+				ok = true; 
+				break;
+			default:
+				System.out.println("잘못 입력했습니다");
+			}
+		}
 		if(usi.addLecture(professorID, lectureName, lectureMaxCount, lectureDay, lectureST, lectureLT)) {
 			System.out.println("강의가 등록되었습니다.");
 			return;
@@ -558,26 +591,79 @@ public class UniversityProgram implements Program{
 		System.out.println("최대 수강인원은 현 수강인원보다 작을 수 없습니다.");
 	}
 
+	//강의 요일 수정
 	private void updateLectureDay(Lecture tmpLecture, String professorID) {
-		System.out.print("수정할 강의 요일 : ");
-		String newLectureDay = ""+scan.next().charAt(0);
+		if(!usi.isLectureEmpty(tmpLecture)) {
+			System.out.println("이미 강의를 등록한 학생이 있어 강의 요일을 변경할 수 없습니다.");
+			return;
+		}
+		String newLectureDay = "";
+		boolean ok = false;
+		while(!ok) {
+			System.out.println("기존 강의 요일 : " + tmpLecture.lectureDay + "요일");
+			System.out.print("수정할 강의 요일 : ");
+			newLectureDay = ""+scan.next().charAt(0);
+			if(newLectureDay.equals(tmpLecture.lectureDay)) {
+				System.out.println("기존 강의 요일과 같습니다.");
+				continue;
+			}
+			switch(newLectureDay) {
+			case "월", "화", "수", "목", "금": 
+				ok = true; 
+				break;
+			default:
+				System.out.println("잘못 입력했습니다");
+			}
+		}
 		if(usi.updateLectureDay(tmpLecture,  professorID, newLectureDay)) {
 			System.out.println("강의 요일 수정에 성공했습니다.");
 			return;
 		}
-		System.out.println("수정하고자 하는 요일에 강의 시간이 겹치는 강의가 있습니다.");
+		System.out.println("수정하고자 하는 요일에 시간이 겹치는 강의가 있습니다.");
 	}
-
+	
+	//강의 시간 수정
 	private void updateLectureTime(Lecture tmpLecture, String professorID) {
-		System.out.print("수정할 강의 시작교시 : ");
-		int newLectureST = scan.nextInt();
-		System.out.print("수정할 강의 시간 : ");
-		int newLectureLT = scan.nextInt();
+		if(!usi.isLectureEmpty(tmpLecture)) {
+			System.out.println("이미 강의를 등록한 학생이 있어 강의 시간을 변경할 수 없습니다.");
+			return;
+		}
+		boolean ok = false;
+		int newLectureST = 0;
+		int newLectureLT = 0;
+		while(!ok) {
+			System.out.println("기존 강의 시간 : 시작 " + tmpLecture.getLectureST()+ "교시, 종료 " 
+								+(tmpLecture.getLectureLT()+tmpLecture.getLectureST()-1)+ "교시, " 
+								+ tmpLecture.getLectureLT() + "H");
+			System.out.print("수정할 강의 시작교시 (1~7) : ");
+			newLectureST = scan.nextInt();
+			switch(newLectureST) {
+			case 1, 2, 3, 4, 5, 6, 7: 
+				break;
+			default:
+				System.out.println("1에서 7 사이 정수를 입력해주세요");
+				continue;
+			}
+			System.out.print("수정할 강의 시간 (1~3) : ");
+			newLectureLT = scan.nextInt();
+			if(tmpLecture.getLectureST() == newLectureST && tmpLecture.getLectureLT() == newLectureLT) {
+				System.out.println("기존 강의시간과 같습니다");
+				continue;
+			}
+			switch(newLectureLT) {
+			case 1, 2, 3: 
+				ok = true; 
+				break;
+			default:
+				System.out.println("1에서 3 사이 정수를 입력해주세요");
+			}
+			
+		}
 		if(usi.updateLectureTime(tmpLecture, professorID, newLectureST, newLectureLT)) {
 			System.out.println("강의 요일 수정에 성공했습니다.");
 			return;
 		}
-		System.out.println("수정하고자 하는 시간에 이미 강의가 등록되어 있습니다.");	
+		System.out.println("수정하고자 하는 시간에 등록한 강의가 있습니다.");	
 	}
 
 	
@@ -593,6 +679,10 @@ public class UniversityProgram implements Program{
 		System.out.print("삭제할 강의 번호 입력 : ");
 		int lectureIndex = scan.nextInt()-1;
 		Lecture tmpLecture = tmp.lectureList.get(lectureIndex);
+		if(!usi.isLectureEmpty(tmpLecture)) {
+			System.out.println("강의에 수강 인원이 있어 삭제에 실패했습니다.");
+			return;
+		}
 		if(usi.deleteLecture(tmpLecture, tmp)) {
 			System.out.println("선택한 강의가 삭제되었습니다.");
 			return;
