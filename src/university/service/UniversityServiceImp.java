@@ -18,13 +18,15 @@ public class UniversityServiceImp implements UniversityService{
 			System.out.println("등록된 전공이 없습니다.");
 			return false;
 		}
-		int index = majorList.indexOf(majorName);
-		if(index == -1) {
-			System.out.println("일치하는 전공이 없습니다.");
-			return false;
+		for(int i = 0; i<majorList.size(); i++) {
+			int index = majorList.indexOf(majorName);
+			if(index == -1) {
+				System.out.println("일치하는 전공이 없습니다.");
+				return false;
+			}
+			System.out.print(majorList.get(index));
 		}
-		System.out.print(majorList.get(index));
-		return true;
+		return true;			
 	}
 	/*
 	//indexOf
