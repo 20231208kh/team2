@@ -11,7 +11,6 @@ import university.Professor;
 
 public interface UniversityService {
 	
-	List<Major> getMajor();
 	
 	//학생 등록
 	boolean addStudent(Student student);
@@ -19,8 +18,11 @@ public interface UniversityService {
 	boolean updateStudentName(Student student,String name);
 	
 	boolean updateStudentMajor(Student student, Major major);
+	boolean updateStudentAge(Student student, int studentAge);
+
+	boolean updateStudentGrade(Student student, int grade);
+
 	
-	List<Student> getStudent();
 	
 	
 	//학생 삭제
@@ -74,18 +76,12 @@ public interface UniversityService {
 	boolean updateScore();
 	
 
-	//강의 등록
-	boolean addLecture();
-	//강의 수정
-	boolean updateLecture();
+	
 
-	boolean updateStudentAge(Student student, int studentAge);
-
-	boolean updateStudentGrade(Student student, int grade);
-
+	
 
 	//수강 신청 : 김준수
-	boolean signUpForLectures();
+	boolean signUpForLectures(int index, Student tmp);
 	//수강 취소 : 김준수
 	boolean deleteForLectures();
 	//리스트 보내기
@@ -94,11 +90,15 @@ public interface UniversityService {
 	List<Student> sendStudentList();
 	List<Major> sendMajorList();
 	
+	List<Student> getStudent();
+	List<Major> getMajor();
+	
 	//각종 확인 메서드
 	boolean isStudentID(String studentID);
 	boolean isProfessorID(String professorID);
 	boolean isLectureEmpty(Lecture tmpLecture);
 	Student selectStudent(String studentID);
+
 		
 	
 }

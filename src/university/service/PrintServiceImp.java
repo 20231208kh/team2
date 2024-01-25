@@ -1,7 +1,6 @@
 package university.service;
 
 
-import java.util.List;
 
 import university.Professor;
 
@@ -205,6 +204,14 @@ public class PrintServiceImp implements PrintService {
 	public void printProfessorLectureList(Professor tmp) {
 		tmp.getLectureList().stream().forEach(l->{
 			System.out.println((tmp.getLectureList().indexOf(l)+1)+". " +l);
+		});
+	}
+	
+	//등록된 강의리스트 출력
+	@Override
+	public void printLectureList() {
+		usi.sendLectureList().stream().forEach(l->{
+			System.out.println((usi.sendLectureList().indexOf(l)+1)+". " +l);
 		});
 	}
 }

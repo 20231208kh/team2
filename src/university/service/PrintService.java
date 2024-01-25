@@ -40,10 +40,6 @@ public interface PrintService {
 	//교수수정
 	void printUpdateProfessor();
 
-	
-	//학생관리
-	void printManageStudent();
-		
 	//등록된 교수 출력
 	void printProfessorList();
 	
@@ -53,6 +49,9 @@ public interface PrintService {
 	void printManageUpdateLecture();
 	
 	//교수의 등록강의 리스트 출력
-	public void printProfessorLectureList(Professor tmp);
+	void printProfessorLectureList(Professor tmp);
+	
+	//등록된 강의 리스트 출력
+	void printLectureList();
 }
 

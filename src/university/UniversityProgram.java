@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 
 
 import java.util.InputMismatchException;
-import java.util.List;
+
 
 import java.util.Scanner;
 
@@ -587,6 +587,15 @@ public class UniversityProgram implements Program{
 
 	//수강 신청
 	private void signUpForLectures(Student tmp) {
+		System.out.println("-------수강신청--------");
+		//강의리스트 전체 출력
+		printService.printLectureList();
+		System.out.print("수강신청 할 강의 : ");
+		int index = scan.nextInt() - 1;
+		if(usi.signUpForLectures(index, tmp)) {
+			System.out.println("신청 되었습니다.");
+			return;
+		}
 		
 	}
 	
@@ -596,7 +605,6 @@ public class UniversityProgram implements Program{
 	}
 
 	
-	
 	//성적 조회
 	private void searchScore() {
 		//학번 입력받고
@@ -605,6 +613,7 @@ public class UniversityProgram implements Program{
 		
 		//학번 저장되있으면 해당 학생이 수강한 수업별 점수 출력
 	}
+
 	
 	//교수 사용 메뉴
 	private void professorMenu() {
@@ -938,7 +947,7 @@ public class UniversityProgram implements Program{
 		
 	}
 	
-
+	
 	//메뉴 출력
 	@Override
 	public void printMenu() {

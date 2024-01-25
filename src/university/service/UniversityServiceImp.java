@@ -3,7 +3,7 @@ package university.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Stream;
+
 
 
 import university.Lecture;
@@ -57,6 +57,8 @@ public class UniversityServiceImp implements UniversityService {
 		}
 		final Professor res = tmp;
 		professorList.stream().filter(p->p.equals(res)).forEach(p->p.setProfessorName(name));
+		return true;
+	}
 
 	
 	@Override
@@ -138,7 +140,8 @@ public class UniversityServiceImp implements UniversityService {
 			return false;
 		}
 		professorList.remove(--num);
-
+		return true;
+	}
 	
 	@Override
 
@@ -187,11 +190,11 @@ public class UniversityServiceImp implements UniversityService {
 				&& tmpI.getLectureDay().equals(lectureDay)) {
 				return false;
 			}
+		}
       lectureList.add(tmpLecture);
       professorList.get(index).getLectureList().add(tmpLecture);
       return true;
-    }
-		
+	}
    
 	
 
@@ -286,8 +289,27 @@ public class UniversityServiceImp implements UniversityService {
 	
 	@Override
 	//수강신청
-	public boolean signUpForLectures() {
-			// TODO Auto-generated method stub
+	public boolean signUpForLectures(int index , Student tmp) {
+		if(lectureList == null || lectureList.size() == 0|| index <0 ) {
+			return false;
+		}
+		int totalHour = 0;
+		for(int i = 0 ; i <tmp.getLectureList().size(); i++) {
+		 	totalHour += tmp.getLectureList().get(i).getLectureLT();
+		 	Lecture tmpLecture = tmp.getLectureList().get(i);
+		 	if(tmpLecture.getLectureDay().equals(lectureList.get(index).getLectureDay())
+	 			&& tmpLecture.getLectureST() < lectureList.get(index).getLectureST()+ lectureList.get(index).getLectureLT() 
+	 			&& lectureList.get(index).getLectureST() < tmpLecture.getLectureST() + tmpLecture.getLectureLT()) {
+		 		return false;
+		 	}
+		}
+		totalHour += lectureList.get(index).getLectureLT();
+		if(totalHour> 22) {
+			return false;
+		}
+		studentList.get(studentList.indexOf(tmp)).getLectureList().add(lectureList.get(index));
+		lectureList.get(index).setLectureCount(lectureList.get(index).getLectureCount()+1);
+		//교수 강의 현재인원 추가요망
 		return false;
 	}
 		
@@ -311,14 +333,8 @@ public class UniversityServiceImp implements UniversityService {
 		return false;
 	}
 
-	@Override
-
-	public boolean updateScore() {
-
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
+	
 	@Override
 
 	public boolean insertScore() {
@@ -383,8 +399,6 @@ public class UniversityServiceImp implements UniversityService {
 			return false;
 		}
 		
-
-		
 		if(majorList.contains(major)) {
 			int index= studentList.indexOf(student);
 			
@@ -433,8 +447,6 @@ public class UniversityServiceImp implements UniversityService {
 			System.out.println(studentList.get(index));
 			return true;
 		}
-		
-		
 		return false;
 	}
 
@@ -453,12 +465,8 @@ public class UniversityServiceImp implements UniversityService {
 			System.out.println(studentList.get(index));
 			return true;
 		}
-		
-		
 		return false;
 	}
-
-	
 	
 	@Override
 	public boolean isProfessorID(String professorID) {
@@ -492,6 +500,26 @@ public class UniversityServiceImp implements UniversityService {
 
 	
 
+
+
+
+	@Override
+	public boolean searchByProfessorMajor() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean searchByStudentId() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	
+
+	
 	@Override
 	//교수 특정
 	public Professor selectUpdateProfessor(String id) {
@@ -501,7 +529,6 @@ public class UniversityServiceImp implements UniversityService {
 		Professor tmp = new Professor(id);
 		int num = professorList.indexOf(tmp);
 		return professorList.get(num);
-
 	}
 
 	
@@ -516,9 +543,6 @@ public class UniversityServiceImp implements UniversityService {
 		int num = studentList.indexOf(tmp);
 		return studentList.get(num);
 	}
-
-	
-
 	
 	
 	
