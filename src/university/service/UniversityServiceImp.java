@@ -3,6 +3,7 @@ package university.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 import university.Lecture;
 import university.Major;
@@ -77,9 +78,17 @@ public class UniversityServiceImp implements UniversityService {
 	}
 
 	@Override
-	public boolean UpdateMajor() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean updateMajor(Major major, String majorTitle) {
+		if(majorList ==null) {
+			return false;
+		}
+		int index = majorList.indexOf(major);
+		if(index ==-1) {
+			return false;
+		}
+		majorList.get(index).setMajorName(majorTitle);
+		System.out.println(majorList.get(index));
+		return true;
 	}
 	
 	@Override
@@ -146,7 +155,7 @@ public class UniversityServiceImp implements UniversityService {
 	@Override
 	public void printMajorList() {
 		for(int i = 0; i<majorList.size(); i++) {
-			System.out.println((i+1)+" : "+majorList.get(i));
+			System.out.print((i+1)+" : "+majorList.get(i));
 		}
 		
 	}
@@ -171,7 +180,8 @@ public class UniversityServiceImp implements UniversityService {
 				return false;
 			}
 			if(studentList.get(index).getMajor().getMajorId()==major.getMajorId()) {
-				System.out.println("기존의 전공과 동일합니다.");
+				
+				System.out.println("기존의 전공과 같은 전공을 선택하였습니다.");
 				return false;
 			}
 			
@@ -187,12 +197,12 @@ public class UniversityServiceImp implements UniversityService {
 			}
 			studentList.get(index).setMajor(major);
 			studentList.get(index).setStudentId(newId);
-			
+			System.out.println("학생 전공 수정 성공!");
 			System.out.println(studentList.get(index));
 			return true;
 			
 		}
-		
+		System.out.println("학생 전공 수정 실패");
 		return false;
 	}
 

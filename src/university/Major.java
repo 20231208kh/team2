@@ -13,8 +13,7 @@ public class Major {
 	String majorName;
 	//전공번호
 	String majorId;
-	
-	//전공 사무실(행정실), 학과장, 대표번호 등
+
 	
 	
 	

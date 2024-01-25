@@ -190,14 +190,22 @@ public class UniversityProgram implements Program{
 			System.out.println("등록된 전공이 없습니다.");
 			return;
 		}
-
-		System.out.print("전공 번호 : ");
+		System.out.println("--전공 수정(전공이름 수정)--");
+		usi.printMajorList();
+		System.out.print("수정할 전공 번호 : ");
 		String majorId = scan.next();
-		
 		Major major = new Major(majorId);
-		System.out.println("무엇을 수정하시겠습니까?");
-		System.out.print("전공 이름(1) / / ");
-		int menu=scan.nextInt();
+		if(!usi.getMajor().contains(major)) {
+			System.out.println("등록되지 않은 전공입니다.");
+			return;
+		}
+		System.out.print("전공 이름 입력(수정) : ");
+		String majorTitle = scan.next();
+		if(usi.updateMajor(major,majorTitle)) {
+			System.out.println("전공 이름 수정 성공!");
+			return;
+		}
+		System.out.println("전공 이름 수정 실패");
 		
 	
 	}
@@ -208,17 +216,16 @@ public class UniversityProgram implements Program{
 			System.out.println("등록된 전공이 없습니다.");
 			return;
 		}
-		System.out.println(usi.getMajor());
-		
+		usi.printMajorList();
 		System.out.print("삭제할 전공 번호 : ");
 		String majorId = scan.next();
 		
 		Major major = new Major(majorId);
 		if(usi.deleteMajor(major)) {
-			System.out.println("삭제 성공!");
+			System.out.println("전공 삭제 성공!");
 			return;
 		}
-		System.out.println("삭제 실패");
+		System.out.println("전공 삭제 실패");
 		
 	}
 
@@ -311,17 +318,29 @@ public class UniversityProgram implements Program{
 		case 1:
 			System.out.print("학생 이름 입력(수정) : ");
 			String studentName = scan.next();
-			usi.updateStudentName(student, studentName);
+			if(usi.updateStudentName(student, studentName)) {
+				System.out.println("학생 이름 수정 성공!");
+				return;
+			}
+			System.out.println("학생 이름 수정  실패");
 			break;
 		case 2:
 			System.out.print("학생 나이 입력(수정) : ");
 			int studentAge = scan.nextInt();
-			usi.updateStudentAge(student, studentAge);
+			if(usi.updateStudentAge(student, studentAge)) {
+				System.out.println("학생 나이 수정 성공!");
+				return;
+			}
+			System.out.println("학생 나이 수정 실패");
 			break;
 		case 3:
 			System.out.print("학생 학년 입력(수정) : ");
 			int grade = scan.nextInt();
-			usi.updateStudentGrade(student, grade);
+			if(usi.updateStudentGrade(student, grade)) {
+				System.out.println("학생 학년 수정 성공!");
+				return;
+			}
+			System.out.println("학생 학년 수정 실패");
 			break;
 		case 4:
 			try {

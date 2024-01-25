@@ -27,7 +27,7 @@ public interface UniversityService {
 	//전공 등록
 	boolean addMajor(Major major);
 	//전공 수정
-	boolean UpdateMajor();
+	boolean updateMajor(Major major, String majorTitle);
 	//전공 삭제
 	boolean deleteMajor(Major major);
 	
