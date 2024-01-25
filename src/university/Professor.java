@@ -17,8 +17,32 @@ public class Professor {
 	Major porfessorBTM; // 등록 학과 중 하나를 가져온다 (아직 생성자에 추가 전)
 	//교수 전공
 	String professorMajor;
+	//소속 학과가 필요함
+	
 	//과목 정보
 	List<Lecture> lectureList = new ArrayList<Lecture>();
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(professorId, professorMajor, professorName);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Professor other = (Professor) obj;
+		return Objects.equals(professorId, other.professorId) && Objects.equals(professorMajor, other.professorMajor)
+				&& Objects.equals(professorName, other.professorName);
+	}
+	
+	public void Professor(String professorName, String professorId, String professorMajor) {
+		
+	}
 	
 	
 	public Professor(String professorName, String professorId, String professorMajor) {

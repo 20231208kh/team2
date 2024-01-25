@@ -1,11 +1,13 @@
 package university.service;
 
+
 import java.util.List;
 
 import university.Lecture;
 import university.Major;
 import university.Professor;
 import university.Student;
+
 
 public interface UniversityService {
 	

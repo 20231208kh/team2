@@ -11,6 +11,7 @@ import university.service.UniversityService;
 import university.service.UniversityServiceImp;
 
 public class UniversityProgram implements Program{
+	
 	private PrintService printService = new PrintServiceImp();
 	private UniversityService usi = new UniversityServiceImp();
 	Scanner scan = new Scanner(System.in);
@@ -122,13 +123,13 @@ public class UniversityProgram implements Program{
 		}
 	}
 	
-	//학생 조회
-	private void searchStudent() {
+	//교수 조회
+	private void searchProfessor() {
 		
 	}
 	
-	//교수 조회
-	private void searchProfessor() {
+	//학생 조회
+	private void searchStudent() {
 		
 	}
 	
@@ -413,7 +414,11 @@ public class UniversityProgram implements Program{
 	
 	//성적 조회
 	private void searchScore() {
+		//학번 입력받고
 		
+		//학번 저장되있는지 유무 확인
+		
+		//학번 저장되있으면 해당 학생이 수강한 수업별 점수 출력
 	}
 	
 	//교수 사용 메뉴
