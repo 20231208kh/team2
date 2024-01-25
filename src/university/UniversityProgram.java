@@ -304,7 +304,8 @@ public class UniversityProgram implements Program{
 		}
 		//이름,나이,학년,전공 수정 택1
 		System.out.println("무엇을 수정하시겠습니까?");
-		System.out.print("이름(1) / 나이(2) / 학년(3) / 전공(4) : ");
+		System.out.println("1.이름\n2.나이\n3.학년\n4.전공");
+		System.out.print("메뉴 선택 : ");
 		int menu = scan.nextInt();
 		switch(menu) {
 		case 1:
@@ -331,6 +332,7 @@ public class UniversityProgram implements Program{
 				if(usi.updateStudentMajor(student,major)) {
 					return;
 				}
+				
 				break;
 			}catch(IndexOutOfBoundsException e) {
 				System.out.println("목록에 없는 전공 선택");
@@ -592,6 +594,7 @@ public class UniversityProgram implements Program{
 	private void updateScore() {
 		
 	}
+	
 	
 	//메뉴 출력
 	@Override

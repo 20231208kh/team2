@@ -2,8 +2,8 @@ package university.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
-import lombok.Data;
 import university.Lecture;
 import university.Major;
 import university.Professor;
@@ -16,6 +16,7 @@ public class UniversityServiceImp implements UniversityService {
 	List<Major> majorList = new ArrayList<Major>();
 	List<Lecture> lectureList = new ArrayList<Lecture>();
 	List<Professor> professorList = new ArrayList<Professor>();
+	Scanner scan = new Scanner(System.in);
 	
 	
 	@Override
@@ -161,19 +162,28 @@ public class UniversityServiceImp implements UniversityService {
 			return false;
 		}
 		
+
+		
 		if(majorList.contains(major)) {
 			int index= studentList.indexOf(student);
 			
 			if(index == -1) {
 				return false;
 			}
+			if(studentList.get(index).getMajor().getMajorId()==major.getMajorId()) {
+				System.out.println("기존의 전공과 동일합니다.");
+				return false;
+			}
 			
 			String id = studentList.get(index).getStudentId();
 			String newId = id.substring(0,4) + major.getMajorId()+id.substring(6);
 			Student tmp = new Student(newId);
-			if (studentList.contains(tmp)){
-				System.out.println("중복된 학번, 마지막 두자리 수정 필요");
-				return false;
+			while(studentList.contains(tmp)){
+				System.out.println("중복된 학번, 마지막 두 자리 수정 필요");
+				System.out.print("수정할 마지막 두 자리 학번 입력 : ");
+				String lastNum = scan.next();
+				newId = id.substring(0,4)+major.getMajorId()+lastNum;
+				tmp = new Student(newId);
 			}
 			studentList.get(index).setMajor(major);
 			studentList.get(index).setStudentId(newId);
