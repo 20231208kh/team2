@@ -20,6 +20,36 @@ public class Professor {
 	//과목 정보
 	List<Lecture> lectureList = new ArrayList<Lecture>();
 
+
+
+	//equals를 위한 생성자
+	public Professor(String professorName, String professorId, String professorMajor) {
+		super();
+		this.professorName=professorName;
+		this.professorId = professorId;
+		this.professorMajor=professorMajor;
+	}
+
+	
+
+	public Professor(String professorId) {
+		super();
+		this.professorId = professorId;
+	}
+
+	
+	@Override
+	public String toString() {
+		
+		return "교수 [ 교수 이름 : " + professorName + ", 교수 번호 : " + professorId + ", 교수 전공 : "
+				+ professorMajor + ", 교수 강의 : " + lectureList + "] \n";
+	}
+	
+	public Professor(String professorName, String professorId) {
+		this.professorName = professorName;
+		this.professorId = professorId;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -32,37 +62,9 @@ public class Professor {
 		return Objects.equals(professorId, other.professorId);
 	}
 
-
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(professorId);
 	}
-
-
-	//equals를 위한 생성자
-	public Professor(String professorName, String professorId, String professorMajor) {
-		super();
-		this.professorName=professorName;
-		this.professorId = professorId;
-		this.professorMajor=professorMajor;
-	}
-
-
-
-	public Professor(String professorId) {
-		super();
-		this.professorId = professorId;
-	}
-
-
-
-	@Override
-	public String toString() {
-		
-		return "교수 [ 교수 이름 : " + professorName + ", 교수 번호 : " + professorId + ", 교수 전공 : "
-				+ professorMajor + ", 교수 강의 : " + lectureList + "] \n";
-	}
-	
 	
 }

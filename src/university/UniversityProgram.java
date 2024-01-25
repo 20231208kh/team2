@@ -150,45 +150,59 @@ public class UniversityProgram implements Program{
 				searchAllProfessor();  //교수 전체 조회
 				break;
 			case 2:
-				searchProfessorId(); 	//교수 번호 조회
+				searchLecturesByProfessorName(); //교수 이름에 해당하는 교수 강의 조회
 				break;
 			case 3:
-				searchProfessorName(); 	//교수 이름 조회
+				professorNameSearchByMajor(); 	// 전공에 해당하는 교수 이름 조회
 				break;
 			case 4:
-				searchProfessorLecture(); //교수 강의 조회
+				currentNumberOfLecture();  		//교수 강의 현재 인원 조회
 			case 5:
+				System.out.println("돌아갑니다.");
 				break;
 			default:
 				throw new InputMismatchException();
 			}
 		}
 		
+		//교수 강의 현재 인원 조회
+		private void currentNumberOfLecture() {
+			System.out.println("교수 이름을 입력하세요.");
+			String professorName=scan.next();
+			
+			unis.currentNumberOfLecture(professorName);
+		}
+
+		//교수 이름으로 교수 강의들 찾기
+		private void searchLecturesByProfessorName() {
+			System.out.println("교수 이름을 입력하세요.");
+			String professorName=scan.next();
+			
+			unis.searchLecturesByProfessorName(professorName);
+		}
+
+		//교수 전공으로 전공에 포함된 이름 찾기
+		private void professorNameSearchByMajor() {
+			System.out.println("교수 이름을 입력하세요.");
+			String professorMajor=scan.next();
+			
+			unis.professorNameSearchByMajor(professorMajor);
+			
+			
+		}
+
 		//교수 전체 조회
 		private void searchAllProfessor() {
 		
 			unis.searchAllProfessor();
 		}
 		
-
-		//교수 번호 조회
-		private void searchProfessorId() {
-			
-			unis.searchProfessorId();
-		}
-
-		//교수 이름 조회
-		private void searchProfessorName() {
-			
-			unis.searchProfessorName();
-			
-		}
 		
-		//교수 강의 조회
-		private void searchProfessorLecture() {
-			unis.searchProfessorLecture();
-		}
 	
+		
+		
+		
+		
 		//학생 조회
 		private void searchStudent() {
 			
@@ -344,7 +358,6 @@ public class UniversityProgram implements Program{
 		String professorMajor=scan.next();
 		
 		Professor professor=new Professor(professorName, professorID, professorMajor);
-		
 		
 		unis.addProfessor(professor);
 		

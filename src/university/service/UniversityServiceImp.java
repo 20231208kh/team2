@@ -9,7 +9,7 @@ import university.Professor;
 public class UniversityServiceImp implements UniversityService {
 	List<Professor> professorList = new ArrayList<Professor>();
 	List<Lecture> lectureList = new ArrayList<Lecture>();
-
+	int index;
 	@Override
 	public boolean addStudent() {
 	
@@ -100,79 +100,87 @@ public class UniversityServiceImp implements UniversityService {
 		  return true;	   
 	}
 	
-	
-
-	//교수 추가 임시->지울것
-	@Override
-	public boolean addProfessor(Professor professor) {
-		professorList.add(professor);
-		return true;
-		
-	}
-
-	//교수 강의 조회
-	@Override
-	public boolean searchProfessorLecture() {
-		if(professorList == null || professorList.size() == 0)
-		{
-			System.out.println("조회할 수 없습니다.");
-			return false;
-		}
-		
-		for(int i=0; i<professorList.size(); i++)
-		{
-			System.out.println("강의 이름" + professorList.get(i).getLectureList());
-		}
-		
-		return true;
-	}
-
-	//교수 이름 조회
-	@Override
-	public boolean searchProfessorName() {
-		if(professorList == null || professorList.size() == 0)
-		{
-			System.out.println("조회할 수 없습니다.");
-			return false;
-		}
-		
-		for(int i=0; i<professorList.size(); i++)
-		{
-			System.out.println("교수 이름 : " + professorList.get(i).getProfessorName());
-			
-		}
-		return true;
-	}
-
-	//교수 번호 조회
-	@Override
-	public boolean searchProfessorId() {
-		if(professorList == null || professorList.size() == 0)
-		{
-			System.out.println("조회할 수 없습니다.");
-			return false;
-		}
-		
-		for(int i=0; i<professorList.size(); i++)
-		{
-			
-			System.out.println("교수 번호 : "+ professorList.get(i).getProfessorId());
-		}
-		
-		return true;
-	}
-
 	//강의 추가 임시->지울것
 	@Override
 	public boolean addLecture(Lecture lecture) {
 
 		lectureList.add(lecture);
+	
 		return true;
 		
 	}
+
+	@Override
+	public boolean addProfessor(Professor professor) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+	@Override //교수 이름을 입력받아 교수 강의들 조회
+	public boolean searchLecturesByProfessorName(String professorName) {
+	
+		if(professorList == null || professorList.size() == 0)
+		{
+			System.out.println("조회할 수 없습니다.");
+			return false;
+		}
+		
+		for(int i=0; i<professorList.size(); i++){
+			
+		if(professorList.get(i).getProfessorName().equals(professorName)) {
+				
+				System.out.println(professorList.get(i).getLectureList());
+				
+		}
+		}
+		return true;
+	
+}
+
+	@Override // 교수 전공을 받아서 교수들 이름을 출력
+	public boolean professorNameSearchByMajor(String professorMajor) {
+		
+		if(professorList == null || professorList.size() == 0)
+		{
+			System.out.println("조회할 수 없습니다.");
+			return false;
+		}
+		
+		for(int i=0; i<professorList.size(); i++){
+			
+			if(professorList.get(i).getProfessorMajor().equals(professorMajor)){
+			
+				System.out.println(professorList.get(i).getProfessorName());
+			
+			}
+			
+		}
+		return true;
+		
+}
+
+	@Override //교수 강의 현재 인원
+	public boolean currentNumberOfLecture(String professorName) {
+		if(professorList == null || professorList.size() == 0)
+		{
+			System.out.println("조회할 수 없습니다.");
+			return false;
+		}
+		
+		for(int i=0; i<professorList.size(); i++){
+			
+			if(professorList.get(i).getProfessorName().equals(professorName)){
+				System.out.println(lectureList.get(i).getLectureCount()+"명/"+
+				lectureList.get(i).getLectureMaxCount());
+			}
+		}
+		return true;
+	}
+	
+}
 	
 	
 	
 	
 
-}

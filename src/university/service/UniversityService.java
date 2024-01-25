@@ -43,17 +43,14 @@ public interface UniversityService {
 	//교수 전체 조회
 	boolean searchAllProfessor();
 	
-	//교수 번호 조회
-	boolean searchProfessorId();
+	//교수 이름을 입력받아 교수 강의들 조회
+	boolean searchLecturesByProfessorName(String professorName);
 	
-	//교수 이름 조회
-	boolean searchProfessorName();
+	//전공을 입력받아 교수들 이름을 조회
+	boolean professorNameSearchByMajor(String professorMajor);
 	
-	//교수 강의 조회
-	boolean searchProfessorLecture();
-	
-	
-	
+	//교수 강의의 현재 인원
+	boolean currentNumberOfLecture(String professorName);
 	
 
 	
