@@ -462,6 +462,10 @@ public class UniversityProgram implements Program{
 		System.out.print("수정할 교수의 ID 입력 : ");
 		String professorID = scan.next();
 		Professor tmp = usi.selectUpdateProfessor(professorID);
+		if(tmp == null) {
+			System.out.println(professorID+"로 등록된 교수가 없습니다.");
+			return;
+		}
 		switch(subMenu) {
 		case 1:
 			System.out.print(tmp.getProfessorName()+"교수의 수정할 이름 : ");
@@ -502,7 +506,7 @@ public class UniversityProgram implements Program{
 	//교수 삭제
 	private void deleteProfessor() {
 
-		printService.printProfessorList();
+		printService.printProfessorList(usi.sendProfessorList());
 		System.out.print("삭제할 교수의 번호를 입력해주세요 : ");
 		int num = scan.nextInt();
 		if(usi.deleteProfessor(num)) {
@@ -587,13 +591,14 @@ public class UniversityProgram implements Program{
 
 	//수강 신청
 	private void signUpForLectures(Student tmp) {
+		
 		System.out.println("-------수강신청--------");
 		//강의리스트 전체 출력
-		printService.printLectureList();
+		printService.printLectureList(usi.sendLectureList());
 		System.out.print("수강신청 할 강의 : ");
 		int index = scan.nextInt() - 1;
 		if(usi.signUpForLectures(index, tmp)) {
-			System.out.println("신청 되었습니다.");
+			System.out.println("수강신청 성공");
 			return;
 		}
 		
@@ -681,6 +686,7 @@ public class UniversityProgram implements Program{
 		case 4:
 			//돌아가기
 			System.out.println("돌아가기.");
+			break;
 		default:
 			throw new InputMismatchException();
 		}

@@ -139,6 +139,9 @@ public class UniversityServiceImp implements UniversityService {
 		if(professorList == null || professorList.size()==0) {
 			return false;
 		}
+		if(professorList.size()<num) {
+			return false;
+		}
 		professorList.remove(--num);
 		return true;
 	}
@@ -307,10 +310,16 @@ public class UniversityServiceImp implements UniversityService {
 		if(totalHour> 22) {
 			return false;
 		}
+		int tmpCount = lectureList.get(index).getLectureCount();
+		for(int i=0; i< professorList.size() ; i++) {
+			if(professorList.get(i).getLectureList().contains(lectureList.get(index))) {
+				professorList.get(i).getLectureList().get(professorList.get(i).getLectureList().indexOf(lectureList.get(index)))
+				.setLectureCount(tmpCount+1);
+			}
+		}
+		lectureList.get(index).setLectureCount(tmpCount+1);
 		studentList.get(studentList.indexOf(tmp)).getLectureList().add(lectureList.get(index));
-		lectureList.get(index).setLectureCount(lectureList.get(index).getLectureCount()+1);
-		//교수 강의 현재인원 추가요망
-		return false;
+		return true;
 	}
 		
 	@Override
@@ -528,6 +537,9 @@ public class UniversityServiceImp implements UniversityService {
 		}
 		Professor tmp = new Professor(id);
 		int num = professorList.indexOf(tmp);
+		if(num <0) {
+			return null;
+		}
 		return professorList.get(num);
 	}
 
@@ -541,6 +553,9 @@ public class UniversityServiceImp implements UniversityService {
 		}
 		Student tmp = new Student(studentID);
 		int num = studentList.indexOf(tmp);
+		if(num <0) {
+			return null;
+		}
 		return studentList.get(num);
 	}
 	

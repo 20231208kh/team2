@@ -1,8 +1,10 @@
 package university.service;
 
 
-import university.Professor;
+import java.util.List;
 
+import university.Lecture;
+import university.Professor;
 
 public interface PrintService {
 	//메뉴출력
@@ -41,7 +43,7 @@ public interface PrintService {
 	void printUpdateProfessor();
 
 	//등록된 교수 출력
-	void printProfessorList();
+	void printProfessorList(List<Professor> tmp);
 	
 	//등록된 전공 출력
 	void printMajorList();
@@ -52,6 +54,6 @@ public interface PrintService {
 	void printProfessorLectureList(Professor tmp);
 	
 	//등록된 강의 리스트 출력
-	void printLectureList();
+	void printLectureList(List<Lecture> tmp);
 }
 

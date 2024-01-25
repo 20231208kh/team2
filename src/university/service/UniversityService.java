@@ -16,18 +16,12 @@ public interface UniversityService {
 	boolean addStudent(Student student);
 	//학생 수정
 	boolean updateStudentName(Student student,String name);
-	
 	boolean updateStudentMajor(Student student, Major major);
 	boolean updateStudentAge(Student student, int studentAge);
-
 	boolean updateStudentGrade(Student student, int grade);
 
-	
-	
-	
 	//학생 삭제
 	boolean deleteStudent(Student student);
-	
 	void printMajorList() ;
 	
 	//전공 등록
@@ -37,10 +31,6 @@ public interface UniversityService {
 	//전공 삭제
 	boolean deleteMajor(Major major);
 
-	
-	
-
-	
 	
 	//교수 등록 : 김준수
 	boolean addProfessor(String name, String id, String major);
@@ -70,20 +60,20 @@ public interface UniversityService {
 	//학생 학번 조회
 	boolean searchByStudentId();
 	
-	//성적 입력
-	boolean insertScore();
-	//성적 수정
-	boolean updateScore();
-	
-
-	
-
-	
 
 	//수강 신청 : 김준수
 	boolean signUpForLectures(int index, Student tmp);
 	//수강 취소 : 김준수
 	boolean deleteForLectures();
+	
+	
+	//성적 입력
+	boolean insertScore();
+	//성적 수정
+	boolean updateScore();
+	
+	
+
 	//리스트 보내기
 	List<Professor> sendProfessorList();
 	List<Lecture> sendLectureList();

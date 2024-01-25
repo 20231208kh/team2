@@ -2,6 +2,9 @@ package university.service;
 
 
 
+import java.util.List;
+
+import university.Lecture;
 import university.Professor;
 
 public class PrintServiceImp implements PrintService {
@@ -170,9 +173,9 @@ public class PrintServiceImp implements PrintService {
   }
     
 	//등록된 교수 번호 붙어 출력
-	public void printProfessorList() {
-		usi.sendProfessorList().stream().forEach(p->{
-			System.out.println((usi.sendProfessorList().indexOf(p)+1)+". " + p.getProfessorName() + " / 담당학과 : " 
+	public void printProfessorList(List<Professor> tmp) {
+		tmp.stream().forEach(p->{
+			System.out.println((tmp.indexOf(p)+1)+". " + p.getProfessorName() + " / 담당학과 : " 
 			+ p.getPorfessorBTM().getMajorName()+" / 교수전공 : " + p.getProfessorMajor() + " / ID : "+p.getProfessorId());
 		});
 	}
@@ -209,10 +212,11 @@ public class PrintServiceImp implements PrintService {
 	
 	//등록된 강의리스트 출력
 	@Override
-	public void printLectureList() {
-		usi.sendLectureList().stream().forEach(l->{
-			System.out.println((usi.sendLectureList().indexOf(l)+1)+". " +l);
+	public void printLectureList(List<Lecture> tmp) {
+		tmp.stream().forEach(l->{
+			System.out.println((tmp.indexOf(l)+1)+". " +l);
 		});
 	}
+	
 }
 
