@@ -11,6 +11,7 @@ public class Student {
 	
 	List<Lecture> lectureList = new ArrayList<Lecture>();
 	Major major ;
+
 	
 	//학생 이름
 	String studentName;
@@ -23,9 +24,11 @@ public class Student {
 	//점수
 	int avgScore;
 	
+
 	int age;
 	
 	String lastNum;
+
 	
 	@Override
 	public boolean equals(Object obj) {
@@ -38,6 +41,7 @@ public class Student {
 		Student other = (Student) obj;
 		return Objects.equals(studentId, other.studentId);
 	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(studentId);
@@ -63,6 +67,6 @@ public class Student {
 		this.studentId = studentId;
 	}
 	
-	
+
 	
 }

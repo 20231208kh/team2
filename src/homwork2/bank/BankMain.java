@@ -1,23 +1,8 @@
 package homwork2.bank;
 
-import java.util.Scanner;
 
 /*
-		[소켓통신] (미정)
-		
-				
-		클래스
-		프로그램
-		구현프로그램
-		메인
-		매니저
-		서비스
-		프린트서비스
-		
-				
-				
-		[회원가입]
-		[로그인]
+	
 		[파일]
 		[지출 / 지출내역(어디다썼는지) / 날짜(등록된)]
 		
@@ -37,23 +22,15 @@ import java.util.Scanner;
 		[2. 금액별 조회]
 		[3. 날짜별 조회]
 		[4. 전체 조회]
-		[파일]
 				
+		[파일]
 		[종료]
 		*/
-
 
 
 public class BankMain {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		Scanner scan = new Scanner(System.in);
-
-//		if(user<=0); 
-//		bank.getArr1().length;
-	
 		
 		BankProgram bp = new BankProgram();
 		bp.run();
@@ -61,3 +38,4 @@ public class BankMain {
 	}
 
 }
+

@@ -2,6 +2,7 @@ package university;
 
 import java.util.Objects;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -48,5 +49,6 @@ public class Major {
 
 	
 	
+
 	
 }

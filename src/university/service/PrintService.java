@@ -1,5 +1,9 @@
 package university.service;
 
+
+import university.Professor;
+
+
 public interface PrintService {
 	//메뉴출력
 	void printMenu();
@@ -10,9 +14,10 @@ public interface PrintService {
 	void printStudentMenu();
 	//수강관리
 	void printManageSignUp();
-	
+
 	void manageUpdateStudent();
 	
+
 	//교수사용메뉴
 	void printProfessorMenu();
 	//성적관리
@@ -28,7 +33,26 @@ public interface PrintService {
 	void printManageMajor();
 	//교수관리
 	void printManageProfessor();
+
 	//학생관리
 	void printManageStudent();
 
+	//교수수정
+	void printUpdateProfessor();
+
+	
+	//학생관리
+	void printManageStudent();
+		
+	//등록된 교수 출력
+	void printProfessorList();
+	
+	//등록된 전공 출력
+	void printMajorList();
+	
+	void printManageUpdateLecture();
+	
+	//교수의 등록강의 리스트 출력
+	public void printProfessorLectureList(Professor tmp);
 }
+

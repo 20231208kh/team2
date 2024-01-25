@@ -12,8 +12,16 @@ public interface PrintService {
 	
 	void printSetWithdrawMenu();
 	
+	void printSetCateogryorUsage();
+
 	void printSearchMenu();
-	
+
+	void printSearchByMoney();
+
+	void printSearchByType();
+
+	void printSearchByDate();
+
 	void printExit();
 
 }
