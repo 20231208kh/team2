@@ -2,6 +2,9 @@ package university;
 
 import java.util.Objects;
 
+import lombok.Data;
+
+@Data
 public class Major {
 	
 	//전공명
