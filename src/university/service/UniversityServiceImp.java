@@ -65,18 +65,6 @@ public class UniversityServiceImp implements UniversityService{
 	}
 	
 	@Override
-	//수정할 교수 특정
-	public Professor selectUpdateProfessor(String id) {
-		if(professorList == null || professorList.size()==0) {
-			return null;
-		}
-		Professor tmp = new Professor(id);
-		int num = professorList.indexOf(tmp);
-		return professorList.get(num);
-
-	}
-
-	@Override
 	//교수 이름 수정
 	public boolean updateProfessorName(Professor tmp ,String name) {
 		if(tmp == null|| professorList == null || professorList.size()==0) {
@@ -155,7 +143,8 @@ public class UniversityServiceImp implements UniversityService{
 	public void updateLectureName(Lecture tmpLecture, String professorID, String newLectureName) {
 		Professor tmp = professorList.get(professorList.indexOf(new Professor(professorID)));
 		int index = tmp.getLectureList().indexOf(tmpLecture);
-		professorList.get(professorList.indexOf(new Professor(professorID))).getLectureList().get(index).setLectureName(newLectureName);
+		professorList.get(professorList.indexOf(new Professor(professorID)))
+			.getLectureList().get(index).setLectureName(newLectureName);
 		lectureList.get(lectureList.indexOf(tmpLecture)).setLectureName(newLectureName);
 		
 	}
@@ -166,7 +155,8 @@ public class UniversityServiceImp implements UniversityService{
 		Professor tmp = professorList.get(professorList.indexOf(new Professor(professorID)));
 		if(newLectureMaxCount >= lectureList.get(lectureList.indexOf(tmpLecture)).getLectureCount()) {
 			int index = tmp.getLectureList().indexOf(tmpLecture);
-			professorList.get(professorList.indexOf(new Professor(professorID))).getLectureList().get(index).setLectureMaxCount(newLectureMaxCount);
+			professorList.get(professorList.indexOf(new Professor(professorID)))
+				.getLectureList().get(index).setLectureMaxCount(newLectureMaxCount);
 			lectureList.get(lectureList.indexOf(tmpLecture)).setLectureMaxCount(newLectureMaxCount);
 			return true;
 		}
@@ -188,7 +178,8 @@ public class UniversityServiceImp implements UniversityService{
 				return false;
 			}
 		}
-		professorList.get(professorList.indexOf(new Professor(professorID))).getLectureList().get(index).setLectureDay(newLectureDay);
+		professorList.get(professorList.indexOf(new Professor(professorID)))
+			.getLectureList().get(index).setLectureDay(newLectureDay);
 		lectureList.get(lectureList.indexOf(tmpLecture)).setLectureDay(newLectureDay);
 		return true;
 	}
@@ -208,8 +199,10 @@ public class UniversityServiceImp implements UniversityService{
 				return false;
 			}
 		}
-		professorList.get(professorList.indexOf(new Professor(professorID))).getLectureList().get(index).setLectureST(newLectureST);
-		professorList.get(professorList.indexOf(new Professor(professorID))).getLectureList().get(index).setLectureLT(newLectureLT);
+		professorList.get(professorList.indexOf(new Professor(professorID)))
+			.getLectureList().get(index).setLectureST(newLectureST);
+		professorList.get(professorList.indexOf(new Professor(professorID)))
+			.getLectureList().get(index).setLectureLT(newLectureLT);
 		lectureList.get(lectureList.indexOf(tmpLecture)).setLectureST(newLectureST);
 		lectureList.get(lectureList.indexOf(tmpLecture)).setLectureLT(newLectureLT);
 		return true;
@@ -229,7 +222,24 @@ public class UniversityServiceImp implements UniversityService{
 		lectureList.remove(tmpLecture);
 		return true;
 	}
+	
+	@Override
+	//수강신청
+	public boolean signUpForLectures() {
+		
+		return false;
+	}
 
+	@Override
+	//수강취소
+	public boolean deleteForLectures() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	
+	
+	
 	@Override
 	public boolean searchByProfessorMajor() {
 		// TODO Auto-generated method stub
@@ -294,12 +304,52 @@ public class UniversityServiceImp implements UniversityService{
 	}
 	
 	@Override
+	public boolean isStudentID(String studentID) {
+		if(studentList == null || studentList.size()==0) {
+			return false;
+		}
+		if(studentList.contains(new Student(studentID))) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
 	public boolean isLectureEmpty(Lecture tmpLecture) {
 		if(lectureList.get(lectureList.indexOf(tmpLecture)).getLectureCount()!=0) {
 			return false;			
 		}
 		return true;
 	}
+
+	
+
+	@Override
+	//교수 특정
+	public Professor selectUpdateProfessor(String id) {
+		if(professorList == null || professorList.size()==0) {
+			return null;
+		}
+		Professor tmp = new Professor(id);
+		int num = professorList.indexOf(tmp);
+		return professorList.get(num);
+
+	}
+
+	
+	
+	@Override
+	//학생특정
+	public Student selectStudent(String studentID) {
+		if(professorList == null || professorList.size()==0) {
+			return null;
+		}
+		Student tmp = new Student(studentID);
+		int num = studentList.indexOf(tmp);
+		return studentList.get(num);
+	}
+
+	
 
 	
 	

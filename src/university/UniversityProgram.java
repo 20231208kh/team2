@@ -336,19 +336,27 @@ public class UniversityProgram implements Program{
 	//학생 사용 메뉴
 	private void studentMenu() {
 		int menu;
-		do {
-			printService.printStudentMenu();
-			menu = scan.nextInt();
-			runStudentMenu(menu);
-		}while(menu != 4);
+		System.out.print("학번을 입력해주세요 : ");
+		String studentID = scan.next();
+		Student tmp = usi.selectStudent(studentID);
+		if(usi.isStudentID(studentID) && tmp != null) {
+			System.out.println("로그인 성공");
+			do {
+				printService.printStudentMenu();
+				menu = scan.nextInt();
+				runStudentMenu(menu ,tmp);
+			}while(menu != 3);
+			return;
+		}
+		System.out.println("로그인 실패");
 	}
 	
 	//학생 사용 메뉴 실행
-	private void runStudentMenu(int menu) {
+	private void runStudentMenu(int menu, Student tmp) {
 		switch(menu) {
 		case 1:
 			//수강 관리
-			manageSingUp();
+			manageSingUp(tmp);
 			break;
 		case 2:
 			//성적 조회
@@ -362,25 +370,25 @@ public class UniversityProgram implements Program{
 	}
 
 	//수강 관리
-	private void manageSingUp() {
+	private void manageSingUp(Student tmp) {
 		int menu;
 		do {
 			printService.printManageSignUp();
 			menu = scan.nextInt();
-			runManageSignUp(menu);
+			runManageSignUp(menu, tmp);
 		}while(menu != 3);
 	}
 	
 	//수강 관리 실행
-	private void runManageSignUp(int menu) {
+	private void runManageSignUp(int menu, Student tmp) {
 		switch(menu) {
 		case 1:
 			//수강 신청
-			signUpForLectures();
+			signUpForLectures(tmp);
 			break;
 		case 2:
-			//수강 정정
-			updateForLectures();
+			//수강 취소
+			deleteForLectures(tmp);
 			break;
 		case 3:
 			System.out.println("돌아가기.");
@@ -390,15 +398,18 @@ public class UniversityProgram implements Program{
 		}
 	}
 	
+
 	//수강 신청
-	private void signUpForLectures() {
+	private void signUpForLectures(Student tmp) {
 		
 	}
 	
-	//수강 정정
-	private void updateForLectures() {
+	//수강 취소
+	private void deleteForLectures(Student tmp) {
 		
 	}
+
+	
 	
 	//성적 조회
 	private void searchScore() {
@@ -660,7 +671,7 @@ public class UniversityProgram implements Program{
 			
 		}
 		if(usi.updateLectureTime(tmpLecture, professorID, newLectureST, newLectureLT)) {
-			System.out.println("강의 요일 수정에 성공했습니다.");
+			System.out.println("강의 시간 수정에 성공했습니다.");
 			return;
 		}
 		System.out.println("수정하고자 하는 시간에 등록한 강의가 있습니다.");	

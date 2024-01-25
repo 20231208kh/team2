@@ -57,14 +57,21 @@ public interface UniversityService {
 	//성적 수정
 	boolean updateScore();
 	
+	//수강 신청 : 김준수
+	boolean signUpForLectures();
+	//수강 취소 : 김준수
+	boolean deleteForLectures();
 	//리스트 보내기
 	List<Professor> sendProfessorList();
 	List<Lecture> sendLectureList();
 	List<Student> sendStudentList();
 	List<Major> sendMajorList();
 	
-	public boolean isProfessorID(String professorID);
-	public boolean isLectureEmpty(Lecture tmpLecture);
+	//각종 확인 메서드
+	boolean isStudentID(String studentID);
+	boolean isProfessorID(String professorID);
+	boolean isLectureEmpty(Lecture tmpLecture);
+	Student selectStudent(String studentID);
 		
 	
 	
