@@ -2,37 +2,32 @@ package university.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
+import university.Lecture;
 import university.Major;
+import university.Professor;
 import university.Student;
 
 public class UniversityServiceImp implements UniversityService{
 	List<Student> studentList = new ArrayList<Student>();
 	List<Major> majorList = new ArrayList<Major>();
+	List<Professor> professorList = new ArrayList<Professor>();
+	List<Lecture> lectureList = new ArrayList<Lecture>();
 	
 	//전공 조회
 	@Override
 	public boolean searchByMajor(Major majorName) {
 		if(majorList == null) {
-			System.out.println("등록된 전공이 없습니다.");
+			majorList = new ArrayList<Major>();
+		}
+		int index = majorList.indexOf(majorName);
+		if(index == -1) {
 			return false;
 		}
-		for(int i = 0; i<majorList.size(); i++) {
-			int index = majorList.indexOf(majorName);
-			if(index == -1) {
-				System.out.println("일치하는 전공이 없습니다.");
-				return false;
-			}
-			System.out.print(majorList.get(index));
-		}
+		System.out.print(majorList.get(index));
 		return true;			
 	}
 	/*
-	//indexOf
-	int index = majorList.indexOf(majorName);
-	System.out.print(majorList.get(index).printMajorCount()); 
-	
 	if(majorList.contains(majorName)){
 		Stream<Major> stream = majorList.stream();
 		//filter(majorName)
@@ -41,36 +36,104 @@ public class UniversityServiceImp implements UniversityService{
 	}
 	*/
 	
-	//학번이랑 이름 받아서 학생 조회(1명)
+	//학번을 받아서 학생 조회(1명)
 	@Override
 	public boolean searchStudent(Student student) {
 		if(studentList == null) {
-			System.out.println("등록된 학번이 없습니다.");
-			return false;
+			studentList = new ArrayList<Student>();
 		}
 		int index = studentList.indexOf(student);
 		if(index == -1) {
-			System.out.println("일치하는 학생이 없습니다.");
 			return false;
 		}
 		System.out.print(studentList.get(index));
 		return true;
 	}
 	
-	//학생 이름으로 조회(등록된 동명이인 모두 출력. 앞에 번호 1 --- 2 --- 이런식으로 출력되게)
+	//학생 이름으로 조회(등록된 동명이인 모두 출력. 앞에 번호 1 --- 2 --- 이런식으로 출력되게 equals로 걍 바로 조회가능 string이여서
+	//학번 빠른순서대로 숫자매겨볼수있을까
 	@Override
 	public boolean searchByStudentName(Student student) {
 		if(studentList == null) {
-			System.out.println("등록된 학생이 없습니다.");
-			return false;
+			studentList = new ArrayList<Student>();
 		}
-		int index = studentList.indexOf(student);
-		if(index == -1) {
-			System.out.println("일치하는 학생이 없습니다.");
-			return false;
+		for(int i = 0; i<studentList.size(); i++) {
+			if(studentList.size() != 0) {
+				studentList.get(i).getStudentName().equals(student.getStudentName());
+				System.out.println(studentList.get(i));
+			}else {
+				return false;
+			}
 		}
-		System.out.print(studentList.get(index));
 		return true;
+	}
+	
+	//교수 확인
+	@Override
+	public boolean matchProfessorID(String professorId) {
+		Professor professor = new Professor(professorId);
+		if(professorList == null) {
+			professorList = new ArrayList<Professor>();
+		}
+		int index = professorList.indexOf(professor);
+		if(index == -1) {
+			return false;
+		}
+		System.out.println(professorList.get(index).equals(lectureList));
+		return true;
+	}
+	
+	//강의에 등록된 학생 출력
+	@Override
+	public boolean matchLectureWithStudent(String lectureName) {
+		if(lectureList == null) {
+			return false;
+		}
+		int index = studentList.indexOf(lectureName);
+		if(index == -1) {
+			return false;
+		}
+		//해당 학생이 등록한 강의list 출력
+		System.out.println(studentList.get(index).equals(lectureName));
+		return true;
+	}
+	/*
+		---a교수 강의목록--
+		1. 경영학원론
+		2. 경영회계
+		선택 : 2
+	
+		2.경영회계 << 인스턴스
+		
+		--경영회계를 수강하는 학생--
+		1. 홍길동(학번)
+		2.임꺽정(학번)
+		선택 : 20241201
+	
+		--임꺽정 성적 입력-- 
+		studentList.get(i).getLectureList(1).setLectureScore()
+		
+		임꺽정(이름,나이,학년,학번 , 강의 [ (강의1이름,점수),(경영회계,점수) ] 
+		점수 입력 : 
+		
+		
+		3단계 : 그 중 선택(string)
+			Lecture lecture  = new Lecture(lectureName)
+			professorList.get(i).get(lectureList)
+			professor [이름 나이 전공 , [강의(강의1,강의2) 
+		
+		4단계 : 교수가 선택한 강의를 가지고있는 학생 인스턴스 출력
+	 */
+	
+	//성적 추가
+	@Override
+	public boolean insertScore(String studentId, Lecture lecture) {
+		int index = studentList.indexOf(studentId);
+		if(studentList.contains(studentId)) {
+			studentList.get(index).getLectureList().set(index, lecture);
+			return true;
+		}
+		return false;
 	}
 	
 	//성적 출력
@@ -116,12 +179,6 @@ public class UniversityServiceImp implements UniversityService{
 
 	@Override
 	public boolean searchByProfessorMajor() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-		@Override
-	public boolean insertScore() {
 		// TODO Auto-generated method stub
 		return false;
 	}

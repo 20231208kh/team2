@@ -11,7 +11,6 @@ public class Student {
 	
 	List<Lecture> lectureList = new ArrayList<Lecture>();
 	Major major = new Major();
-	Lecture lecture = new Lecture();
 	
 	//학생 이름
 	String studentName;
@@ -32,23 +31,6 @@ public class Student {
 		this.studentName = stdName;
 		this.studentId = stdId;
 	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(studentId, studentName);
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Student other = (Student) obj;
-		return Objects.equals(studentId, other.studentId) && Objects.equals(studentName, other.studentName);
-	}
 		
 	@Override
 	public String toString() {
@@ -63,7 +45,22 @@ public class Student {
 		System.out.println("[학번 : " + studentId + " ] " + "[이름 : " + studentName + " ] " + "[전공 : " + major.majorName + " ] " + lectureList);
 		return false;
 	}
-	
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Student other = (Student) obj;
+		return Objects.equals(studentId, other.studentId);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(studentId);
+	}
 
 }

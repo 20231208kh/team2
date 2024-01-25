@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import lombok.Data;
 
+@Data
 public class Professor {
 	
 	//성함
@@ -16,5 +17,11 @@ public class Professor {
 	String professorMajor;
 	//과목 정보
 	List<Lecture> lectureList = new ArrayList<Lecture>();
+	public Professor(String professorId) {
+		super();
+		this.professorId = professorId;
+	}
+	
+	
 	
 }

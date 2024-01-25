@@ -24,6 +24,8 @@ public interface PrintService {
 	void printSearch();
 	//학생조회 메뉴
 	void printSearchStudentMenu();
+	//전공조회 메뉴
+	void printSearchMajorMenu();
 	//전공관리
 	void printManageMajor();
 	//교수관리

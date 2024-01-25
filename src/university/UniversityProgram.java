@@ -171,22 +171,21 @@ public class UniversityProgram implements Program{
 		}
 	}
 	
-	//학번과 학생이름으로 1명 조회
+	//학번으로 1명 조회
 	private void searchStudentId() {
-		//이름 입력
-		System.out.print("학생 이름 입력 : ");
-		String stdName = scan.next();
 		//학번 입력
 		System.out.print("학번 입력 : ");
 		String stdId = scan.next();
 		//객체 생성
-		Student student = new Student(stdName, stdId);
+		Student student = new Student(stdId);
 		//serviceimp
-		unis.searchStudent(student);
+		if(!unis.searchStudent(student)) {
+			System.out.println("일치하는 학생이 없습니다.");
+		}
 		return;
 	}
 	
-	//중복되는 학생 이름 전체조회
+	//이름 중복되는 학생들 전체조회
 	private void searchStudentName() {
 		//이름 입력
 		System.out.print("학생 이름 입력 : ");
@@ -194,16 +193,14 @@ public class UniversityProgram implements Program{
 		//객체 생성
 		Student student = new Student(stdName);
 		//serviceimp
-		unis.searchByStudentName(student);
+		if(!unis.searchByStudentName(student)) {
+			System.out.println("일치하는 학생이 없습니다.");
+		}
 		return;
 	}
 
 	//전공 조회
 	private void searchMajor() {
-		int menu;
-		do {
-			menu = scan.nextInt();
-		}while(menu != 3);
 		//전공명 입력
 		scan.nextLine();
 		System.out.print("전공명 입력 : ");
@@ -211,7 +208,9 @@ public class UniversityProgram implements Program{
 		//객체 생성
 		Major majorName = new Major(mName);
 		//serviceimp
-		unis.searchByMajor(majorName);
+		if(!unis.searchByMajor(majorName)) {
+			System.out.println("일치하는 전공이 없습니다.");
+		}
 		return;
 	}
 
@@ -465,8 +464,8 @@ public class UniversityProgram implements Program{
 		//객체 생성
 		Student studentId = new Student(stdId);
 		//serviceimp
-		if(unis.searchStudent(studentId)) {
-			
+		if(!unis.searchStudent(studentId)) {
+			System.out.println("등록되지 않은 학번입니다.");
 		};
 		return;
 	}
@@ -492,6 +491,7 @@ public class UniversityProgram implements Program{
 			//성적 관리
 			manageScore();
 			break;
+			//내 강의를 듣고있는 학생 전체 출력
 		case 3:
 			System.out.println("돌아가기.");
 			break;
@@ -579,7 +579,26 @@ public class UniversityProgram implements Program{
 	
 	//성적 등록
 	private void insertScore() {
-		
+		System.out.print("교수번호 입력: ");
+		String professorId = scan.next();
+		if(!unis.matchProfessorID(professorId)) {
+			System.out.println("등록된 교수가 없습니다.");
+		}
+		System.out.print("강의 선택 : ");
+		String lectureName = scan.next();
+		if(!unis.matchLectureWithStudent(lectureName)) {
+			System.out.println("등록된 학생이 없습니다.");
+		}
+		System.out.print("학번 선택 : ");
+		String studentId = scan.next();
+		System.out.print("성적 입력 : ");
+		int lectureScore  = scan.nextInt();
+		Lecture lecture = new Lecture(lectureScore);
+		if(!unis.insertScore(studentId, lecture)) {
+			System.out.println("성적 입력을 실패했습니다.");
+		}
+		System.out.println("성적 등록 성공!");
+		return;
 	}
 	
 	//성적 수정

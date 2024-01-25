@@ -26,6 +26,14 @@ public class Lecture {
 	public String toString() {
 		return "[강의번호 : " + lectureId + " ] " + "[강의명 : " + lectureName + " ] " + "[점수 : " + lectureScore + " ] ";
 	}
+
+	public Lecture() {
+		
+	}
+
+	public Lecture(int lecture) {
+		this.lectureScore = lecture;
+	}
 	
 	
 }
