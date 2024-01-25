@@ -10,7 +10,8 @@ import lombok.Data;
 public class Student {
 	
 	List<Lecture> lectureList = new ArrayList<Lecture>();
-	Major major = new Major();
+	Major major ;
+
 	
 	//학생 이름
 	String studentName;
@@ -23,12 +24,11 @@ public class Student {
 	//점수
 	int avgScore;
 	
+
+	int age;
 	
-	public Student(String studentId) {
-		super();
-		this.studentId = studentId;
-	}
-	
+	String lastNum;
+
 	
 	@Override
 	public boolean equals(Object obj) {
@@ -41,7 +41,7 @@ public class Student {
 		Student other = (Student) obj;
 		return Objects.equals(studentId, other.studentId);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(studentId);
@@ -49,6 +49,24 @@ public class Student {
 	
 	
 	
+	public Student(String studentName,int grade, int year, int age, Major major,String lastNum) {
+		super();
+		this.major = major;
+		this.studentName = studentName;
+		this.grade = grade;
+		this.year = year;
+		this.age = age;
+		this.studentId = year+major.getMajorId()+lastNum;
+	}
+	@Override
+	public String toString() {
+		return "학번 : "+studentId+ " 이름 : "+studentName+ " 나이 : "+age+" 학년 : "+grade+ " 전공 : "+major.getMajorName()+" / 수강중인 강의 : "+lectureList;
+	}
+	public Student(String studentId) {
+		super();
+		this.studentId = studentId;
+	}
 	
+
 	
 }

@@ -60,11 +60,11 @@ public class Lecture {
 				+ (lectureLT+lectureST-1) + "교시, "+ lectureLT +"H (" + lectureCount + " / " + lectureMaxCount +")";
 	}
 
-	
 
 	
 
 	
 	
+
 	
 }

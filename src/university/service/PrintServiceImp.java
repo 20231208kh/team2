@@ -1,11 +1,13 @@
 package university.service;
 
+
 import java.util.List;
 
 import university.Professor;
 
 public class PrintServiceImp implements PrintService {
 	UniversityService usi = new UniversityServiceImp();
+
 	
 	@Override
 	public void printMenu() {
@@ -34,6 +36,7 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("1. 강의관리");
 		System.out.println("2. 성적관리");
 		System.out.println("3. 뒤로가기");
+
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
 	}
@@ -45,7 +48,9 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("2. 학생 관리");
 		System.out.println("3. 전공 관리");
 		System.out.println("4. 조회");
-		System.out.println("5. 뒤로가기");
+
+		System.out.println("5. 뒤로 가기");
+
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
 	}
@@ -78,7 +83,9 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("1. 학생 등록");
 		System.out.println("2. 학생 수정");
 		System.out.println("3. 학생 삭제");
-		System.out.println("4. 뒤로가기");
+
+		System.out.println("4. 뒤로 가기");
+
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
 	}
@@ -89,7 +96,9 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("1. 전공 등록");
 		System.out.println("2. 전공 수정");
 		System.out.println("3. 전공 삭제");
-		System.out.println("4. 뒤로가기");
+
+		System.out.println("4. 뒤로 가기");
+
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
 	}
@@ -100,7 +109,9 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("1. 강의 등록");
 		System.out.println("2. 강의 수정");
 		System.out.println("3. 강의 삭제");
-		System.out.println("4. 뒤로가기");
+
+		System.out.println("4. 뒤로 가기");
+
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
 	}
@@ -109,8 +120,10 @@ public class PrintServiceImp implements PrintService {
 	public void printManageSignUp() {
 		System.out.println("-------수강신청-------");
 		System.out.println("1. 수강 신청");
+
 		System.out.println("2. 수강 취소");
 		System.out.println("3. 뒤로가기");
+
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
 	}
@@ -120,7 +133,9 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("--------조회--------");
 		System.out.println("1. 교수 조회");
 		System.out.println("2. 학생 조회");
+
 		System.out.println("3. 뒤로가기");
+
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
 	}
@@ -130,7 +145,8 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("-------성적메뉴-------");
 		System.out.println("1. 성적 등록");
 		System.out.println("2. 성적 수정");
-		System.out.println("3. 종료");
+		System.out.println("3. 뒤로 가기");
+
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
 	}
@@ -143,6 +159,17 @@ public class PrintServiceImp implements PrintService {
 	}
 
 	@Override
+
+	public void manageUpdateStudent() {
+		System.out.println("-------학생 수정-------");
+		System.out.println("1. 이름 수정");
+		System.out.println("2. 나이 수정");
+		System.out.println("3. 학년 수정");
+		System.out.println("4. 전공 수정");
+    System.out.println("-------------------");
+		System.out.print("메뉴 선택 : ");
+  }
+    
 	//등록된 교수 번호 붙어 출력
 	public void printProfessorList() {
 		usi.sendProfessorList().stream().forEach(p->{
@@ -172,6 +199,7 @@ public class PrintServiceImp implements PrintService {
 		
 	}
 
+
 	//교수별 등록된 강의 출력
 	@Override
 	public void printProfessorLectureList(Professor tmp) {
@@ -180,3 +208,4 @@ public class PrintServiceImp implements PrintService {
 		});
 	}
 }
+

@@ -2,6 +2,9 @@ package university.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Stream;
+
 
 import university.Lecture;
 import university.Major;
@@ -9,47 +12,29 @@ import university.Professor;
 import university.Student;
 
 
-public class UniversityServiceImp implements UniversityService{
-	List<Professor> professorList = new ArrayList<Professor>();
-	List<Lecture> lectureList = new ArrayList<Lecture>(); 
+
+public class UniversityServiceImp implements UniversityService {
+
 	List<Student> studentList = new ArrayList<Student>();
 	List<Major> majorList = new ArrayList<Major>();
+	List<Lecture> lectureList = new ArrayList<Lecture>();
+	List<Professor> professorList = new ArrayList<Professor>();
+	Scanner scan = new Scanner(System.in);
+	
 	
 	@Override
-	public boolean addStudent() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean addStudent(Student student) {
+		
+		if(studentList.contains(student)) {
+			System.out.println("중복된 학번 입력입니다.");
+			return false;
+		}
+		
+		studentList.add(student);
+		System.out.println(studentList);
+		return true;
 	}
 
-	@Override
-	public boolean updateStudent() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean deleteStudent() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean addMajor() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean UpdateMajor() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean deleteMajor() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public boolean addProfessor(String name, String id, String major) {
@@ -72,10 +57,54 @@ public class UniversityServiceImp implements UniversityService{
 		}
 		final Professor res = tmp;
 		professorList.stream().filter(p->p.equals(res)).forEach(p->p.setProfessorName(name));
-		return true;
+
+	
+	@Override
+
+	public boolean updateStudentName(Student student,String name) {
+		
+		if(studentList==null) {
+			return false;
+		}
+		
+		if(studentList.contains(student)) {
+			int index = studentList.indexOf(student);
+			if(index==-1) {
+				return false;
+			}
+			studentList.get(index).setStudentName(name);
+			System.out.println(studentList.get(index));
+			return true;
+		}
+		
+		
+		return false;
 	}
 
 	@Override
+	public boolean deleteStudent(Student student) {
+		if(studentList == null) {
+			return false;
+		}
+		
+		if(studentList.contains(student)) {
+			return studentList.remove(student);
+			
+		}
+		return false;
+	}
+
+	@Override
+	public boolean addMajor(Major major) {
+		if(majorList.contains(major)) {
+		   
+			return false;
+		}
+		majorList.add(major);
+    	return true;
+	}
+
+
 	//교수 ID 수정
 	public boolean updateProfessorID(Professor tmp ,String newID) {
 		if(tmp == null|| professorList == null || professorList.size()==0) {
@@ -109,10 +138,36 @@ public class UniversityServiceImp implements UniversityService{
 			return false;
 		}
 		professorList.remove(--num);
+
+	
+	@Override
+
+	public boolean updateMajor(Major major, String majorTitle) {
+		if(majorList ==null) {
+			return false;
+		}
+		int index = majorList.indexOf(major);
+		if(index ==-1) {
+			return false;
+		}
+		majorList.get(index).setMajorName(majorTitle);
+		System.out.println(majorList.get(index));
 		return true;
 	}
-
+	
 	@Override
+	public boolean deleteMajor(Major major) {
+		if(majorList == null) {
+			return false;
+		}
+		
+		if(majorList.contains(major)) {
+			return majorList.remove(major);
+				}
+		return false;
+	}
+
+
 	// 강의 등록
 	public boolean addLecture(String professorID, String lectureName, int lectureMaxCount
 							, String lectureDay, int lectureST, int lectureLT) {
@@ -132,11 +187,13 @@ public class UniversityServiceImp implements UniversityService{
 				&& tmpI.getLectureDay().equals(lectureDay)) {
 				return false;
 			}
-		}
-		lectureList.add(tmpLecture);
-		professorList.get(index).getLectureList().add(tmpLecture);
-		return true;
-	}
+      lectureList.add(tmpLecture);
+      professorList.get(index).getLectureList().add(tmpLecture);
+      return true;
+    }
+		
+   
+	
 
 	@Override
 	// 강의명 수정
@@ -159,10 +216,14 @@ public class UniversityServiceImp implements UniversityService{
 				.getLectureList().get(index).setLectureMaxCount(newLectureMaxCount);
 			lectureList.get(lectureList.indexOf(tmpLecture)).setLectureMaxCount(newLectureMaxCount);
 			return true;
-		}
-		return false;
+      }
+  
+	
+   return false;
 	}
-
+  
+    
+    
 	@Override
 	// 강의 요일 수정
 	public boolean updateLectureDay(Lecture tmpLecture, String professorID, String newLectureDay) {
@@ -226,10 +287,10 @@ public class UniversityServiceImp implements UniversityService{
 	@Override
 	//수강신청
 	public boolean signUpForLectures() {
-		
+			// TODO Auto-generated method stub
 		return false;
 	}
-
+		
 	@Override
 	//수강취소
 	public boolean deleteForLectures() {
@@ -240,36 +301,57 @@ public class UniversityServiceImp implements UniversityService{
 	
 	
 	
-	@Override
-	public boolean searchByProfessorMajor() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 
 	@Override
+
+	
 	public boolean searchByStudentMajor() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean searchByStudentId() {
+
+	public boolean updateScore() {
+
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
+
 	public boolean insertScore() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
+
 	public boolean updateScore() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+
+	@Override
+	public List<Major> getMajor() {
+		return majorList;
+
+	}
+
+	@Override
+	public void printMajorList() {
+		for(int i = 0; i<majorList.size(); i++) {
+			System.out.print((i+1)+" : "+majorList.get(i));
+		}
+		
+	}
+
+	@Override
+	public List<Student> getStudent() {
+    return studentList;
+	}
 	
 	@Override
 	//교수 리스트를 보내는 메서드
@@ -284,13 +366,99 @@ public class UniversityServiceImp implements UniversityService{
 
 	@Override
 	public List<Student> sendStudentList() {
+
 		return studentList;
+	}
+  
+  @Override  
+  public List<Major> sendMajorList() {
+		return majorList;
+	}  
+    
+
+	@Override
+
+	public boolean updateStudentMajor(Student student, Major major) {
+		if(majorList==null || studentList==null) {
+			return false;
+		}
+		
+
+		
+		if(majorList.contains(major)) {
+			int index= studentList.indexOf(student);
+			
+			if(index == -1) {
+				return false;
+			}
+			if(studentList.get(index).getMajor().getMajorId()==major.getMajorId()) {
+				
+				System.out.println("기존의 전공과 같은 전공을 선택하였습니다.");
+				return false;
+			}
+			
+			String id = studentList.get(index).getStudentId();
+			String newId = id.substring(0,4) + major.getMajorId()+id.substring(6);
+			Student tmp = new Student(newId);
+			while(studentList.contains(tmp)){
+				System.out.println("중복된 학번, 마지막 두 자리 수정 필요");
+				System.out.print("수정할 마지막 두 자리 학번 입력 : ");
+				String lastNum = scan.next();
+				newId = id.substring(0,4)+major.getMajorId()+lastNum;
+				tmp = new Student(newId);
+			}
+			studentList.get(index).setMajor(major);
+			studentList.get(index).setStudentId(newId);
+			System.out.println("학생 전공 수정 성공!");
+			System.out.println(studentList.get(index));
+			return true;
+			
+		}
+		System.out.println("학생 전공 수정 실패");
+		return false;
 	}
 
 	@Override
-	public List<Major> sendMajorList() {
-		return majorList;
+	public boolean updateStudentAge(Student student, int studentAge) {
+		if(studentList==null) {
+			return false;
+		}
+		
+		if(studentList.contains(student)) {
+			int index = studentList.indexOf(student);
+			if(index==-1) {
+				return false;
+			}
+			studentList.get(index).setAge(studentAge);
+			System.out.println(studentList.get(index));
+			return true;
+		}
+		
+		
+		return false;
 	}
+
+	@Override
+	public boolean updateStudentGrade(Student student, int grade) {
+		if(studentList==null) {
+			return false;
+		}
+		
+		if(studentList.contains(student)) {
+			int index = studentList.indexOf(student);
+			if(index==-1) {
+				return false;
+			}
+			studentList.get(index).setGrade(grade);
+			System.out.println(studentList.get(index));
+			return true;
+		}
+		
+		
+		return false;
+	}
+
+	
 	
 	@Override
 	public boolean isProfessorID(String professorID) {
@@ -354,6 +522,7 @@ public class UniversityServiceImp implements UniversityService{
 	
 	
 	
+
 
 	
 }

@@ -3,28 +3,42 @@ package university.service;
 
 import java.util.List;
 
-import university.Lecture;
 import university.Major;
-import university.Professor;
 import university.Student;
+import university.Lecture;
+import university.Professor;
 
 
 public interface UniversityService {
 	
+	List<Major> getMajor();
 	
-	//학생 등록  : 박성훈
-	boolean addStudent();
-	//학생 수정  : 박성훈
-	boolean updateStudent();
-	//학생 삭제  : 박성훈
-	boolean deleteStudent();
+	//학생 등록
+	boolean addStudent(Student student);
+	//학생 수정
+	boolean updateStudentName(Student student,String name);
 	
-	//전공 등록  : 박성훈
-	boolean addMajor();
-	//전공 수정  : 박성훈
-	boolean UpdateMajor();
-	//전공 삭제  : 박성훈
-	boolean deleteMajor();
+	boolean updateStudentMajor(Student student, Major major);
+	
+	List<Student> getStudent();
+	
+	
+	//학생 삭제
+	boolean deleteStudent(Student student);
+	
+	void printMajorList() ;
+	
+	//전공 등록
+	boolean addMajor(Major major);
+	//전공 수정
+	boolean updateMajor(Major major, String majorTitle);
+	//전공 삭제
+	boolean deleteMajor(Major major);
+
+	
+	
+
+	
 	
 	//교수 등록 : 김준수
 	boolean addProfessor(String name, String id, String major);
@@ -59,6 +73,17 @@ public interface UniversityService {
 	//성적 수정
 	boolean updateScore();
 	
+
+	//강의 등록
+	boolean addLecture();
+	//강의 수정
+	boolean updateLecture();
+
+	boolean updateStudentAge(Student student, int studentAge);
+
+	boolean updateStudentGrade(Student student, int grade);
+
+
 	//수강 신청 : 김준수
 	boolean signUpForLectures();
 	//수강 취소 : 김준수
@@ -75,6 +100,5 @@ public interface UniversityService {
 	boolean isLectureEmpty(Lecture tmpLecture);
 	Student selectStudent(String studentID);
 		
-	
 	
 }
