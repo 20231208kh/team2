@@ -57,7 +57,7 @@ public interface PrintService {
 	//등록된 강의 리스트 출력
 	void printLectureList(List<Lecture> tmp);
 	
-	
+	//수강신청,취소 에러 출력
 	void printSignUpError(int errorCode);
 	void printDeleteForLecturesError(int errorCode);
 }

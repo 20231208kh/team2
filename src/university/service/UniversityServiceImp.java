@@ -123,13 +123,11 @@ public class UniversityServiceImp implements UniversityService {
 				return false;
 			}
 			if(professorList.get(index).getProfessorMajor().getMajorId()==professorMajor.getMajorId()) {
-				
 				System.out.println("기존의 전공과 같은 전공을 선택하였습니다.");
 				return false;
 			}
 			professorList.get(index).setProfessorMajor(professorMajor);
 			return true;
-			
 		}
 		return false;
 	}
@@ -351,7 +349,20 @@ public class UniversityServiceImp implements UniversityService {
 			return false;
 		}
 		studentList.get(studentList.indexOf(tmp)).getLectureList().remove(index);
-		return true;
+		lectureList.get(lectureList.indexOf(tmp.getLectureList().get(index)))
+		.setLectureCount(lectureList.get(lectureList.indexOf(tmp.getLectureList().get(index)))
+		.getLectureCount()-1);
+		for(int i = 0 ; i< professorList.size(); i++) {
+			if(professorList.get(i).getLectureList().contains(tmp.getLectureList().get(index))) {
+				professorList.get(i).getLectureList().get(professorList.get(i).getLectureList().indexOf(tmp.getLectureList().get(index)))
+				.setLectureCount(professorList.get(i).getLectureList().get(professorList.get(i).getLectureList().indexOf(tmp.getLectureList().get(index)))
+				.getLectureCount()-1);
+				return true;
+			}
+		}
+		errorCode = 3;
+		prsi.printDeleteForLecturesError(errorCode);
+		return false;
 	}
 	
 	
@@ -420,8 +431,8 @@ public class UniversityServiceImp implements UniversityService {
 		return studentList;
 	}
   
-  @Override  
-  public List<Major> sendMajorList() {
+	@Override  
+  	public List<Major> sendMajorList() {
 		return majorList;
 	}  
     

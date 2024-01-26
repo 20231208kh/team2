@@ -230,6 +230,7 @@ public class PrintServiceImp implements PrintService {
 		switch(errorCode) {
 		case 1: System.out.println("번호를 잘못 입력했습니다."); break;
 		case 2: System.out.println("존재하는 강의가 아닙니다."); break;
+		case 3: System.out.println("강의를 등록한 교수가 없습니다."); break;
 		default:
 			System.out.println("잘못된 에러코드 : " + errorCode);
 		}
