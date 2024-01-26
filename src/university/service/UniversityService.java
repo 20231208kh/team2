@@ -32,12 +32,12 @@ public interface UniversityService {
 
 	
 	//교수 등록 : 김준수
-	boolean addProfessor(String name, String id, String major);
+	boolean addProfessor(String name, String id, Major professorMajor);
 	//교수 수정 : 김준수
 	Professor selectUpdateProfessor(String id);
 	boolean updateProfessorName(Professor tmp ,String name);
 	boolean updateProfessorID(Professor tmp ,String newID);
-	boolean updateProfessorMajor(Professor tmp ,String major);
+	boolean updateProfessorMajor(Professor tmp ,Major professorMajor);
 	//교수 삭제 : 김준수
 	boolean deleteProfessor(int num);
 	

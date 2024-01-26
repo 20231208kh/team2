@@ -20,7 +20,7 @@ public class UniversityProgram implements Program{
 	private PrintService printService = new PrintServiceImp();
 	private UniversityService usi = new UniversityServiceImp();
 	Scanner scan = new Scanner(System.in);
-	private final int EXIT_PROGRAM = 4;
+	private final int EXIT_PROGRAM = 5;
 
 	
 	@Override
@@ -54,6 +54,10 @@ public class UniversityProgram implements Program{
 			universityMenu();
 			break;
 		case 4:
+			//프로그램 안내
+			infoProgram();
+			break;
+		case 5:
 			//프로그램 종료
 			printService.printExitMenu();
 			break;
@@ -62,6 +66,12 @@ public class UniversityProgram implements Program{
 		}
 	}
 	
+	private void infoProgram() {
+		
+		printService.infoProgram();
+		
+	}
+
 	//학교 사용 메뉴
 	private void universityMenu() {
 		int menu;
@@ -132,14 +142,55 @@ public class UniversityProgram implements Program{
 
 	//학생 조회
 	private void searchStudent() {
-		
-	}
-	
-	//교수 조회
-	private void searchProfessor() {
 
 	}
+	//교수 조회
+	private void searchProfessor() {
+		int menu = scan.nextInt();
+		switch(menu) {
+		case 1:
+			searchAllProfessor();
+			break;
+		case 2:
+			searchProfessorByName();
+			break;
+		case 3:
+			searchProfessorById();
+			break;
+		case 4:
+			searchProfessorByMajor();
+			break;
+		case 5:
+			System.out.println("뒤로 가기");
+			break;
+		default:
+			throw new InputMismatchException();
+			
+		}
+	}
+
 	
+	
+	private void searchAllProfessor() {
+//		usi.searchAllProfessor();
+		
+	}
+
+	private void searchProfessorByName() {
+//		usi.searchProfessorByName();
+		
+	}
+
+	private void searchProfessorById() {
+//		usi.searchProfessorById();
+		
+	}
+
+	private void searchProfessorByMajor() {
+//		usi.searchProfessorByMajor();
+		
+	}
+
 	//전공 관리
 	private void manageMajor() {
 		int menu;
@@ -443,16 +494,26 @@ public class UniversityProgram implements Program{
 	
 	//교수 추가
 	private void addProfessor() {
-
+		if(usi.getMajor().size() <=0) {
+			System.out.println("전공을 먼저 등록해주세요.");
+			return;
+		}
+		
 		System.out.print("등록할 교수 이름 : ");
 		String professorName = scan.next();
 		System.out.print("등록할 교수 ID : ");
 		String professorID = scan.next();
-		System.out.print("등록할 교수 전공 : ");
-		String professorMajor = scan.next();
-		if(usi.addProfessor(professorName, professorID, professorMajor)) {
-			System.out.println(professorName+"교수 등록 완료");
-			return;
+		usi.printMajorList();
+		System.out.print("등록할 교수 전공 선택 : ");
+		int index = scan.nextInt();
+		try {
+			Major professorMajor = usi.getMajor().get(index-1);
+			if(usi.addProfessor(professorName, professorID, professorMajor)) {
+				System.out.println(professorName+"교수 등록 완료");
+				return;
+			}
+		}catch(IndexOutOfBoundsException e) {
+			System.out.println("목록에 없는 전공 선택");
 		}
 		System.out.println("등록된 ID 입니다.");
 	}
@@ -489,11 +550,18 @@ public class UniversityProgram implements Program{
 			System.out.println("ID 수정에 실패했습니다.");
 			break;
 		case 3: 
-			System.out.print(tmp.getProfessorName()+"교수의 수정할 전공 : ");
-			String newMajor = scan.next();
-			if(usi.updateProfessorMajor(tmp, newMajor)) {
-				System.out.println("전공이 수정되었습니다 : " + newMajor);
-				return;
+			usi.printMajorList();
+			System.out.print("수정할 전공 선택 : ");
+			int index = scan.nextInt();
+			try {
+				Major professorMajor = usi.getMajor().get(index-1);
+				if(usi.updateProfessorMajor(tmp, professorMajor)) {
+					System.out.println("전공이 수정되었습니다 : " + professorMajor);
+					return;
+				}
+			}catch(IndexOutOfBoundsException e) {
+				System.out.println("목록에 없는 전공 선택");
+				break;
 			}
 			System.out.println("전공 수정에 실패했습니다.");
 			break;

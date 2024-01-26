@@ -37,14 +37,14 @@ public class UniversityServiceImp implements UniversityService {
 
 
 	@Override
-	public boolean addProfessor(String name, String id, String major) {
+	public boolean addProfessor(String name, String id, Major professorMajor) {
 		if(professorList == null) {
 			professorList = new ArrayList<Professor>();
 		}
 		if(professorList.contains(new Professor(id))) {
 			return false;
 		}
-		Professor tmp = new Professor(name, id, major);
+		Professor tmp = new Professor(name, id, professorMajor);
 		professorList.add(tmp);
 		return true;
 	}
@@ -113,13 +113,25 @@ public class UniversityServiceImp implements UniversityService {
 
 	@Override
 	//교수 전공 수정
-	public boolean updateProfessorMajor(Professor tmp , String major) {
+	public boolean updateProfessorMajor(Professor tmp , Major professorMajor) {
 		if(tmp == null|| professorList == null || professorList.size()==0) {
 			return false;
 		}
-		final Professor res = tmp;
-		professorList.stream().filter(p->p.equals(res)).forEach(p->p.setProfessorMajor(major));
-		return true;
+		if(professorList.contains(tmp)) {
+			int index = professorList.indexOf(tmp);
+			if (index==-1) {
+				return false;
+			}
+			if(professorList.get(index).getProfessorMajor().getMajorId()==professorMajor.getMajorId()) {
+				
+				System.out.println("기존의 전공과 같은 전공을 선택하였습니다.");
+				return false;
+			}
+			professorList.get(index).setProfessorMajor(professorMajor);
+			return true;
+			
+		}
+		return false;
 	}
 	
 	

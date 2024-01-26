@@ -17,7 +17,8 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("1. 교수 메뉴");
 		System.out.println("2. 학생 메뉴");
 		System.out.println("3. 학사 메뉴");
-		System.out.println("4. 프로그램 종료");
+		System.out.println("4. 프로그램 안내");
+		System.out.println("5. 프로그램 종료");
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
 	}
@@ -175,8 +176,8 @@ public class PrintServiceImp implements PrintService {
 	//등록된 교수 번호 붙어 출력
 	public void printProfessorList(List<Professor> tmp) {
 		tmp.stream().forEach(p->{
-			System.out.println((tmp.indexOf(p)+1)+". " + p.getProfessorName() + " / 담당학과 : " 
-			+ p.getPorfessorBTM().getMajorName()+" / 교수전공 : " + p.getProfessorMajor() + " / ID : "+p.getProfessorId());
+			System.out.println((tmp.indexOf(p)+1)+". " + p.getProfessorName() + 
+			" / 교수전공 [ " + p.getProfessorMajor() + " ] / ID : "+p.getProfessorId());
 		});
 	}
 
@@ -232,6 +233,20 @@ public class PrintServiceImp implements PrintService {
 		default:
 			System.out.println("잘못된 에러코드 : " + errorCode);
 		}
+	}
+
+	@Override
+	public void infoProgram() {
+		System.out.println("-----------------프로그램 이용안내---------------------");
+		System.out.println("1. 학사관리에서, 학생의 추가 혹은 교수의 추가를 위해서는\n전공의 추가가 선행 되어야 한다.");
+		System.out.println("2. 학번의 경우 6개의 고유번호를 프로그램이 지정해주고, 이용자가 직접 2자리를 입력한다.");
+		System.out.println("   이때, 8개의 번호가 모두 같은 객체가 이미 존재하는 경우를 중복으로 지정한다.");
+		System.out.println("3. 학번의 경우 입학년도 4자리는 불변, 나머지 4자리는 가변으로 값의 변경를 필수적으로");
+		System.out.println("   요구하는 메서드에서 변경할 수 있다.");
+		System.out.println("4. 교수는 객체 생성시에 입력한 id로, 학생은 객체 생성시에 입력한 학번으로 로그인 하여");
+		System.out.println("   리스트에 담긴 자신의 객체에 접근할 수 있다.");
+		System.out.println("5. 수강신청의 경우, 같은 요일 + 같은 시간에 진행되는 서로 다른 강의를 수강할 수 없다.");
+		System.out.println("6. 수강신청의 경우, 강의의 진행 시간 1시간당 1학점으로, 학생은 최대 21학점까지 수강 가능하다.");
 	}
 	
 }

@@ -19,6 +19,8 @@ public interface PrintService {
 
 	void manageUpdateStudent();
 	
+	void infoProgram();
+	
 
 	//교수사용메뉴
 	void printProfessorMenu();
