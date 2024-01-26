@@ -123,11 +123,13 @@ public class UniversityServiceImp implements UniversityService {
 				return false;
 			}
 			if(professorList.get(index).getProfessorMajor().getMajorId()==professorMajor.getMajorId()) {
+				
 				System.out.println("기존의 전공과 같은 전공을 선택하였습니다.");
 				return false;
 			}
 			professorList.get(index).setProfessorMajor(professorMajor);
 			return true;
+			
 		}
 		return false;
 	}
