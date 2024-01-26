@@ -89,6 +89,7 @@ public class UniversityServiceImp implements UniversityService{
 		if(lectureList == null) {
 			return false;
 		}
+		//반복문 stream이용해서 리스트 다 출력
 		int index = studentList.indexOf(lectureName);
 		if(index == -1) {
 			return false;
@@ -127,12 +128,17 @@ public class UniversityServiceImp implements UniversityService{
 	
 	//성적 추가
 	@Override
+	//교수 강의가 
 	public boolean insertScore(String studentId, Lecture lecture) {
-		int index = studentList.indexOf(studentId);
 		if(studentList.contains(studentId)) {
-			studentList.get(index).getLectureList().set(index, lecture);
+			int index = studentList.indexOf(studentId);
+			if(index==-1) {
+				return false;
+			}
+			studentList.get(index).getLectureList().get(1).setLectureScore(index);
 			return true;
 		}
+		studentList (Student(A,B,C,[LeturList(lecture1),lecture(2)]), Student2(~~~))
 		return false;
 	}
 	

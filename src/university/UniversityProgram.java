@@ -579,20 +579,15 @@ public class UniversityProgram implements Program{
 	
 	//성적 등록
 	private void insertScore() {
-		System.out.print("교수번호 입력: ");
-		String professorId = scan.next();
-		if(!unis.matchProfessorID(professorId)) {
-			System.out.println("등록된 교수가 없습니다.");
-		}
-		
 		//Lecture lecture = professorList.get(index).getLectureList.get(0) 
-		//교수 강의 출력 메서드
+		//교수 강의 출력 메서드(index)
 		System.out.print("강의 선택 : ");
 		String lectureName = scan.next();
-		
 		if(!unis.matchLectureWithStudent(lectureName)) {
 			System.out.println("등록된 학생이 없습니다.");
 		}
+		//화학을 등록 -> 화학을 등록한 학생
+		//학생list for문으로 돌려서 lecture랑 비교해서 있으면 출력 학생을 고르면
 		System.out.print("학번 선택 : ");
 		String studentId = scan.next();
 		Student student = new Student(studentId);
@@ -608,7 +603,7 @@ public class UniversityProgram implements Program{
 	
 	//성적 수정
 	private void updateScore() {
-		
+		//등록 먼저 해주세요 하는 예외처리마 ㄴ추가되면 될 듯ㅅㅅㅅㅅㅅ
 	}
 	
 	//메뉴 출력
