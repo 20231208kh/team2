@@ -593,9 +593,8 @@ public class UniversityProgram implements Program{
 		String studentId = scan.next();
 		Student student = new Student(studentId);
 		System.out.print("성적 입력 : ");
-		int lectureScore  = scan.nextInt();
-		Lecture lecture = new Lecture(lectureScore);
-		if(!unis.insertScore(studentId, lecture)) {
+		int score = scan.nextInt();
+		if(!unis.insertScore(studentId,lecture,score)) {
 			System.out.println("성적 입력을 실패했습니다.");
 		}
 		System.out.println("성적 등록 성공!");

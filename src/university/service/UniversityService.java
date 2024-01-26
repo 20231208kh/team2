@@ -31,9 +31,7 @@ public interface UniversityService {
 	boolean searchStudent(Student student);
 	
 	//성적 입력
-	boolean insertScore(String studentId, Lecture lecture);
-	//교수 확인
-	boolean matchProfessorID(String professorId);
+	boolean insertScore(String studentId, Lecture lecture, int score);
 	//강의에 등록된 학생 출력
 	boolean matchLectureWithStudent(Lecture lecture);
 	//성적 수정

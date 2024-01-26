@@ -68,82 +68,57 @@ public class UniversityServiceImp implements UniversityService{
 		return true;
 	}
 	
-	//교수 확인
-	@Override
-	public boolean matchProfessorID(String professorId) {
-		Professor professor = new Professor(professorId);
-		if(professorList == null) {
-			professorList = new ArrayList<Professor>();
-		}
-		int index = professorList.indexOf(professor);
-		if(index == -1) {
-			return false;
-		}
-		System.out.println(professorList.get(index).equals(lectureList));
-		return true;
-	}
-	
 	//수강하고있는 학생 전체 출력
 	@Override
 	public boolean matchLectureWithStudent(Lecture lecture) {
 		if(lectureList == null) {
 			return false;
 		}
-		//반복문 stream이용해서 리스트 다 출력
+		//교수list에서 lecture와 이름이 같은 번지 index 저장
 		int index = professorList.indexOf(lecture);
 		if(index == -1) {
 			return false;
 		}
+		//강의list보다 작은동안
 		for(int i = 0; i < lectureList.size(); i++) {
-			//해당 강의를 수강하는 모든 학생 출력
-			if(professorList.get(index).getLectureList().equals(i)) {
-			
+			if(lectureList == null) {
+				return false;
 			}
-			
+			//강의 리스트의 i번째 강의가 교수list의 index번째 강의와 같다면 
+			if(professorList.get(index).getLectureList().equals(i)) {
+				//studentList에서 lecture를 가지고 있는 학생 출력
+				System.out.println(studentList.equals(lecture));
+			}
+			return true;
 		}
 		return false;
 	}
-	/*
-		---a교수 강의목록--
-		1. 경영학원론
-		2. 경영회계
-		선택 : 2
-	
-		2.경영회계 << 인스턴스
-		
-		--경영회계를 수강하는 학생--
-		1. 홍길동(학번)
-		2.임꺽정(학번)
-		선택 : 20241201
-	
-		--임꺽정 성적 입력-- 
-		studentList.get(i).getLectureList(1).setLectureScore()
-		
-		임꺽정(이름,나이,학년,학번 , 강의 [ (강의1이름,점수),(경영회계,점수) ] 
-		점수 입력 : 
-		
-		
-		3단계 : 그 중 선택(string)
-			Lecture lecture  = new Lecture(lectureName)
-			professorList.get(i).get(lectureList)
-			professor [이름 나이 전공 , [강의(강의1,강의2) 
-		
-		4단계 : 교수가 선택한 강의를 가지고있는 학생 인스턴스 출력
-	 */
 	
 	//성적 추가
 	@Override
 	//교수 강의가 
-	public boolean insertScore(String studentId, Lecture lecture) {
+	public boolean insertScore(String studentId, Lecture lecture, int score) {
+		//학생list의 id가 입력받은 studentId와 같다면
 		if(studentList.contains(studentId)) {
-			int index = studentList.indexOf(studentId);
-			if(index==-1) {
+			//studentList의 index를 indexStudentId에 저장
+			int indexStudentId = studentList.indexOf(studentId);
+			//없으면 false
+			if(indexStudentId == -1) {
 				return false;
 			}
-			studentList.get(index).getLectureList().get(1).setLectureScore(index);
-			return true;
+			//lecturelist의 lecture가 위에서 입력된 lecture와 같다면
+			if(lectureList.contains(lecture)) {
+				//lectureList의 index를 indexLecture에 저장
+				int indexLecture = lectureList.indexOf(lecture);
+				//없으면 false;
+				if(indexLecture == -1) {
+					return false;
+				}
+				//lectureList의 indexLecture와 같은 전공을 등록한 학생리스트의 indexStudentId에 입력받은 score 저장
+				studentList.get(indexStudentId).getLectureList().get(indexLecture).setLectureScore(score);
+				return true;
+			}
 		}
-		studentList (Student(A,B,C,[LeturList(lecture1),lecture(2)]), Student2(~~~))
 		return false;
 	}
 	
