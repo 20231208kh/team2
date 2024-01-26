@@ -584,13 +584,18 @@ public class UniversityProgram implements Program{
 		if(!unis.matchProfessorID(professorId)) {
 			System.out.println("등록된 교수가 없습니다.");
 		}
+		
+		//Lecture lecture = professorList.get(index).getLectureList.get(0) 
+		//교수 강의 출력 메서드
 		System.out.print("강의 선택 : ");
 		String lectureName = scan.next();
+		
 		if(!unis.matchLectureWithStudent(lectureName)) {
 			System.out.println("등록된 학생이 없습니다.");
 		}
 		System.out.print("학번 선택 : ");
 		String studentId = scan.next();
+		Student student = new Student(studentId);
 		System.out.print("성적 입력 : ");
 		int lectureScore  = scan.nextInt();
 		Lecture lecture = new Lecture(lectureScore);
