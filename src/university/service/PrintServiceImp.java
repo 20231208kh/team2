@@ -8,7 +8,7 @@ import university.Lecture;
 import university.Professor;
 
 public class PrintServiceImp implements PrintService {
-	UniversityService usi = new UniversityServiceImp();
+	
 
 	
 	@Override
@@ -180,13 +180,7 @@ public class PrintServiceImp implements PrintService {
 		});
 	}
 
-	@Override
-	//등록된 전공 번호 붙여 출력
-	public void printMajorList() {
-		usi.sendMajorList().stream().forEach(m->{
-			System.out.println((usi.sendMajorList().indexOf(m)+1) + ". " + m.getMajorName());
-		});
-	}
+	
 
 	@Override
 	public void printManageUpdateLecture() {
@@ -216,6 +210,28 @@ public class PrintServiceImp implements PrintService {
 		tmp.stream().forEach(l->{
 			System.out.println((tmp.indexOf(l)+1)+". " +l);
 		});
+	}
+
+	@Override
+	public void printSignUpError(int errorCode) {
+		switch(errorCode) {
+		case 1: System.out.println("등록된 강의가 없습니다."); break;
+		case 2: System.out.println("번호를 잘못 입력했습니다."); break;
+		case 3: System.out.println("시간이 겹치는 강의가 있습니다"); break;
+		case 4: System.out.println("신청시 최대 수강 학점을 초과합니다."); break;
+		default:
+			System.out.println("잘못된 에러코드 : " + errorCode);
+		}
+	}
+
+	@Override
+	public void printDeleteForLecturesError(int errorCode) {
+		switch(errorCode) {
+		case 1: System.out.println("번호를 잘못 입력했습니다."); break;
+		case 2: System.out.println("존재하는 강의가 아닙니다."); break;
+		default:
+			System.out.println("잘못된 에러코드 : " + errorCode);
+		}
 	}
 	
 }

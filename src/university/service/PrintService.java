@@ -45,8 +45,7 @@ public interface PrintService {
 	//등록된 교수 출력
 	void printProfessorList(List<Professor> tmp);
 	
-	//등록된 전공 출력
-	void printMajorList();
+	
 	
 	void printManageUpdateLecture();
 	
@@ -55,5 +54,9 @@ public interface PrintService {
 	
 	//등록된 강의 리스트 출력
 	void printLectureList(List<Lecture> tmp);
+	
+	
+	void printSignUpError(int errorCode);
+	void printDeleteForLecturesError(int errorCode);
 }
 

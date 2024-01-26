@@ -11,7 +11,6 @@ import university.Professor;
 
 public interface UniversityService {
 	
-	
 	//학생 등록
 	boolean addStudent(Student student);
 	//학생 수정
@@ -64,7 +63,7 @@ public interface UniversityService {
 	//수강 신청 : 김준수
 	boolean signUpForLectures(int index, Student tmp);
 	//수강 취소 : 김준수
-	boolean deleteForLectures();
+	boolean deleteForLectures(int index, Student tmp);
 	
 	
 	//성적 입력

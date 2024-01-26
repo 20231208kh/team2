@@ -459,12 +459,15 @@ public class UniversityProgram implements Program{
 	
 	//교수 수정 실행
 	private void runUpdateProfessor(int subMenu) {
-		System.out.print("수정할 교수의 ID 입력 : ");
-		String professorID = scan.next();
-		Professor tmp = usi.selectUpdateProfessor(professorID);
-		if(tmp == null) {
-			System.out.println(professorID+"로 등록된 교수가 없습니다.");
-			return;
+		Professor tmp = null;
+		if(subMenu<4 && 0<subMenu) {
+			System.out.print("수정할 교수의 ID 입력 : ");
+			String professorID = scan.next();
+			tmp = usi.selectUpdateProfessor(professorID);
+			if(tmp == null) {
+				System.out.println(professorID+"로 등록된 교수가 없습니다.");
+				return;
+			}
 		}
 		switch(subMenu) {
 		case 1:
@@ -601,12 +604,24 @@ public class UniversityProgram implements Program{
 			System.out.println("수강신청 성공");
 			return;
 		}
-		
+		System.out.println("수강신청 실패");
 	}
 	
 	//수강 취소
 	private void deleteForLectures(Student tmp) {
-		
+		if(tmp.getLectureList().size()==0 || tmp.getLectureList()== null) {
+			System.out.println("수강신청한 강의가 없습니다");
+			return;
+		}
+		System.out.println("-------수강취소--------");
+		printService.printLectureList(tmp.getLectureList());
+		System.out.print("수강취소 할 강의 : ");
+		int index = scan.nextInt() - 1;
+		if(usi.deleteForLectures(index, tmp)) {
+			System.out.println("수강취소 성공");
+			return;
+		}
+		System.out.println("수강취소 실패");
 	}
 
 	

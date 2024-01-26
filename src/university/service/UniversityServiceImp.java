@@ -14,7 +14,7 @@ import university.Student;
 
 
 public class UniversityServiceImp implements UniversityService {
-
+	PrintService prsi = new PrintServiceImp();
 	List<Student> studentList = new ArrayList<Student>();
 	List<Major> majorList = new ArrayList<Major>();
 	List<Lecture> lectureList = new ArrayList<Lecture>();
@@ -62,13 +62,10 @@ public class UniversityServiceImp implements UniversityService {
 
 	
 	@Override
-
 	public boolean updateStudentName(Student student,String name) {
-		
 		if(studentList==null) {
 			return false;
 		}
-		
 		if(studentList.contains(student)) {
 			int index = studentList.indexOf(student);
 			if(index==-1) {
@@ -78,8 +75,6 @@ public class UniversityServiceImp implements UniversityService {
 			System.out.println(studentList.get(index));
 			return true;
 		}
-		
-		
 		return false;
 	}
 
@@ -91,7 +86,6 @@ public class UniversityServiceImp implements UniversityService {
 		
 		if(studentList.contains(student)) {
 			return studentList.remove(student);
-			
 		}
 		return false;
 	}
@@ -99,7 +93,6 @@ public class UniversityServiceImp implements UniversityService {
 	@Override
 	public boolean addMajor(Major major) {
 		if(majorList.contains(major)) {
-		   
 			return false;
 		}
 		majorList.add(major);
@@ -166,10 +159,9 @@ public class UniversityServiceImp implements UniversityService {
 		if(majorList == null) {
 			return false;
 		}
-		
 		if(majorList.contains(major)) {
 			return majorList.remove(major);
-				}
+		}
 		return false;
 	}
 
@@ -222,10 +214,8 @@ public class UniversityServiceImp implements UniversityService {
 				.getLectureList().get(index).setLectureMaxCount(newLectureMaxCount);
 			lectureList.get(lectureList.indexOf(tmpLecture)).setLectureMaxCount(newLectureMaxCount);
 			return true;
-      }
-  
-	
-   return false;
+		}
+		return false;
 	}
   
     
@@ -293,7 +283,15 @@ public class UniversityServiceImp implements UniversityService {
 	@Override
 	//수강신청
 	public boolean signUpForLectures(int index , Student tmp) {
-		if(lectureList == null || lectureList.size() == 0|| index <0 ) {
+		int errorCode;
+		if(lectureList == null || lectureList.size() == 0) {
+			errorCode = 1;
+			prsi.printSignUpError(errorCode);
+			return false;
+		}
+		if(index<0 || index>= lectureList.size() ) {
+			errorCode = 2;
+			prsi.printSignUpError(errorCode);
 			return false;
 		}
 		int totalHour = 0;
@@ -303,11 +301,15 @@ public class UniversityServiceImp implements UniversityService {
 		 	if(tmpLecture.getLectureDay().equals(lectureList.get(index).getLectureDay())
 	 			&& tmpLecture.getLectureST() < lectureList.get(index).getLectureST()+ lectureList.get(index).getLectureLT() 
 	 			&& lectureList.get(index).getLectureST() < tmpLecture.getLectureST() + tmpLecture.getLectureLT()) {
+		 		errorCode = 3;
+		 		prsi.printSignUpError(errorCode);
 		 		return false;
 		 	}
 		}
 		totalHour += lectureList.get(index).getLectureLT();
 		if(totalHour> 22) {
+			errorCode = 4;
+			prsi.printSignUpError(errorCode);
 			return false;
 		}
 		int tmpCount = lectureList.get(index).getLectureCount();
@@ -324,9 +326,20 @@ public class UniversityServiceImp implements UniversityService {
 		
 	@Override
 	//수강취소
-	public boolean deleteForLectures() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteForLectures(int index, Student tmp) {
+		int errorCode;
+		if(index < 0|| tmp.getLectureList().size() <= index) {
+			errorCode = 1;
+			prsi.printDeleteForLecturesError(errorCode);
+			return false;
+		}
+		if(!lectureList.contains(tmp.getLectureList().get(index))) {
+			errorCode = 2;
+			prsi.printDeleteForLecturesError(errorCode);
+			return false;
+		}
+		studentList.get(studentList.indexOf(tmp)).getLectureList().remove(index);
+		return true;
 	}
 	
 	
