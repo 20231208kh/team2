@@ -583,8 +583,9 @@ public class UniversityProgram implements Program{
 		//교수 강의 출력 메서드(index)
 		System.out.print("강의 선택 : ");
 		String lectureName = scan.next();
-		if(!unis.matchLectureWithStudent(lectureName)) {
-			System.out.println("등록된 학생이 없습니다.");
+		Lecture lecture = new Lecture(lectureName);
+		if(!unis.matchLectureWithStudent(lecture)) {
+			System.out.println("등록된 강의가 없습니다.");
 		}
 		//화학을 등록 -> 화학을 등록한 학생
 		//학생list for문으로 돌려서 lecture랑 비교해서 있으면 출력 학생을 고르면

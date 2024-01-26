@@ -83,20 +83,25 @@ public class UniversityServiceImp implements UniversityService{
 		return true;
 	}
 	
-	//강의에 등록된 학생 출력
+	//수강하고있는 학생 전체 출력
 	@Override
-	public boolean matchLectureWithStudent(String lectureName) {
+	public boolean matchLectureWithStudent(Lecture lecture) {
 		if(lectureList == null) {
 			return false;
 		}
 		//반복문 stream이용해서 리스트 다 출력
-		int index = studentList.indexOf(lectureName);
+		int index = professorList.indexOf(lecture);
 		if(index == -1) {
 			return false;
 		}
-		//해당 학생이 등록한 강의list 출력
-		System.out.println(studentList.get(index).equals(lectureName));
-		return true;
+		for(int i = 0; i < lectureList.size(); i++) {
+			//해당 강의를 수강하는 모든 학생 출력
+			if(professorList.get(index).getLectureList().equals(i)) {
+			
+			}
+			
+		}
+		return false;
 	}
 	/*
 		---a교수 강의목록--

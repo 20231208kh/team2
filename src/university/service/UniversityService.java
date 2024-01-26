@@ -35,7 +35,7 @@ public interface UniversityService {
 	//교수 확인
 	boolean matchProfessorID(String professorId);
 	//강의에 등록된 학생 출력
-	boolean matchLectureWithStudent(String lectureName);
+	boolean matchLectureWithStudent(Lecture lecture);
 	//성적 수정
 	boolean updateScore();
 	//성적 출력

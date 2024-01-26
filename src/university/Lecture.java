@@ -34,6 +34,9 @@ public class Lecture {
 	public Lecture(int lecture) {
 		this.lectureScore = lecture;
 	}
+	public Lecture(String lectureName) {
+		this.lectureName = lectureName;
+	}
 	
 	
 }
