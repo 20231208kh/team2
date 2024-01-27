@@ -1,15 +1,12 @@
 package university;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 
-import lombok.AllArgsConstructor;
+
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
 
 public class Major {
 	
@@ -27,9 +24,6 @@ public class Major {
 		this.majorId = majorId;
 	}
 	
-	public Major(String majorName) {
-		this.majorName = majorName;
-	}
 	
 	public Major(String majorId) {
 		super();
@@ -37,10 +31,7 @@ public class Major {
 	}
   
   
-	@Override
-	public int hashCode() {
-		return Objects.hash(majorName);
-
+	
 
 	
 	
@@ -68,19 +59,7 @@ public class Major {
 	}
 
 	
-    
-
-	
-	//현재 인원만(특정 정보만) 뽑고싶을때(indexOf사용시)
-	public boolean printMajorCount() {
-		if(majorCount == 0) {
-			System.out.println("0명입니다.");
-			return false;
-		}
-		System.out.print("[현재인원 : " + majorCount + " ] ");
-		return true;
-	}
-
+  
 
 
 

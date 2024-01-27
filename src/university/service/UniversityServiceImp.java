@@ -23,18 +23,7 @@ public class UniversityServiceImp implements UniversityService {
 	Scanner scan = new Scanner(System.in);
 	
 	
-	@Override
-	public boolean addStudent(Student student) {
-		
-		if(studentList.contains(student)) {
-			System.out.println("중복된 학번 입력입니다.");
-			return false;
-		}
-		
-		studentList.add(student);
-		System.out.println(studentList);
-		return true;
-	}
+	
 
 
 	@Override
@@ -91,15 +80,7 @@ public class UniversityServiceImp implements UniversityService {
 		return false;
 	}
 
-	@Override
-	public boolean addMajor(Major major) {
-		if(majorList.contains(major)) {
-			return false;
-		}
-		majorList.add(major);
-    	return true;
-	}
-
+	
 
 	//교수 ID 수정
 	public boolean updateProfessorID(Professor tmp ,String newID) {
@@ -452,14 +433,6 @@ public class UniversityServiceImp implements UniversityService {
 	}
 
 
-	@Override
-
-	
-	public boolean searchByStudentMajor() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	
 	
 
@@ -660,9 +633,9 @@ public class UniversityServiceImp implements UniversityService {
 	//교수 강의가 
 	public boolean insertScore(String studentId, Lecture lecture, int score) {
 		//학생list의 id가 입력받은 studentId와 같다면
-		if(studentList.contains(studentId)) {
+		if(studentList.contains( new Student(studentId))) {
 			//studentList의 index를 indexStudentId에 저장
-			int indexStudentId = studentList.indexOf(studentId);
+			int indexStudentId = studentList.indexOf( new Student(studentId));
 			//없으면 false
 			if(indexStudentId == -1) {
 				return false;
@@ -699,31 +672,7 @@ public class UniversityServiceImp implements UniversityService {
 		return true;
 	}
 
-	@Override
-	public boolean updateStudent() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean deleteStudent() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	@Override
-	public boolean UpdateMajor() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean deleteMajor() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 	@Override
 	public boolean searchByProfessorMajor() {
 		// TODO Auto-generated method stub
@@ -736,17 +685,7 @@ public class UniversityServiceImp implements UniversityService {
 		return false;
 	}
 
-	@Override
-	public boolean addLecture() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean updateLecture() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 	@Override
 	public boolean addMajor(Major major) {

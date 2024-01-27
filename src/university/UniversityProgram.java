@@ -457,6 +457,7 @@ public class UniversityProgram implements Program{
 				System.out.println("학생 등록 성공 !");
 				return;
 			}
+			System.out.println("중복된 학번 입력입니다.");
 		}catch(IndexOutOfBoundsException e) {
 			System.out.println("목록에 없는 전공 선택");
 			return;
@@ -1143,7 +1144,6 @@ public class UniversityProgram implements Program{
 		//학생list for문으로 돌려서 lecture랑 비교해서 있으면 출력 학생을 고르면
 		System.out.print("학번 선택 : ");
 		String studentId = scan.next();
-		Student student = new Student(studentId);
 		System.out.print("성적 입력 : ");
 		int score = scan.nextInt();
 		if(!usi.insertScore(studentId,lecture,score)) {
