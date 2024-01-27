@@ -136,9 +136,9 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("--------조회--------");
 		System.out.println("1. 교수 조회");
 		System.out.println("2. 학생 조회");
-
-		System.out.println("3. 뒤로가기");
-
+		System.out.println("3. 전공 조회");
+		System.out.println("4. 강의 조회");
+		System.out.println("5. 종료");
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
 	}
@@ -162,6 +162,26 @@ public class PrintServiceImp implements PrintService {
 	}
 
 	@Override
+	public void printSearchStudentMenu() {
+		System.out.println("-----학생조회메뉴-----");
+		System.out.println("1. 학번으로 조회");
+		System.out.println("2. 이름으로 조회");
+		System.out.println("3. 종료");
+		System.out.println("-------------------");
+		System.out.println("메뉴 선택 : ");
+	}
+
+	@Override
+	public void printSearchMajorMenu() {
+		System.out.println("-------전공조회-------");
+		System.out.println("1. 전공별 교수 조회");
+		System.out.println("2. 전공별 학생 조회");
+		System.out.println("3. 전공 정보 조회");
+		System.out.println("4. 종료");
+		System.out.println("-------------------");
+		System.out.println("메뉴 선택 : ");
+	}
+
 
 	public void manageUpdateStudent() {
 		System.out.println("-------학생 수정-------");

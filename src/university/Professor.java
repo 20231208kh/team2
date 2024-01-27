@@ -22,6 +22,7 @@ public class Professor {
 	//과목 정보
 	List<Lecture> lectureList = new ArrayList<Lecture>();
 
+
 	
 	public Professor(String professorName, String professorId,Major professorMajor) {
 		this.professorName = professorName;
@@ -53,6 +54,7 @@ public class Professor {
 
 
 	
+
 	
 	
 	

@@ -24,12 +24,36 @@ public class Student {
 	//점수
 	int avgScore;
 	
-
-	int age;
+  int age;
 	
 	String lastNum;
 
 	
+
+	public Student(String stdname) {
+		this.studentName = stdname;
+	}
+	
+	public Student(String stdName, String stdId) {
+		this.studentName = stdName;
+		this.studentId = stdId;
+	}
+		
+	@Override
+	public String toString() {
+		return "[학번 : " + studentId + " ] " + "[이름 : " + studentName + " ] " + "[전공 : " + major.majorName + " ] " + "[입학년도 : " + year + " ] " + "[평균학점 : " + avgScore + " ] ";
+	}
+	
+	public boolean printScore() {
+		if(lectureList == null) {
+			System.out.println("등록된 정보가 없습니다.");
+			return false;
+		}
+		System.out.println("[학번 : " + studentId + " ] " + "[이름 : " + studentName + " ] " + "[전공 : " + major.majorName + " ] " + lectureList);
+		return false;
+	}
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -46,8 +70,7 @@ public class Student {
 	public int hashCode() {
 		return Objects.hash(studentId);
 	}
-	
-	
+
 	
 	public Student(String studentName,int grade, int year, int age, Major major,String lastNum) {
 		super();
@@ -69,4 +92,5 @@ public class Student {
 	
 
 	
+
 }

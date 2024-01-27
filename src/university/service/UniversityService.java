@@ -9,6 +9,7 @@ import university.Lecture;
 import university.Professor;
 
 
+
 public interface UniversityService {
 	
 	//학생 등록
@@ -55,9 +56,11 @@ public interface UniversityService {
 	//교수 전공별 조회
 	boolean searchByProfessorMajor();
 	//학생 전공별 조회
-	boolean searchByStudentMajor();
-	//학생 학번 조회
-	boolean searchByStudentId();
+	boolean searchByMajor(Major majorName);
+	//학생 이름으로 조회
+	boolean searchByStudentName(Student student);
+	//학생 학번으로 조회
+	boolean searchStudent(Student student);
 	
 
 	//수강 신청 : 김준수
@@ -67,9 +70,13 @@ public interface UniversityService {
 	
 	
 	//성적 입력
-	boolean insertScore();
+	boolean insertScore(String studentId, Lecture lecture, int score);
+	//강의에 등록된 학생 출력
+	boolean matchLectureWithStudent(Lecture lecture);
 	//성적 수정
 	boolean updateScore();
+	//성적 출력
+	boolean printScore();
 	
 	
 
