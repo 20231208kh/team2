@@ -4,6 +4,7 @@ package university;
 
 
 
+
 import java.util.Objects;
 
 import lombok.Data;
@@ -66,6 +67,7 @@ public class Lecture {
 
 	@Override
 	public int hashCode() {
+
 		return Objects.hash(lectureDay, lectureST, professorID);
 	}
 
@@ -83,3 +85,4 @@ public class Lecture {
 
 
 }
+

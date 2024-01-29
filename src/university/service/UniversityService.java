@@ -1,6 +1,7 @@
 package university.service;
 
 
+
 import java.util.List;
 
 import university.Major;
@@ -52,10 +53,12 @@ public interface UniversityService {
 	//강의 삭제 : 김준수
 	boolean deleteLecture(Lecture tmpLecture, Professor tmp);
 	
+
 	
 	//교수 전공별 조회
 	boolean searchByProfessorMajor();
 	//학생 전공별 조회
+
 	boolean searchByMajor(Major majorName);
 	//학생 이름으로 조회
 	boolean searchByStudentName(Student student);
@@ -98,3 +101,4 @@ public interface UniversityService {
 		
 	
 }
+

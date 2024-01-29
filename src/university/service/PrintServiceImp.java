@@ -11,16 +11,19 @@ public class PrintServiceImp implements PrintService {
 	
 
 	
+
 	@Override
 	public void printMenu() {
 		System.out.println("--------메뉴--------");
 		System.out.println("1. 교수 메뉴");
 		System.out.println("2. 학생 메뉴");
 		System.out.println("3. 학사 메뉴");
+
 		System.out.println("4. 프로그램 안내");
 		System.out.println("5. 프로그램 종료");
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
+
 	}
 	
 	@Override
@@ -28,6 +31,7 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("-------학생메뉴-------");
 		System.out.println("1. 수강신청");
 		System.out.println("2. 성적조회");
+
 		System.out.println("3. 뒤로가기");
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
@@ -44,6 +48,7 @@ public class PrintServiceImp implements PrintService {
 		System.out.print("메뉴 선택 : ");
 	}
 
+
 	@Override
 	public void printUniversityMenu() {
 		System.out.println("-------학사메뉴-------");
@@ -56,6 +61,7 @@ public class PrintServiceImp implements PrintService {
 
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
+
 	}
 	
 	@Override
@@ -64,6 +70,7 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("1. 교수 등록");
 		System.out.println("2. 교수 수정");
 		System.out.println("3. 교수 삭제");
+
 		System.out.println("4. 뒤로가기");
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
@@ -78,6 +85,7 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("4. 뒤로가기");
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
+
 	}
 
 	@Override
@@ -87,10 +95,12 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("2. 학생 수정");
 		System.out.println("3. 학생 삭제");
 
+
 		System.out.println("4. 뒤로 가기");
 
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
+
 	}
 
 	@Override
@@ -100,10 +110,12 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("2. 전공 수정");
 		System.out.println("3. 전공 삭제");
 
+
 		System.out.println("4. 뒤로 가기");
 
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
+
 	}
 
 	@Override
@@ -117,6 +129,7 @@ public class PrintServiceImp implements PrintService {
 
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
+
 	}
 
 	@Override
@@ -124,11 +137,18 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("-------수강신청-------");
 		System.out.println("1. 수강 신청");
 
+		System.out.println("2. 수강 정정");
+		System.out.println("3. 종료");
+		System.out.println("-------------------");
+		System.out.println("메뉴 선택 : ");
+
+
 		System.out.println("2. 수강 취소");
 		System.out.println("3. 뒤로가기");
 
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
+
 	}
 
 	@Override
@@ -140,7 +160,9 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("4. 강의 조회");
 		System.out.println("5. 종료");
 		System.out.println("-------------------");
+
 		System.out.print("메뉴 선택 : ");
+
 	}
 
 	@Override
@@ -148,10 +170,12 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("-------성적메뉴-------");
 		System.out.println("1. 성적 등록");
 		System.out.println("2. 성적 수정");
+
 		System.out.println("3. 뒤로 가기");
 
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
+
 	}
 
 	@Override
@@ -160,6 +184,16 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("프로그램을 종료합니다.");
 		System.out.println("-----------------");
 	}
+
+	
+	public void printProfessorSearch() {
+		System.out.println("--------교수 조회--------");
+		System.out.println("1. 교수 전체 조회");
+		System.out.println("2. 교수 이름에 해당하는 교수 강의 조회");
+		System.out.println("3. 전공에 해당하는 교수 이름 조회");
+		System.out.println("4. 교수 강의에 해당되는 현재 정원 조회");
+		System.out.println("5. 돌아가기");
+
 
 	@Override
 	public void printSearchStudentMenu() {
@@ -271,4 +305,5 @@ public class PrintServiceImp implements PrintService {
 	}
 	
 }
+
 

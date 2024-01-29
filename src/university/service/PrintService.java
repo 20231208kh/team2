@@ -6,6 +6,7 @@ import java.util.List;
 import university.Lecture;
 import university.Professor;
 
+
 public interface PrintService {
 	//메뉴출력
 	void printMenu();
@@ -22,6 +23,7 @@ public interface PrintService {
 	void infoProgram();
 	
 
+
 	//교수사용메뉴
 	void printProfessorMenu();
 	//성적관리
@@ -33,10 +35,12 @@ public interface PrintService {
 	void printUniversityMenu();
 	//조회
 	void printSearch();
+
 	//학생조회 메뉴
 	void printSearchStudentMenu();
 	//전공조회 메뉴
 	void printSearchMajorMenu();
+
 	//전공관리
 	void printManageMajor();
 	//교수관리
@@ -44,6 +48,13 @@ public interface PrintService {
 
 	//학생관리
 	void printManageStudent();
+	
+	//교수조회
+	void printProfessorSearch();
+
+}
+
+
 
 	//교수수정
 	void printUpdateProfessor();
@@ -65,4 +76,5 @@ public interface PrintService {
 	void printSignUpError(int errorCode);
 	void printDeleteForLecturesError(int errorCode);
 }
+
 

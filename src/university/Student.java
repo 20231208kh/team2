@@ -2,6 +2,7 @@ package university;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.Objects;
 
 import lombok.Data;
@@ -11,6 +12,7 @@ public class Student {
 	
 	List<Lecture> lectureList = new ArrayList<Lecture>();
 	Major major ;
+
 
 	
 	//학생 이름
@@ -23,7 +25,7 @@ public class Student {
 	int year;
 	//점수
 	int avgScore;
-	
+
   int age;
 	
 	String lastNum;
@@ -86,3 +88,4 @@ public class Student {
 	
 
 }
+
