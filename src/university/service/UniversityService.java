@@ -97,6 +97,13 @@ public interface UniversityService {
 	boolean isProfessorID(String professorID);
 	boolean isLectureEmpty(Lecture tmpLecture);
 	Student selectStudent(String studentID);
+	
+	
+	
+	boolean searchAllProfessor();
+	boolean searchLecturesByProfessorName(String professorName);
+	boolean professorNameSearchByMajor(String professorMajor);
+	boolean currentNumberOfLecture(String professorName);
 
 		
 	

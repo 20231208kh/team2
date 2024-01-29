@@ -52,7 +52,7 @@ public interface PrintService {
 	//교수조회
 	void printProfessorSearch();
 
-}
+
 
 
 

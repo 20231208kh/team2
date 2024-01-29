@@ -193,7 +193,7 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("3. 전공에 해당하는 교수 이름 조회");
 		System.out.println("4. 교수 강의에 해당되는 현재 정원 조회");
 		System.out.println("5. 돌아가기");
-
+	}
 
 	@Override
 	public void printSearchStudentMenu() {

@@ -1,15 +1,12 @@
 package university;
 
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 
 
 import java.text.DecimalFormat;
 
 
-import java.util.InputMismatchException;
 
 
 
@@ -162,7 +159,7 @@ public class UniversityProgram implements Program{
 			break;
 		case 4:
 			//강의 조회
-			searchLecture();
+//			searchLecture();
 			break;
 		case 5:
 			//돌아가기
@@ -212,7 +209,7 @@ public class UniversityProgram implements Program{
 			System.out.println("교수 이름을 입력하세요.");
 			String professorName=scan.next();
 			
-			unis.currentNumberOfLecture(professorName);
+			usi.currentNumberOfLecture(professorName);
 		}
 
 		//교수 이름으로 교수 강의들 찾기
@@ -220,7 +217,7 @@ public class UniversityProgram implements Program{
 			System.out.println("교수 이름을 입력하세요.");
 			String professorName=scan.next();
 			
-			unis.searchLecturesByProfessorName(professorName);
+			usi.searchLecturesByProfessorName(professorName);
 		}
 
 		//교수 전공으로 전공에 포함된 이름 찾기
@@ -228,7 +225,7 @@ public class UniversityProgram implements Program{
 			System.out.println("교수 이름을 입력하세요.");
 			String professorMajor=scan.next();
 			
-			unis.professorNameSearchByMajor(professorMajor);
+			usi.professorNameSearchByMajor(professorMajor);
 			
 			
 		}
@@ -236,7 +233,7 @@ public class UniversityProgram implements Program{
 		//교수 전체 조회
 		private void searchAllProfessor() {
 		
-			unis.searchAllProfessor();
+			usi.searchAllProfessor();
 		}
 		
 		
@@ -256,6 +253,7 @@ public class UniversityProgram implements Program{
 				runManageMajor(menu);
 			}while(menu != 4);
 		}
+		
 		
 
 
@@ -334,44 +332,35 @@ public class UniversityProgram implements Program{
 
 
 	//교수 조회
-	private void searchProfessor() {
-		int menu = scan.nextInt();
-		switch(menu) {
-		case 1:
-			searchAllProfessor();
-			break;
-		case 2:
-			searchProfessorByName();
-			break;
-		case 3:
-			searchProfessorById();
-			break;
-		case 4:
-			searchProfessorByMajor();
-			break;
-		case 5:
-			System.out.println("뒤로 가기");
-			break;
-		default:
-			throw new InputMismatchException();
-			
-		}
-	}
+//	private void searchProfessor() {
+//		int menu = scan.nextInt();
+//		switch(menu) {
+//		case 1:
+//			searchAllProfessor();
+//			break;
+//		case 2:
+//			searchProfessorByName();
+//			break;
+//		case 3:
+//			searchProfessorById();
+//			break;
+//		case 4:
+//			searchProfessorByMajor();
+//			break;
+//		case 5:
+//			System.out.println("뒤로 가기");
+//			break;
+//		default:
+//			throw new InputMismatchException();
+//			
+//		}
+//	}
 
 	
 	
 
 	
 
-	//전공 관리
-	private void manageMajor() {
-		int menu;
-		do {
-			printService.printManageMajor();
-			menu = scan.nextInt();
-			runManageMajor(menu);
-		}while(menu != 4);
-	}
 	
 
 	//전공 관리 실행
