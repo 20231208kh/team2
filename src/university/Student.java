@@ -26,7 +26,7 @@ public class Student {
 	//점수
 	int avgScore;
 
-  int age;
+	int age;
 	
 	String lastNum;
 
