@@ -185,6 +185,15 @@ public class UniversityServiceImp implements UniversityService {
 		if(tmp == null|| professorList == null || professorList.size()==0) {
 			return false;
 		}
+		//equals, contains, indexOf
+		
+		var str = "abc";
+		if(str == "abcd")
+			
+		if(str.equals("abc"))
+			
+		if(str.contains("ac")) 
+		
 		if(professorList.contains(tmp)) {
 			int index = professorList.indexOf(tmp);
 			if (index==-1) {
@@ -478,18 +487,71 @@ public class UniversityServiceImp implements UniversityService {
 	//동명이인 모두 출력
 	@Override
 	public boolean searchByStudentName(Student student) {
+		
 		if(studentList == null) {
 			studentList = new ArrayList<Student>();
 		}
+		
+		
+		/*
+		
+		if(studentList.size() != 0) {
+			for(int i = 0; i<studentList.size(); i++) {
+				if(studentList.get(i).getStudentName().equals(student.getStudentName())) {
+					System.out.println(studentList.get(i));
+					return true;
+				}
+			}
+			return false;
+		} else { // size == 0
+			return false;
+		}
+		
+		
+		if(studentList.size() != 0) {
+			for(int i = 0; i<studentList.size(); i++) {
+				if(studentList.get(i).getStudentName().equals(student.getStudentName())) {
+					System.out.println(studentList.get(i).getStudentName().equals(student.getStudentName().setScore());
+					return true;
+				}
+			}
+		} 
+		
+		return false;
+		
+		
 		for(int i = 0; i<studentList.size(); i++) {
+			if(studentList.get(i).getStudentName().equals(student.getStudentName())) {
+				System.out.println(studentList.get(i).getStudentName().equals(student.getStudentName()));
+				return true;
+			}
+		}
+		return false;
+		
+		
+		for(int i = 0; i<studentList.size(); i++) {
+			
 			if(studentList.size() != 0) {
+				
 				studentList.get(i).getStudentName().equals(student.getStudentName());
 				System.out.println(studentList.get(i));
 			}else {
 				return false;
 			}
 		}
+		
+		
 		return true;
+		*/
+		
+		for(int i = 0; i<studentList.size(); i++) {
+			Student std = studentList.get(i);
+			if(std.getStudentName().equals(student.getStudentName())) {
+				System.out.println(std);
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	//수강하고있는 학생 전체 출력
@@ -746,8 +808,29 @@ public class UniversityServiceImp implements UniversityService {
 		if(professorList == null || professorList.size() == 0) {
 			return null;
 		}
+		
+		/*
+		 * professorList
+		 * 1 배영걸 0
+		 * 2 김수현 1
+		 * 3 김태원 2
+		 * 
+		 * Professor p : 1
+		 */
+		
 		Professor p = new Professor(professorID);
 		int index = professorList.indexOf(p);
+		
+		
+		Professor p = new Professor(professorID);
+		int i=0;
+		for(Professor pf : professorList) {
+			if(pf.getProfessorId().equals(p.getProfessorId())) {
+				index = i;
+			}
+			i++;
+		}
+		
 		if(index < 0) {
 			return null;
 		}
