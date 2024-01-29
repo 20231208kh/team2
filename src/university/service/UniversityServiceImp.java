@@ -69,8 +69,7 @@ public class UniversityServiceImp implements UniversityService {
 		return false;
 	}
 
-	@Override
-
+	
 
 	//전체 조회
 	@Override
@@ -85,21 +84,7 @@ public class UniversityServiceImp implements UniversityService {
 		  return true;	   
 	}
 	
-	//강의 추가 임시->지울것
-	@Override
-	public boolean addLecture(Lecture lecture) {
-
-		lectureList.add(lecture);
 	
-		return true;
-		
-	}
-
-	@Override
-	public boolean addProfessor(Professor professor) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	
 	@Override //교수 이름을 입력받아 교수 강의들 조회
@@ -163,7 +148,7 @@ public class UniversityServiceImp implements UniversityService {
 		return true;
 	}
 	
-}
+
 	
 	
 	
