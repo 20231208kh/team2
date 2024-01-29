@@ -8,7 +8,8 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("1. 가계부 수입 내역 관리");
 		System.out.println("2. 가계부 지출 내역 관리");
 		System.out.println("3. 가계부 조회");
-		System.out.println("4. 프로그램 종료");
+		System.out.println("4. 가계부 초기화");
+		System.out.println("5. 프로그램 종료");
 		System.out.print("메뉴 선택 : ");
 		
 	}
@@ -43,7 +44,7 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("3. 지출 내역 삭제");
 		System.out.println("4. 뒤로 가기");
 		System.out.print("메뉴 선택 : ");
-		
+
 	}
 	
 	@Override
@@ -54,7 +55,16 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("3. 지출 날짜 수정");
 		System.out.println("4. 뒤로 가기");
 		System.out.print("메뉴 선택 : ");
-		
+
+	}
+	
+	@Override
+	public void printSetCateogryorUsage() {
+		System.out.println("------지출 카테고리 또는 상세 내역 수정------");
+		System.out.println("1.지출 카테고리 수정");
+		System.out.println("2.상세 내역 수정");
+		System.out.println("3.뒤로 가기");
+		System.out.print("메뉴 선택 : ");
 	}
 	
 
@@ -97,14 +107,11 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("4. 뒤로 가기");
 		System.out.print("메뉴 선택 : ");
 	}
-
 	
 	@Override
 	public void printExit() {
 		System.out.println("================");
 		System.out.println("프로그램을 종료합니다.");
 		System.out.println("================");
-		
 	}
-
 }

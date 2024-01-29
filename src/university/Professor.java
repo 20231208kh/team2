@@ -2,6 +2,7 @@ package university;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.Objects;
 
 import lombok.Data;
@@ -9,28 +10,18 @@ import lombok.Data;
 @Data
 public class Professor {
 	
-	//교수 이름
+
+	//성함
 	String professorName;
 	//교수 번호
-	String professorId;
-	//교수님 전공
-	String professorMajor;
-	//소속 학과가 필요함
+	String professorId; // 포탈 ID
+	//교수 전공
+	Major professorMajor;
 	
 	//과목 정보
 	List<Lecture> lectureList = new ArrayList<Lecture>();
 
 
-
-	//equals를 위한 생성자
-	public Professor(String professorName, String professorId, String professorMajor) {
-		super();
-		this.professorName=professorName;
-		this.professorId = professorId;
-		this.professorMajor=professorMajor;
-	}
-
-	
 
 	public Professor(String professorId) {
 		super();
@@ -44,9 +35,15 @@ public class Professor {
 		return "교수 [ 교수 이름 : " + professorName + ", 교수 번호 : " + professorId + ", 교수 전공 : "
 				+ professorMajor + ", 교수 강의 : " + lectureList + "] \n";
 	}
+
 	
-	public Professor(String professorName, String professorId) {
+	public Professor(String professorName, String professorId,Major professorMajor) {
 		this.professorName = professorName;
+		this.professorId = professorId;
+		this.professorMajor = professorMajor;
+	}
+
+	public Professor(String professorId) {
 		this.professorId = professorId;
 	}
 
@@ -66,5 +63,6 @@ public class Professor {
 	public int hashCode() {
 		return Objects.hash(professorId);
 	}
-	
+
 }
+
