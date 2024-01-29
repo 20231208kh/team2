@@ -3,6 +3,7 @@ package university.service;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import java.util.Scanner;
 
 
@@ -23,18 +24,7 @@ public class UniversityServiceImp implements UniversityService {
 	Scanner scan = new Scanner(System.in);
 	
 	
-	@Override
-	public boolean addStudent(Student student) {
-		
-		if(studentList.contains(student)) {
-			System.out.println("중복된 학번 입력입니다.");
-			return false;
-		}
-		
-		studentList.add(student);
-		System.out.println(studentList);
-		return true;
-	}
+	
 
 
 	@Override
@@ -79,7 +69,92 @@ public class UniversityServiceImp implements UniversityService {
 		return false;
 	}
 
+	
+
+	//전체 조회
 	@Override
+	public boolean searchAllProfessor() {
+		if(professorList == null || professorList.size() == 0)
+		{
+			System.out.println("조회할 수 없습니다.");
+			return false;
+		}
+		
+		  System.out.println(professorList);	
+		  return true;	   
+	}
+	
+	
+
+	
+	@Override //교수 이름을 입력받아 교수 강의들 조회
+	public boolean searchLecturesByProfessorName(String professorName) {
+	
+		if(professorList == null || professorList.size() == 0)
+		{
+			System.out.println("조회할 수 없습니다.");
+			return false;
+		}
+		
+		for(int i=0; i<professorList.size(); i++){
+			
+		if(professorList.get(i).getProfessorName().equals(professorName)) {
+				
+				System.out.println(professorList.get(i).getLectureList());
+				
+		}
+		}
+		return true;
+	
+}
+
+	@Override // 교수 전공을 받아서 교수들 이름을 출력
+	public boolean professorNameSearchByMajor(String professorMajor) {
+		
+		if(professorList == null || professorList.size() == 0)
+		{
+			System.out.println("조회할 수 없습니다.");
+			return false;
+		}
+		
+		for(int i=0; i<professorList.size(); i++){
+			
+			if(professorList.get(i).getProfessorMajor().equals(professorMajor)){
+			
+				System.out.println(professorList.get(i).getProfessorName());
+			
+			}
+			
+		}
+		return true;
+		
+}
+
+	@Override //교수 강의 현재 인원
+	public boolean currentNumberOfLecture(String professorName) {
+		if(professorList == null || professorList.size() == 0)
+		{
+			System.out.println("조회할 수 없습니다.");
+			return false;
+		}
+		
+		for(int i=0; i<professorList.size(); i++){
+			
+			if(professorList.get(i).getProfessorName().equals(professorName)){
+				System.out.println(lectureList.get(i).getLectureCount()+"명/"+
+				lectureList.get(i).getLectureMaxCount());
+			}
+		}
+		return true;
+	}
+	
+
+	
+	
+	
+	
+
+  @Override
 	public boolean deleteStudent(Student student) {
 		if(studentList == null) {
 			return false;
@@ -91,15 +166,7 @@ public class UniversityServiceImp implements UniversityService {
 		return false;
 	}
 
-	@Override
-	public boolean addMajor(Major major) {
-		if(majorList.contains(major)) {
-			return false;
-		}
-		majorList.add(major);
-    	return true;
-	}
-
+	
 
 	//교수 ID 수정
 	public boolean updateProfessorID(Professor tmp ,String newID) {
@@ -180,6 +247,7 @@ public class UniversityServiceImp implements UniversityService {
 
 
 	// 강의 등록
+  @Override
 	public boolean addLecture(String professorID, String lectureName, int lectureMaxCount
 							, String lectureDay, int lectureST, int lectureLT) {
 		if(lectureList == null) {
@@ -452,14 +520,6 @@ public class UniversityServiceImp implements UniversityService {
 	}
 
 
-	@Override
-
-	
-	public boolean searchByStudentMajor() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	
 	
 
@@ -660,9 +720,9 @@ public class UniversityServiceImp implements UniversityService {
 	//교수 강의가 
 	public boolean insertScore(String studentId, Lecture lecture, int score) {
 		//학생list의 id가 입력받은 studentId와 같다면
-		if(studentList.contains(studentId)) {
+		if(studentList.contains( new Student(studentId))) {
 			//studentList의 index를 indexStudentId에 저장
-			int indexStudentId = studentList.indexOf(studentId);
+			int indexStudentId = studentList.indexOf( new Student(studentId));
 			//없으면 false
 			if(indexStudentId == -1) {
 				return false;
@@ -699,31 +759,7 @@ public class UniversityServiceImp implements UniversityService {
 		return true;
 	}
 
-	@Override
-	public boolean updateStudent() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean deleteStudent() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	@Override
-	public boolean UpdateMajor() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean deleteMajor() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 	@Override
 	public boolean searchByProfessorMajor() {
 		// TODO Auto-generated method stub
@@ -736,17 +772,7 @@ public class UniversityServiceImp implements UniversityService {
 		return false;
 	}
 
-	@Override
-	public boolean addLecture() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean updateLecture() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 	@Override
 	public boolean addMajor(Major major) {
@@ -758,3 +784,4 @@ public class UniversityServiceImp implements UniversityService {
 	}
 
 }
+

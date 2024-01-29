@@ -1,10 +1,13 @@
 package university;
 
 
+import java.util.InputMismatchException;
+
+
 import java.text.DecimalFormat;
 
 
-import java.util.InputMismatchException;
+
 
 
 import java.util.Scanner;
@@ -17,12 +20,14 @@ import university.service.UniversityServiceImp;
 
 public class UniversityProgram implements Program{
 
+
 	
 
 	private PrintService printService = new PrintServiceImp();
 	private UniversityService usi = new UniversityServiceImp();
 	Scanner scan = new Scanner(System.in);
 	private final int EXIT_PROGRAM = 5;
+
 
 	
 	@Override
@@ -52,6 +57,7 @@ public class UniversityProgram implements Program{
 			studentMenu();
 			break;
 		case 3:
+
 			//학교 메뉴
 			universityMenu();
 			break;
@@ -60,6 +66,7 @@ public class UniversityProgram implements Program{
 			infoProgram();
 			break;
 		case 5:
+
 			//프로그램 종료
 			printService.printExitMenu();
 			break;
@@ -68,6 +75,7 @@ public class UniversityProgram implements Program{
 		}
 	}
 	
+
 	private void infoProgram() {
 		
 		printService.infoProgram();
@@ -86,6 +94,7 @@ public class UniversityProgram implements Program{
 				System.out.println("잘못된 메뉴 선택입니다.");
 				scan.nextLine();
 			}
+
 		}while(menu != 5);
 	}
 	
@@ -118,6 +127,8 @@ public class UniversityProgram implements Program{
 	
 	//조회
 	private void search() {
+
+
 		int menu = 0;
 		do {
 			printService.printSearch();
@@ -145,13 +156,10 @@ public class UniversityProgram implements Program{
 		case 3:
 			//전공 조회
 			searchMajor();
-			//1. 교수
-			//2. 학생
-			//3. 전공
 			break;
 		case 4:
 			//강의 조회
-			searchLecture();
+//			searchLecture();
 			break;
 		case 5:
 			//돌아가기
@@ -161,6 +169,93 @@ public class UniversityProgram implements Program{
 			throw new InputMismatchException();
 		}
 	}
+
+	
+	//교수 조회
+		private void searchProfessor() {
+			int menu;
+			do {
+			printService.printProfessorSearch();
+			menu=scan.nextInt();
+			runsearchProfessor(menu);
+			}while(menu!=5);//메뉴 숫자 변경 될 수 있음
+		}
+		
+		//교수 조회 실행
+		private void runsearchProfessor(int menu) {
+			
+			switch(menu) {
+			case 1:
+				searchAllProfessor();  //교수 전체 조회
+				break;
+			case 2:
+				searchLecturesByProfessorName(); //교수 이름에 해당하는 교수 강의 조회
+				break;
+			case 3:
+				professorNameSearchByMajor(); 	// 전공에 해당하는 교수 이름 조회
+				break;
+			case 4:
+				currentNumberOfLecture();  		//교수 강의 현재 인원 조회
+			case 5:
+				System.out.println("돌아갑니다.");
+				break;
+			default:
+				throw new InputMismatchException();
+			}
+		}
+		
+		//교수 강의 현재 인원 조회
+		private void currentNumberOfLecture() {
+			System.out.println("교수 이름을 입력하세요.");
+			String professorName=scan.next();
+			
+			usi.currentNumberOfLecture(professorName);
+		}
+
+		//교수 이름으로 교수 강의들 찾기
+		private void searchLecturesByProfessorName() {
+			System.out.println("교수 이름을 입력하세요.");
+			String professorName=scan.next();
+			
+			usi.searchLecturesByProfessorName(professorName);
+		}
+
+		//교수 전공으로 전공에 포함된 이름 찾기
+		private void professorNameSearchByMajor() {
+			System.out.println("교수 이름을 입력하세요.");
+			String professorMajor=scan.next();
+			
+			usi.professorNameSearchByMajor(professorMajor);
+			
+			
+		}
+
+		//교수 전체 조회
+		private void searchAllProfessor() {
+		
+			usi.searchAllProfessor();
+		}
+		
+		
+	
+		
+		
+		
+		
+
+		
+		//전공 관리
+		private void manageMajor() {
+			int menu;
+			do {
+				printService.printManageMajor();
+				menu = scan.nextInt();
+				runManageMajor(menu);
+			}while(menu != 4);
+		}
+		
+		
+
 
 
 	//학생 조회
@@ -236,70 +331,10 @@ public class UniversityProgram implements Program{
 	}
 
 
-	//교수 조회
-	private void searchProfessor() {
-		int menu = scan.nextInt();
-		switch(menu) {
-		case 1:
-			searchAllProfessor();
-			break;
-		case 2:
-			searchProfessorByName();
-			break;
-		case 3:
-			searchProfessorById();
-			break;
-		case 4:
-			searchProfessorByMajor();
-			break;
-		case 5:
-			System.out.println("뒤로 가기");
-			break;
-		default:
-			throw new InputMismatchException();
-			
-		}
-	}
-
-	
 	
 
-	//강의 조회
-	private void searchLecture() {
-    
-  }
-
-	private void searchAllProfessor() {
-//		usi.searchAllProfessor();
-		
-	}
-
-	private void searchProfessorByName() {
-//		usi.searchProfessorByName();
-		
-	}
-
-	private void searchProfessorById() {
-//		usi.searchProfessorById();
-		
-	}
-
-	private void searchProfessorByMajor() {
-//		usi.searchProfessorByMajor();
-
-		
-	}
-
-	//전공 관리
-	private void manageMajor() {
-		int menu;
-		do {
-			printService.printManageMajor();
-			menu = scan.nextInt();
-			runManageMajor(menu);
-		}while(menu != 4);
-	}
 	
+
 	//전공 관리 실행
 	private void runManageMajor(int menu) {
 		switch(menu) {
@@ -321,6 +356,7 @@ public class UniversityProgram implements Program{
 
 			break;
 
+
 		default:
 			throw new InputMismatchException();
 		}
@@ -328,6 +364,7 @@ public class UniversityProgram implements Program{
 	
 	//전공 추가
 	private void addMajor() {
+
 		System.out.print("전공 이름 : ");
 		scan.nextLine();
 		String majorName = scan.nextLine();
@@ -341,10 +378,12 @@ public class UniversityProgram implements Program{
 			return;
 		}
 		System.out.println("전공 등록 실패");
+
 	}
 	
 	//전공 수정
 	private void updateMajor() {
+
 
 		if(usi.getMajor().size()<=0) {
 			System.out.println("등록된 전공이 없습니다.");
@@ -369,6 +408,7 @@ public class UniversityProgram implements Program{
 		
 	
 
+
 	}
 	
 	//전공 삭제
@@ -388,6 +428,7 @@ public class UniversityProgram implements Program{
 			return;
 		}
 		System.out.println("전공 삭제 실패");
+
 
 		
 	}
@@ -420,10 +461,7 @@ public class UniversityProgram implements Program{
 		case 4:
 			//돌아가기
 			System.out.println("돌아가기.");
-
-			break;
-
-
+		break;
 		default:
 			throw new InputMismatchException();
 		}
@@ -431,6 +469,7 @@ public class UniversityProgram implements Program{
 	
 	//학생 등록
 	private void addStudent() {
+
 		if(usi.getMajor().size()<=0) {
 			System.out.println("전공을 먼저 등록해주세요.");
 			return;
@@ -457,16 +496,17 @@ public class UniversityProgram implements Program{
 				System.out.println("학생 등록 성공 !");
 				return;
 			}
+			System.out.println("중복된 학번 입력입니다.");
 		}catch(IndexOutOfBoundsException e) {
 			System.out.println("목록에 없는 전공 선택");
 			return;
 		}	
 
+
 	}
 	
 	//학생 수정
 	private void updateStudent() {
-
 		//학번 입력
 		System.out.print("수정할 학생의 학번을 입력 : ");
 		//인스턴스 생성
@@ -529,6 +569,7 @@ public class UniversityProgram implements Program{
 		}
 		
 
+
 		
 	}
 	
@@ -543,6 +584,7 @@ public class UniversityProgram implements Program{
 			return;
 		}
 		System.out.println("삭제 실패");
+
 
 	}
 	
@@ -571,6 +613,7 @@ public class UniversityProgram implements Program{
 			int subMenu = scan.nextInt();
 			runUpdateProfessor(subMenu);
 
+
 			break;
 		case 3:
 			//교수 삭제
@@ -580,6 +623,7 @@ public class UniversityProgram implements Program{
 			//돌아가기
 			System.out.println("돌아가기.");
 
+
 			break;
 
 		default:
@@ -587,6 +631,8 @@ public class UniversityProgram implements Program{
 		}
 	}
 	
+
+
 	//교수 추가
 	private void addProfessor() {
 		if(usi.getMajor().size() <=0) {
@@ -667,6 +713,7 @@ public class UniversityProgram implements Program{
 			throw new InputMismatchException();
 		}
 
+
 	}
 	
 	//교수 삭제
@@ -681,11 +728,13 @@ public class UniversityProgram implements Program{
 		}
 		System.out.println("삭제에 실패했습니다.");
 
+
 	}
 	
 	//학생 사용 메뉴
 	private void studentMenu() {
 		int menu;
+
 		System.out.print("학번을 입력해주세요 : ");
 		String studentID = scan.next();
 		Student tmp = usi.selectStudent(studentID);
@@ -708,6 +757,7 @@ public class UniversityProgram implements Program{
 		case 1:
 			//수강 관리
 			manageSingUp(tmp);
+
 			break;
 		case 2:
 			//성적 조회
@@ -723,18 +773,22 @@ public class UniversityProgram implements Program{
 	//수강 관리
 
 	private void manageSingUp(Student tmp) {
+
 		int menu;
 		do {
 			printService.printManageSignUp();
 			menu = scan.nextInt();
 
+			
+
+
 			runManageSignUp(menu, tmp);
+
 
 		}while(menu != 3);
 	}
 	
 	//수강 관리 실행
-
 	private void runManageSignUp(int menu, Student tmp) {
 		switch(menu) {
 		case 1:
@@ -744,7 +798,6 @@ public class UniversityProgram implements Program{
 		case 2:
 			//수강 취소
 			deleteForLectures(tmp);
-
 			break;
 		case 3:
 			System.out.println("돌아가기.");
@@ -754,7 +807,6 @@ public class UniversityProgram implements Program{
 		}
 	}
 	
-
 
 	//수강 신청
 	private void signUpForLectures(Student tmp) {
@@ -804,10 +856,12 @@ public class UniversityProgram implements Program{
 		return;
 	}
 
+
 	
 	//교수 사용 메뉴
 	private void professorMenu() {
 		int menu;
+
 		System.out.print("아이디를 입력해주세요 : ");
 		String professorID = scan.next();
 		if(usi.isProfessorID(professorID)) {
@@ -834,6 +888,7 @@ public class UniversityProgram implements Program{
 			manageScore(professorID);
 			break;
 			//내 강의를 듣고있는 학생 전체 출력
+
 		case 3:
 			System.out.println("돌아가기.");
 			break;
@@ -843,7 +898,9 @@ public class UniversityProgram implements Program{
 	}
 
 	//강의 관리
+
 	private void manageLecture(String professorID) {
+
 
 		int menu;
 		do {
@@ -851,10 +908,14 @@ public class UniversityProgram implements Program{
 			menu = scan.nextInt();
 
 			runManageLecture(menu, professorID);
+
 		}while(menu != 4);
 	}
 	
 	//강의 관리 실행
+
+
+
 	private void runManageLecture(int menu, String professorID) {
 		switch(menu) {
 		case 1:
@@ -868,6 +929,7 @@ public class UniversityProgram implements Program{
 		case 3:
 			//강의 삭제
 			deleteLecture(professorID);
+
 			break;
 		case 4:
 			//돌아가기
@@ -1105,12 +1167,14 @@ public class UniversityProgram implements Program{
 
 			runManageScore(menu , professorID);
 
+
 		}while(menu != 3);
 	}
 	
 	//성적 관리 실행
 
 	private void runManageScore(int menu, String professorID) {
+
 
 		switch(menu) {
 		case 1:
@@ -1131,6 +1195,7 @@ public class UniversityProgram implements Program{
 	
 	//성적 등록
 	private void insertScore() {
+
 		//Lecture lecture = professorList.get(index).getLectureList.get(0) 
 		//교수 강의 출력 메서드(index)
 		System.out.print("강의 선택 : ");
@@ -1143,7 +1208,6 @@ public class UniversityProgram implements Program{
 		//학생list for문으로 돌려서 lecture랑 비교해서 있으면 출력 학생을 고르면
 		System.out.print("학번 선택 : ");
 		String studentId = scan.next();
-		Student student = new Student(studentId);
 		System.out.print("성적 입력 : ");
 		int score = scan.nextInt();
 		if(!usi.insertScore(studentId,lecture,score)) {
@@ -1151,14 +1215,17 @@ public class UniversityProgram implements Program{
 		}
 		System.out.println("성적 등록 성공!");
 		return;
+
 	}
 	
 	//성적 수정
 	private void updateScore() {
+
 		//등록 먼저 해주세요 하는 예외처리마 ㄴ추가되면 될 듯ㅅㅅㅅㅅㅅ
 	}
 	
 	
+
 	//메뉴 출력
 	@Override
 	public void printMenu() {
@@ -1171,4 +1238,6 @@ public class UniversityProgram implements Program{
 		printService.printExitMenu();
 	}
 
+
 }
+

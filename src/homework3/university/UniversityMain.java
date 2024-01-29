@@ -1,7 +1,6 @@
-package university;
+package homework3.university;
 
 public class UniversityMain {
-
 	/* 대학생 관리 프로그램을 작성하세요.
 	 * - 기본 기능
 	 *   - 교수 관리
@@ -20,11 +19,10 @@ public class UniversityMain {
 	 * - 과에 학부 추가해도 됨
 	 * - 제출일 : 1월 26일. 상황봐서 변경될 수 있음.
 	 * */
-	public static void main(String[] args) {
-		UniversityProgram p = new UniversityProgram();
-		p.run();
+	public static void main(String args[])
+	{
+		UniversityProgram up=new UniversityProgram();
+		
+		up.run();
 	}
-
-
 }
-
