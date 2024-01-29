@@ -1179,7 +1179,7 @@ public class UniversityProgram implements Program{
 		switch(menu) {
 		case 1:
 			//성적 등록
-			insertScore();
+			insertScore(professorID);
 			break;
 		case 2:
 			//성적 수정
@@ -1193,16 +1193,24 @@ public class UniversityProgram implements Program{
 		}
 	}
 	
+	//Lecture lecture = professorList.get(index).getLectureList.get(0) 
+			//교수 강의 출력 메서드(index)
+	
 	//성적 등록
-	private void insertScore() {
-
-		//Lecture lecture = professorList.get(index).getLectureList.get(0) 
-		//교수 강의 출력 메서드(index)
+	private void insertScore(String professorID) {
+		//교수 id 비교한다. "교수 전체 리스트에 있는거랑 비교"
+		Professor tmp = usi.matchProfessorID(professorID);
+		//return 받은 교수 리스트에서 뭐 받아와야해?
+		//그 교수가 가지고 있는 강의 리스트 일단 다 출력해서 확인
+		printService.printProfessorLectureList(tmp);
+		//강의 선택받는다.
 		System.out.print("강의 선택 : ");
 		String lectureName = scan.next();
-		Lecture lecture = new Lecture(lectureName);
-		if(!usi.matchLectureWithStudent(lecture)) {
+		//강의 리스트에서 선택한 강의와 그 강의를 수강하는 학생 전체 출력해줘
+		if(!usi.matchLectureWithStudent(tmp, lectureName)) {
 			System.out.println("등록된 강의가 없습니다.");
+		}else {
+			System.out.println("수강중인 학생출력");
 		}
 		//화학을 등록 -> 화학을 등록한 학생
 		//학생list for문으로 돌려서 lecture랑 비교해서 있으면 출력 학생을 고르면

@@ -73,9 +73,11 @@ public interface UniversityService {
 	
 	
 	//성적 입력
-	boolean insertScore(String studentId, Lecture lecture, int score);
+	boolean insertScore(String professorID, String studentId, Lecture lecture, int score);
+	//교수 id 확인
+	Professor matchProfessorID(String professorID);
 	//강의에 등록된 학생 출력
-	boolean matchLectureWithStudent(Lecture lecture);
+	boolean matchLectureWithStudent(Professor tmp, String LectureName);
 	//성적 수정
 	boolean updateScore();
 	//성적 출력

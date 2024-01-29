@@ -475,8 +475,7 @@ public class UniversityServiceImp implements UniversityService {
 		return true;
 	}
 	
-	//학생 이름으로 조회(등록된 동명이인 모두 출력. 앞에 번호 1 --- 2 --- 이런식으로 출력되게 equals로 걍 바로 조회가능 string이여서
-	//학번 빠른순서대로 숫자매겨볼수있을까
+	//동명이인 모두 출력
 	@Override
 	public boolean searchByStudentName(Student student) {
 		if(studentList == null) {
@@ -495,12 +494,14 @@ public class UniversityServiceImp implements UniversityService {
 	
 	//수강하고있는 학생 전체 출력
 	@Override
-	public boolean matchLectureWithStudent(Lecture lecture) {
-		if(lectureList == null) {
+	public boolean matchLectureWithStudent(Professor tmp, String lectureName) {
+		if(lectureList == null || lectureList.size() == 0) {
 			return false;
 		}
-		//교수list에서 lecture와 이름이 같은 번지 index 저장
-		int index = professorList.indexOf(lecture);
+		//교수list에서 특정한 교수 index인 tmp의 lecture와 lecturelist lecture를 비교해서
+		//같은거 출력
+		
+		int index = professorList.indexOf(tmp);
 		if(index == -1) {
 			return false;
 		}
@@ -711,14 +712,10 @@ public class UniversityServiceImp implements UniversityService {
 	}
 	
 	
-	
-
-
-	
 	//성적 추가
 	@Override
 	//교수 강의가 
-	public boolean insertScore(String studentId, Lecture lecture, int score) {
+	public boolean insertScore(String professorID, String studentId, Lecture lecture, int score) {
 		//학생list의 id가 입력받은 studentId와 같다면
 		if(studentList.contains( new Student(studentId))) {
 			//studentList의 index를 indexStudentId에 저장
@@ -741,6 +738,20 @@ public class UniversityServiceImp implements UniversityService {
 			}
 		}
 		return false;
+	}
+	
+	//입력받은 교수 id가 리스트에 있는지 확인
+	@Override
+	public Professor matchProfessorID(String professorID) {
+		if(professorList == null || professorList.size() == 0) {
+			return null;
+		}
+		Professor p = new Professor(professorID);
+		int index = professorList.indexOf(p);
+		if(index < 0) {
+			return null;
+		}
+		return professorList.get(index);
 	}
 	
 	//성적 출력
