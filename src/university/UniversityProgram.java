@@ -331,34 +331,6 @@ public class UniversityProgram implements Program{
 	}
 
 
-	//교수 조회
-//	private void searchProfessor() {
-//		int menu = scan.nextInt();
-//		switch(menu) {
-//		case 1:
-//			searchAllProfessor();
-//			break;
-//		case 2:
-//			searchProfessorByName();
-//			break;
-//		case 3:
-//			searchProfessorById();
-//			break;
-//		case 4:
-//			searchProfessorByMajor();
-//			break;
-//		case 5:
-//			System.out.println("뒤로 가기");
-//			break;
-//		default:
-//			throw new InputMismatchException();
-//			
-//		}
-//	}
-
-	
-	
-
 	
 
 	
