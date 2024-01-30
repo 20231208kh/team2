@@ -1193,32 +1193,20 @@ public class UniversityProgram implements Program{
 		}
 	}
 	
-	//Lecture lecture = professorList.get(index).getLectureList.get(0) 
-			//교수 강의 출력 메서드(index)
-	
 	//성적 등록
 	private void insertScore(String professorID) {
-		//교수 id 비교한다. "교수 전체 리스트에 있는거랑 비교"
 		Professor tmp = usi.matchProfessorID(professorID);
-		//return 받은 교수 리스트에서 뭐 받아와야해?
-		//그 교수가 가지고 있는 강의 리스트 일단 다 출력해서 확인
 		printService.printProfessorLectureList(tmp);
-		//강의 선택받는다.
 		System.out.print("강의 선택 : ");
 		String lectureName = scan.next();
-		//강의 리스트에서 선택한 강의와 그 강의를 수강하는 학생 전체 출력해줘
 		if(!usi.matchLectureWithStudent(tmp, lectureName)) {
-			System.out.println("등록된 강의가 없습니다.");
-		}else {
-			System.out.println("수강중인 학생출력");
+			System.out.println("등록한 학생이 없습니다.");
 		}
-		//화학을 등록 -> 화학을 등록한 학생
-		//학생list for문으로 돌려서 lecture랑 비교해서 있으면 출력 학생을 고르면
 		System.out.print("학번 선택 : ");
 		String studentId = scan.next();
 		System.out.print("성적 입력 : ");
 		int score = scan.nextInt();
-		if(!usi.insertScore(studentId,lecture,score)) {
+		if(!usi.insertScore(studentId,lectureName,score)) {
 			System.out.println("성적 입력을 실패했습니다.");
 		}
 		System.out.println("성적 등록 성공!");

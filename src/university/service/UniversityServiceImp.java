@@ -560,32 +560,20 @@ public class UniversityServiceImp implements UniversityService {
 		if(lectureList == null || lectureList.size() == 0) {
 			return false;
 		}
-		//교수list에서 특정한 교수 index인 tmp의 lecture와 lecturelist lecture를 비교해서
-		//같은거 출력
-		
-		int index = professorList.indexOf(tmp);
-		if(index == -1) {
-			return false;
-		}
-		//강의list보다 작은동안
-		for(int i = 0; i < lectureList.size(); i++) {
-			if(lectureList == null) {
-				return false;
+		for(int i = 0; i<tmp.getLectureList().size(); i++) {
+			Lecture lecture = tmp.getLectureList().get(i);
+			if(lecture.getLectureName().equals(lectureName)) {
+				for(int j = 0; i<studentList.size(); j++) {
+					Student std = studentList.get(j);
+					if(std.getLectureList().contains(lecture)) {
+						System.out.println("학번 : "+std.getStudentId() +" 이름 : "+ std.getStudentName() + " 전공 : " + std.getMajor().getMajorName());
+						return true;
+					}
+				}
 			}
-			//강의 리스트의 i번째 강의가 교수list의 index번째 강의와 같다면 
-			if(professorList.get(index).getLectureList().equals(i)) {
-				//studentList에서 lecture를 가지고 있는 학생 출력
-				System.out.println(studentList.equals(lecture));
-			}
-			return true;
 		}
 		return false;
 	}
-
-
-	
-	
-
 
 	@Override
 	public List<Major> getMajor() {
@@ -777,30 +765,28 @@ public class UniversityServiceImp implements UniversityService {
 	//성적 추가
 	@Override
 	//교수 강의가 
-	public boolean insertScore(String professorID, String studentId, Lecture lecture, int score) {
-		//학생list의 id가 입력받은 studentId와 같다면
-		if(studentList.contains( new Student(studentId))) {
-			//studentList의 index를 indexStudentId에 저장
-			int indexStudentId = studentList.indexOf( new Student(studentId));
-			//없으면 false
-			if(indexStudentId == -1) {
+	public boolean insertScore(String studentId, String lectureName, int score) {
+		//학생 리스트에서 찾는다. 입력받은 학번, 강의이름으로
+		for(int i = 0; i < studentList.size(); i++) {
+			//for문이 차례대로 비교한다.
+			Student std = studentList.get(i);
+			//입력받은 학번이 학생리스트의 학번과 다르다면
+			if(!std.getStudentId().equals(studentId)){
 				return false;
 			}
-			//lecturelist의 lecture가 위에서 입력된 lecture와 같다면
-			if(lectureList.contains(lecture)) {
-				//lectureList의 index를 indexLecture에 저장
-				int indexLecture = lectureList.indexOf(lecture);
-				//없으면 false;
-				if(indexLecture == -1) {
-					return false;
-				}
-				//lectureList의 indexLecture와 같은 전공을 등록한 학생리스트의 indexStudentId에 입력받은 score 저장
-				studentList.get(indexStudentId).getLectureList().get(indexLecture).setLectureScore(score);
+			//학생리스트 i의 강의리스트i를 비교한다.
+			Lecture lecture = std.getLectureList().get(i);
+			//lecture의 강의 이름과 입력받은 강의이름이 같은지 비교
+			if(lecture.getLectureName().equals(lectureName)) {
+				//같다면 std의 강의리스트i에 성적 입력.
+				lecture.setLectureScore(score);
 				return true;
 			}
 		}
 		return false;
 	}
+		
+	
 	
 	//입력받은 교수 id가 리스트에 있는지 확인
 	@Override
@@ -808,19 +794,8 @@ public class UniversityServiceImp implements UniversityService {
 		if(professorList == null || professorList.size() == 0) {
 			return null;
 		}
-		
-		/*
-		 * professorList
-		 * 1 배영걸 0
-		 * 2 김수현 1
-		 * 3 김태원 2
-		 * 
-		 * Professor p : 1
-		 */
-		
-		Professor p = new Professor(professorID);
-		int index = professorList.indexOf(p);
-		
+	
+		int index = professorList.indexOf(professorID);
 		
 		Professor p = new Professor(professorID);
 		int i=0;
