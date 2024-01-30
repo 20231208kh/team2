@@ -1195,7 +1195,7 @@ public class UniversityProgram implements Program{
 	
 	//성적 등록
 	private void insertScore(String professorID) {
-		Professor tmp = usi.matchProfessorID(professorID);
+		Professor tmp = usi.selectUpdateProfessor(professorID);
 		printService.printProfessorLectureList(tmp);
 		System.out.print("강의 선택 : ");
 		String lectureName = scan.next();
@@ -1211,7 +1211,6 @@ public class UniversityProgram implements Program{
 		}
 		System.out.println("성적 등록 성공!");
 		return;
-
 	}
 	
 	//성적 수정

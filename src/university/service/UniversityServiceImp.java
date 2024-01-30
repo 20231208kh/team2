@@ -492,58 +492,6 @@ public class UniversityServiceImp implements UniversityService {
 			studentList = new ArrayList<Student>();
 		}
 		
-		
-		/*
-		
-		if(studentList.size() != 0) {
-			for(int i = 0; i<studentList.size(); i++) {
-				if(studentList.get(i).getStudentName().equals(student.getStudentName())) {
-					System.out.println(studentList.get(i));
-					return true;
-				}
-			}
-			return false;
-		} else { // size == 0
-			return false;
-		}
-		
-		
-		if(studentList.size() != 0) {
-			for(int i = 0; i<studentList.size(); i++) {
-				if(studentList.get(i).getStudentName().equals(student.getStudentName())) {
-					System.out.println(studentList.get(i).getStudentName().equals(student.getStudentName().setScore());
-					return true;
-				}
-			}
-		} 
-		
-		return false;
-		
-		
-		for(int i = 0; i<studentList.size(); i++) {
-			if(studentList.get(i).getStudentName().equals(student.getStudentName())) {
-				System.out.println(studentList.get(i).getStudentName().equals(student.getStudentName()));
-				return true;
-			}
-		}
-		return false;
-		
-		
-		for(int i = 0; i<studentList.size(); i++) {
-			
-			if(studentList.size() != 0) {
-				
-				studentList.get(i).getStudentName().equals(student.getStudentName());
-				System.out.println(studentList.get(i));
-			}else {
-				return false;
-			}
-		}
-		
-		
-		return true;
-		*/
-		
 		for(int i = 0; i<studentList.size(); i++) {
 			Student std = studentList.get(i);
 			if(std.getStudentName().equals(student.getStudentName())) {
@@ -723,14 +671,6 @@ public class UniversityServiceImp implements UniversityService {
 		return true;
 	}
 
-	
-
-
-
-
-
-
-	
 	@Override
 	//교수 특정
 	public Professor selectUpdateProfessor(String id) {
@@ -745,8 +685,6 @@ public class UniversityServiceImp implements UniversityService {
 		return professorList.get(num);
 	}
 
-	
-	
 	@Override
 	//학생특정
 	public Student selectStudent(String studentID) {
@@ -761,55 +699,27 @@ public class UniversityServiceImp implements UniversityService {
 		return studentList.get(num);
 	}
 	
-	
 	//성적 추가
 	@Override
-	//교수 강의가 
 	public boolean insertScore(String studentId, String lectureName, int score) {
 		//학생 리스트에서 찾는다. 입력받은 학번, 강의이름으로
 		for(int i = 0; i < studentList.size(); i++) {
 			//for문이 차례대로 비교한다.
 			Student std = studentList.get(i);
-			//입력받은 학번이 학생리스트의 학번과 다르다면
-			if(!std.getStudentId().equals(studentId)){
-				return false;
-			}
-			//학생리스트 i의 강의리스트i를 비교한다.
-			Lecture lecture = std.getLectureList().get(i);
-			//lecture의 강의 이름과 입력받은 강의이름이 같은지 비교
-			if(lecture.getLectureName().equals(lectureName)) {
-				//같다면 std의 강의리스트i에 성적 입력.
-				lecture.setLectureScore(score);
-				return true;
+			if(std.getStudentId().equals(studentId)) {
+				for(int j = 0; j<std.getLectureList().size(); j++) {
+					//학생리스트 i의 강의리스트i를 비교한다.
+					Lecture lecture = std.getLectureList().get(i);
+					//lecture의 강의 이름과 입력받은 강의이름이 같은지 비교
+					if(lecture.getLectureName().equals(lectureName)) {
+						//같다면 std의 강의리스트i에 성적 입력.
+						lecture.setLectureScore(score);
+						return true;
+					}
+				}
 			}
 		}
 		return false;
-	}
-		
-	
-	
-	//입력받은 교수 id가 리스트에 있는지 확인
-	@Override
-	public Professor matchProfessorID(String professorID) {
-		if(professorList == null || professorList.size() == 0) {
-			return null;
-		}
-	
-		int index = professorList.indexOf(professorID);
-		
-		Professor p = new Professor(professorID);
-		int i=0;
-		for(Professor pf : professorList) {
-			if(pf.getProfessorId().equals(p.getProfessorId())) {
-				index = i;
-			}
-			i++;
-		}
-		
-		if(index < 0) {
-			return null;
-		}
-		return professorList.get(index);
 	}
 	
 	//성적 출력
