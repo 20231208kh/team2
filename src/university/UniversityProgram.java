@@ -778,13 +778,7 @@ public class UniversityProgram implements Program{
 		do {
 			printService.printManageSignUp();
 			menu = scan.nextInt();
-
-			
-
-
 			runManageSignUp(menu, tmp);
-
-
 		}while(menu != 3);
 	}
 	
@@ -887,8 +881,6 @@ public class UniversityProgram implements Program{
 			//성적 관리
 			manageScore(professorID);
 			break;
-			//내 강의를 듣고있는 학생 전체 출력
-
 		case 3:
 			System.out.println("돌아가기.");
 			break;

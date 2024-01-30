@@ -98,11 +98,11 @@ public class UniversityServiceImp implements UniversityService {
 		
 		for(int i=0; i<professorList.size(); i++){
 			
-		if(professorList.get(i).getProfessorName().equals(professorName)) {
-				
-				System.out.println(professorList.get(i).getLectureList());
-				
-		}
+			if(professorList.get(i).getProfessorName().equals(professorName)) {
+					
+					System.out.println(professorList.get(i).getLectureList());
+					
+			}
 		}
 		return true;
 	
@@ -111,24 +111,19 @@ public class UniversityServiceImp implements UniversityService {
 	@Override // 교수 전공을 받아서 교수들 이름을 출력
 	public boolean professorNameSearchByMajor(String professorMajor) {
 		
-		if(professorList == null || professorList.size() == 0)
-		{
+		if(professorList == null || professorList.size() == 0) {
 			System.out.println("조회할 수 없습니다.");
 			return false;
 		}
 		
 		for(int i=0; i<professorList.size(); i++){
-			
-			if(professorList.get(i).getProfessorMajor().equals(professorMajor)){
-			
-				System.out.println(professorList.get(i).getProfessorName());
-			
+			if(professorList.get(i).getProfessorMajor().getMajorName().equals(professorMajor)){
+				System.out.println(professorList.get(i).getProfessorName()+" : " 
+						+ professorList.get(i).getLectureList());
 			}
-			
 		}
 		return true;
-		
-}
+	}
 
 	@Override //교수 강의 현재 인원
 	public boolean currentNumberOfLecture(String professorName) {
@@ -141,20 +136,19 @@ public class UniversityServiceImp implements UniversityService {
 		for(int i=0; i<professorList.size(); i++){
 			
 			if(professorList.get(i).getProfessorName().equals(professorName)){
-				System.out.println(lectureList.get(i).getLectureCount()+"명/"+
-				lectureList.get(i).getLectureMaxCount());
+				for(int j = 0 ; j < professorList.get(i).getLectureList().size() ; j++) {
+					System.out.println(professorList.get(i).getLectureList().get(j).getLectureName()+" : "
+							+ professorList.get(i).getLectureList().get(j).getLectureCount()+" / "
+							+ professorList.get(i).getLectureList().get(j).getLectureMaxCount());
+				}
 			}
 		}
 		return true;
 	}
 	
-
-	
-	
-	
 	
 
-  @Override
+	@Override
 	public boolean deleteStudent(Student student) {
 		if(studentList == null) {
 			return false;
