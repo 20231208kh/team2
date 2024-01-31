@@ -169,7 +169,8 @@ public class UniversityProgram implements Program{
 			throw new InputMismatchException();
 		}
 	}
-
+	
+//박석훈 조회 메뉴
 	//강의 조회 <교수 조회,학생 조회> 선택 메뉴
 	private void searchLecture() {
 		int menu;
@@ -205,7 +206,7 @@ public class UniversityProgram implements Program{
 		do {
 		printService.printProfessorLectuerSearch();
 		menu=scan.nextInt();
-		professorLectureSearch(menu);
+		runProfessorLectureSearch(menu);
 		}while(menu!=4);
 	}
 	
@@ -215,22 +216,97 @@ public class UniversityProgram implements Program{
 		do {
 			printService.printStudentLecturetSearch();
 			menu=scan.nextInt();
-			studentLectureSearch(menu);
+			runStudentLectureSearch(menu);
 		}while(menu!=4);
 	}
 	
 	//교수 강의 조회 실행
-	private void professorLectureSearch(int menu) {
+	private void runProfessorLectureSearch(int menu) {
 		
+		switch(menu) {
+		case 1:
+			searchLectureStartTimeAndLectureName(); //해당 요일의 교수 수업 시작 시간과 강의 이름만 조회
+			break;
+		case 2:
+			searchSelectLectureAndLectureCount(); //교수의 강의를 입력받고 해당 강의의 현재 정원 조회
+			break;
+		case 3:
+			searchStudentNameFromLecture(); 	// 해당 요일의 수업을 듣는 학생들 이름 조회
+			break;
+		case 4:
+			System.out.println("돌아갑니다.");
+			break;
+		default:
+			throw new InputMismatchException();
+		}
 		
+	}
+	
+	 //해당 요일의 교수 수업 시작 시간과 강의 이름만 조회
+	private void searchLectureStartTimeAndLectureName() {
+		System.out.println("교수의 ID를 입력하세요.");
+		String professorId=scan.next();
+		System.out.println("요일을 입력하세요.");
+		String lectureDay=scan.next();
+		
+		usi.searchLectureStartTimeAndLectureName( professorId,lectureDay);
 		
 	}
 
+	 //교수의 강의를 입력받고 해당 강의의 현재 정원 조회
+	private void searchSelectLectureAndLectureCount() {
+		System.out.println("교수의 ID를 입력하세요.");
+		String professorId=scan.next();
+		System.out.println("교수의 강의 이름을 입력하세요.");
+		String lectureName=scan.next();
+		
+		usi.searchSelectLectureAndLectureCount(professorId,lectureName);
+	}
+
+	// 해당 요일의 수업을 듣는 학생들 이름 조회
+	private void searchStudentNameFromLecture() {
+		System.out.println("교수의 ID를 입력하세요.");
+		String professorId=scan.next();
+		System.out.println("요일을 입력하세요.");
+		String lectureDay=scan.next();
+		
+		usi.searchStudentNameFromLecture(professorId,lectureDay);
+	}
 
 	//학생 강의 조회 실행
-	private void studentLectureSearch(int menu) {
+	private void runStudentLectureSearch(int menu) {
 		
+		switch(menu) {
+		case 1:
+			searchStudentLectureScore(); //입력받은 강의 점수를 조회
+			break;
+		case 2:
+			searchAllLecturefromStudent(); //입력받은 이름의 학생 강의 모두 조회
+			break;
+		case 3:
+			searchStudentLectureAverageScore(); 	// 입력받은 학번의 학생 점수의 평균 조회
+			break;
+		case 4:
+			System.out.println("돌아갑니다.");
+			break;
+		default:
+			throw new InputMismatchException();
+		}
 		
+	}
+	
+	//입력받은 강의 점수를 조회 구현
+	private void searchStudentLectureScore() {
+		
+	}
+
+	//입력받은 이름의 학생 강의 모두 조회 구현
+	private void searchAllLecturefromStudent() {
+		
+	}
+
+	// 입력받은 학번의 학생 점수의 평균 조회 구현
+	private void searchStudentLectureAverageScore() {
 		
 	}
 
@@ -301,7 +377,7 @@ public class UniversityProgram implements Program{
 		
 		
 	
-		
+//박석훈 조회 끝
 		
 		
 		

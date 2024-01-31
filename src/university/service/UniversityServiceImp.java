@@ -71,7 +71,7 @@ public class UniversityServiceImp implements UniversityService {
 
 	
 
-	//전체 조회
+	//교수전체 조회
 	@Override
 	public boolean searchAllProfessor() {
 		if(professorList == null || professorList.size() == 0)
@@ -148,7 +148,77 @@ public class UniversityServiceImp implements UniversityService {
 		return true;
 	}
 	
+	
+	@Override  //해당 요일의 교수 수업 시작 시간과 강의 이름만 조회
+	public boolean searchLectureStartTimeAndLectureName(String professorId, String lectureDay) {
+		if(professorList == null || professorList.size() == 0)
+		{
+			System.out.println("조회할 수 없습니다.");
+			return false;
+		}
+		
+		for(int i=0; i<professorList.size(); i++) {
+		
+			if(professorList.get(i).getProfessorId().equals(professorId)){ //교수리스트의 번호와 입력한 교수 번호가 동일하다면
+			
+				for(int j=0; j<professorList.get(i).getLectureList().size(); j++) {
+				
+				System.out.println("강의 이름:"+professorList.get(i).getLectureList().get(j).getLectureName()
+				+"강의 시작 시간 : " +professorList.get(i).getLectureList().get(j).getLectureST());
+					
+			}
+					
+		}
+	}
+		return true;
+	}
 
+	@Override //교수의 강의를 입력받고 해당 강의의 현재 정원 조회
+	public boolean searchSelectLectureAndLectureCount(String professorId, String lectureName) {
+		if(professorList == null || professorList.size() == 0)
+		{
+			System.out.println("조회할 수 없습니다.");
+			return false;
+		}
+		for(int i=0; i<professorList.size(); i++) {
+			
+			if(professorList.get(i).getProfessorId().equals(professorId)){ //교수리스트의 번호와 입력한 교수 번호가 동일하다면
+				
+				for(int j=0; j<professorList.get(i).getLectureList().size(); j++) {
+					
+					if(professorList.get(i).getLectureList().get(j).equals(lectureName))
+						
+						professorList.get(i).getLectureList().get(j).getLectureMaxCount();
+					
+			}
+				
+	}
+		}
+		return true;
+		
+	}
+
+	@Override // 교수가 해당 강의 수업을 듣는 학생들의 이름 조회
+	public boolean searchStudentNameFromLecture(String professorId, String lectureDay) {
+		
+		if(professorList == null || professorList.size() == 0)
+		{
+			System.out.println("조회할 수 없습니다.");
+			return false;
+		}
+		
+		 for(int i=0; i<professorList.size(); i++) {
+			 
+			
+			 for(int j=0; j<professorList.get(i).getLectureList().size(); j++)
+				if(professorList.get(i).getProfessorId().equals(lectureDay) &&studentList.get(i).get) {
+				 
+					if(professorList.get(i).getLectureList().get(j).getLectureDay().equals()	)			
+				}
+	
+		 }
+			return false;
+	}
 	
 	
 	
@@ -782,6 +852,7 @@ public class UniversityServiceImp implements UniversityService {
 		majorList.add(major);
 		return true;
 	}
+
 
 }
 

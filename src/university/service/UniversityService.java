@@ -99,13 +99,27 @@ public interface UniversityService {
 	Student selectStudent(String studentID);
 	
 	
+	//박석훈
 	
-	boolean searchAllProfessor();
-	boolean searchLecturesByProfessorName(String professorName);
+	//교수 조회
+	//교수 전체 조회
+	boolean searchAllProfessor(); 
+	//교수 이름에 해당하는 교수 강의 조회
+	boolean searchLecturesByProfessorName(String professorName); 
+	// 전공에 해당하는 교수 이름 조회
 	boolean professorNameSearchByMajor(String professorMajor);
+	//교수 강의 현재 인원 조회
 	boolean currentNumberOfLecture(String professorName);
-
+	
+	//교수 강의 조회
+	 //해당 요일의 교수 수업 시작 시간과 강의 이름만 조회
+	boolean searchLectureStartTimeAndLectureName(String professorId,String lectureDay);
+	 //교수의 강의를 입력받고 해당 강의의 현재 정원 조회
+	boolean searchSelectLectureAndLectureCount(String professorId, String lectureName);
+	// 해당 교수의 수업을 듣는 학생들 이름 조회
+	boolean searchStudentNameFromLecture(String professortId, String lectureDay);
 		
+	//학생 강의 조회
 	
 }
 
