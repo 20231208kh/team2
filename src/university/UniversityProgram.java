@@ -236,14 +236,6 @@ public class UniversityProgram implements Program{
 			usi.searchAllProfessor();
 		}
 		
-		
-	
-		
-		
-		
-		
-
-		
 		//전공 관리
 		private void manageMajor() {
 			int menu;
@@ -254,9 +246,6 @@ public class UniversityProgram implements Program{
 			}while(menu != 4);
 		}
 		
-		
-
-
 
 	//학생 조회
 	private void searchStudent() {
@@ -289,13 +278,9 @@ public class UniversityProgram implements Program{
 	
 	//학번으로 1명 조회
 	private void searchStudentId() {
-		//학번 입력
 		System.out.print("학번 입력 : ");
 		String stdId = scan.next();
-		//객체 생성
-		Student student = new Student(stdId);
-		//serviceimp
-		if(!usi.searchStudent(student)) {
+		if(!usi.searchStudent(stdId)) {
 			System.out.println("일치하는 학생이 없습니다.");
 		}
 		return;
@@ -303,13 +288,9 @@ public class UniversityProgram implements Program{
 	
 	//이름 중복되는 학생들 전체조회
 	private void searchStudentName() {
-		//이름 입력
 		System.out.print("학생 이름 입력 : ");
 		String stdName = scan.next();
-		//객체 생성
-		Student student = new Student(stdName);
-		//serviceimp
-		if(!usi.searchByStudentName(student)) {
+		if(!usi.searchByStudentName(stdName)) {
 			System.out.println("일치하는 학생이 없습니다.");
 		}
 		return;
@@ -317,23 +298,14 @@ public class UniversityProgram implements Program{
 
 	//전공 조회
 	private void searchMajor() {
-		//전공명 입력
 		scan.nextLine();
 		System.out.print("전공명 입력 : ");
-		String mName = scan.next();
-		//객체 생성
-		Major majorName = new Major(mName);
-		//serviceimp
+		String majorName = scan.next();
 		if(!usi.searchByMajor(majorName)) {
 			System.out.println("일치하는 전공이 없습니다.");
 		}
 		return;
 	}
-
-
-	
-
-	
 
 	//전공 관리 실행
 	private void runManageMajor(int menu) {
@@ -757,7 +729,6 @@ public class UniversityProgram implements Program{
 		case 1:
 			//수강 관리
 			manageSingUp(tmp);
-
 			break;
 		case 2:
 			//성적 조회
@@ -843,17 +814,18 @@ public class UniversityProgram implements Program{
 	
 	//성적 조회
 	private void searchScore() {
-
-		//학번 입력
 		System.out.print("학번 입력 : ");
 		String stdId = scan.next();
-		//객체 생성
-		Student studentId = new Student(stdId);
-		//serviceimp
-		if(!usi.searchStudent(studentId)) {
+		if(!usi.searchStudent(stdId)) {
 			System.out.println("등록되지 않은 학번입니다.");
+			return;
 		};
-		return;
+		System.out.print("강의 선택 : ");
+		String lectureName = scan.next();
+		if(!usi.printScore(stdId, lectureName)) {
+			System.out.print("등록되지 않은 강의입니다.");
+			return;
+		};
 	}
 
 
@@ -1194,13 +1166,14 @@ public class UniversityProgram implements Program{
 	}
 	
 	//성적 등록
-	private void insertScore(String professorID) {
+	private boolean insertScore(String professorID) {
 		Professor tmp = usi.selectUpdateProfessor(professorID);
 		printService.printProfessorLectureList(tmp);
 		System.out.print("강의 선택 : ");
 		String lectureName = scan.next();
 		if(!usi.matchLectureWithStudent(tmp, lectureName)) {
 			System.out.println("등록한 학생이 없습니다.");
+			return false;
 		}
 		System.out.print("학번 선택 : ");
 		String studentId = scan.next();
@@ -1210,12 +1183,12 @@ public class UniversityProgram implements Program{
 			System.out.println("성적 입력을 실패했습니다.");
 		}
 		System.out.println("성적 등록 성공!");
-		return;
+		return true;
 	}
 	
 	//성적 수정
 	private void updateScore() {
-
+		
 		//등록 먼저 해주세요 하는 예외처리마 ㄴ추가되면 될 듯ㅅㅅㅅㅅㅅ
 	}
 	

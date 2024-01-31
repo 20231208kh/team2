@@ -445,48 +445,41 @@ public class UniversityServiceImp implements UniversityService {
 		return false;
 	}
 	
-	
-	
-	
 	//전공 조회
 	@Override
-	public boolean searchByMajor(Major majorName) {
+	public boolean searchByMajor(String majorName) {
 		if(majorList == null) {
 			majorList = new ArrayList<Major>();
 		}
-		int index = majorList.indexOf(majorName);
-		if(index == -1) {
-			return false;
+		for(int i = 0; i<majorList.size(); i++) {			
+			Major major = majorList.get(i);
+			if(major.getMajorName().equals(majorName)) {
+				System.out.println(major);
+				return true;
+			}
 		}
-		System.out.print(majorList.get(index));
-		return true;			
+		return false;
 	}
-	/*
-	if(majorList.contains(majorName)){
-		Stream<Major> stream = majorList.stream();
-		//filter(majorName)
-		stream.filter(m->m.equals(majorName)).forEach(m->System.out.print(m));
-		return true;
-	}
-	*/
 	
 	//학번을 받아서 학생 조회(1명)
 	@Override
-	public boolean searchStudent(Student student) {
+	public boolean searchStudent(String stdId) {
 		if(studentList == null) {
 			studentList = new ArrayList<Student>();
 		}
-		int index = studentList.indexOf(student);
-		if(index == -1) {
-			return false;
+		for(int i = 0; i<studentList.size(); i++) {
+			Student std = studentList.get(i);
+			if(std.getStudentId().equals(stdId)) {
+				System.out.println(std);
+				return true;
+			}
 		}
-		System.out.print(studentList.get(index));
-		return true;
+		return false;
 	}
 	
 	//동명이인 모두 출력
 	@Override
-	public boolean searchByStudentName(Student student) {
+	public boolean searchByStudentName(String stdName) {
 		
 		if(studentList == null) {
 			studentList = new ArrayList<Student>();
@@ -494,7 +487,7 @@ public class UniversityServiceImp implements UniversityService {
 		
 		for(int i = 0; i<studentList.size(); i++) {
 			Student std = studentList.get(i);
-			if(std.getStudentName().equals(student.getStudentName())) {
+			if(std.getStudentName().equals(stdName)) {
 				System.out.println(std);
 				return true;
 			}
@@ -724,8 +717,22 @@ public class UniversityServiceImp implements UniversityService {
 	
 	//성적 출력
 	@Override
-	public boolean printScore() {
-		// TODO Auto-generated method stub
+	public boolean printScore(String stdId, String lectureName) {
+		if(lectureList == null || lectureList.size() == 0) {
+			return false;	
+		}
+		for(int i = 0; i<studentList.size(); i++) {
+			Student std = studentList.get(i);
+			if(std.getStudentId().equals(stdId)) {
+				for(int j = 0; j<std.getLectureList().size(); j++) {
+					Lecture lecture = std.getLectureList().get(j);
+					if(lecture.getLectureName().equals(lectureName)) {
+						System.out.println("[강의 : " + lecture.getLectureName() + "] " + "[성적 : " + lecture.getLectureScore() + "]");
+						return true;
+					}
+				}
+			}
+		}
 		return false;
 	}
 
