@@ -159,7 +159,7 @@ public class UniversityProgram implements Program{
 			break;
 		case 4:
 			//강의 조회
-//			searchLecture();
+			searchLecture();
 			break;
 		case 5:
 			//돌아가기
@@ -170,8 +170,71 @@ public class UniversityProgram implements Program{
 		}
 	}
 
+	//강의 조회 <교수 조회,학생 조회> 선택 메뉴
+	private void searchLecture() {
+		int menu;
+		do {
+		printService.printProfessor_StudentLectureSearch();
+		menu=scan.nextInt();
+		Professor_StudentLectureSearch(menu);
+		}while(menu!=3);
+	}
+
+	//강의 조회 <교수 조회,학생 조회> 선택 메뉴 실행
+	private void Professor_StudentLectureSearch(int menu) {
+		
+		switch(menu) {
+		case 1:
+			 professorLectuerSearch();  //교수 강의 조회
+			break;
+		case 2:
+			studentLecturetSearch(); //학생 강의 조회
+			break;
+		case 3:
+			System.out.println("돌아갑니다.");
+			break;
+		default:
+			throw new InputMismatchException();
+		}
+		
+	}
+
+	//교수 강의 조회
+	private void professorLectuerSearch() {
+		int menu;
+		do {
+		printService.printProfessorLectuerSearch();
+		menu=scan.nextInt();
+		professorLectureSearch(menu);
+		}while(menu!=4);
+	}
 	
-	//교수 조회
+	//학생 강의 조회
+	private void studentLecturetSearch() {
+		int menu;
+		do {
+			printService.printStudentLecturetSearch();
+			menu=scan.nextInt();
+			studentLectureSearch(menu);
+		}while(menu!=4);
+	}
+	
+	//교수 강의 조회 실행
+	private void professorLectureSearch(int menu) {
+		
+		
+		
+	}
+
+
+	//학생 강의 조회 실행
+	private void studentLectureSearch(int menu) {
+		
+		
+		
+	}
+
+		//교수 조회
 		private void searchProfessor() {
 			int menu;
 			do {

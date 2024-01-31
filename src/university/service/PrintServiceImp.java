@@ -140,7 +140,6 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("4. 강의 조회");
 		System.out.println("5. 종료");
 		System.out.println("-------------------");
-
 		System.out.print("메뉴 선택 : ");
 
 	}
@@ -169,14 +168,37 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("1. 교수 전체 조회");
 		System.out.println("2. 교수 이름에 해당하는 교수 강의 조회");
 		System.out.println("3. 전공에 해당하는 교수 이름 조회");
-		System.out.println("4. 교수 강의에 해당되는 현재 정원 조회");
-		System.out.println("5. 돌아가기");
+		System.out.println("4. 돌아가기");
+		System.out.println("-----------------");
+		System.out.print("메뉴 선택 : ");
 	}
-	public void printLectuerSearch() {
+	
+	public void printProfessor_StudentLectureSearch() {
 		System.out.println("--------강의 조회--------");
-		System.out.println("요일을 입력 받고 해당 요일에 있는 강의 모두 출력하기");
-		System.out.println("요일을 입력 받고 해당 요일에 수업이 없는 지 확인하기");
-		
+		System.out.println("1.교수 강의 조회");
+		System.out.println("2.교수 강의 조회");
+		System.out.println("3.돌아가기");
+		System.out.println("-----------------");
+		System.out.print("메뉴 선택 : ");
+	}
+	
+	public void printProfessorLectuerSearch() {
+		System.out.println("--------교수 강의 조회--------");
+		System.out.println("1.입력받은 요일의 교수 수업 시작 시간과 강의 이름만 조회");
+		System.out.println("2.교수 강의를 입력 받고 해당되는 강의의 현재 정원 조회);");
+		System.out.println("3.입력받은 요일의 수업을 듣는 학생들 이름 조회");
+		System.out.println("4.돌아가기");
+		System.out.println("-----------------");
+		System.out.print("메뉴 선택 : ");
+	}
+	public void printStudentLecturetSearch() {
+		System.out.println("--------학생 강의 조회--------");
+		System.out.println("1.입력받은 강의 점수를 조회");
+		System.out.println("2.입력받은 이름의 학생 강의 모두 조회");
+		System.out.println("3.입력받은 학번의 학생 점수의 평균 조회");
+		System.out.println("4.돌아가기");
+		System.out.println("-----------------");
+		System.out.print("메뉴 선택 : ");
 	}
 	@Override
 	public void printSearchStudentMenu() {
@@ -185,7 +207,7 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("2. 이름으로 조회");
 		System.out.println("3. 종료");
 		System.out.println("-------------------");
-		System.out.println("메뉴 선택 : ");
+		System.out.print("메뉴 선택 : ");
 	}
 
 	@Override
@@ -196,7 +218,7 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("3. 전공 정보 조회");
 		System.out.println("4. 종료");
 		System.out.println("-------------------");
-		System.out.println("메뉴 선택 : ");
+		System.out.print("메뉴 선택 : ");
 	}
 
 
