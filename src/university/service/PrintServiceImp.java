@@ -18,7 +18,6 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("1. 교수 메뉴");
 		System.out.println("2. 학생 메뉴");
 		System.out.println("3. 학사 메뉴");
-
 		System.out.println("4. 프로그램 안내");
 		System.out.println("5. 프로그램 종료");
 		System.out.println("-------------------");
@@ -31,7 +30,6 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("-------학생메뉴-------");
 		System.out.println("1. 수강신청");
 		System.out.println("2. 성적조회");
-
 		System.out.println("3. 뒤로가기");
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
@@ -43,7 +41,6 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("1. 강의관리");
 		System.out.println("2. 성적관리");
 		System.out.println("3. 뒤로가기");
-
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
 	}
@@ -56,7 +53,6 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("2. 학생 관리");
 		System.out.println("3. 전공 관리");
 		System.out.println("4. 조회");
-
 		System.out.println("5. 뒤로 가기");
 
 		System.out.println("-------------------");
@@ -70,7 +66,6 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("1. 교수 등록");
 		System.out.println("2. 교수 수정");
 		System.out.println("3. 교수 삭제");
-
 		System.out.println("4. 뒤로가기");
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
@@ -94,10 +89,7 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("1. 학생 등록");
 		System.out.println("2. 학생 수정");
 		System.out.println("3. 학생 삭제");
-
-
 		System.out.println("4. 뒤로 가기");
-
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
 
@@ -109,10 +101,7 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("1. 전공 등록");
 		System.out.println("2. 전공 수정");
 		System.out.println("3. 전공 삭제");
-
-
 		System.out.println("4. 뒤로 가기");
-
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
 
@@ -124,9 +113,7 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("1. 강의 등록");
 		System.out.println("2. 강의 수정");
 		System.out.println("3. 강의 삭제");
-
 		System.out.println("4. 뒤로 가기");
-
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
 
@@ -136,16 +123,9 @@ public class PrintServiceImp implements PrintService {
 	public void printManageSignUp() {
 		System.out.println("-------수강신청-------");
 		System.out.println("1. 수강 신청");
-
 		System.out.println("2. 수강 정정");
-		System.out.println("3. 종료");
-		System.out.println("-------------------");
-		System.out.println("메뉴 선택 : ");
-
-
-		System.out.println("2. 수강 취소");
-		System.out.println("3. 뒤로가기");
-
+		System.out.println("3. 수강 취소");
+		System.out.println("4. 뒤로가기");
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
 
@@ -160,7 +140,6 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("4. 강의 조회");
 		System.out.println("5. 종료");
 		System.out.println("-------------------");
-
 		System.out.print("메뉴 선택 : ");
 
 	}
@@ -170,9 +149,7 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("-------성적메뉴-------");
 		System.out.println("1. 성적 등록");
 		System.out.println("2. 성적 수정");
-
 		System.out.println("3. 뒤로 가기");
-
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
 
@@ -191,10 +168,38 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("1. 교수 전체 조회");
 		System.out.println("2. 교수 이름에 해당하는 교수 강의 조회");
 		System.out.println("3. 전공에 해당하는 교수 이름 조회");
-		System.out.println("4. 교수 강의에 해당되는 현재 정원 조회");
-		System.out.println("5. 돌아가기");
+		System.out.println("4. 돌아가기");
+		System.out.println("-----------------");
+		System.out.print("메뉴 선택 : ");
 	}
-
+	
+	public void printProfessor_StudentLectureSearch() {
+		System.out.println("--------강의 조회--------");
+		System.out.println("1.교수 강의 조회");
+		System.out.println("2.교수 강의 조회");
+		System.out.println("3.돌아가기");
+		System.out.println("-----------------");
+		System.out.print("메뉴 선택 : ");
+	}
+	
+	public void printProfessorLectuerSearch() {
+		System.out.println("--------교수 강의 조회--------");
+		System.out.println("1.입력받은 요일의 교수 수업 시작 시간과 강의 이름만 조회");
+		System.out.println("2.교수 강의를 입력 받고 해당되는 강의의 현재 정원 조회);");
+		System.out.println("3.입력받은 요일의 수업을 듣는 학생들 이름 조회");
+		System.out.println("4.돌아가기");
+		System.out.println("-----------------");
+		System.out.print("메뉴 선택 : ");
+	}
+	public void printStudentLecturetSearch() {
+		System.out.println("--------학생 강의 조회--------");
+		System.out.println("1.입력받은 강의 점수를 조회");
+		System.out.println("2.입력받은 이름의 학생 강의 모두 조회");
+		System.out.println("3.입력받은 학번의 학생 점수의 평균 조회");
+		System.out.println("4.돌아가기");
+		System.out.println("-----------------");
+		System.out.print("메뉴 선택 : ");
+	}
 	@Override
 	public void printSearchStudentMenu() {
 		System.out.println("-----학생조회메뉴-----");
@@ -202,7 +207,7 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("2. 이름으로 조회");
 		System.out.println("3. 종료");
 		System.out.println("-------------------");
-		System.out.println("메뉴 선택 : ");
+		System.out.print("메뉴 선택 : ");
 	}
 
 	@Override
@@ -213,7 +218,7 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("3. 전공 정보 조회");
 		System.out.println("4. 종료");
 		System.out.println("-------------------");
-		System.out.println("메뉴 선택 : ");
+		System.out.print("메뉴 선택 : ");
 	}
 
 
