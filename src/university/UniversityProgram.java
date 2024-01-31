@@ -1155,7 +1155,7 @@ public class UniversityProgram implements Program{
 			break;
 		case 2:
 			//성적 수정
-			updateScore();
+			updateScore(professorID);
 			break;
 		case 3:
 			System.out.println("돌아가기.");
@@ -1175,25 +1175,39 @@ public class UniversityProgram implements Program{
 			System.out.println("등록한 학생이 없습니다.");
 			return false;
 		}
-		System.out.print("학번 선택 : ");
+		System.out.print("학번 선택 :  ");
 		String studentId = scan.next();
 		System.out.print("성적 입력 : ");
 		int score = scan.nextInt();
 		if(!usi.insertScore(studentId,lectureName,score)) {
 			System.out.println("성적 입력을 실패했습니다.");
+			return false;
 		}
 		System.out.println("성적 등록 성공!");
 		return true;
 	}
 	
 	//성적 수정
-	private void updateScore() {
-		
-		//등록 먼저 해주세요 하는 예외처리마 ㄴ추가되면 될 듯ㅅㅅㅅㅅㅅ
+	private boolean updateScore(String professorID) {
+		Professor tmp = usi.selectUpdateProfessor(professorID);
+		printService.printProfessorLectureList(tmp);
+		System.out.print("강의 선택 : ");
+		String lectureName = scan.next();
+		if(!usi.matchLectureWithStudent(tmp, lectureName)) {
+			System.out.println("등록한 학생이 없습니다.");
+			return false;
+		}
+		System.out.print("학번 선택 :  ");
+		String studentId = scan.next();
+		System.out.print("성적 입력 : ");
+		int score = scan.nextInt();
+		if(!usi.updateScore(studentId,lectureName,score)) {
+			System.out.println("성적을 먼저 등록해주세요.");
+		}
+		System.out.println("성적 수정 성공!");
+		return true;
 	}
 	
-	
-
 	//메뉴 출력
 	@Override
 	public void printMenu() {

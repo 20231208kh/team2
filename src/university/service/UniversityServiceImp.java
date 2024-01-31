@@ -695,17 +695,12 @@ public class UniversityServiceImp implements UniversityService {
 	//성적 추가
 	@Override
 	public boolean insertScore(String studentId, String lectureName, int score) {
-		//학생 리스트에서 찾는다. 입력받은 학번, 강의이름으로
 		for(int i = 0; i < studentList.size(); i++) {
-			//for문이 차례대로 비교한다.
 			Student std = studentList.get(i);
 			if(std.getStudentId().equals(studentId)) {
 				for(int j = 0; j<std.getLectureList().size(); j++) {
-					//학생리스트 i의 강의리스트i를 비교한다.
 					Lecture lecture = std.getLectureList().get(i);
-					//lecture의 강의 이름과 입력받은 강의이름이 같은지 비교
 					if(lecture.getLectureName().equals(lectureName)) {
-						//같다면 std의 강의리스트i에 성적 입력.
 						lecture.setLectureScore(score);
 						return true;
 					}
@@ -753,8 +748,25 @@ public class UniversityServiceImp implements UniversityService {
 	}
 
 	@Override
-	public boolean updateScore() {
-		// TODO Auto-generated method stub
+	public boolean updateScore(String studentId,String lectureName,int score) {
+		if(lectureList == null || lectureList.size() == 0) {
+			return false;	
+		}
+		for(int i = 0; i < studentList.size(); i++) {
+			Student std = studentList.get(i);
+			if(std.getStudentId().equals(studentId)) {
+				for(int j = 0; j<std.getLectureList().size(); j++) {
+					Lecture lecture = std.getLectureList().get(i);
+					if(lecture.getLectureScore() > 0 || lecture == null){
+						return false;
+					}
+					if(lecture.getLectureName().equals(lectureName)) {
+						lecture.setLectureScore(score);
+						return true;
+					}
+				}
+			}
+		}
 		return false;
 	}
 

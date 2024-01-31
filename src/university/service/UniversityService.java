@@ -77,7 +77,7 @@ public interface UniversityService {
 	//강의에 등록된 학생 출력
 	boolean matchLectureWithStudent(Professor tmp, String LectureName);
 	//성적 수정
-	boolean updateScore();
+	boolean updateScore(String studentId,String lectureName,int score);
 	//성적 출력
 	boolean printScore(String stdId, String lectureName);
 	
