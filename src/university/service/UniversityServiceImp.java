@@ -119,7 +119,7 @@ public class UniversityServiceImp implements UniversityService {
 		
 		for(int i=0; i<professorList.size(); i++){
 			
-			if(professorList.get(i).getProfessorMajor().equals(professorMajor)){
+			if(professorList.get(i).getProfessorMajor().getMajorName().equals(professorMajor)){
 			
 				System.out.println(professorList.get(i).getProfessorName());
 			
@@ -130,7 +130,7 @@ public class UniversityServiceImp implements UniversityService {
 		
 }
 
-	@Override //교수 강의 현재 인원
+	@Override //교수 강의 현재 인원 최대정원이랑 합치는게 좋아보임
 	public boolean currentNumberOfLecture(String professorName) {
 		if(professorList == null || professorList.size() == 0)
 		{
@@ -138,68 +138,59 @@ public class UniversityServiceImp implements UniversityService {
 			return false;
 		}
 		
-		for(int i=0; i<professorList.size(); i++){
-			
-			if(professorList.get(i).getProfessorName().equals(professorName)){
-				System.out.println(lectureList.get(i).getLectureCount()+"명/"+
-				lectureList.get(i).getLectureMaxCount());
-			}
-		}
-		return true;
-	}
-	
-	
-	@Override  //해당 요일의 교수 수업 시작 시간과 강의 이름만 조회
-	public boolean searchLectureStartTimeAndLectureName(String professorId, String lectureDay) {
-		if(professorList == null || professorList.size() == 0)
+		for(int i=0; i<professorList.size(); i++)
 		{
-			System.out.println("조회할 수 없습니다.");
-			return false;
-		}
-		
-		for(int i=0; i<professorList.size(); i++) {
-		
-			if(professorList.get(i).getProfessorId().equals(professorId)){ //교수리스트의 번호와 입력한 교수 번호가 동일하다면
 			
-				for(int j=0; j<professorList.get(i).getLectureList().size(); j++) {
+			if(professorList.get(i).getProfessorName().equals(professorName)) {
+					
+				System.out.println(professorList.get(i).getProfessorName());
 				
-				System.out.println("강의 이름:"+professorList.get(i).getLectureList().get(j).getLectureName()
-				+"강의 시작 시간 : " +professorList.get(i).getLectureList().get(j).getLectureST());
-					
-			}
-					
-		}
-	}
-		return true;
-	}
-
-	@Override //교수의 강의를 입력받고 해당 강의의 현재 정원 조회
-	public boolean searchSelectLectureAndLectureCount(String professorId, String lectureName) {
-		if(professorList == null || professorList.size() == 0)
-		{
-			System.out.println("조회할 수 없습니다.");
-			return false;
-		}
-		for(int i=0; i<professorList.size(); i++) {
-			
-			if(professorList.get(i).getProfessorId().equals(professorId)){ //교수리스트의 번호와 입력한 교수 번호가 동일하다면
-				
-				for(int j=0; j<professorList.get(i).getLectureList().size(); j++) {
-					
-					if(professorList.get(i).getLectureList().get(j).equals(lectureName))
+					for(int j=0; j<lectureList.size(); j++) {
 						
-						professorList.get(i).getLectureList().get(j).getLectureMaxCount();
-					
-			}
+						
+							System.out.println("교수 이름:"+professorList.get(i).getProfessorName()+
+									"현재 정원 : "+professorList.get(i).getLectureList().get(j).getLectureCount()+ 
+									" 최대 정원 : "+professorList.get(i).getLectureList().get(j).getLectureMaxCount());
 				
-	}
+			
+					}
+			}
 		}
 		return true;
+	}
+	
+	//교수 강의 조회
+	
+	@Override  //교수 1명 특정하고 강의 리스트를 가져옴
+			   // 강의리스트에서 강의 이름과 동일한 것을 뽑아 오고 그 강의의 이름과 강의 시작 시간을 가져옴.
+	public boolean searchLectureStartTimeAndLectureName(String professorId, String lectureName) {
+		if(professorList == null || professorList.size() == 0){
+			System.out.println("조회할 수 없습니다.");
+			return false;
+		}
 		
+		for(int i=0; i<professorList.size(); i++){
+		
+			if(professorList.get(i).getProfessorId().equals(professorId)){ //교수리스트의 번호와 입력한 교수 번호가 동일하다면 
+			
+				for(int j=0; j<professorList.get(i).getLectureList().size(); j++){ //강의 리스트 j를 가진 for문을 돌림
+				
+					if(professorList.get(i).getLectureList().get(j).getLectureName().equals(lectureName)){
+					
+							System.out.println("강의 이름:"+professorList.get(i).getLectureList().get(j).getLectureName()
+							+"강의 시작 시간 : " +professorList.get(i).getLectureList().get(j).getLectureST());
+					}
+					
+				}
+			}
+		
+		}
+		return true;
 	}
 
-	@Override // 교수가 해당 강의 수업을 듣는 학생들의 이름 조회
-	public boolean searchStudentNameFromLecture(String professorId, String lectureDay) {
+	@Override //교수 id를 입력받고 교수가 가지고 있는 강의들 중에 강의를 선택해서 그 강의를 듣는 학생들의 이름 조회
+				
+	public boolean  searchStudentNameFromLecture(String professorId, String lectureName) {
 		
 		if(professorList == null || professorList.size() == 0)
 		{
@@ -210,20 +201,129 @@ public class UniversityServiceImp implements UniversityService {
 		
 		// Professor tmp = new Professor(professorId); 를 선언한 뒤 넣어준것과 같다
 		// professorList에서 professorId를 갖는 교수를 Professor tmp라고 선언
-		Professor tmp2 = professorList.get(professorList.indexOf(new Professor(professorId)));
+		// Professor tmp2 = professorList.get(professorList.indexOf(new Professor(professorId)));
+		// tmp2교수의 강의리스트중 i번지 강의 이름이 lectureName과 같은가
+		// 강의를 특정하고 학생 리스트를 가져와서 for문 j 사용 
+		// j학생의 강의 리스트에 특정한 강의가 포함 된다면 출력
 		
-		for(int i=0; i<professorList.size(); i++) {
-			 
+		for(int i=0; i<lectureList.size(); i++){
 			
-			 for(int j=0; j<professorList.get(i).getLectureList().size(); j++)
-				if(professorList.get(i).getProfessorId().equals(lectureDay) &&studentList.get(i).get) {
-				 
-					if(professorList.get(i).getLectureList().get(j).getLectureDay().equals()	)			
+			if(lectureList.get(i).getProfessorID().equals(professorId)){ //강의 리스트에 있는 교수의 번호와 내가 입력한 교수 번호가 일치한다면
+				
+				for(int j=0; j<studentList.size(); j++) {
+					
+					for(int k=0; k<studentList.get(i).getLectureList().size(); k++) {
+							
+						if(studentList.get(j).getLectureList().get(k).getLectureName().equals(lectureName)){
+							
+							//학생 리스트에 있는 강의 리스트를 가져오고 그 강의 리스트에 있는 강의 이름과 내가 입력한 강의 이름과 동일하다면
+							
+							System.out.println("학생 이름 : "+studentList.get(j).getStudentName()); //학생 리스트에 있는 학생 이름을 가져와서 출력해라
+							
+							
+						}
+					}
 				}
-	
-		 }
-			return false;
+			}
+		
+		}
+		
+		return true;
 	}
+	
+	//학생 강의 조회
+	@Override
+	//입력받은 학생의 강의 점수를 조회
+	public boolean searchStudentLectureScore(String studentId, String lectureName) {
+		
+		if(studentList == null || studentList.size() == 0)
+		{
+			System.out.println("조회할 수 없습니다.");
+			return false;
+		}
+		
+		for(int i=0; i<studentList.size(); i++) {
+			
+			if(studentList.get(i).getStudentId().equals(studentId)) { //학생 리스트안에 학생 학번이 사용자가 입력한 학번과 동일하다면
+			
+				for(int j=0; j<studentList.get(i).getLectureList().size(); j++) {
+					
+					if(studentList.get(i).getLectureList().get(j).getLectureName().equals(lectureName)){ 
+						//입력한 학생의 학번과 동일한 학생의 강의 리스트에서 사용자가 강의 이름을 입력한 것과 동일한 강의 이름이라면
+						
+						System.out.println("강의 이름 : "+studentList.get(i).getLectureList().get(j).getLectureName() //해당 강의 이름과 해당 강의의 점수를 출력하시오.
+								+ "강의 점수 : " + studentList.get(i).getLectureList().get(j).getLectureScore());
+								
+						
+						
+					}
+				}
+			}
+		}
+		return true;
+		
+		
+	}
+
+	@Override
+	//입력받은 학생의 강의 이름과 성적 모두 조회
+	public boolean searchStudentAllLecture(String studentId) {
+		if(studentList == null || studentList.size() == 0)
+		{
+			System.out.println("조회할 수 없습니다.");
+			return false;
+		}
+		for(int i=0; i<studentList.size(); i++) {
+			
+			if(studentList.get(i).getStudentId().equals(studentId)) { //학생 리스트안에 학생 학번이 사용자가 입력한 학번과 동일하다면
+						
+				for(int j=0; j<studentList.size(); j++) {	//해당 학생의 강의 이름과 강의 성적을 모두 출력
+					System.out.println("강의 이름: "+studentList.get(i).getLectureList().get(j).getLectureName() +
+							" 강의 성적 : " + studentList.get(i).getLectureList().get(j).getLectureScore());
+					
+				}
+			}
+				
+			
+		}
+		
+		return true;
+	}
+
+	@Override
+	//입력받은 학번의 학생이 가지고 있는 강의들의 점수의 평균 조회
+	public boolean searchStudentAverageScore(String studentId) {
+		int sum_score=0; //학생 강의 점수 합계
+		int count=0; //학생 강의 개수 세기
+		int average;
+		if(studentList == null || studentList.size() == 0)
+		{
+			System.out.println("조회할 수 없습니다.");
+			return false;
+		}
+		for(int i=0; i<studentList.size(); i++) {
+			
+			if(studentList.get(i).getStudentId().equals(studentId)) { //학생 리스트안에 학생 학번이 사용자가 입력한 학번과 동일하다면
+				
+				for(int j=0; j<studentList.get(i).getLectureList().size(); j++) { //해당 학생의 강의 리스트의 크기만큼 반복
+					
+					sum_score+=studentList.get(i).getLectureList().get(j).getLectureScore(); //학생이 가진 강의의 점수를 sum_score에 합쳐줌
+					count++; //학생 강의 개수 만큼 더함
+					
+				}
+			}
+		
+		
+		}
+		
+		average=sum_score/count; //이 학생의 이름을 반복문 안에 넣으면 이름이 반복되어 이름을 특정해서 출력하는 것이 어렵다고 느껴 반복문 밖에 씀
+		System.out.println("이 학생의 평균은 : "+average);
+		
+		return true;
+
+}
+	
+	
 	
 	
 	
@@ -858,6 +958,7 @@ public class UniversityServiceImp implements UniversityService {
 		return true;
 	}
 
+	
 
 }
 

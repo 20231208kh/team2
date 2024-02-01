@@ -185,17 +185,16 @@ public class PrintServiceImp implements PrintService {
 	public void printProfessorLectuerSearch() {
 		System.out.println("--------교수 강의 조회--------");
 		System.out.println("1.해당 요일의 교수 수업 시작 시간과 강의 이름만 조회"); 
-		System.out.println("2.교수의 강의를 입력받고 해당 강의의 현재 정원 조회);"); 
-		System.out.println("3.해당 교수의 수업을 듣는 학생들 이름 조회");
-		System.out.println("4.돌아가기");
+		System.out.println("2.해당 교수의 수업을 듣는 학생들 이름 조회");
+		System.out.println("3.돌아가기");
 		System.out.println("-----------------");
 		System.out.print("메뉴 선택 : ");
 	}
 	public void printStudentLecturetSearch() {
 		System.out.println("--------학생 강의 조회--------");
-		System.out.println("1.입력받은 강의 점수를 조회");
-		System.out.println("2.입력받은 이름의 학생 강의 모두 조회");
-		System.out.println("3.입력받은 학번의 학생 점수의 평균 조회");
+		System.out.println("1.입력받은 학생의 강의 점수를 조회");
+		System.out.println("2.입력받은 학생의 강의 모두 조회");
+		System.out.println("3.입력받은 학번의 학생이 가지고 있는 강의들의 점수의 평균 조회");
 		System.out.println("4.돌아가기");
 		System.out.println("-----------------");
 		System.out.print("메뉴 선택 : ");
@@ -308,6 +307,8 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("5. 수강신청의 경우, 같은 요일 + 같은 시간에 진행되는 서로 다른 강의를 수강할 수 없다.");
 		System.out.println("6. 수강신청의 경우, 강의의 진행 시간 1시간당 1학점으로, 학생은 최대 21학점까지 수강 가능하다.");
 	}
+	
+	
 	
 }
 

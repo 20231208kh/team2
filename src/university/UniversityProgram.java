@@ -228,12 +228,9 @@ public class UniversityProgram implements Program{
 			searchLectureStartTimeAndLectureName(); //해당 요일의 교수 수업 시작 시간과 강의 이름만 조회
 			break;
 		case 2:
-			searchSelectLectureAndLectureCount(); //교수의 강의를 입력받고 해당 강의의 현재 정원 조회
-			break;
-		case 3:
 			searchStudentNameFromLecture(); 	// 해당 요일의 수업을 듣는 학생들 이름 조회
 			break;
-		case 4:
+		case 3:
 			System.out.println("돌아갑니다.");
 			break;
 		default:
@@ -251,16 +248,6 @@ public class UniversityProgram implements Program{
 		
 		usi.searchLectureStartTimeAndLectureName( professorId,lectureDay);
 		
-	}
-
-	 //교수의 강의를 입력받고 해당 강의의 현재 정원 조회
-	private void searchSelectLectureAndLectureCount() {
-		System.out.println("교수의 ID를 입력하세요.");
-		String professorId=scan.next();
-		System.out.println("교수의 강의 이름을 입력하세요.");
-		String lectureName=scan.next();
-		
-		usi.searchSelectLectureAndLectureCount(professorId,lectureName);
 	}
 
 	// 해당 요일의 수업을 듣는 학생들 이름 조회
@@ -297,16 +284,29 @@ public class UniversityProgram implements Program{
 	
 	//입력받은 강의 점수를 조회 구현
 	private void searchStudentLectureScore() {
+		System.out.println("학생의 학번을 입력하세요.");
+		String studentId=scan.next();
+		System.out.println("학생의 강의 이름을 입력하세요.");
+		String LectureName=scan.next();
+		usi.searchStudentLectureScore(studentId, LectureName);
+		
 		
 	}
 
 	//입력받은 이름의 학생 강의 모두 조회 구현
 	private void searchAllLecturefromStudent() {
+		System.out.println("학생의 학번을 입력하세요.");
+		String studentId=scan.next();
+		usi.searchStudentAllLecture(studentId);
+		
 		
 	}
 
 	// 입력받은 학번의 학생 점수의 평균 조회 구현
 	private void searchStudentLectureAverageScore() {
+		System.out.println("학생의 학번을 입력하세요.");
+		String studentId=scan.next();
+		usi.searchStudentAverageScore(studentId);
 		
 	}
 
@@ -359,9 +359,9 @@ public class UniversityProgram implements Program{
 			usi.searchLecturesByProfessorName(professorName);
 		}
 
-		//교수 전공으로 전공에 포함된 이름 찾기
+		//전공을 입력 받고 전공에 있는 교수들의 이름 찾기
 		private void professorNameSearchByMajor() {
-			System.out.println("교수 이름을 입력하세요.");
+			System.out.println("전공을 입력하세요.");
 			String professorMajor=scan.next();
 			
 			usi.professorNameSearchByMajor(professorMajor);
