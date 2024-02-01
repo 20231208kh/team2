@@ -299,32 +299,22 @@ public class UniversityServiceImp implements UniversityService {
 		int sum_score=0; //학생 강의 점수 합계
 		int count=0; //학생 강의 개수 세기
 		int average;
-		if(studentList == null || studentList.size() == 0)
-		{
+		if(studentList == null || studentList.size() == 0) {
 			System.out.println("조회할 수 없습니다.");
 			return false;
 		}
 		for(int i=0; i<studentList.size(); i++) {
-			
 			if(studentList.get(i).getStudentId().equals(studentId)) { //학생 리스트안에 학생 학번이 사용자가 입력한 학번과 동일하다면
-				
 				for(int j=0; j<studentList.get(i).getLectureList().size(); j++) { //해당 학생의 강의 리스트의 크기만큼 반복
-					
 					sum_score+=studentList.get(i).getLectureList().get(j).getLectureScore(); //학생이 가진 강의의 점수를 sum_score에 합쳐줌
-					count++; //학생 강의 개수 만큼 더함
-					
+					count++; //학생 강의 개수 만큼 더함	
 				}
 			}
-		
-		
 		}
-		
 		average=sum_score/count; //이 학생의 이름을 반복문 안에 넣으면 이름이 반복되어 이름을 특정해서 출력하는 것이 어렵다고 느껴 반복문 밖에 씀
 		System.out.println("이 학생의 평균은 : "+average);
-		
 		return true;
-
-}
+	}
 
 
 	@Override
@@ -332,7 +322,6 @@ public class UniversityServiceImp implements UniversityService {
 		if(studentList == null) {
 			return false;
 		}
-		
 		if(studentList.contains(student)) {
 			return studentList.remove(student);
 		}
@@ -349,7 +338,6 @@ public class UniversityServiceImp implements UniversityService {
 		final Professor res = tmp;
 		professorList.stream().filter(p->p.equals(res)).forEach(p->p.setProfessorId(newID));
 		return true;
-
 	}
 
 	@Override
@@ -359,14 +347,12 @@ public class UniversityServiceImp implements UniversityService {
 			return false;
 		}
 		//equals, contains, indexOf
-		
+		/*
 		var str = "abc";
 		if(str == "abcd")
-			
 		if(str.equals("abc"))
-			
 		if(str.contains("ac")) 
-		
+		*/
 		if(professorList.contains(tmp)) {
 			int index = professorList.indexOf(tmp);
 			if (index==-1) {
