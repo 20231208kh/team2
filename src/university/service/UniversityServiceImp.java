@@ -477,6 +477,19 @@ public class UniversityServiceImp implements UniversityService {
 		return false;
 	}
 	
+	//학번으로 성적조회
+	@Override
+	public boolean searchStudentByStudentId(Student tmp) {
+		if(studentList == null) {
+			studentList = new ArrayList<Student>();
+		}
+		if(studentList.contains(tmp)) {
+			System.out.println(tmp);
+			return true;
+		}
+		return false;
+	}
+	
 	//동명이인 모두 출력
 	@Override
 	public boolean searchByStudentName(String stdName) {
@@ -495,6 +508,7 @@ public class UniversityServiceImp implements UniversityService {
 		return false;
 	}
 	
+
 	//수강하고있는 학생 전체 출력
 	@Override
 	public boolean matchLectureWithStudent(Professor tmp, String lectureName) {
@@ -504,7 +518,7 @@ public class UniversityServiceImp implements UniversityService {
 		for(int i = 0; i<tmp.getLectureList().size(); i++) {
 			Lecture lecture = tmp.getLectureList().get(i);
 			if(lecture.getLectureName().equals(lectureName)) {
-				for(int j = 0; i<studentList.size(); j++) {
+				for(int j = 0; j<studentList.size(); j++) {
 					Student std = studentList.get(j);
 					if(std.getLectureList().contains(lecture)) {
 						System.out.println("학번 : "+std.getStudentId() +" 이름 : "+ std.getStudentName() + " 전공 : " + std.getMajor().getMajorName());
@@ -699,7 +713,7 @@ public class UniversityServiceImp implements UniversityService {
 			Student std = studentList.get(i);
 			if(std.getStudentId().equals(studentId)) {
 				for(int j = 0; j<std.getLectureList().size(); j++) {
-					Lecture lecture = std.getLectureList().get(i);
+					Lecture lecture = std.getLectureList().get(j);
 					if(lecture.getLectureName().equals(lectureName)) {
 						lecture.setLectureScore(score);
 						return true;
@@ -712,20 +726,15 @@ public class UniversityServiceImp implements UniversityService {
 	
 	//성적 출력
 	@Override
-	public boolean printScore(String stdId, String lectureName) {
+	public boolean printScore(Student tmp, String lectureName) {
 		if(lectureList == null || lectureList.size() == 0) {
 			return false;	
 		}
-		for(int i = 0; i<studentList.size(); i++) {
-			Student std = studentList.get(i);
-			if(std.getStudentId().equals(stdId)) {
-				for(int j = 0; j<std.getLectureList().size(); j++) {
-					Lecture lecture = std.getLectureList().get(j);
-					if(lecture.getLectureName().equals(lectureName)) {
-						System.out.println("[강의 : " + lecture.getLectureName() + "] " + "[성적 : " + lecture.getLectureScore() + "]");
-						return true;
-					}
-				}
+		for(int j = 0; j<tmp.getLectureList().size(); j++) {
+			Lecture lecture = tmp.getLectureList().get(j);
+			if(lecture.getLectureName().equals(lectureName)) {
+				System.out.println("[강의 : " + lecture.getLectureName() + "] " + "[성적 : " + lecture.getLectureScore() + "]");
+				return true;
 			}
 		}
 		return false;
@@ -757,7 +766,7 @@ public class UniversityServiceImp implements UniversityService {
 			if(std.getStudentId().equals(studentId)) {
 				for(int j = 0; j<std.getLectureList().size(); j++) {
 					Lecture lecture = std.getLectureList().get(i);
-					if(lecture.getLectureScore() > 0 || lecture == null){
+					if(lecture.getLectureScore() < 0 || lecture == null){
 						return false;
 					}
 					if(lecture.getLectureName().equals(lectureName)) {

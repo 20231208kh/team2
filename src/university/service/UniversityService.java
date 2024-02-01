@@ -56,6 +56,7 @@ public interface UniversityService {
 
 	
 	//교수 전공별 조회
+	
 	boolean searchByProfessorMajor();
 	//학생 전공별 조회
 
@@ -79,8 +80,9 @@ public interface UniversityService {
 	//성적 수정
 	boolean updateScore(String studentId,String lectureName,int score);
 	//성적 출력
-	boolean printScore(String stdId, String lectureName);
-	
+	boolean printScore(Student tmp, String lectureName);
+	//학번으로 성적조회
+	boolean searchStudentByStudentId(Student tmp);
 	
 
 	//리스트 보내기
@@ -104,6 +106,7 @@ public interface UniversityService {
 	boolean searchLecturesByProfessorName(String professorName);
 	boolean professorNameSearchByMajor(String professorMajor);
 	boolean currentNumberOfLecture(String professorName);
+	
 
 		
 	

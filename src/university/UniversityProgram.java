@@ -732,7 +732,7 @@ public class UniversityProgram implements Program{
 			break;
 		case 2:
 			//성적 조회
-			searchScore();
+			searchScore(tmp);
 			break;
 		case 3:
 			System.out.println("돌아가기.");
@@ -813,17 +813,15 @@ public class UniversityProgram implements Program{
 
 	
 	//성적 조회
-	private void searchScore() {
-		System.out.print("학번 입력 : ");
-		String stdId = scan.next();
-		if(!usi.searchStudent(stdId)) {
+	private void searchScore(Student tmp) {
+		if(!usi.searchStudentByStudentId(tmp)) {
 			System.out.println("등록되지 않은 학번입니다.");
 			return;
 		};
 		System.out.print("강의 선택 : ");
 		String lectureName = scan.next();
-		if(!usi.printScore(stdId, lectureName)) {
-			System.out.print("등록되지 않은 강의입니다.");
+		if(!usi.printScore(tmp, lectureName)) {
+			System.out.println("등록되지 않은 강의입니다.");
 			return;
 		};
 	}
