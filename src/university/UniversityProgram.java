@@ -378,11 +378,7 @@ public class UniversityProgram implements Program{
 		
 	
 //박석훈 조회 끝
-		
-		
-		
-
-		
+	
 		//전공 관리
 		private void manageMajor() {
 			int menu;
@@ -393,9 +389,6 @@ public class UniversityProgram implements Program{
 			}while(menu != 4);
 		}
 		
-		
-
-
 
 	//학생 조회
 	private void searchStudent() {
@@ -428,13 +421,9 @@ public class UniversityProgram implements Program{
 	
 	//학번으로 1명 조회
 	private void searchStudentId() {
-		//학번 입력
 		System.out.print("학번 입력 : ");
 		String stdId = scan.next();
-		//객체 생성
-		Student student = new Student(stdId);
-		//serviceimp
-		if(!usi.searchStudent(student)) {
+		if(!usi.searchStudent(stdId)) {
 			System.out.println("일치하는 학생이 없습니다.");
 		}
 		return;
@@ -442,13 +431,9 @@ public class UniversityProgram implements Program{
 	
 	//이름 중복되는 학생들 전체조회
 	private void searchStudentName() {
-		//이름 입력
 		System.out.print("학생 이름 입력 : ");
 		String stdName = scan.next();
-		//객체 생성
-		Student student = new Student(stdName);
-		//serviceimp
-		if(!usi.searchByStudentName(student)) {
+		if(!usi.searchByStudentName(stdName)) {
 			System.out.println("일치하는 학생이 없습니다.");
 		}
 		return;
@@ -456,23 +441,14 @@ public class UniversityProgram implements Program{
 
 	//전공 조회
 	private void searchMajor() {
-		//전공명 입력
 		scan.nextLine();
 		System.out.print("전공명 입력 : ");
-		String mName = scan.next();
-		//객체 생성
-		Major majorName = new Major(mName);
-		//serviceimp
+		String majorName = scan.next();
 		if(!usi.searchByMajor(majorName)) {
 			System.out.println("일치하는 전공이 없습니다.");
 		}
 		return;
 	}
-
-
-	
-
-	
 
 	//전공 관리 실행
 	private void runManageMajor(int menu) {
@@ -896,11 +872,10 @@ public class UniversityProgram implements Program{
 		case 1:
 			//수강 관리
 			manageSingUp(tmp);
-
 			break;
 		case 2:
 			//성적 조회
-			searchScore();
+			searchScore(tmp);
 			break;
 		case 3:
 			System.out.println("돌아가기.");
@@ -917,13 +892,7 @@ public class UniversityProgram implements Program{
 		do {
 			printService.printManageSignUp();
 			menu = scan.nextInt();
-
-			
-
-
 			runManageSignUp(menu, tmp);
-
-
 		}while(menu != 3);
 	}
 	
@@ -981,18 +950,17 @@ public class UniversityProgram implements Program{
 
 	
 	//성적 조회
-	private void searchScore() {
-
-		//학번 입력
-		System.out.print("학번 입력 : ");
-		String stdId = scan.next();
-		//객체 생성
-		Student studentId = new Student(stdId);
-		//serviceimp
-		if(!usi.searchStudent(studentId)) {
+	private void searchScore(Student tmp) {
+		if(!usi.searchStudentByStudentId(tmp)) {
 			System.out.println("등록되지 않은 학번입니다.");
+			return;
 		};
-		return;
+		System.out.print("강의 선택 : ");
+		String lectureName = scan.next();
+		if(!usi.printScore(tmp, lectureName)) {
+			System.out.println("등록되지 않은 강의입니다.");
+			return;
+		};
 	}
 
 
@@ -1026,8 +994,6 @@ public class UniversityProgram implements Program{
 			//성적 관리
 			manageScore(professorID);
 			break;
-			//내 강의를 듣고있는 학생 전체 출력
-
 		case 3:
 			System.out.println("돌아가기.");
 			break;
@@ -1318,11 +1284,11 @@ public class UniversityProgram implements Program{
 		switch(menu) {
 		case 1:
 			//성적 등록
-			insertScore();
+			insertScore(professorID);
 			break;
 		case 2:
 			//성적 수정
-			updateScore();
+			updateScore(professorID);
 			break;
 		case 3:
 			System.out.println("돌아가기.");
@@ -1333,38 +1299,48 @@ public class UniversityProgram implements Program{
 	}
 	
 	//성적 등록
-	private void insertScore() {
-
-		//Lecture lecture = professorList.get(index).getLectureList.get(0) 
-		//교수 강의 출력 메서드(index)
+	private boolean insertScore(String professorID) {
+		Professor tmp = usi.selectUpdateProfessor(professorID);
+		printService.printProfessorLectureList(tmp);
 		System.out.print("강의 선택 : ");
 		String lectureName = scan.next();
-		Lecture lecture = new Lecture(lectureName);
-		if(!usi.matchLectureWithStudent(lecture)) {
-			System.out.println("등록된 강의가 없습니다.");
+		if(!usi.matchLectureWithStudent(tmp, lectureName)) {
+			System.out.println("등록한 학생이 없습니다.");
+			return false;
 		}
-		//화학을 등록 -> 화학을 등록한 학생
-		//학생list for문으로 돌려서 lecture랑 비교해서 있으면 출력 학생을 고르면
-		System.out.print("학번 선택 : ");
+		System.out.print("학번 선택 :  ");
 		String studentId = scan.next();
 		System.out.print("성적 입력 : ");
 		int score = scan.nextInt();
-		if(!usi.insertScore(studentId,lecture,score)) {
+		if(!usi.insertScore(studentId,lectureName,score)) {
 			System.out.println("성적 입력을 실패했습니다.");
+			return false;
 		}
 		System.out.println("성적 등록 성공!");
-		return;
-
+		return true;
 	}
 	
 	//성적 수정
-	private void updateScore() {
-
-		//등록 먼저 해주세요 하는 예외처리마 ㄴ추가되면 될 듯ㅅㅅㅅㅅㅅ
+	private boolean updateScore(String professorID) {
+		Professor tmp = usi.selectUpdateProfessor(professorID);
+		printService.printProfessorLectureList(tmp);
+		System.out.print("강의 선택 : ");
+		String lectureName = scan.next();
+		if(!usi.matchLectureWithStudent(tmp, lectureName)) {
+			System.out.println("등록한 학생이 없습니다.");
+			return false;
+		}
+		System.out.print("학번 선택 :  ");
+		String studentId = scan.next();
+		System.out.print("성적 입력 : ");
+		int score = scan.nextInt();
+		if(!usi.updateScore(studentId,lectureName,score)) {
+			System.out.println("성적을 먼저 등록해주세요.");
+		}
+		System.out.println("성적 수정 성공!");
+		return true;
 	}
 	
-	
-
 	//메뉴 출력
 	@Override
 	public void printMenu() {

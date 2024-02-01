@@ -81,7 +81,7 @@ public class Student {
 	}
 	@Override
 	public String toString() {
-		return "학번 : "+studentId+ " 이름 : "+studentName+ " 나이 : "+age+" 학년 : "+grade+ " 전공 : "+major.getMajorName()+" / 수강중인 강의 : "+lectureList;
+		return "학번 : "+studentId+ " 이름 : "+studentName+ " 나이 : "+age+" 학년 : "+grade+ " 전공 : "+major.getMajorName()+" / 수강중인 강의 : " + lectureList + "\n";
 	}
 	
 

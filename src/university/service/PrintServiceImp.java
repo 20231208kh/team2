@@ -123,9 +123,8 @@ public class PrintServiceImp implements PrintService {
 	public void printManageSignUp() {
 		System.out.println("-------수강신청-------");
 		System.out.println("1. 수강 신청");
-		System.out.println("2. 수강 정정");
-		System.out.println("3. 수강 취소");
-		System.out.println("4. 뒤로가기");
+		System.out.println("2. 수강 취소");
+		System.out.println("3. 뒤로가기");
 		System.out.println("-------------------");
 		System.out.print("메뉴 선택 : ");
 
@@ -278,6 +277,7 @@ public class PrintServiceImp implements PrintService {
 		case 2: System.out.println("번호를 잘못 입력했습니다."); break;
 		case 3: System.out.println("시간이 겹치는 강의가 있습니다"); break;
 		case 4: System.out.println("신청시 최대 수강 학점을 초과합니다."); break;
+		case 5: System.out.println("동일한 과목의 강의를 이미 수강 중 입니다."); break;
 		default:
 			System.out.println("잘못된 에러코드 : " + errorCode);
 		}

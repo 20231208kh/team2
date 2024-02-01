@@ -36,7 +36,7 @@ public class Major {
 	
 	@Override
 	public String toString() {
-		return "전공번호 : "+majorId+" 전공 이름 : "+majorName+"\n";
+		return "[전공번호 : "+majorId+"]" +"" +"[전공 이름 : "+majorName+"]\n";
 	}
 
 	@Override
