@@ -387,6 +387,13 @@ public class UniversityServiceImp implements UniversityService {
 			prsi.printSignUpError(errorCode);
 			return false;
 		}
+		for(int i=0 ;i<tmp.getLectureList().size(); i++) {
+			if(tmp.getLectureList().get(i).getLectureName().equals(lectureList.get(index).getLectureName())) {
+				errorCode = 5;
+				prsi.printSignUpError(errorCode);
+				return false;
+			}
+		}
 		int tmpCount = lectureList.get(index).getLectureCount();
 		for(int i=0; i< professorList.size() ; i++) {
 			if(professorList.get(i).getLectureList().contains(lectureList.get(index))) {
