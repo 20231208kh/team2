@@ -207,7 +207,12 @@ public class UniversityServiceImp implements UniversityService {
 			return false;
 		}
 		
-		 for(int i=0; i<professorList.size(); i++) {
+		
+		// Professor tmp = new Professor(professorId); 를 선언한 뒤 넣어준것과 같다
+		// professorList에서 professorId를 갖는 교수를 Professor tmp라고 선언
+		Professor tmp2 = professorList.get(professorList.indexOf(new Professor(professorId)));
+		
+		for(int i=0; i<professorList.size(); i++) {
 			 
 			
 			 for(int j=0; j<professorList.get(i).getLectureList().size(); j++)
