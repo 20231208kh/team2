@@ -137,11 +137,6 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("-------수강신청-------");
 		System.out.println("1. 수강 신청");
 
-		System.out.println("2. 수강 정정");
-		System.out.println("3. 종료");
-		System.out.println("-------------------");
-		System.out.println("메뉴 선택 : ");
-
 
 		System.out.println("2. 수강 취소");
 		System.out.println("3. 뒤로가기");

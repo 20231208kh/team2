@@ -56,14 +56,15 @@ public interface UniversityService {
 
 	
 	//교수 전공별 조회
+	
 	boolean searchByProfessorMajor();
 	//학생 전공별 조회
 
-	boolean searchByMajor(Major majorName);
+	boolean searchByMajor(String majorName);
 	//학생 이름으로 조회
-	boolean searchByStudentName(Student student);
+	boolean searchByStudentName(String stdName);
 	//학생 학번으로 조회
-	boolean searchStudent(Student student);
+	boolean searchStudent(String stdId);
 	
 
 	//수강 신청 : 김준수
@@ -73,14 +74,15 @@ public interface UniversityService {
 	
 	
 	//성적 입력
-	boolean insertScore(String studentId, Lecture lecture, int score);
+	boolean insertScore(String studentId, String lectureName, int score);
 	//강의에 등록된 학생 출력
-	boolean matchLectureWithStudent(Lecture lecture);
+	boolean matchLectureWithStudent(Professor tmp, String LectureName);
 	//성적 수정
-	boolean updateScore();
+	boolean updateScore(String studentId,String lectureName,int score);
 	//성적 출력
-	boolean printScore();
-	
+	boolean printScore(Student tmp, String lectureName);
+	//학번으로 성적조회
+	boolean searchStudentByStudentId(Student tmp);
 	
 
 	//리스트 보내기
@@ -104,6 +106,7 @@ public interface UniversityService {
 	boolean searchLecturesByProfessorName(String professorName);
 	boolean professorNameSearchByMajor(String professorMajor);
 	boolean currentNumberOfLecture(String professorName);
+	
 
 		
 	
