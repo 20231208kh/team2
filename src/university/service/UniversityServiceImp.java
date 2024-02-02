@@ -915,12 +915,6 @@ public class UniversityServiceImp implements UniversityService {
 		return true;
 	}
 
-	
-	@Override
-	public boolean searchByProfessorMajor() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public boolean updateScore(String studentId,String lectureName,int score) {
