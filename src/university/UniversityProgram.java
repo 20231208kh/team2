@@ -207,7 +207,7 @@ public class UniversityProgram implements Program{
 		printService.printProfessorLectuerSearch();
 		menu=scan.nextInt();
 		runProfessorLectureSearch(menu);
-		}while(menu!=4);
+		}while(menu!=3);
 	}
 	
 	//학생 강의 조회
