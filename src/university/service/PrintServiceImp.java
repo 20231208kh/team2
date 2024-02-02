@@ -167,7 +167,8 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("1. 교수 전체 조회");
 		System.out.println("2. 교수 이름에 해당하는 교수 강의 조회");
 		System.out.println("3. 전공에 해당하는 교수 이름 조회");
-		System.out.println("4. 돌아가기");
+		System.out.println("4. 교수 강의 현재 인원 조회");
+		System.out.println("5. 돌아가기");
 		System.out.println("-----------------");
 		System.out.print("메뉴 선택 : ");
 	}

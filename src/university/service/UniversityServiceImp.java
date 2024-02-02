@@ -145,7 +145,7 @@ public class UniversityServiceImp implements UniversityService {
 					
 				System.out.println(professorList.get(i).getProfessorName());
 				
-					for(int j=0; j<lectureList.size(); j++) {
+					for(int j=0; j<professorList.get(i).getLectureList().size(); j++) {
 						
 						
 							System.out.println("교수 이름:"+professorList.get(i).getProfessorName()+
@@ -594,10 +594,10 @@ public class UniversityServiceImp implements UniversityService {
 			prsi.printDeleteForLecturesError(errorCode);
 			return false;
 		}
-		studentList.get(studentList.indexOf(tmp)).getLectureList().remove(index);
 		lectureList.get(lectureList.indexOf(tmp.getLectureList().get(index)))
 		.setLectureCount(lectureList.get(lectureList.indexOf(tmp.getLectureList().get(index)))
 		.getLectureCount()-1);
+		studentList.get(studentList.indexOf(tmp)).getLectureList().remove(index);
 		for(int i = 0 ; i< professorList.size(); i++) {
 			if(professorList.get(i).getLectureList().contains(tmp.getLectureList().get(index))) {
 				professorList.get(i).getLectureList().get(professorList.get(i).getLectureList().indexOf(tmp.getLectureList().get(index)))
