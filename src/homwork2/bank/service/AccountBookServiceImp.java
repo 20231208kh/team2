@@ -17,8 +17,9 @@ import lombok.Data;
 public class AccountBookServiceImp implements AccountBookService , Serializable {
 	private static final long serialVersionUID = 6760830936819586275L;
 	private List<Bank> bankList = new ArrayList<Bank>();
+
 	private int id = 1;
-	
+
 	@Override
 	//수입 추가
 	/* 강사 피드백
@@ -52,7 +53,7 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 		 * - index가 -1일 때 처리 필요*/
 		if (bankList.contains(bank)) {
 			int index = bankList.indexOf(bank);
-      if(bankList.get(index).getMoney()<0) {
+			if(bankList.get(index).getMoney()<0) {
 				return false;
 			}
 			bankList.get(index).setMoney(money);
@@ -61,6 +62,7 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 		}
 		return false;
 	}
+
 
 	@Override
 	//수입 일자 수정
@@ -495,6 +497,8 @@ public class AccountBookServiceImp implements AccountBookService , Serializable 
 		Stream<Bank> stream = bankList.stream();
 		stream.filter(m->m.getMoney()>=0).forEach(m->System.out.print(m));
 	}
+
+  
 	//지출내역 출력
 	public void printWithdraw() {
 		Stream<Bank> stream = bankList.stream();
