@@ -1,5 +1,5 @@
 package project1.board.service;
 
-public class PostServiceImp {
+public class PostServiceImp implements PostService {
 
 }
