@@ -37,7 +37,7 @@ public class PrintServiceImp implements PrintService {
 	@Override
 	public void manageBoardMenu() {
 		System.out.println("--게시판 관리 메뉴--");
-		System.out.println("1. 게시판 카테고리(그룹) 추가");
+		System.out.println("1. 게시판 카테고리(그룹) 설정");
 		System.out.println("2. 게시판 추가");
 		System.out.println("3. 게시판 수정");
 		System.out.println("4. 게시판 삭제");
