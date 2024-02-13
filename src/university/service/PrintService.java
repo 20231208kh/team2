@@ -52,15 +52,21 @@ public interface PrintService {
 	//교수조회
 	void printProfessorSearch();
 
-
-
-
-
+	//교수와학생 강의 조회 선택 메뉴
+	void printProfessor_StudentLectureSearch();
+	
+	//교수 강의 조회
+	void printProfessorLectuerSearch();
+	
+	//학생 강의 조회
+	void printStudentLecturetSearch();
+	
 	//교수수정
 	void printUpdateProfessor();
 
 	//등록된 교수 출력
 	void printProfessorList(List<Professor> tmp);
+	
 	
 	
 	
@@ -75,6 +81,8 @@ public interface PrintService {
 	//수강신청,취소 에러 출력
 	void printSignUpError(int errorCode);
 	void printDeleteForLecturesError(int errorCode);
+	
 }
+
 
 

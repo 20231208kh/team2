@@ -24,7 +24,7 @@ public class Student {
 	//입학년도
 	int year;
 	//점수
-	int avgScore;
+	int Score;
 
 	int age;
 	
