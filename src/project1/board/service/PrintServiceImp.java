@@ -56,12 +56,6 @@ public class PrintServiceImp implements PrintService {
 	}
 
 	@Override
-	public void manageBoardCategory() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void updateBoard() {
 		// TODO Auto-generated method stub
 		
@@ -102,6 +96,16 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("4. 회원 탈퇴");
 		System.out.print("메뉴 선택 : ");
 		
+	}
+
+	@Override
+	public void manageBoardCategory() {
+		System.out.println("--내 정보 수정--");
+		System.out.println("1. 카테고리 추가");
+		System.out.println("2. 카테고리 수정");
+		System.out.println("3. 카테고리 삭제");
+		System.out.println("4. 뒤로 가기");
+		System.out.print("메뉴 선택 : ");
 	}
 
 

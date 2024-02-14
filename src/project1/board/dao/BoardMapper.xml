@@ -5,6 +5,18 @@
 <mapper namespace="project1.board.dao.BoardDAO">
 	<!-- 태그에는 insert, select, update, delete가 들어감 -->
   <insert id="insertBoardType">
-  	insert into board(bc_title) values(#{boardType});
+  	insert into board_Category(bc_title) values(#{boardCategoryVO.bc_title})
+  </insert>
+  <select id="selectBoardCategory" resultType="project1.board.model.vo.BoardCategoryVO">
+  	select * from board_category
+  </select>
+  <insert id="insertBoard">
+  	insert into board(bo_title, bo_detail, bo_bc_num) values(#{boardVO.bo_title}, #{boardVO.bo_detail}, #{boardVO.bo_bc_num})
+  </insert>
+  <select id="selectBoard" resultType="project1.board.model.vo.BoardVO">
+  	select * from board
+  </select>
+  <insert id="insertPostCategory">
+  	insert into post_category(pc_title, pc_bo_num) values(#{postCategoryVO.pc_title}, #{postCategoryVO.pc_bo_num})
   </insert>
 </mapper>

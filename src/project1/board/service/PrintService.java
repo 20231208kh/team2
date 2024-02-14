@@ -7,9 +7,9 @@ public interface PrintService {
 	void manageBoardMenu();
 	void postMenu();
 	void managePostCategory();
-	void manageBoardCategory();
 	void updateBoard();
 	void loggedinUserMenu();
 	void loggedinAdminMenu();
 	void updateMyInfo();
+	void manageBoardCategory();
 }
