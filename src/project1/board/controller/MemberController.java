@@ -25,10 +25,11 @@ public class MemberController {
 		String id = scan.next();
 		System.out.println("비밀번호를 입력해주세요 : ");
 		String pw = scan.next();
-		memberVo = new MemberVO(id,pw);
+		MemberVO tmp = new MemberVO(id,pw);
 		
-		if(memberService.login(memberVo)!=null) {
-			return memberService.login(memberVo);
+		if(memberService.login(tmp)!=null) {
+			
+			return memberVo = memberService.login(tmp);
 		}
 		return null;
 		
@@ -58,15 +59,19 @@ public class MemberController {
 		MemberVO member = new MemberVO(id,pw,email,age,localnum,role);
 		
 		if(memberService.signIn(member)) {
+			System.out.println("회원가입 성공");
 			return true;
 		};
-		
+		System.out.println("회원가입 실패");
 		return false;
 	}
 
 	public void run() {
 		int menu = 0;
 		do {
+			if(memberVo==null) {
+				break;
+			}
 			printService.loggedinUserMenu();
 			menu=scan.nextInt();
 			runUser(menu);
@@ -89,6 +94,7 @@ public class MemberController {
 			break;
 		case 6:
 			System.out.println("로그아웃 합니다.");
+			memberVo = null;
 			break;
 		}
 		
@@ -119,22 +125,84 @@ public class MemberController {
 	}
 
 	private void updateAge() {
-		// TODO Auto-generated method stub
+		System.out.print("수정할 나이를 입력해주세요 : ");
+		int updateAge = scan.nextInt();
+		if(memberVo.getMb_age()==updateAge){
+			System.out.println("기존의 나이와 같은 나이로 수정할 수 없습니다.");
+			return;
+		}
+		if(memberService.updateAge(memberVo,updateAge)) {
+			System.out.println("수정이 완료되었습니다.");
+			System.out.println(memberVo);
+			return;
+		}
+		System.out.println("수정 실패");
 		
 	}
 
 	private void updateEmail() {
-		// TODO Auto-generated method stub
+		System.out.print("수정할 이메일을 입력해주세요 : ");
+		String updateEmail = scan.next();
+		if(memberVo.getMb_email().equals(updateEmail)) {
+			System.out.println("기존의 이메일과 같은 이메일로 수정할 수 없습니다.");
+			return;
+		}
+		if(memberService.updateEmail(memberVo,updateEmail)) {
+			System.out.println("수정이 완료되었습니다.");
+			System.out.println(memberVo);
+			return;
+		}
+		System.out.println("수정 실패");
 		
 	}
+		
+	
 
 	private void updatePw() {
-		// TODO Auto-generated method stub
+		System.out.print("수정할 비밀번호를 입력해주세요 : ");
+		String updatePw = scan.next();
+		if(memberVo.getMb_pw().equals(updatePw)) {
+			System.out.println("기존의 비밀번호와 같은 비밀번호로 수정할 수 없습니다.");
+			return;
+		}
+		if(memberService.updatePw(memberVo,updatePw)) {
+			System.out.println("수정이 완료되었습니다.");
+			System.out.println(memberVo);
+			return;
+		}
+		System.out.println("수정 실패");
 		
 	}
 
 	private void deleteUser() {
-		// TODO Auto-generated method stub
+		int menu=0;
+		System.out.println("회원 탈퇴를 진행합니다.");
+		System.out.println("비밀번호를 입력해주세요 : ");
+		String pw = scan.next();
+		System.out.println("주민등록번호를 입력해주세요 : ");
+		String localNum = scan.next();
+		if(memberVo.getMb_pw().equals(pw)&&memberVo.getMb_localnum().equals(localNum)) {
+			System.out.println("입력 정보가 확인되었습니다.");
+			System.out.println("정말 회원탈퇴를 하시겠습니까?");
+			System.out.println("1. 회원 탈퇴");
+			System.out.println("2. 취소");
+			System.out.print("메뉴 선택 : ");
+			menu = scan.nextInt();
+		}
+		switch(menu) {
+		case 1:
+			if(memberService.deleteMember(memberVo)) {
+				memberVo = null;
+				System.out.println("회원 탈퇴 완료");
+			};
+			break;
+		case 2:
+			System.out.println("회원 탈퇴를 취소합니다. 이전 메뉴로 돌아갑니다.");
+			break;
+		default:
+			System.out.println("잘못된 메뉴 선택");
+			break;
+		}
 		
 	}
 
