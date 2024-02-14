@@ -28,5 +28,14 @@ public class BoardServiceImp implements BoardService {
 		}
 	}
 	
+	@Override
+	public boolean insertBoardType(String boardType) {
+		boolean res = boardDAO.insertBoardType(boardType);
+		if(res) {
+			session.commit();
+		}
+		return res;
+	}
+	
 	
 }

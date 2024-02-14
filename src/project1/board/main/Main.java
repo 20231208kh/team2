@@ -44,7 +44,7 @@ import project1.board.service.PrintServiceImp;
 
 
 public class Main {
-	private static BoardController boardController;
+	private static BoardController boardController = new BoardController();;
 	private static MemberController memberController = new MemberController();
 	private static PostController postController;
 	private static PrintService printService = new PrintServiceImp();
