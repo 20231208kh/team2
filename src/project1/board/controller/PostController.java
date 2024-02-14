@@ -1,5 +1,6 @@
 package project1.board.controller;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import project1.board.model.vo.BoardVO;
@@ -36,13 +37,26 @@ public class PostController {
 		int menu = 0;
 		System.out.println("1.내가 작성한 게시글");
 		System.out.println("2.내가 작성한 댓글");
+		System.out.println("3.뒤로 가기");
 		System.out.print("입력 : ");
-		menu = scan.nextInt();
+		try {
+			menu = scan.nextInt();
+			runMyPageMenu(menu, memberVo);
+		}
+		catch (InputMismatchException e) {
+			System.out.println("잘못된 입력입니다 : " + menu);
+		}
+		
+	}
+
+
+	private void runMyPageMenu(int menu, MemberVO memberVo) {
 		switch(menu){
-		case 1: break;
-		case 2: break;
+		case 1: selectMyPost(memberVo); break;
+		case 2: selectMyReply(memberVo); break;
+		case 3: System.out.println("뒤로가기"); break;
 		default:
-			
+			throw new InputMismatchException();
 		}
 	}
 
