@@ -64,21 +64,23 @@ public class MemberController {
 		return false;
 	}
 
-	public void run() {
+	public void run(MemberVO tmpMember) {
 		int menu = 0;
 		do {
 			printService.loggedinUserMenu();
 			menu=scan.nextInt();
-			runUser(menu);
+			runUser(menu, tmpMember);
 		}while(menu !=6);
 		
 	}
 
-	private void runUser(int menu) {
+	private void runUser(int menu, MemberVO tmpMember) {
 		switch(menu) {
 		case 1:
 			break;
 		case 2:
+			// 마이페이지
+			postController.runMyPage(tmpMember);
 			break;
 		case 3:
 			break;

@@ -75,7 +75,7 @@ public class Main {
 			if(memberVo.getMb_right().equals("ADMIN")) {
 				runAdminMenu();
 			}else {
-				memberController.run();
+				memberController.run(memberVo);
 			}
 			break;
 		case 2:

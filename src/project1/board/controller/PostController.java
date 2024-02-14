@@ -31,4 +31,20 @@ public class PostController {
 	private PrintService printService = new PrintServiceImp();
 	
 	
+	public void runMyPage(MemberVO tmpMember) {
+		int menu;
+		memberVo =tmpMember;
+		System.out.println("1.내가 작성한 게시글");
+		System.out.println("2.내가 작성한 댓글");
+		System.out.print("입력 : ");
+		menu = scan.nextInt();
+		switch(menu){
+		case 1: break;
+		case 2: break;
+		default:
+			
+		}
+	}
+	
+	
 }
