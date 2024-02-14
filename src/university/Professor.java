@@ -2,6 +2,7 @@ package university;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.Objects;
 
 import lombok.Data;
@@ -9,43 +10,29 @@ import lombok.Data;
 @Data
 public class Professor {
 	
+
 	//성함
 	String professorName;
 	//교수 번호
 	String professorId; // 포탈 ID
-	//교수 소속학과
-	Major porfessorBTM; // 등록 학과 중 하나를 가져온다 (아직 생성자에 추가 전)
 	//교수 전공
-	String professorMajor;
-	//소속 학과가 필요함
+	Major professorMajor;
 	
 	//과목 정보
 	List<Lecture> lectureList = new ArrayList<Lecture>();
 
+
+
+	
 	@Override
-	public int hashCode() {
-		return Objects.hash(professorId, professorMajor, professorName);
+	public String toString() {
+		
+		return "교수 [ 교수 이름 : " + professorName + ", 교수 번호 : " + professorId + ", 교수 전공 : "
+				+ professorMajor + ", 교수 강의 : " + lectureList + "] \n";
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Professor other = (Professor) obj;
-		return Objects.equals(professorId, other.professorId) && Objects.equals(professorMajor, other.professorMajor)
-				&& Objects.equals(professorName, other.professorName);
-	}
 	
-	public void Professor(String professorName, String professorId, String professorMajor) {
-		
-	}
-	
-	
-	public Professor(String professorName, String professorId, String professorMajor) {
+	public Professor(String professorName, String professorId,Major professorMajor) {
 		this.professorName = professorName;
 		this.professorId = professorId;
 		this.professorMajor = professorMajor;
@@ -67,15 +54,10 @@ public class Professor {
 		return Objects.equals(professorId, other.professorId);
 	}
 
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(professorId);
 	}
 
-
-	
-	
-	
-	
 }
+

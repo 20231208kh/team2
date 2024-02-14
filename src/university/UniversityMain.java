@@ -1,6 +1,7 @@
 package university;
 
 public class UniversityMain {
+
 	/* 대학생 관리 프로그램을 작성하세요.
 	 * - 기본 기능
 	 *   - 교수 관리
@@ -24,4 +25,6 @@ public class UniversityMain {
 		p.run();
 	}
 
+
 }
+
