@@ -14,6 +14,7 @@ import project1.board.service.PrintServiceImp;
 
 public class MemberController {
 	private MemberService memberService = new MemberServiceImp();
+	private PostController postController = new PostController();
 	private MemberVO memberVo;
 	private Scanner scan = new Scanner(System.in);
 	private PrintService printService = new PrintServiceImp();
@@ -82,6 +83,7 @@ public class MemberController {
 	private void runUser(int menu) {
 		switch(menu) {
 		case 1:
+			postController.writePost(memberVo);
 			break;
 		case 2:
 			break;
