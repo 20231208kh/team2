@@ -10,5 +10,13 @@ public interface MemberService {
 
 	boolean signIn(MemberVO member);
 
+	boolean updateAge(MemberVO memberVo, int updateAge);
+
+	boolean updateEmail(MemberVO memberVo, String updateEmail);
+
+	boolean updatePw(MemberVO memberVo, String updatePw);
+
+	boolean deleteMember(MemberVO memberVo);
+
 
 }
