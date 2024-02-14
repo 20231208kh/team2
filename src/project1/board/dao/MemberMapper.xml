@@ -10,5 +10,20 @@
 	<select id="selectMemberList" resultType="project1.board.model.vo.MemberVO">
   		select * from member
   	</select>
+  	<update id="updateMemberAge">
+  		update member set mb_age = #{updateAge}
+  		where mb_id = #{memberVo.mb_id}
+  	</update>
+  	<update id="updateMemberEmail">
+  		update member set mb_email = #{updateEmail}
+  		where mb_id = #{memberVo.mb_id}
+  	</update>
+  	<update id="updateMemberPw">
+  		update member set mb_pw = #{updatePw}
+  		where mb_id = #{memberVo.mb_id}
+  	</update>
+  	<delete id="deleteMember">
+  		delete from member where mb_id =#{memberVo.mb_id};
+  	</delete>
   	
 </mapper>
