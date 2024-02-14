@@ -84,12 +84,16 @@ public class MemberController {
 		case 1:
 			break;
 		case 2:
-			// 마이페이지
-			postController.runMyPage(tmpMember);
+			// 마이페이지메뉴
+			postController.myPageMenu(tmpMember);
 			break;
 		case 3:
+			// 게시판조회메뉴
+			postController.boardMenu(tmpMember);
 			break;
 		case 4:
+			// 검색조회메뉴
+			postController.searchMenu(tmpMember);
 			break;
 		case 5:
 			updateUser();

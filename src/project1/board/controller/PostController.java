@@ -31,9 +31,9 @@ public class PostController {
 	private PrintService printService = new PrintServiceImp();
 	
 	
-	public void runMyPage(MemberVO tmpMember) {
-		int menu;
+	public void myPageMenu(MemberVO tmpMember) {
 		memberVo =tmpMember;
+		int menu = 0;
 		System.out.println("1.내가 작성한 게시글");
 		System.out.println("2.내가 작성한 댓글");
 		System.out.print("입력 : ");
@@ -44,6 +44,18 @@ public class PostController {
 		default:
 			
 		}
+	}
+
+
+	public void boardMenu(MemberVO tmpMember) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void searchMenu(MemberVO tmpMember) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
