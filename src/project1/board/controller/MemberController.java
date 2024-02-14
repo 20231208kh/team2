@@ -17,7 +17,7 @@ public class MemberController {
 	private MemberVO memberVo;
 	private Scanner scan = new Scanner(System.in);
 	private PrintService printService = new PrintServiceImp();
-	
+	private PostController postController = new PostController();
 	
 	
 	public MemberVO login() {

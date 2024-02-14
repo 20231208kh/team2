@@ -1,5 +1,9 @@
 package project1.board.dao;
 
-public interface PostDAO {
+import java.util.ArrayList;
 
+import project1.board.model.vo.PostVO;
+
+public interface PostDAO {
+	ArrayList<PostVO> selectPostList();
 }
