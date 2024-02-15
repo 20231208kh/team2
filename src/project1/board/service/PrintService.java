@@ -12,4 +12,7 @@ public interface PrintService {
 	void loggedinAdminMenu();
 	void updateMyInfo();
 	void manageBoardCategory();
+	void printBoardCategory();
+	void printBoard();
+	void printPostCategory();
 }

@@ -12,6 +12,10 @@ public class BoardCategoryVO {
 	int bc_num;
 	String bc_title;
 	
+	public BoardCategoryVO(int boardCategoryNum) {
+		this.bc_num = boardCategoryNum;
+	}
+	
 	public BoardCategoryVO(String boardCategory) {
 		this.bc_title = boardCategory;
 	}

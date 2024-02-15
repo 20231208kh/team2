@@ -2,6 +2,8 @@ package project1.board.service;
 
 public class PrintServiceImp implements PrintService {
 
+	BoardService boardService = new BoardServiceImp();
+	
 	@Override
 	public void startMenu() {
 		System.out.println("메뉴");
@@ -106,6 +108,21 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("3. 카테고리 삭제");
 		System.out.println("4. 뒤로 가기");
 		System.out.print("메뉴 선택 : ");
+	}
+
+	@Override
+	public void printBoard() {
+		boardService.printBoard();
+	}
+
+	@Override
+	public void printBoardCategory() {
+		boardService.printBoardCategory();
+	}
+
+	@Override
+	public void printPostCategory() {
+		boardService.printPostCategory();
 	}
 
 

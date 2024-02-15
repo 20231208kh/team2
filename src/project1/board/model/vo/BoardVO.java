@@ -24,6 +24,10 @@ public class BoardVO {
 		this.bo_title = boardName;
 	}
 	
+	public BoardVO(int boardNum) {
+		this.bo_num = boardNum;
+	}
+	
 	@Override
 	public String toString() {
 		return "[카테고리 번호 : " + bo_bc_num + " ] " + "[게시판 번호 : " + bo_num + " ] " + "[게시판 이름 : " + bo_title + " ] " + "[게시판 내용 : " + bo_detail + " ]";

@@ -31,4 +31,13 @@
   <insert id="updatePostCategory">
   	update post_category set pc_title = (#{postCategoryVO.pc_title}) where pc_num = (#{postCategoryVO.pc_num})
   </insert>
+  <delete id="deleteBoard">
+  	delete from board where bo_num = (#{boardVO.bo_num})
+  </delete>
+  <delete id="deleteBoardCategory">
+  	delete from board_Category where bc_num = (#{boardVO.bc_num})
+  </delete>
+  <delete id="deletePostCategory">
+  	delete from post_Category where pc_num = (#{postCategoryVO.pc_num})
+  </delete>
 </mapper>
