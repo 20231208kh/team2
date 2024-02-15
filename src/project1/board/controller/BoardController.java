@@ -59,7 +59,7 @@ public class BoardController {
 	
 	//게시판 추가
 	private void insertBoard() {
-		ArrayList<BoardCategoryVO> categoryList = boardService.getBoardType();
+		ArrayList<BoardCategoryVO> categoryList = boardService.getBoardCategory();
 		if(categoryList.size() == 0) {
 			System.out.println("등록된 카테고리가 없습니다.");
 			return;
@@ -85,28 +85,26 @@ public class BoardController {
 	
 	//게시판 수정
 	private void updateBoard() {
-		/*
-		분류 번호, 이름 출력
-		분류 번호 입력
-		잘못 입력시
-		FALSE
-		해당 번호 입력시
-		수정할 이름 입력
-		이미 존재하는 이름이면
-		FALSE
-		없으면
-		TRUE
-		*/
-		//분류번호, 이름 출력
-		/*
-		BoardService.printBoard();
-		System.out.println("분류번호 입력 : ");
+		ArrayList<BoardVO> BoardList = boardService.getBoard();
+		if(BoardList.size() == 0) {
+			System.out.println("입력된 게시판이 없습니다.");
+			return;
+		}
+		for(BoardVO tmp : BoardList) {
+			System.out.println(tmp);
+		}
+		System.out.print("게시판 번호 입력 : ");
 		int boardNum = scan.nextInt();
-		if(BoardService.updateBoard()) {			
+		System.out.print("수정할 게시판 이름 입력 : ");
+		String boardName = scan.next();
+		
+		BoardVO uBoardVo = new BoardVO(boardNum, boardName);
+		if(boardService.updateBoard(uBoardVo)) {			
 			System.out.println("게시판 수정 성공!");
+			return;
 		};
 		System.out.println("게시판 수정 실패!");
-		*/
+		
 	}
 
 	//게시판 분류 관리자 선택
@@ -126,7 +124,7 @@ public class BoardController {
 			insertBoardCategory();
 			break;
 		case 2:
-			//updateBoardCategory();
+			updateBoardCategory();
 			break;
 		case 3:
 			//deleteBoardCategory();
@@ -139,17 +137,40 @@ public class BoardController {
 		}
 		
 	}
-	
-	//분류 추가
+
+	//카테고리 추가
 	private void insertBoardCategory() {
-		System.out.println("카테고리 이름 입력 : ");
+		System.out.print("카테고리 이름 입력 : ");
 		String boardCategory = scan.next();
 		BoardCategoryVO boardCategoryVO = new BoardCategoryVO(boardCategory);
-		if(boardService.insertBoardType(boardCategoryVO)) {
+		if(boardService.insertBoardCategory(boardCategoryVO)) {
 			System.out.println("카테고리 추가 성공!");
 			return;
 		}
 		System.out.println("카테고리 추가 실패!");
+	}
+	
+	//카테고리 수정
+	private void updateBoardCategory() {
+		ArrayList<BoardCategoryVO> boardCategoryList = boardService.getBoardCategory();
+		if(boardCategoryList.size() == 0) {
+			System.out.println("등록된 카테고리가 없습니다.");
+			return;
+		}
+		for(BoardCategoryVO tmp : boardCategoryList) {
+			System.out.println(tmp);
+		}
+		
+		System.out.print("카테고리 번호 입력 : ");
+		int boardCategoryNum = scan.nextInt();
+		System.out.print("수정할 카테고리 이름 입력 : ");
+		String boardCategoryName = scan.next();
+		BoardCategoryVO uBoardCategoryVo = new BoardCategoryVO(boardCategoryNum, boardCategoryName);
+		if(boardService.updateBoardCategory(uBoardCategoryVo)) {
+			System.out.println("카테고리 수정 성공!");
+			return;
+		}
+		System.out.println("카테고리 수정 실패!");
 	}
 
 	//말머리 관리자 선택
@@ -170,7 +191,7 @@ public class BoardController {
 			insertPostCategory();
 			break;
 		case 2:
-			//updatePostCategory();
+			updatePostCategory();
 			break;
 		case 3:
 			//deletePostCategory();
@@ -184,6 +205,7 @@ public class BoardController {
 		
 	}
 
+	//말머리 추가
 	private void insertPostCategory() {
 		ArrayList<BoardVO> boardList = boardService.getBoard();
 		if(boardList.size() == 0) {
@@ -207,4 +229,26 @@ public class BoardController {
 		System.out.println("말머리 추가 실패!");
 	}
 	
+	//말머리 수정
+	private void updatePostCategory() {
+		ArrayList<PostCategoryVO> postCategoryList = boardService.getPostCategory();
+		if(postCategoryList.size() == 0) {
+			System.out.println("등록된 카테고리가 없습니다.");
+			return;
+		}
+		for(PostCategoryVO tmp : postCategoryList) {
+			System.out.println(tmp);
+		}
+		
+		System.out.print("말머리 번호 입력 : ");
+		int postCategoryNum = scan.nextInt();
+		System.out.print("수정할 말머리 이름 입력 : ");
+		String postCategoryName = scan.next();
+		PostCategoryVO uPostCategoryVo = new PostCategoryVO(postCategoryNum, postCategoryName);
+		if(boardService.updatePostCategory(uPostCategoryVo)) {
+			System.out.println("카테고리 수정 성공!");
+			return;
+		}
+		System.out.println("카테고리 수정 실패!");
+	}
 }

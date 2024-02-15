@@ -9,14 +9,23 @@ import project1.board.model.vo.PostCategoryVO;
 
 public interface BoardService {
 
-	boolean insertBoardType(BoardCategoryVO boardCategoryVO);
+	boolean insertBoardCategory(BoardCategoryVO boardCategoryVO);
 
-	ArrayList<BoardCategoryVO> getBoardType();
+	ArrayList<BoardCategoryVO> getBoardCategory();
 
 	boolean insertBoard(BoardVO boardVo);
 
 	ArrayList<BoardVO> getBoard();
 
 	boolean insertPostCategory(PostCategoryVO postCategoryVo);
+	
+	ArrayList<PostCategoryVO> getPostCategory();
 
+	boolean updateBoardCategory(BoardCategoryVO uBoardCategoryVo);
+
+	boolean updateBoard(BoardVO uBoardVo);
+
+	boolean updatePostCategory(PostCategoryVO uPostCategoryVo);
+
+	
 }
