@@ -8,16 +8,41 @@
   	update post set po_viewcount = po_viewcount + 1 where po_num = #{post.po_num} 
   </update>
   <select id="getPost" resultType="project1.board.model.vo.PostVO">
-  	select * from post where po_num = #{post.po_num}
+  	select 
+  		post.*, pc_title as po_pc_title
+	from 
+		post 
+			join
+		post_category on po_pc_num = pc_num
+  	where 
+  		po_num = #{post.po_num}
   </select>
   <select id="getMyPost" resultType="project1.board.model.vo.PostVO">
-  	select * from post where po_mb_id = #{member.mb_id} order by po_num desc limit #{page},10
+  	select 
+  		post.*, pc_title as po_pc_title
+	from 
+		post
+  			join
+		post_category on po_pc_num = pc_num
+  	where 
+  		po_mb_id = #{member.mb_id} 
+	order by 
+		po_num desc 
+	limit #{page},10
   </select>
   <select id="getMyReply" resultType="project1.board.model.vo.PostVO">
   	select * from reply where re_mb_id = #{member.mb_id} order by re_num desc limit #{page},10
   </select>
   <select id="getAllPost" resultType="project1.board.model.vo.PostVO">
-  	select * from post order by po_num desc limit #{page},10
+  	select 
+  		post.*, pc_title as po_pc_title
+  	from 
+  		post 
+  			join
+		post_category on po_pc_num = pc_num
+  	order by 
+  		po_num desc 
+  	limit #{page},10
   </select>
   <insert id="insertReply">
   	insert into reply(re_content, re_date, re_mb_id, re_po_num)	values(#{content}, now(), #{member.mb_id}, #{post.po_num})
@@ -26,12 +51,54 @@
   	select * from reply where re_po_num = #{post.po_num} limit #{page},10
   </select>
   <select id="getPostByTitle" resultType="project1.board.model.vo.PostVO">
-  	select * from post where po_title like concat("%", #{keyword}, "%") order by po_num desc limit #{page},10
+  	select 
+  		post.*, pc_title as po_pc_title
+ 	from post 
+ 			join
+		post_category on po_pc_num = pc_num
+ 	where 
+ 		po_title like concat("%", #{keyword}, "%") 
+	order by 
+		po_num desc 
+	limit #{page},10
   </select>
   <select id="getPostByWriter" resultType="project1.board.model.vo.PostVO">
-  	select * from post where po_mb_id like concat("%", #{keyword}, "%") order by po_num desc limit #{page},10
+  	select 
+  		post.*, pc_title as po_pc_title
+  	from 
+  		post 
+  			join
+		post_category on po_pc_num = pc_num
+  	where 
+  		po_mb_id like concat("%", #{keyword}, "%") 
+  	order by 
+  		po_num desc 
+ 	limit #{page},10
   </select>
   <select id="getPostByDate" resultType="project1.board.model.vo.PostVO">
-  	select * from post where po_date like concat(ifnull(#{year},"%"),"-",lpad(#{month},2,0),"-",lpad(#{day},2,0)) order by po_num desc limit #{page},10
+  	select 
+  		post.*, pc_title as po_pc_title
+  	from post 
+  			join
+		post_category on po_pc_num = pc_num
+  	where 
+  		po_date like concat(ifnull(#{year},"%"),"-",lpad(#{month},2,0),"-",lpad(#{day},2,0)) 
+  	order by 
+  		po_num desc 
+  	limit #{page},10
   </select>
+  <select id="getPostByBoard" resultType="project1.board.model.vo.PostVO">
+  	select 
+  		post.*, pc_title as po_pc_title
+  	from post 
+  			join
+		post_category on po_pc_num = pc_num
+  	where 
+  		po_bo_num = #{board.bo_num}
+  	order by 
+  		po_num desc 
+  	limit #{page},10
+  </select>
+  
+  
 </mapper>

@@ -2,6 +2,7 @@ package project1.board.service;
 
 import java.util.ArrayList;
 
+import project1.board.model.vo.BoardVO;
 import project1.board.model.vo.MemberVO;
 import project1.board.model.vo.PostVO;
 import project1.board.model.vo.ReplyVO;
@@ -25,5 +26,7 @@ public interface PostService {
 	ArrayList<PostVO> getPostByWriter(String keyword, int page);
 
 	ArrayList<PostVO> getPostByDate(String year, String month, String day, int page);
+
+	ArrayList<PostVO> getPostByBoard(BoardVO tmpBoard, int page);
 
 }

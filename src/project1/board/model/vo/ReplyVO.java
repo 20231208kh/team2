@@ -15,7 +15,7 @@ public class ReplyVO {
 	int re_po_num;
 	@Override
 	public String toString() {
-		return  re_mb_id +" : " + re_content + " (" + re_date+")"  ;
+		return  re_mb_id +" : " + re_content + " ("+re_date+")"  ;
 	}
 	
 	

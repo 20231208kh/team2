@@ -105,7 +105,8 @@ public class PostController {
 
 	private void manageMyPost(PostVO tmpPost) {
 		postDetail(tmpPost);
-		System.out.print("입력[뒤로가기(1) 수정(2) 삭제(3)] : ");
+		System.out.println("[뒤로가기(1) 수정(2) 삭제(3)] : ");
+		System.out.print("입력 : ");
 		int menu = scan.nextInt();
 		switch(menu) {
 		case 1: break;
@@ -258,9 +259,68 @@ public class PostController {
 
 
 	private void allBoard(MemberVO tmpMember) {
-		// TODO Auto-generated method stub
-		
+		int num = 0;
+		ArrayList<BoardVO> boardList = printService.getBoard();
+		for(int i = 0 ; i < boardList.size() ; i++) {
+			System.out.println((i+1)+". "+ boardList.get(i));
+		}
+		System.out.print("게시판 입력 : ");
+		num = scan.nextInt();
+		if(num <= 0 || num > boardList.size()) {
+			System.out.println("게시판을 잘못 선택했습니다. ");
+			return;
+		}
+		BoardVO tmpBoard = boardList.get(num-1);
+		selectedBoardMenu(tmpBoard,tmpMember);
 	}
+
+	private void selectedBoardMenu(BoardVO tmpBoard, MemberVO tmpMember) {
+		ArrayList<PostVO> postList = new ArrayList<PostVO>();
+		int page = 1;
+		int num = -3;
+		while(true) {
+			postList = postService.getPostByBoard(tmpBoard,page);
+			if((postList == null || postList.size() == 0) && page == 1) {
+				System.out.println("해당 게시판에 등록된 게시글이 없습니다.");
+			}
+			else {
+				for(int i = 0 ; i < postList.size() ; i++) {
+					System.out.println((i+1)+". "+ postList.get(i));
+				}
+			}
+			System.out.println("해당 게시판에 게시글 작성(-3)");
+			if(postList.size() < 10 && page == 1) {
+				System.out.println("상위메뉴(-2)");
+			}else if(postList.size() < 10) {
+				System.out.println("상위메뉴(-2) 이전페이지(-1)");
+			}else if(page == 1) {
+				System.out.println("상위메뉴(-2) 다음페이지(0)");
+			}else {
+				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
+			}
+			System.out.print("입력 : ");
+			num = scan.nextInt();				
+			if(num > 0 && num < 11) {
+				PostVO tmpPost = postList.get(num-1);
+				viewPost(tmpPost , tmpMember);
+				return;
+			}
+			else {
+				switch(num) {
+				case 0: page++; break;
+				case -1: page--; break;
+				case -2: return;
+				case -3: postService.writePostInBoard(tmpBoard,tmpMember);
+				default:
+					throw new InputMismatchException();
+				}
+			}
+			if(page<1) {
+				page = 1;
+			}
+		}
+	}
+
 
 	public void searchMenu(MemberVO tmpMember) {
 		int menu = 0;
@@ -493,7 +553,8 @@ public class PostController {
 			for(ReplyVO tmp : replyList) {
 				System.out.println(tmp);
 			}
-			System.out.print("입력[뒤로가기(0) 댓글작성(1)"+ btn +"] : ");
+			System.out.println("[뒤로가기(0) 댓글작성(1)"+ btn +"]");
+			System.out.print("입력 : ");
 			menu = scan.nextInt();
 			switch(menu) {
 			case 0: return;

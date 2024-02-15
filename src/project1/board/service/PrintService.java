@@ -1,5 +1,9 @@
 package project1.board.service;
 
+import java.util.ArrayList;
+
+import project1.board.model.vo.BoardVO;
+
 public interface PrintService {
 	void startMenu();
 	void mainMenu();
@@ -12,4 +16,5 @@ public interface PrintService {
 	void loggedinUserMenu();
 	void loggedinAdminMenu();
 	void updateMyInfo();
+	ArrayList<BoardVO> getBoard();
 }

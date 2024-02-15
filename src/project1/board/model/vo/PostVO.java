@@ -14,9 +14,10 @@ public class PostVO {
 	int po_notice;
 	String po_mb_id;
 	int po_bo_num,po_pc_num;
+	String po_pc_title;
 	@Override
 	public String toString() {
-		return  po_title  + " 작성자 : " + po_mb_id + " 작성일 : " +  po_date  +" 조회수 " + po_viewCount ;
+		return "["+po_pc_title+"]"+ po_title  + " [작성자: " + po_mb_id + "][" +  po_date  +"] 조회수(" + po_viewCount+ ")" ;
 	}
 	
 	

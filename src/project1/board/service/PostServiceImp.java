@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import project1.board.dao.PostDAO;
+import project1.board.model.vo.BoardVO;
 import project1.board.model.vo.MemberVO;
 import project1.board.model.vo.PostVO;
 import project1.board.model.vo.ReplyVO;
@@ -99,6 +100,13 @@ public class PostServiceImp implements PostService {
 			year = null;
 		}
 		ArrayList<PostVO> postList = postDAO.getPostByDate(year, month, day,page);
+		return postList;
+	}
+
+	@Override
+	public ArrayList<PostVO> getPostByBoard(BoardVO tmpBoard, int page) {
+		page = (page-1)*10;
+		ArrayList<PostVO> postList = postDAO.getPostByBoard(tmpBoard,page);
 		return postList;
 	}
 

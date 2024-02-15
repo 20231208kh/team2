@@ -1,7 +1,13 @@
 package project1.board.service;
 
-public class PrintServiceImp implements PrintService {
+import java.util.ArrayList;
 
+import project1.board.model.vo.BoardVO;
+
+public class PrintServiceImp implements PrintService {
+	
+	BoardService boardService = new BoardServiceImp(); 
+	
 	@Override
 	public void startMenu() {
 		System.out.println("메뉴");
@@ -102,6 +108,11 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("4. 회원 탈퇴");
 		System.out.print("메뉴 선택 : ");
 		
+	}
+
+	@Override
+	public ArrayList<BoardVO> getBoard() {
+		return boardService.getBoard();
 	}
 
 

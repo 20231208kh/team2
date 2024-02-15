@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import project1.board.model.vo.BoardVO;
 import project1.board.model.vo.MemberVO;
 import project1.board.model.vo.PostVO;
 import project1.board.model.vo.ReplyVO;
@@ -29,5 +30,7 @@ public interface PostDAO {
 	ArrayList<PostVO> getPostByWriter(@Param("keyword")String keyword, @Param("page")int page);
 
 	ArrayList<PostVO> getPostByDate(@Param("year")String year, @Param("month")String month, @Param("day")String day, @Param("page")int page);
+
+	ArrayList<PostVO> getPostByBoard(@Param("board")BoardVO tmpBoard, @Param("page")int page);
 	
 }
