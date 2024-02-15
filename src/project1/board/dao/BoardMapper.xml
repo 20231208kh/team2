@@ -4,7 +4,40 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="project1.board.dao.BoardDAO">
 	<!-- 태그에는 insert, select, update, delete가 들어감 -->
-  <태그명 id="메서드명">
-  	//쿼리
-  </태그명>
+  <insert id="insertBoardType">
+  	insert into board_Category(bc_title) values(#{boardCategoryVO.bc_title})
+  </insert>
+  <insert id="insertBoard">
+  	insert into board(bo_title, bo_detail, bo_bc_num) values(#{boardVO.bo_title}, #{boardVO.bo_detail}, #{boardVO.bo_bc_num})
+  </insert>
+  <insert id="insertPostCategory">
+  	insert into post_category(pc_title, pc_bo_num) values(#{postCategoryVO.pc_title}, #{postCategoryVO.pc_bo_num})
+  </insert>
+  <select id="selectBoardCategory" resultType="project1.board.model.vo.BoardCategoryVO">
+  	select * from board_category
+  </select>
+  <select id="selectBoard" resultType="project1.board.model.vo.BoardVO">
+  	select * from board
+  </select>
+  <select id="selectPostCategory" resultType="project1.board.model.vo.PostCategoryVO">
+  	select * from post_category
+  </select>
+  <update id="updateBoardCategory">
+  	update board_category set bc_title = (#{boardCategoryVO.bc_title}) where bc_num = (#{boardCategoryVO.bc_num})
+  </update>
+  <update id="updateBoard">
+  	update board set bo_title = (#{boardVO.bo_title}) where bo_num = (#{boardVO.bo_num})
+  </update>
+  <insert id="updatePostCategory">
+  	update post_category set pc_title = (#{postCategoryVO.pc_title}) where pc_num = (#{postCategoryVO.pc_num})
+  </insert>
+  <delete id="deleteBoard">
+  	delete from board where bo_num = (#{boardVO.bo_num})
+  </delete>
+  <delete id="deleteBoardCategory">
+  	delete from board_Category where bc_num = (#{boardVO.bc_num})
+  </delete>
+  <delete id="deletePostCategory">
+  	delete from post_Category where pc_num = (#{postCategoryVO.pc_num})
+  </delete>
 </mapper>

@@ -32,6 +32,12 @@ public class PostServiceImp implements PostService {
 
 	@Override
 	public boolean write(PostVO postVo) {
+		if(postVo == null 
+				|| postVo.getPo_title() == null 
+				|| postVo.getPo_content() == null
+				|| postVo.getPo_mb_id() == null) {
+			return false;
+		}
 		
 		boolean res = postDAO.writePost(postVo);
 		if(res) {

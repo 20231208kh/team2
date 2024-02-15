@@ -27,31 +27,93 @@ public class PostController {
 	private Scanner scan = new Scanner(System.in);
 	private PrintService printService = new PrintServiceImp();
 	
-	
-	private void runPost(int menu) {
-		
-		
-		
-	}
 
-	public boolean writePost() {
+	public void writePost() {
+		printService.printBoard();
+	
+	}
+	public boolean writePost(MemberVO member) {
+		
 		System.out.println("게시글을 작성합니다.");
+		printService.printBoard();
+		System.out.println("게시판 번호를 입력하세요.");
+		int po_bo_num=scan.nextInt();
+		
+		printService.printPostCategory();
+		System.out.println("게시글 말머리 번호를 입력하세요.");
+		int po_pc_num=scan.nextInt();
 		
 		System.out.print("게시글 제목을 입력하세요.");
 		String po_title=scan.next();
 		System.out.print("게시글 내용을 입력하세요.");;
-		String content=scan.next();
-		String po_mb_id="0";
-		int po_bo_num=0;
-		int po_pc_num=0;
-		
-	PostVO postVo = new PostVO(po_title,content,po_mb_id,po_bo_num,po_pc_num);
+		String po_content=scan.next();
+
+		PostVO postVo = new PostVO(po_title,po_content,member.getMb_id(),po_bo_num,po_pc_num);
 	
-	if(postService.write(postVo)) {
-		return true;
+		if(postService.write(postVo)) {
+			return true;
+		}
+			return false;	
 	}
-	return false;
+	public void myCommunityManagePost(MemberVO member) {
+		
+		//if(select * from member where  mb_id=내가 입력한 것 member.getMB_id();)->{ 성공시-> 넣어줌} 실패시->는 없음.
+		printService.myCommunityUsed();
+		int menu=scan.nextInt();
+		myCommunityManagePost(menu);
+	}
+	
+	private void myCommunityManagePost(int menu) { //아이디를 받아온 것과 같은 것을 확인해야 됨.
+		
+		
+		switch(menu) {
+		case 1:
+			updatePost();	//게시글 수정
+			break;
+		case 2:
+			deletePost();	//게시글 삭제
+			break;
+		case 3:
+			System.out.println("돌아갑니다.");
+			break;
+
+		}
 		
 	}
+	
+	private void updatePost() {	//게시글 수정
+	
+		//게시글 수정을 하기 위해서-> id리스트에서 id가 동일한지 확인해야함
+		//어떻게 확인-> 
+		
+		int menu = scan.nextInt();
+		switch(menu){
+		case 1:
+			updatePostCategory();
+			break;
+		case 2:
+			updatePostTitle;
+			break;
+		case 3:
+			updatePostContent;
+			break;
+			
+		}
+		
+	
+		
+	}
+	
+
+	private void deletePost() { //게시글 삭제
+		
+	}
+
+	public void getUserID() {
+		
+		
+	}
+
+
 	
 }

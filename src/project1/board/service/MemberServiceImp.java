@@ -59,8 +59,70 @@ public class MemberServiceImp implements MemberService {
 		}
 		return res;
 	}
+
+	@Override
+	public boolean updateAge(MemberVO memberVo, int updateAge) {
+		if(memberVo == null 
+				|| memberVo.getMb_id() == null 
+				|| memberVo.getMb_pw() == null
+				|| memberVo.getMb_email() == null) {
+			return false;
+		}
+		boolean res = memberDAO.updateMemberAge(memberVo,updateAge);
+		if(res) {
+			session.commit();
+		}
+		return res;
+	}
+
+	@Override
+	public boolean updateEmail(MemberVO memberVo, String updateEmail) {
+		if(memberVo == null 
+				|| memberVo.getMb_id() == null 
+				|| memberVo.getMb_pw() == null
+				|| memberVo.getMb_email() == null) {
+			return false;
+		}
+		boolean res = memberDAO.updateMemberEmail(memberVo,updateEmail);
+		if(res) {
+			session.commit();
+		}
+		return res;
+	}
+
+	@Override
+	public boolean updatePw(MemberVO memberVo, String updatePw) {
+		if(memberVo == null 
+				|| memberVo.getMb_id() == null 
+				|| memberVo.getMb_pw() == null
+				|| memberVo.getMb_email() == null) {
+			return false;
+		}
+		boolean res = memberDAO.updateMemberPw(memberVo,updatePw);
+		if(res) {
+			session.commit();
+		}
+		return res;
+	}
+
+	@Override
+	public boolean deleteMember(MemberVO memberVo) {
+		if(memberVo == null 
+				|| memberVo.getMb_id() == null 
+				|| memberVo.getMb_pw() == null
+				|| memberVo.getMb_email() == null) {
+			return false;
+		}
+		boolean res = memberDAO.deleteMember(memberVo);
+		if(res) {
+			session.commit();
+		}
+		return res;
+	}
+
+	@Override
+	public MemberVO getMember(MemberVO memberVo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
-
-
-
-

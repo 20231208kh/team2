@@ -4,10 +4,12 @@ import java.util.Objects;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-public class MemberVO { //사용자
+@NoArgsConstructor
+public class MemberVO {
 	String mb_id,mb_pw,mb_email;
 	int mb_age;
 	String mb_localnum;

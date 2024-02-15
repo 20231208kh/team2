@@ -1,5 +1,8 @@
 package project1.board.main;
 
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 import project1.board.controller.BoardController;
@@ -56,8 +59,13 @@ public class Main {
 		int menu = 0;
 		do {
 			printService.startMenu();
-			menu = scan.nextInt();
-			runMenu(menu);
+			try {
+				menu = scan.nextInt();
+				runMenu(menu);
+			}catch(InputMismatchException e) {
+				scan.nextLine();
+				System.out.println("잘못된 입력");
+			}
 			
 		}while(menu!=3);
 
@@ -75,32 +83,70 @@ public class Main {
 			if(memberVo.getMb_right().equals("ADMIN")) {
 				runAdminMenu();
 			}else {
-				memberController.run();
+				runUserMenu();
 			}
 			break;
 		case 2:
-			memberController.signIn();
+			if(memberController.signIn()) {
+				System.out.println("회원가입 성공");
+				return;
+			}
+			System.out.println("회원가입 실패");
+			break;
+		default:
+			throw new InputMismatchException();
+		}
+	}
+
+	private static void runUserMenu() {
+		int menu =0;
+		do {
+			memberVo = memberController.getMemberInfo();
+			if(memberVo == null) {
+				break;
+			}
+			printService.loggedinUserMenu();
+			try {
+				menu = scan.nextInt();
+				loggedInUserMenu(menu);
+			}catch(InputMismatchException e) {
+				scan.nextLine();
+				System.out.println("잘못된 입력");
+			}
+		}while(menu !=6);
+		
+	}
+
+	private static void loggedInUserMenu(int menu) {
+		switch(menu) {
+		case 1:
+			postController.writePost(memberVo);
+			break;
+		case 2:
+			postController.myCommunityManagePost(memberVo);
 			break;
 		case 3:
-			System.out.println("프로그램을 종료합니다.");
 			break;
-			
+		case 4:
+			break;
+		case 5:
+			memberController.updateUser();
+			break;
+		case 6:
+			System.out.println("로그아웃 합니다.");
+			memberVo = null;
+			break;
+		default:
+			throw new InputMismatchException();
 		}
 		
 	}
 
+
 	private static void runAdminMenu() {
 		int menu =0;
 		do {
-			//System.out.println("--관리자 메뉴--");
-			//System.out.println("1. 게시판 관리");
-			//System.out.println("2. 게시글 관리");
-			//System.out.println("3. 나의 커뮤니티 이용내역");
-			//System.out.println("4. 게시판 보기");
-			//System.out.println("5. 검색 기능");
-			//System.out.println("6. 로그아웃");
-			//System.out.print("메뉴 선택 : ");
-		printService.loggedinAdminMenu();										
+			printService.loggedinAdminMenu();
 			menu = scan.nextInt();
 			loggedInAddminMenu(menu);
 		}while(menu != 6);
@@ -111,8 +157,6 @@ public class Main {
 		case 1:
 			boardController.run();
 			break;
-		case 2:
-		
 		}
 		
 	}
