@@ -1,6 +1,7 @@
 package project1.board.controller;
 
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import project1.board.model.vo.MemberVO;
 import project1.board.service.MemberService;
@@ -24,7 +25,7 @@ public class MemberController {
 	public MemberVO login() {
 		System.out.print("아이디를 입력해주세요 : ");
 		String id = scan.next();
-		System.out.println("비밀번호를 입력해주세요 : ");
+		System.out.print("비밀번호를 입력해주세요 : ");
 		String pw = scan.next();
 		MemberVO tmp = new MemberVO(id,pw);
 		
@@ -44,17 +45,37 @@ public class MemberController {
 	}
 
 	public boolean signIn() {
+		String regex = "^[a-zA-Z]{1}[a-zA-Z0-9]{4,16}$";
+		String emailRegex = "^[a-zA-Z0-9]+@[0-9a-zA-Z]+\\.[a-z]+$";
+		String localnumRegex ="^[0-9]{6}-[1234][0-9]{6}$";
 		System.out.println("--회원가입을 진행합니다.--");
 		System.out.print("ID를 입력해주세요 : ");
 		String id = scan.next();
+		if(!Pattern.matches(regex, id)) {
+			System.out.println("ID는 영어,숫자 5~15자리");
+			return false;
+		}
 		System.out.print("PW를 입력해주세요 : ");
 		String pw = scan.next();
+		if(!Pattern.matches(regex, pw)) {
+			System.out.println("PW는 영어,숫자 5~15자리");
+			return false;
+		}
 		System.out.print("Email을 입력해주세요 : ");
 		String email = scan.next();
+		if(!Pattern.matches(emailRegex,email)) {
+			System.out.println("올바르지 않은 email 양식입니다");
+			return false;
+		}
 		System.out.print("나이를 입력해주세요 : ");
 		int age = scan.nextInt();
 		System.out.print("주민등록번호를 입력해주세요 : ");
 		String localnum = scan.next();
+		if(!Pattern.matches(localnumRegex, localnum)) {
+			System.out.println("올바르지 않은 주민등록번호 양식입니다.");
+			return false;
+		}
+		
 		System.out.print("권한을 입력해주세요");
 		String role = scan.next();
 		MemberVO member = new MemberVO(id,pw,email,age,localnum,role);

@@ -119,6 +119,12 @@ public class MemberServiceImp implements MemberService {
 		}
 		return res;
 	}
+
+	@Override
+	public MemberVO getMember(MemberVO memberVo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 
 

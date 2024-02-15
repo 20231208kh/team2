@@ -118,6 +118,7 @@ public class Main {
 	private static void loggedInUserMenu(int menu) {
 		switch(menu) {
 		case 1:
+			postController.writePost(memberVo);
 			break;
 		case 2:
 			break;
@@ -153,6 +154,7 @@ public class Main {
 		case 1:
 			boardController.run();
 			break;
+		
 		}
 		
 	}
