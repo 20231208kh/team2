@@ -1,6 +1,7 @@
 package project1.board.controller;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Scanner;
 
 import project1.board.model.vo.MemberVO;
@@ -26,14 +27,10 @@ public class PostController {
 	private PostVO postVo;
 	private Scanner scan = new Scanner(System.in);
 	private PrintService printService = new PrintServiceImp();
+	private MemberService memberService =new MemberServiceImp();
 	
 
-	public void writePost() {
-		printService.printBoard();
-	
-	}
 	public boolean writePost(MemberVO member) {
-		
 		System.out.println("게시글을 작성합니다.");
 		printService.printBoard();
 		System.out.println("게시판 번호를 입력하세요.");
@@ -55,9 +52,11 @@ public class PostController {
 		}
 			return false;	
 	}
-	public void myCommunityManagePost(MemberVO member) {
+		public void myCommunityManagePost(MemberVO member) {
 		
 		//if(select * from member where  mb_id=내가 입력한 것 member.getMB_id();)->{ 성공시-> 넣어줌} 실패시->는 없음.
+		//List<MemberVO> memberList=memberService.getMemberList(member.getMb_id());	//포기
+		//System.out.println(memberList);
 		printService.myCommunityUsed();
 		int menu=scan.nextInt();
 		myCommunityManagePost(menu);
@@ -81,30 +80,42 @@ public class PostController {
 		
 	}
 	
-	private void updatePost() {	//게시글 수정
-	
-		//게시글 수정을 하기 위해서-> id리스트에서 id가 동일한지 확인해야함
-		//어떻게 확인-> 
-		
-		int menu = scan.nextInt();
-		switch(menu){
-		case 1:
-			updatePostCategory();
-			break;
-		case 2:
-			updatePostTitle;
-			break;
-		case 3:
-			updatePostContent;
-			break;
-			
-		}
-		
-	
-		
-	}
+
 	
 
+	private void updatePost() {
+		int menu;
+	
+		do{
+			printService.myCoummunityUsedUpdateMenu();
+			menu = scan.nextInt();
+			runMyCoummunityUsedUpdateMenu(menu);
+			
+		}while(menu !=3);
+		
+	}
+
+	private void runMyCoummunityUsedUpdateMenu(int menu) {
+		switch(menu) {
+		case 1:
+			updatePost_Po_Title();
+		case 2:
+			updatePost_Po_Content();
+		case 3:
+			System.out.println("이전으로 돌아갑니다.");
+			break;
+		
+		}
+	}
+	private void updatePost_Po_Title() {
+		//제목을 수정하기 위해 뭐부터 보여줘야 되는가?
+		//->게시글 리스트를 보여주고
+		List<PostVO> postList = postService.getPostList();
+		//->게시글 리스트에서 번호를 찾는다.
+	}
+	private void updatePost_Po_Content() {
+		
+	}
 	private void deletePost() { //게시글 삭제
 		
 	}
@@ -113,6 +124,7 @@ public class PostController {
 		
 		
 	}
+
 
 
 	

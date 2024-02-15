@@ -120,9 +120,14 @@ public class MemberServiceImp implements MemberService {
 		return res;
 	}
 
-	@Override
-	public MemberVO getMember(MemberVO memberVo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public List<MemberVO> getMemberList(String mb_id) {
+//		if(mb_id == null) {
+//			return null;
+//		}
+//		return memberDAO.selectMemberList(mb_id);
+//	}
+
+
+	
 }

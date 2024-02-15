@@ -21,6 +21,6 @@ public interface PrintService {
 	void printPostCategory();
 	void printBoardCategory();
 	void printBoard();
-	
+	void myCoummunityUsedUpdateMenu();
 
 }

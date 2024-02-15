@@ -136,6 +136,14 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("3.돌아가기");
 		System.out.print("메뉴 선택 : ");
 	}
+	
+	public void myCoummunityUsedUpdateMenu() {
+		System.out.println("--게시글 수정-");
+		System.out.println("1.게시글 제목 수정");
+		System.out.println("2.게시글 내용 수정");
+		System.out.println("3.돌아가기");
+		System.out.print("메뉴 선택 : ");
+	}
 
 
 }

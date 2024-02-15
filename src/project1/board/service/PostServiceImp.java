@@ -46,6 +46,12 @@ public class PostServiceImp implements PostService {
 		
 		return res;
 	}
+
+	@Override
+	public List<PostVO> getPostList() {
+		
+		return postDAO.selectPostList();
+	}
 	
 
 }

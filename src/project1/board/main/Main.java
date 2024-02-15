@@ -1,8 +1,6 @@
 package project1.board.main;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 import project1.board.controller.BoardController;
@@ -49,7 +47,7 @@ import project1.board.service.PrintServiceImp;
 public class Main {
 	private static BoardController boardController = new BoardController();
 	private static MemberController memberController = new MemberController();
-	private static PostController postController;
+	private static PostController postController = new PostController();
 	private static PrintService printService = new PrintServiceImp();
 	private static MemberService memberService = new MemberServiceImp();
 	private static MemberVO memberVo;
@@ -157,6 +155,7 @@ public class Main {
 		case 1:
 			boardController.run();
 			break;
+		
 		}
 		
 	}

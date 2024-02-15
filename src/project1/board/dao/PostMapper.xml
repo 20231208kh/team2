@@ -7,7 +7,8 @@
   <insert id="writePost">
   		insert into post(po_title,po_content,po_mb_id,po_bo_num,po_pc_num)
   		value(#{postVo.po_title},#{postVo.po_content},#{postVo.po_mb_id},#{postVo.po_bo_num},#{postVo.po_pc_num})
-  		
-  	</insert>
-  	
+  </insert>
+  <select id="selectPostList" resultType="project1.board.model.vo.PostVO">
+		select * from post
+	</select>	
 </mapper>
