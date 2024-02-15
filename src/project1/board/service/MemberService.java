@@ -18,5 +18,7 @@ public interface MemberService {
 
 	boolean deleteMember(MemberVO memberVo);
 
+	MemberVO getMember(MemberVO memberVo);
+
 
 }

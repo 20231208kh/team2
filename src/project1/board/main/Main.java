@@ -1,5 +1,6 @@
 package project1.board.main;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import project1.board.controller.BoardController;
@@ -56,8 +57,13 @@ public class Main {
 		int menu = 0;
 		do {
 			printService.startMenu();
-			menu = scan.nextInt();
-			runMenu(menu);
+			try {
+				menu = scan.nextInt();
+				runMenu(menu);
+			}catch(InputMismatchException e) {
+				scan.nextLine();
+				System.out.println("잘못된 입력");
+			}
 			
 		}while(menu!=3);
 
@@ -75,15 +81,63 @@ public class Main {
 			if(memberVo.getMb_right().equals("ADMIN")) {
 				runAdminMenu();
 			}else {
-				memberController.run();
+				runUserMenu();
 			}
 			break;
 		case 2:
-			memberController.signIn();
+			if(memberController.signIn()) {
+				System.out.println("회원가입 성공");
+				return;
+			}
+			System.out.println("회원가입 실패");
 			break;
+		default:
+			throw new InputMismatchException();
+		}
+	}
+
+	private static void runUserMenu() {
+		int menu =0;
+		do {
+			memberVo = memberController.getMemberInfo();
+			if(memberVo == null) {
+				break;
+			}
+			printService.loggedinUserMenu();
+			try {
+				menu = scan.nextInt();
+				loggedInUserMenu(menu);
+			}catch(InputMismatchException e) {
+				scan.nextLine();
+				System.out.println("잘못된 입력");
+			}
+		}while(menu !=6);
+		
+	}
+
+	private static void loggedInUserMenu(int menu) {
+		switch(menu) {
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			memberController.updateUser();
+			break;
+		case 6:
+			System.out.println("로그아웃 합니다.");
+			memberVo = null;
+			break;
+		default:
+			throw new InputMismatchException();
 		}
 		
 	}
+
 
 	private static void runAdminMenu() {
 		int menu =0;
