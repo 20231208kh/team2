@@ -7,7 +7,6 @@ public interface PrintService {
 	void manageBoardMenu();
 	void postMenu();
 	void managePostCategory();
-	void updateBoard();
 	void loggedinUserMenu();
 	void loggedinAdminMenu();
 	void updateMyInfo();
@@ -15,4 +14,5 @@ public interface PrintService {
 	void printBoardCategory();
 	void printBoard();
 	void printPostCategory();
+	void manageBoard();
 }

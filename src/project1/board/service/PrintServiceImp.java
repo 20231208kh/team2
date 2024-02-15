@@ -32,35 +32,47 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("--회원 관리 메뉴--");
 		System.out.println("1. 회원 권한 수정");
 		System.out.println("2. 뒤로 가기");
-		
 	}
 
 	//관리자 전용 메뉴
 	@Override
 	public void manageBoardMenu() {
 		System.out.println("--게시판 관리 메뉴--");
-		System.out.println("1. 게시판 카테고리(그룹) 설정");
-		System.out.println("2. 게시판 추가");
-		System.out.println("3. 게시판 수정");
-		System.out.println("4. 게시판 삭제");
-		System.out.println("5. 게시판-게시글 말머리 설정");
-		System.out.println("6. 뒤로 가기");
+		System.out.println("1. 카테고리(그룹) 설정");
+		System.out.println("2. 게시판 설정");
+		System.out.println("3. 말머리 설정");
+		System.out.println("4. 뒤로 가기");
+		System.out.print("메뉴 선택 : ");
+	}
+	
+	@Override
+	public void manageBoardCategory() {
+		System.out.println("--카테고리 설정--");
+		System.out.println("1. 카테고리 추가");
+		System.out.println("2. 카테고리 수정");
+		System.out.println("3. 카테고리 삭제");
+		System.out.println("4. 뒤로 가기");
+		System.out.print("메뉴 선택 : ");
 	}
 
 	@Override
+	public void manageBoard() {
+		System.out.println("--게시판 설정--");
+		System.out.println("1. 게시판 추가");
+		System.out.println("2. 게시판 수정");
+		System.out.println("3. 게시판 삭제");
+		System.out.println("4. 뒤로 가기");
+		System.out.print("메뉴 선택 : ");
+	}
+	
+	@Override
 	public void managePostCategory() {
-		System.out.println("--게시판-게시글 말머리 설정--");
+		System.out.println("--말머리 설정--");
 		System.out.println("1. 게시글 말머리 등록");
 		System.out.println("2. 게시글 말머리 수정");
 		System.out.println("3. 게시글 말머리 삭제");
 		System.out.println("4. 뒤로 가기");
-		
-	}
-
-	@Override
-	public void updateBoard() {
-		// TODO Auto-generated method stub
-		
+		System.out.print("메뉴 선택 : ");
 	}
 
 	@Override
@@ -73,7 +85,6 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("5. 내 정보 수정");
 		System.out.println("6. 로그아웃");
 		System.out.print("메뉴 선택 : ");
-		
 	}
 
 	@Override
@@ -86,7 +97,6 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("5. 검색 기능");
 		System.out.println("6. 로그아웃");
 		System.out.print("메뉴 선택 : ");
-		
 	}
 
 	@Override
@@ -96,17 +106,6 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("2. 이메일 수정");
 		System.out.println("3. 나이 수정");
 		System.out.println("4. 회원 탈퇴");
-		System.out.print("메뉴 선택 : ");
-		
-	}
-
-	@Override
-	public void manageBoardCategory() {
-		System.out.println("--내 정보 수정--");
-		System.out.println("1. 카테고리 추가");
-		System.out.println("2. 카테고리 수정");
-		System.out.println("3. 카테고리 삭제");
-		System.out.println("4. 뒤로 가기");
 		System.out.print("메뉴 선택 : ");
 	}
 
@@ -124,6 +123,5 @@ public class PrintServiceImp implements PrintService {
 	public void printPostCategory() {
 		boardService.printPostCategory();
 	}
-
 
 }
