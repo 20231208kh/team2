@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="project1.board.dao.PostDAO">
+	<!-- 태그에는 insert, select, update, delete가 들어감 -->
+  <insert id="writePost">
+  		insert into post(po_title,po_content,po_mb_id,po_bo_num,po_pc_num)
+  		value(#{postVo.po_title},#{postVo.po_content},#{postVo.po_mb_id},#{postVo.po_bo_num},#{postVo.po_pc_num})
+  		
+  	</insert>
+  	
+</mapper>
