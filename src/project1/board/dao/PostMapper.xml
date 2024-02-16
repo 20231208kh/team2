@@ -5,6 +5,7 @@
 <mapper namespace="project1.board.dao.PostDAO">
 	<!-- 태그에는 insert, select, update, delete가 들어감 -->
 
+
   <update id="increaseVeiwCount">
   	update post set po_viewcount = po_viewcount + 1 where po_num = #{post.po_num} 
   </update>
@@ -106,5 +107,16 @@
   <update id="updateReply">
   	update reply set re_content = #{content} where re_num = #{reply.re_num}
   </update>
+
+
+  
+  <insert id="writePost">
+  		insert into post(po_title,po_content,po_date,po_mb_id,po_bo_num,po_pc_num)
+  		value(#{postVo.po_title},#{postVo.po_content},#{postVo.po_date},#{postVo.po_mb_id},#{postVo.po_bo_num},#{postVo.po_pc_num})
+  </insert>
+ 
+  <select id="selectPostList" resultType="project1.board.model.vo.PostVO">
+		select * from post
+	</select>	
 
 </mapper>

@@ -7,8 +7,6 @@ import project1.board.controller.BoardController;
 import project1.board.controller.MemberController;
 import project1.board.controller.PostController;
 import project1.board.model.vo.MemberVO;
-import project1.board.service.MemberService;
-import project1.board.service.MemberServiceImp;
 import project1.board.service.PrintService;
 import project1.board.service.PrintServiceImp;
 
@@ -47,9 +45,8 @@ import project1.board.service.PrintServiceImp;
 public class Main {
 	private static BoardController boardController = new BoardController();
 	private static MemberController memberController = new MemberController();
-	private static PostController postController;
+	private static PostController postController = new PostController();
 	private static PrintService printService = new PrintServiceImp();
-	private static MemberService memberService = new MemberServiceImp();
 	private static MemberVO memberVo;
 	private static Scanner scan = new Scanner(System.in);
 	public static void main(String[] args) {
@@ -142,14 +139,11 @@ public class Main {
 		case 6:
 			System.out.println("로그아웃 합니다.");
 			memberVo = null;
-
 			break;
 		default:
 			throw new InputMismatchException();
 		}
 	}
-
-	
 
 
 	private static void runAdminMenu() {

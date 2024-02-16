@@ -1,6 +1,7 @@
 package project1.board.controller;
 
 
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -10,6 +11,14 @@ import project1.board.model.vo.MemberVO;
 import project1.board.model.vo.PostCategoryVO;
 import project1.board.model.vo.PostVO;
 import project1.board.model.vo.ReplyVO;
+
+import java.sql.Date;
+import java.util.List;
+
+
+import project1.board.service.MemberService;
+import project1.board.service.MemberServiceImp;
+
 import project1.board.service.PostService;
 import project1.board.service.PostServiceImp;
 import project1.board.service.PrintService;
@@ -1012,5 +1021,105 @@ public class PostController {
 		}
 		System.out.println("댓글 등록에 실패했습니다.");
 	}
+
+
+	public boolean writePost(MemberVO member) {
+		System.out.println("게시글을 작성합니다.");
+		printService.printBoard();
+		System.out.println("게시판 번호를 입력하세요.");
+		int po_bo_num=scan.nextInt();
+		
+		printService.printPostCategory();
+		System.out.println("게시글 말머리 번호를 입력하세요.");
+		int po_pc_num=scan.nextInt();
+		
+		System.out.print("게시글 제목을 입력하세요.");
+		String po_title=scan.next();
+		System.out.print("게시글 내용을 입력하세요.");;
+		String po_content=scan.next();
+
+		PostVO postVo = new PostVO(po_title,po_content,member.getMb_id(),po_bo_num,po_pc_num);
+	
+		if(postService.write(postVo)) {
+			return true;
+		}
+			return false;	
+	}
+		public void myCommunityManagePost(MemberVO member) {
+		
+		//if(select * from member where  mb_id=내가 입력한 것 member.getMB_id();)->{ 성공시-> 넣어줌} 실패시->는 없음.
+		//List<MemberVO> memberList=memberService.getMemberList(member.getMb_id());	//포기
+		//System.out.println(memberList);
+		printService.myCommunityUsed();
+		int menu=scan.nextInt();
+		myCommunityManagePost(menu);
+	}
+	
+	private void myCommunityManagePost(int menu) { //아이디를 받아온 것과 같은 것을 확인해야 됨.
+		
+		switch(menu) {
+		case 1:
+			updatePost();	//게시글 수정
+			break;
+		case 2:
+			deletePost();	//게시글 삭제
+			break;
+		case 3:
+			System.out.println("돌아갑니다.");
+			break;
+
+		}
+		
+	}
+	
+
+	
+
+	private void updatePost() {
+		int menu;
+	
+		do{
+			printService.myCoummunityUsedUpdateMenu();
+			menu = scan.nextInt();
+			runMyCoummunityUsedUpdateMenu(menu);
+			
+		}while(menu !=3);
+		
+	}
+
+	private void runMyCoummunityUsedUpdateMenu(int menu) {
+		switch(menu) {
+		case 1:
+			updatePost_Po_Title();
+		case 2:
+			updatePost_Po_Content();
+		case 3:
+			System.out.println("이전으로 돌아갑니다.");
+			break;
+		
+		}
+	}
+	private void updatePost_Po_Title() {
+		//제목을 수정하기 위해 뭐부터 보여줘야 되는가?
+		//->게시글 리스트를 보여주고
+		List<PostVO> postList = postService.getPostList();
+		System.out.println(postList);
+		//->게시글 리스트에서 번호를 찾는다.
+	}
+	private void updatePost_Po_Content() {
+		
+	}
+	private void deletePost() { //게시글 삭제
+		
+	}
+
+	public void getUserID() {
+		
+		
+	}
+
+
+
+	
 
 }

@@ -1,6 +1,5 @@
 package project1.board.controller;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import project1.board.model.vo.BoardCategoryVO;

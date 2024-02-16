@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import project1.board.model.vo.BoardVO;
 
 public interface PrintService {
+
 	void startMenu();
 	void mainMenu();
 	void manageMemberMenu();
@@ -16,5 +17,15 @@ public interface PrintService {
 	void loggedinUserMenu();
 	void loggedinAdminMenu();
 	void updateMyInfo();
+
 	ArrayList<BoardVO> getBoard();
+  
+  
+	void myCommunityUsed(); //게시글 관리
+	void printPostCategory();
+	void printBoardCategory();
+	void printBoard();
+	void myCoummunityUsedUpdateMenu();
+
+
 }

@@ -1,10 +1,11 @@
 package project1.board.dao;
 
 
+
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
+
 
 import project1.board.model.vo.BoardVO;
 import project1.board.model.vo.MemberVO;
@@ -38,5 +39,21 @@ public interface PostDAO {
 
 	boolean updateReply(@Param("reply")ReplyVO tmpReply, @Param("content")String content);
 	
+
+
+	boolean writePost(@Param("postVo")PostVO postVo);
+
+	List<PostVO> selectPostList();
+
+	List<PostVO> setPo_Title(int po_num);
+
+	
+
+	
+
+	
+
+
+
 
 }

@@ -1,13 +1,16 @@
 package project1.board.model.vo;
 
 import java.util.Date;
+import java.util.Objects;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class PostVO {
 	int po_num,po_viewCount;
 	String po_title,po_content;
@@ -33,5 +36,37 @@ public class PostVO {
 
 	}
 	
+	
+
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PostVO other = (PostVO) obj;
+		return po_num == other.po_num;
+	}
+
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(po_num);
+	}
+	
+	
+
+	public PostVO(String po_title, String po_content,String po_mb_id, int po_bo_num, int po_pc_num){
+
+	this.po_title=po_title;
+	this.po_content=po_content;
+	this.po_mb_id=po_mb_id;
+	this.po_bo_num=po_bo_num;
+	this.po_pc_num=po_pc_num;
+	
+	}
+
+
 	
 }

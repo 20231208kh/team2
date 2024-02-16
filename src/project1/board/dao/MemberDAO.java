@@ -1,6 +1,9 @@
+
 package project1.board.dao;
 
 import java.util.ArrayList;
+
+
 
 import org.apache.ibatis.annotations.Param;
 
@@ -16,4 +19,9 @@ public interface MemberDAO {
 	boolean updateMemberPw(@Param("memberVo")MemberVO memberVo, @Param("updatePw")String updatePw);
 	boolean deleteMember(@Param("memberVo")MemberVO memberVo);
 
+//	List<MemberVO> selectMemberList(@Param("mb_id")String mb_id);
+	
+	
+
 }
+

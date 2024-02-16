@@ -4,12 +4,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import java.util.List;
+
+
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import project1.board.dao.PostDAO;
+
 
 import project1.board.model.vo.BoardVO;
 import project1.board.model.vo.MemberVO;
@@ -35,6 +39,7 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
+
 
 	public PostVO increaseVeiwCount(PostVO tmpPost) {
 		postDAO.increaseVeiwCount(tmpPost);
@@ -127,5 +132,35 @@ public class PostServiceImp implements PostService {
 		return false;
 
 	}
+
+	public boolean write(PostVO postVo) {
+		if(postVo == null 
+				|| postVo.getPo_title() == null 
+				|| postVo.getPo_content() == null
+				|| postVo.getPo_mb_id() == null) {
+			return false;
+		}
+		
+		boolean res = postDAO.writePost(postVo);
+		if(res) {
+			session.commit();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public List<PostVO> getPostList() {
+		
+		return postDAO.selectPostList();
+	}
+
+	@Override
+	public List<PostVO> getPo_Title(int po_num) {
+		
+		return postDAO.setPo_Title(po_num);
+	}
+	
+
 
 }
