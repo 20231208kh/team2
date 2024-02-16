@@ -118,6 +118,7 @@ public class Main {
 	private static void loggedInUserMenu(int menu) {
 		switch(menu) {
 		case 1:
+			//게시글 작성
 			postController.writePost(memberVo);
 			break;
 		case 2:
