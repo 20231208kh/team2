@@ -290,8 +290,8 @@ public class PostController {
 				for(int i = 0 ; i < postList.size() ; i++) {
 					System.out.println((i+1)+". "+ postList.get(i));
 				}
+				System.out.println("현재 페이지 : " + page);
 			}
-			System.out.println("현재 페이지 : " + page);
 			System.out.println("해당 게시판에 게시글 작성(-3)");
 			if(postList.size() < 10 && page == 1) {
 				System.out.println("상위메뉴(-2)");
