@@ -64,7 +64,6 @@ public class PostController {
 	
 	private void myCommunityManagePost(int menu) { //아이디를 받아온 것과 같은 것을 확인해야 됨.
 		
-		
 		switch(menu) {
 		case 1:
 			updatePost();	//게시글 수정
@@ -111,6 +110,7 @@ public class PostController {
 		//제목을 수정하기 위해 뭐부터 보여줘야 되는가?
 		//->게시글 리스트를 보여주고
 		List<PostVO> postList = postService.getPostList();
+		System.out.println(postList);
 		//->게시글 리스트에서 번호를 찾는다.
 	}
 	private void updatePost_Po_Content() {

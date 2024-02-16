@@ -52,6 +52,12 @@ public class PostServiceImp implements PostService {
 		
 		return postDAO.selectPostList();
 	}
+
+	@Override
+	public List<PostVO> getPo_Title(int po_num) {
+		
+		return postDAO.setPo_Title(po_num);
+	}
 	
 
 }
