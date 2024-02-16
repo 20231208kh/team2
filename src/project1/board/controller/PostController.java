@@ -14,10 +14,8 @@ import project1.board.model.vo.ReplyVO;
 
 import java.sql.Date;
 import java.util.List;
-import java.util.Scanner;
 
-import project1.board.model.vo.MemberVO;
-import project1.board.model.vo.PostVO;
+
 import project1.board.service.MemberService;
 import project1.board.service.MemberServiceImp;
 

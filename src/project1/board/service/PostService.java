@@ -3,6 +3,7 @@ package project1.board.service;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import project1.board.model.vo.BoardVO;
 import project1.board.model.vo.MemberVO;

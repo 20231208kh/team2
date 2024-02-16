@@ -3,8 +3,6 @@ package project1.board.controller;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
-import java.util.ArrayList;
-import java.util.List;
 
 
 import project1.board.model.vo.MemberVO;
@@ -19,7 +17,6 @@ import project1.board.service.PrintServiceImp;
 
 public class MemberController {
 	private MemberService memberService = new MemberServiceImp();
-	private PostController postController = new PostController();
 	private MemberVO memberVo;
 	private Scanner scan = new Scanner(System.in);
 	private PrintService printService = new PrintServiceImp();
