@@ -59,7 +59,7 @@ public class BoardServiceImp implements BoardService {
 			System.out.println("카테고리 이름을 입력하지 않았습니다.");
 			return false;
 		}
-		if(!boardDAO.selectBoardCategory().contains(uBoardCategoryVo.getBc_num())) {
+		if(!boardDAO.selectBoardCategory().contains(uBoardCategoryVo)) {
 			System.out.println("해당 카테고리가 존재하지 않습니다.");
 			return false;
 		}
@@ -81,7 +81,7 @@ public class BoardServiceImp implements BoardService {
 			System.out.println("카테고리 번호를 입력하지 않았습니다.");
 			return false;
 		}
-		if(!boardDAO.selectBoardCategory().contains(dBoardCategoryVo.getBc_num())) {
+		if(!boardDAO.selectBoardCategory().contains(dBoardCategoryVo)) {
 			System.out.println("해당 카테고리가 존재하지 않습니다.");
 			return false;
 		}
@@ -100,10 +100,6 @@ public class BoardServiceImp implements BoardService {
 	//게시판 입력
 	@Override
 	public boolean insertBoard(BoardVO boardVo) {
-		if(!boardDAO.selectBoard().contains(boardVo.getBo_bc_num())) {
-			System.out.println("해당 카테고리가 존재하지 않습니다.");
-			return false;
-		}
 		if(boardVo == null || boardVo.getBo_title() == null) {
 			System.out.println("게시판 이름을 입력하지 않았습니다.");
 			return false;

@@ -76,8 +76,11 @@ public class PostServiceImp implements PostService {
 				|| tmpPost == null) {
 			return false;			
 		}
-		postDAO.insertReply(content, tmpMember, tmpPost);
-		return true;
+		boolean res = postDAO.insertReply(content, tmpMember, tmpPost);
+		if(res) {
+			session.commit();
+		}
+		return res;
 	}
 
 	@Override
