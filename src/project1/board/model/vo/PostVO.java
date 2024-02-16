@@ -1,7 +1,5 @@
 package project1.board.model.vo;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -12,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class PostVO {
 	int po_num,po_viewCount;
 	String po_title,po_content;
