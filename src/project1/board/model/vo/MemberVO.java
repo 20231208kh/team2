@@ -34,7 +34,6 @@ public class MemberVO {
 	public int hashCode() {
 		return Objects.hash(mb_id, mb_pw);
 	}
-	
-	
-	
+
 }
+

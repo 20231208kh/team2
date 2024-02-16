@@ -1,6 +1,7 @@
 package project1.board.service;
 
 
+
 import java.util.ArrayList;
 
 import project1.board.model.vo.BoardVO;
@@ -33,5 +34,12 @@ public interface PostService {
 	void deleteReply(ReplyVO tmpReply);
 
 	boolean updateReply(ReplyVO tmpReply, String content);
+
+	boolean write(PostVO postVo);
+
+	List<PostVO> getPostList(); //게시글 가져오기
+
+	List<PostVO> getPo_Title(int po_num);	//제목 수정을 위함
+
 
 }
