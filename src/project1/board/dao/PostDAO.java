@@ -32,5 +32,9 @@ public interface PostDAO {
 	ArrayList<PostVO> getPostByDate(@Param("year")String year, @Param("month")String month, @Param("day")String day, @Param("page")int page);
 
 	ArrayList<PostVO> getPostByBoard(@Param("board")BoardVO tmpBoard, @Param("page")int page);
+
+	void deleteReply(@Param("reply")ReplyVO tmpReply);
+
+	boolean updateReply(@Param("reply")ReplyVO tmpReply, @Param("content")String content);
 	
 }

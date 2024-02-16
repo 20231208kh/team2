@@ -110,4 +110,18 @@ public class PostServiceImp implements PostService {
 		return postList;
 	}
 
+	@Override
+	public void deleteReply(ReplyVO tmpReply) {
+		postDAO.deleteReply(tmpReply);
+		
+	}
+
+	@Override
+	public boolean updateReply(ReplyVO tmpReply, String content) {
+		if(postDAO.updateReply(tmpReply,content)) {
+			return true;
+		}
+		return false;
+	}
+
 }

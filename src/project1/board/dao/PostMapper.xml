@@ -82,7 +82,7 @@
   			join
 		post_category on po_pc_num = pc_num
   	where 
-  		po_date like concat(ifnull(#{year},"%"),"-",lpad(#{month},2,0),"-",lpad(#{day},2,0)) 
+  		po_date like concat(ifnull(#{year},"%"),"-",lpad(#{month},2,0),"-",lpad(#{day},2,0),"%") 
   	order by 
   		po_num desc 
   	limit #{page},10
@@ -99,6 +99,10 @@
   		po_num desc 
   	limit #{page},10
   </select>
-  
-  
+  <delete id="deleteReply">
+  	delete from reply where re_num = #{reply.re_num}
+  </delete> 
+  <update id="updateReply">
+  	update reply set re_content = #{content} where re_num = #{reply.re_num}
+  </update>
 </mapper>

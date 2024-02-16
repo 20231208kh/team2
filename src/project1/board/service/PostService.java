@@ -29,4 +29,8 @@ public interface PostService {
 
 	ArrayList<PostVO> getPostByBoard(BoardVO tmpBoard, int page);
 
+	void deleteReply(ReplyVO tmpReply);
+
+	boolean updateReply(ReplyVO tmpReply, String content);
+
 }

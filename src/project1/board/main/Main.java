@@ -158,9 +158,29 @@ public class Main {
 	private static void loggedInAddminMenu(int menu) {
 		switch (menu) {
 		case 1:
+			// 게시판 관리
 			boardController.run();
 			break;
-		
+		case 2:
+			// 게시글 작성
+			
+			break;
+		case 3: 
+			// 마이페이지
+			postController.myPageMenu(memberVo);
+			break;
+		case 4:
+			// 게시판 메뉴
+			// 전체, 게시판 
+			postController.boardAdminMenu(memberVo);
+			break;
+		case 5: 
+			// 검색 메뉴
+			postController.searchAdminMenu(memberVo);
+			break;
+		case 6: break;
+		default:
+			throw new InputMismatchException();
 		}
 		
 	}
