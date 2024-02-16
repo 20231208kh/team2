@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class PostVO {
 	int po_num,po_viewCount;
 	String po_title,po_content;
-	Date po_date;
+	String po_date;
 	int po_notice;
 	String po_mb_id;
 	int po_bo_num,po_pc_num;

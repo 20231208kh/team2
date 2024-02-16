@@ -101,22 +101,31 @@
   		po_num desc 
   	limit #{page},10
   </select>
+  
   <delete id="deleteReply">
   	delete from reply where re_num = #{reply.re_num}
   </delete> 
+  
   <update id="updateReply">
   	update reply set re_content = #{content} where re_num = #{reply.re_num}
   </update>
-
-
   
   <insert id="writePost">
   		insert into post(po_title,po_content,po_date,po_mb_id,po_bo_num,po_pc_num)
-  		value(#{postVo.po_title},#{postVo.po_content},#{postVo.po_date},#{postVo.po_mb_id},#{postVo.po_bo_num},#{postVo.po_pc_num})
+  		value(#{postVo.po_title},#{postVo.po_content},now(),#{postVo.po_mb_id},#{postVo.po_bo_num},#{postVo.po_pc_num})
   </insert>
  
   <select id="selectPostList" resultType="project1.board.model.vo.PostVO">
 		select * from post
-	</select>	
-
+  </select>
+  
+  <update id="updatePost">
+  	UPDATE post 
+SET 
+    po_title = #{postVo.po_title},
+    po_content = #{postVo.po_content}
+WHERE
+    po_num = #{postVo.po_num}	
+  </update>
+  
 </mapper>

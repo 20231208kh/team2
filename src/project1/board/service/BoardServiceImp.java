@@ -254,7 +254,7 @@ public class BoardServiceImp implements BoardService {
 	//말머리 출력
 	@Override
 	public void printPostCategory() {
-		ArrayList<BoardVO> boardList = getBoard();
+		ArrayList<PostCategoryVO> postList = getBoard();
 		if(boardList.size() == 0) {
 			System.out.println("등록된 카테고리가 없습니다.");
 			return;

@@ -45,7 +45,7 @@ public interface PostDAO {
 
 	List<PostVO> selectPostList();
 
-	List<PostVO> setPo_Title(int po_num);
+	boolean updatePost(@Param("postVo")PostVO tmpPost);
 
 	
 

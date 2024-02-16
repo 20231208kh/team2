@@ -156,9 +156,17 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
-	public List<PostVO> getPo_Title(int po_num) {
+	public boolean setPost(PostVO tmpPost) {
+		if(tmpPost==null 
+				|| tmpPost.getPo_title() == null || tmpPost.getPo_content() == null) {
+			return false;
+		}
 		
-		return postDAO.setPo_Title(po_num);
+		 return postDAO.updatePost(tmpPost);
+		
+		
+		
+		
 	}
 	
 

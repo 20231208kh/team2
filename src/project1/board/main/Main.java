@@ -108,7 +108,7 @@ public class Main {
 				loggedInUserMenu(menu);
 			}catch(InputMismatchException e) {
 				scan.nextLine();
-				System.out.println("잘못된 입력");
+				System.out.println("잘못된 입력입니다.");
 			}
 		}while(menu !=6);
 		
@@ -121,7 +121,6 @@ public class Main {
 			postController.writePost(memberVo);
 			break;
 		case 2:
-
 			// 마이페이지메뉴
 			postController.myPageMenu(memberVo);
 			break;
@@ -165,7 +164,8 @@ public class Main {
 
 		case 2:
 			// 게시글 작성
-			
+			postController.writePostAdminMenu();
+			//공지or게시글 작성 선택메뉴 
 			break;
 		case 3: 
 			// 마이페이지
