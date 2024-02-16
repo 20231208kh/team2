@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class MemberVO {
 	String mb_id,mb_pw,mb_email;
 	int mb_age;

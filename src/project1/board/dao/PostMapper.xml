@@ -4,6 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="project1.board.dao.PostDAO">
 	<!-- 태그에는 insert, select, update, delete가 들어감 -->
+
   <update id="increaseVeiwCount">
   	update post set po_viewcount = po_viewcount + 1 where po_num = #{post.po_num} 
   </update>
@@ -105,4 +106,5 @@
   <update id="updateReply">
   	update reply set re_content = #{content} where re_num = #{reply.re_num}
   </update>
+
 </mapper>

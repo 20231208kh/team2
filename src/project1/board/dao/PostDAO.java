@@ -1,5 +1,6 @@
 package project1.board.dao;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,4 +38,5 @@ public interface PostDAO {
 
 	boolean updateReply(@Param("reply")ReplyVO tmpReply, @Param("content")String content);
 	
+
 }

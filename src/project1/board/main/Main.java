@@ -82,12 +82,14 @@ public class Main {
 				runAdminMenu();
 			}else {
 				runUserMenu();
+
 			}
 			break;
 		case 2:
 			if(memberController.signIn()) {
 				System.out.println("회원가입 성공");
 				return;
+
 			}
 			System.out.println("회원가입 실패");
 			break;
@@ -122,6 +124,7 @@ public class Main {
 			postController.writePost(memberVo);
 			break;
 		case 2:
+
 			// 마이페이지메뉴
 			postController.myPageMenu(memberVo);
 			break;
@@ -139,12 +142,32 @@ public class Main {
 		case 6:
 			System.out.println("로그아웃 합니다.");
 			memberVo = null;
+
 			break;
 		default:
 			throw new InputMismatchException();
 		}
+	}
+
+	private static void runUserMenu() {
+		int menu =0;
+		do {
+			memberVo = memberController.getMemberInfo();
+			if(memberVo == null) {
+				break;
+			}
+			printService.loggedinUserMenu();
+			try {
+				menu = scan.nextInt();
+				loggedInUserMenu(menu);
+			}catch(InputMismatchException e) {
+				scan.nextLine();
+				System.out.println("잘못된 입력");
+			}
+		}while(menu !=6);
 		
 	}
+
 
 
 	private static void runAdminMenu() {
@@ -162,6 +185,7 @@ public class Main {
 			// 게시판 관리
 			boardController.run();
 			break;
+
 		case 2:
 			// 게시글 작성
 			

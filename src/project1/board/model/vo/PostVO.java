@@ -1,8 +1,10 @@
 package project1.board.model.vo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import lombok.Data;
+
 import lombok.NoArgsConstructor;
 
 @Data
@@ -29,6 +31,7 @@ public class PostVO {
 			return sb  + " [작성자: " + po_mb_id + "][" +  po_date  +"] 조회수(" + po_viewCount+ ")" ;
 		}
 		return "["+po_pc_title+"]"+ sb  + " [작성자: " + po_mb_id + "][" +  po_date  +"] 조회수(" + po_viewCount+ ")" ;
+
 	}
 	
 	

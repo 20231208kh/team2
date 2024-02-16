@@ -10,10 +10,12 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import project1.board.dao.PostDAO;
+
 import project1.board.model.vo.BoardVO;
 import project1.board.model.vo.MemberVO;
 import project1.board.model.vo.PostVO;
 import project1.board.model.vo.ReplyVO;
+
 
 public class PostServiceImp implements PostService {
 	private PostDAO postDAO;
@@ -33,6 +35,7 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
+
 	public PostVO increaseVeiwCount(PostVO tmpPost) {
 		postDAO.increaseVeiwCount(tmpPost);
 		PostVO post = postDAO.getPost(tmpPost).get(0);
@@ -122,6 +125,7 @@ public class PostServiceImp implements PostService {
 			return true;
 		}
 		return false;
+
 	}
 
 }
