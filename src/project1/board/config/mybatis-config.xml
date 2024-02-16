@@ -18,6 +18,5 @@
     <mapper resource="project1/board/dao/MemberMapper.xml"/>
     <mapper resource="project1/board/dao/PostMapper.xml"/>
     <mapper resource="project1/board/dao/BoardMapper.xml"/>
-
   </mappers>
 </configuration>

@@ -12,11 +12,16 @@ public interface PrintService {
 	void manageBoardMenu();
 	void postMenu();
 	void managePostCategory();
-	void manageBoardCategory();
-	void updateBoard();
 	void loggedinUserMenu();
 	void loggedinAdminMenu();
 	void updateMyInfo();
+
+	void manageBoardCategory();
+	void printBoardCategory();
+	void printBoard();
+	void printPostCategory();
+	void manageBoard();
+
 
 	ArrayList<BoardVO> getBoard();
   
@@ -26,6 +31,7 @@ public interface PrintService {
 	void printBoardCategory();
 	void printBoard();
 	void myCoummunityUsedUpdateMenu();
+
 
 
 }
