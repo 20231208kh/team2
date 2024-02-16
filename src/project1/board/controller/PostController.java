@@ -33,7 +33,7 @@ import project1.board.service.PrintServiceImp;
 //관리자는 게시글 작성,수정,삭제 + 공지사항 등록이 가능함
 
 public class PostController {
-	private Scanner scan;
+	private Scanner scan = new Scanner(System.in);
 	private PostService postService = new PostServiceImp();
 	private PrintService printService = new PrintServiceImp();
 	
@@ -83,13 +83,13 @@ public class PostController {
 			}
 			System.out.println("현재 페이지 : " + page);
 			if(postList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
+				System.out.println("뒤로가기(-2)");
 			}else if(postList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1)");
 			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 다음페이지(0)");
 			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
 			}
 			System.out.print("입력 : ");
 			num = scan.nextInt();				
@@ -150,13 +150,13 @@ public class PostController {
 			}
 			System.out.println("현재 페이지 : " + page);
 			if(myReplyList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
+				System.out.println("뒤로가기(-2)");
 			}else if(myReplyList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1)");
 			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 다음페이지(0)");
 			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
 			}
 			System.out.print("입력 : ");
 			num = scan.nextInt();				
@@ -278,13 +278,13 @@ public class PostController {
 			}
 			System.out.println("현재 페이지 : " + page);
 			if(postList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
+				System.out.println("뒤로가기(-2)");
 			}else if(postList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1)");
 			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 다음페이지(0)");
 			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
 			}
 			System.out.print("입력 : ");
 			num = scan.nextInt();				
@@ -325,13 +325,13 @@ public class PostController {
 			}
 			System.out.println("현재 페이지 : " + page);
 			if(postList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
+				System.out.println("뒤로가기(-2)");
 			}else if(postList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1)");
 			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 다음페이지(0)");
 			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
 			}
 			System.out.print("입력 : ");
 			num = scan.nextInt();				
@@ -411,13 +411,13 @@ public class PostController {
 			}
 			System.out.println("해당 게시판에 게시글 작성(-3)");
 			if(postList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
+				System.out.println("뒤로가기(-2)");
 			}else if(postList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1)");
 			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 다음페이지(0)");
 			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
 			}
 			System.out.print("입력 : ");
 			num = scan.nextInt();				
@@ -462,13 +462,13 @@ public class PostController {
 			}
 			System.out.println("해당 게시판에 게시글 작성(-3)");
 			if(postList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
+				System.out.println("뒤로가기(-2)");
 			}else if(postList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1)");
 			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 다음페이지(0)");
 			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
 			}
 			System.out.print("입력 : ");
 			num = scan.nextInt();				
@@ -568,13 +568,13 @@ public class PostController {
 			}
 			System.out.println("현재 페이지 : " + page);
 			if(postList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
+				System.out.println("뒤로가기(-2)");
 			}else if(postList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1)");
 			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 다음페이지(0)");
 			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
 			}
 			System.out.print("입력 : ");
 			num = scan.nextInt();				
@@ -617,13 +617,13 @@ public class PostController {
 			}
 			System.out.println("현재 페이지 : " + page);
 			if(postList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
+				System.out.println("뒤로가기(-2)");
 			}else if(postList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1)");
 			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 다음페이지(0)");
 			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
 			}
 			System.out.print("입력 : ");
 			num = scan.nextInt();				
@@ -668,13 +668,13 @@ public class PostController {
 			}
 			System.out.println("현재 페이지 : " + page);
 			if(postList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
+				System.out.println("뒤로가기(-2)");
 			}else if(postList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1)");
 			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 다음페이지(0)");
 			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
 			}
 			System.out.print("입력 : ");
 			num = scan.nextInt();				
@@ -717,13 +717,13 @@ public class PostController {
 			}
 			System.out.println("현재 페이지 : " + page);
 			if(postList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
+				System.out.println("뒤로가기(-2)");
 			}else if(postList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1)");
 			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 다음페이지(0)");
 			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
 			}
 			System.out.print("입력 : ");
 			num = scan.nextInt();				
@@ -770,13 +770,13 @@ public class PostController {
 			}
 			System.out.println("현재 페이지 : " + page);
 			if(postList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
+				System.out.println("뒤로가기(-2)");
 			}else if(postList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1)");
 			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 다음페이지(0)");
 			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
 			}
 			System.out.print("입력 : ");
 			num = scan.nextInt();				
@@ -823,13 +823,13 @@ public class PostController {
 			}
 			System.out.println("현재 페이지 : " + page);
 			if(postList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
+				System.out.println("뒤로가기(-2)");
 			}else if(postList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1)");
 			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 다음페이지(0)");
 			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
 			}
 			System.out.print("입력 : ");
 			num = scan.nextInt();				
@@ -920,7 +920,7 @@ public class PostController {
 			else {
 				btn = " 이전페이지(2)  다음페이지(3)";
 			}
-			
+			System.out.println(replyList);
 			for(ReplyVO tmp : replyList) {
 				System.out.println(tmp);
 			}
@@ -1009,6 +1009,7 @@ public class PostController {
 	private void writeReply(PostVO tmpPost, MemberVO tmpMember) {
 		System.out.println("댓글 작성");
 		System.out.print("내용 : ");
+		scan.nextLine();
 		String content = scan.nextLine();
 		if(content == null || content.length() ==0) {
 			System.out.println("내용이 있어야 댓글에 등록됩니다.");
@@ -1024,7 +1025,7 @@ public class PostController {
 	public boolean writePost(MemberVO member) {
 		System.out.println("게시글을 작성합니다.");
 		printService.printBoard();
-		System.out.println("게시판 번호를 입력하세요.");
+		System.out.print("게시판 번호를 입력하세요. : ");
 		int po_bo_num=scan.nextInt();
 		
 		printService.printPostCategory();
@@ -1032,9 +1033,11 @@ public class PostController {
 		int po_pc_num=scan.nextInt();
 		
 		System.out.print("게시글 제목을 입력하세요.");
-		String po_title=scan.next();
-		System.out.print("게시글 내용을 입력하세요.");;
-		String po_content=scan.next();
+		scan.nextLine();
+		String po_title=scan.nextLine();
+		System.out.print("게시글 내용을 입력하세요.");
+		scan.nextLine();
+		String po_content=scan.nextLine();
 
 		PostVO postVo = new PostVO(po_title,po_content,member.getMb_id(),po_bo_num,po_pc_num);
 	

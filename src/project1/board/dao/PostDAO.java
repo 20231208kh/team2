@@ -23,7 +23,7 @@ public interface PostDAO {
 
 	ArrayList<PostVO> getAllPost(@Param("page")int page);
 
-	void insertReply(@Param("content")String content, @Param("member")MemberVO tmpMember, @Param("post")PostVO tmpPost);
+	boolean insertReply(@Param("content")String content, @Param("member")MemberVO tmpMember, @Param("post")PostVO tmpPost);
 
 	ArrayList<ReplyVO> getPostReply(@Param("post")PostVO tmpPost, @Param("page")int page);
 

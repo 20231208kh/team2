@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class PostVO {
 	int po_num,po_viewCount;
 	String po_title,po_content;
-	Date po_date;
+	String po_date;
 	int po_notice;
 	String po_mb_id;
 	int po_bo_num,po_pc_num;
@@ -27,12 +27,16 @@ public class PostVO {
 		int limit = 20;
 		
 		sb.setLength(limit);
-		sb.append("...");
-		
+		if(sb.length()>20) {
+			sb.append("...");			
+		}
+		else {
+			sb.append("   ");
+		}
 		if(po_pc_title == null) {
 			return sb  + " [작성자: " + po_mb_id + "][" +  po_date  +"] 조회수(" + po_viewCount+ ")" ;
 		}
-		return "["+po_pc_title+"]"+ sb  + " [작성자: " + po_mb_id + "][" +  po_date  +"] 조회수(" + po_viewCount+ ")" ;
+		return "["+po_pc_title+"] "+ sb  + " [작성자: " + po_mb_id + "][" +  po_date  +"] 조회수(" + po_viewCount+ ")" ;
 
 	}
 	
