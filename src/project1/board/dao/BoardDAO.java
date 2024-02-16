@@ -26,3 +26,4 @@ public interface BoardDAO {
 	ArrayList<PostCategoryVO> selectPostCategory();
 
 }
+

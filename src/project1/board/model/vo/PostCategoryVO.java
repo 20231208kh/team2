@@ -49,4 +49,6 @@ public class PostCategoryVO {
 		return "[게시글 번호 : " + pc_bo_num + " ] " + "[말머리 번호 : " + pc_num + " ] " + "[카테고리 이름 : " + pc_title + " ]";
 	}
 
+
 }
+

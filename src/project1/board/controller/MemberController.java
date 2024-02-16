@@ -1,6 +1,9 @@
 package project1.board.controller;
 
+
 import java.util.Scanner;
+import java.util.regex.Pattern;
+
 
 import project1.board.model.vo.MemberVO;
 import project1.board.service.MemberService;
@@ -19,11 +22,10 @@ public class MemberController {
 	private PrintService printService = new PrintServiceImp();
 	
 	
-	
 	public MemberVO login() {
 		System.out.print("아이디를 입력해주세요 : ");
 		String id = scan.next();
-		System.out.println("비밀번호를 입력해주세요 : ");
+		System.out.print("비밀번호를 입력해주세요 : ");
 		String pw = scan.next();
 		MemberVO tmp = new MemberVO(id,pw);
 		
@@ -38,69 +40,55 @@ public class MemberController {
 	}
 
 	public MemberVO getMemberInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		return memberService.login(memberVo);
+		
 	}
 
 	public boolean signIn() {
+
+		String regex = "^[a-zA-Z]{1}[a-zA-Z0-9]{4,16}$";
+		String emailRegex = "^[a-zA-Z0-9]+@[0-9a-zA-Z]+\\.[a-z]+$";
+		String localnumRegex ="^[0-9]{6}-[1234][0-9]{6}$";
 		System.out.println("--회원가입을 진행합니다.--");
 		System.out.print("ID를 입력해주세요 : ");
 		String id = scan.next();
+		if(!Pattern.matches(regex, id)) {
+			System.out.println("ID는 영어,숫자 5~15자리");
+			return false;
+		}
 		System.out.print("PW를 입력해주세요 : ");
 		String pw = scan.next();
+		if(!Pattern.matches(regex, pw)) {
+			System.out.println("PW는 영어,숫자 5~15자리");
+			return false;
+		}
 		System.out.print("Email을 입력해주세요 : ");
 		String email = scan.next();
+		if(!Pattern.matches(emailRegex,email)) {
+			System.out.println("올바르지 않은 email 양식입니다");
+			return false;
+		}
+
 		System.out.print("나이를 입력해주세요 : ");
 		int age = scan.nextInt();
 		System.out.print("주민등록번호를 입력해주세요 : ");
 		String localnum = scan.next();
+		if(!Pattern.matches(localnumRegex, localnum)) {
+			System.out.println("올바르지 않은 주민등록번호 양식입니다.");
+			return false;
+		}
 		System.out.print("권한을 입력해주세요");
 		String role = scan.next();
 		MemberVO member = new MemberVO(id,pw,email,age,localnum,role);
 		
-		if(memberService.signIn(member)) {
-			System.out.println("회원가입 성공");
+
+		if(memberService.signIn(member)) {	//등록이 성공한다면 
 			return true;
 		};
-		System.out.println("회원가입 실패");
 		return false;
 	}
 
-	public void run() {
-		int menu = 0;
-		do {
-			if(memberVo==null) {
-				break;
-			}
-			printService.loggedinUserMenu();
-			menu=scan.nextInt();
-			runUser(menu);
-		}while(menu !=6);
-		
-	}
-
-	private void runUser(int menu) {
-		switch(menu) {
-		case 1:
-			break;
-		case 2:
-			break;
-		case 3:
-			break;
-		case 4:
-			break;
-		case 5:
-			updateUser();
-			break;
-		case 6:
-			System.out.println("로그아웃 합니다.");
-			memberVo = null;
-			break;
-		}
-		
-	}
-
-	private void updateUser() {
+	public void updateUser() {
 		printService.updateMyInfo();
 		int menu = scan.nextInt();
 		switch(menu) {
@@ -121,26 +109,26 @@ public class MemberController {
 			break;
 		}
 		
-		
 	}
 
-	private void updateAge() {
+	public void updateAge() {
 		System.out.print("수정할 나이를 입력해주세요 : ");
 		int updateAge = scan.nextInt();
 		if(memberVo.getMb_age()==updateAge){
 			System.out.println("기존의 나이와 같은 나이로 수정할 수 없습니다.");
 			return;
+
 		}
 		if(memberService.updateAge(memberVo,updateAge)) {
 			System.out.println("수정이 완료되었습니다.");
-			System.out.println(memberVo);
 			return;
+
 		}
 		System.out.println("수정 실패");
 		
 	}
 
-	private void updateEmail() {
+	public void updateEmail() {
 		System.out.print("수정할 이메일을 입력해주세요 : ");
 		String updateEmail = scan.next();
 		if(memberVo.getMb_email().equals(updateEmail)) {
@@ -149,7 +137,6 @@ public class MemberController {
 		}
 		if(memberService.updateEmail(memberVo,updateEmail)) {
 			System.out.println("수정이 완료되었습니다.");
-			System.out.println(memberVo);
 			return;
 		}
 		System.out.println("수정 실패");
@@ -158,7 +145,7 @@ public class MemberController {
 		
 	
 
-	private void updatePw() {
+	public void updatePw() {
 		System.out.print("수정할 비밀번호를 입력해주세요 : ");
 		String updatePw = scan.next();
 		if(memberVo.getMb_pw().equals(updatePw)) {
@@ -167,14 +154,14 @@ public class MemberController {
 		}
 		if(memberService.updatePw(memberVo,updatePw)) {
 			System.out.println("수정이 완료되었습니다.");
-			System.out.println(memberVo);
+			System.out.println("수정된 비밀번호로 다시 로그인해주세요.");
 			return;
 		}
 		System.out.println("수정 실패");
 		
 	}
 
-	private void deleteUser() {
+	public void deleteUser() {
 		int menu=0;
 		System.out.println("회원 탈퇴를 진행합니다.");
 		System.out.println("비밀번호를 입력해주세요 : ");
@@ -206,4 +193,6 @@ public class MemberController {
 		
 	}
 
+
 }
+

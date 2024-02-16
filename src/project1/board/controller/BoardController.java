@@ -19,6 +19,7 @@ public class BoardController {
 	private Scanner scan = new Scanner(System.in);
 	private BoardService boardService = new BoardServiceImp();
 	private PrintService printService = new PrintServiceImp();
+
 	
 	public void run() {
 		int menu;
@@ -141,6 +142,7 @@ public class BoardController {
 		case 2:
 			updateBoardCategory();
 			break;
+
 		case 3:
 			deleteBoardCategory();
 			break;

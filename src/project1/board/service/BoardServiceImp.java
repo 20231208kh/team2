@@ -50,6 +50,7 @@ public class BoardServiceImp implements BoardService {
 		}
 		return res;
 	}
+
 	
 	//카테고리 이름 수정
 	@Override
@@ -58,14 +59,8 @@ public class BoardServiceImp implements BoardService {
 			System.out.println("카테고리 이름을 입력하지 않았습니다.");
 			return false;
 		}
-		List<Integer> list = new ArrayList<Integer>();
-		
-		for(BoardCategoryVO item : getBoardCategory()) {
-			list.add(item.getBc_num());
-		}
-		
-		if(!list.contains(uBoardCategoryVo.getBc_num())){
-			System.out.println("등록된 카테고리가 없습니다.");
+		if(!boardDAO.selectBoardCategory().contains(uBoardCategoryVo.getBc_num())) {
+			System.out.println("해당 카테고리가 존재하지 않습니다.");
 			return false;
 		}
 		if(boardDAO.selectBoardCategory().contains(uBoardCategoryVo)) {
@@ -86,14 +81,8 @@ public class BoardServiceImp implements BoardService {
 			System.out.println("카테고리 번호를 입력하지 않았습니다.");
 			return false;
 		}
-		List<Integer> list = new ArrayList<Integer>();
-		
-		for(BoardCategoryVO item : getBoardCategory()) {
-			list.add(item.getBc_num());
-		}
-		
-		if(!list.contains(dBoardCategoryVo.getBc_num())){
-			System.out.println("등록된 카테고리가 없습니다.");
+		if(!boardDAO.selectBoardCategory().contains(dBoardCategoryVo.getBc_num())) {
+			System.out.println("해당 카테고리가 존재하지 않습니다.");
 			return false;
 		}
 		if(boardDAO.selectBoardCategory().size() == 1) {
@@ -107,13 +96,19 @@ public class BoardServiceImp implements BoardService {
 		return res;
 	}
 	
+	
 	//게시판 입력
 	@Override
 	public boolean insertBoard(BoardVO boardVo) {
+		if(!boardDAO.selectBoard().contains(boardVo.getBo_bc_num())) {
+			System.out.println("해당 카테고리가 존재하지 않습니다.");
+			return false;
+		}
 		if(boardVo == null || boardVo.getBo_title() == null) {
 			System.out.println("게시판 이름을 입력하지 않았습니다.");
 			return false;
 		}
+
 		List<Integer> list = new ArrayList<Integer>();
 		
 		for(BoardCategoryVO item : getBoardCategory()) {
@@ -122,6 +117,7 @@ public class BoardServiceImp implements BoardService {
 		
 		if(!list.contains(boardVo.getBo_bc_num())){
 			System.out.println("등록된 카테고리가 없습니다.");
+
 			return false;
 		}
 		boolean res = boardDAO.insertBoard(boardVo);
@@ -138,6 +134,7 @@ public class BoardServiceImp implements BoardService {
 			System.out.println("게시판 이름을 입력하지 않았습니다.");
 			return false;
 		}
+
 		List<Integer> list = new ArrayList<Integer>();
 		
 		for(BoardVO item : getBoard()) {
@@ -166,6 +163,7 @@ public class BoardServiceImp implements BoardService {
 			System.out.println("게시판 번호를 입력하지 않았습니다.");
 			return false;
 		}
+
 		List<Integer> list = new ArrayList<Integer>();
 		
 		for(BoardVO item : getBoard()) {
@@ -176,6 +174,7 @@ public class BoardServiceImp implements BoardService {
 			System.out.println("등록된 게시판 번호가 아닙니다.");
 			return false;
 		}
+
 		if(boardDAO.selectBoard().size() == 1) {
 			System.out.println("최소 하나의 게시판은 존재해야합니다.");
 			return false;
@@ -187,6 +186,13 @@ public class BoardServiceImp implements BoardService {
 		return res;
 	}
 	
+
+	//게시판 데이터 받아오는 메서드
+	@Override
+	public ArrayList<BoardVO> getBoard() {
+		return boardDAO.selectBoard();
+	}
+
 	//말머리 입력
 	@Override
 	public boolean insertPostCategory(PostCategoryVO postCategoryVo) {
@@ -194,6 +200,7 @@ public class BoardServiceImp implements BoardService {
 			System.out.println("말머리 이름을 입력하지 않았습니다.");
 			return false;
 		}
+
 		List<Integer> list = new ArrayList<Integer>();
 		
 		for(BoardVO item : getBoard()) {
@@ -204,6 +211,7 @@ public class BoardServiceImp implements BoardService {
 			System.out.println("등록된 게시판 번호가 아닙니다.");
 			return false;
 		}
+
 		if(boardDAO.selectPostCategory().contains(postCategoryVo)) {
 			System.out.println("중복된 말머리 이름입니다.");
 			return false;
@@ -222,6 +230,7 @@ public class BoardServiceImp implements BoardService {
 			System.out.println("말머리 이름을 입력하지 않았습니다.");
 			return false;
 		}
+
 		List<Integer> list = new ArrayList<Integer>();
 		
 		for(PostCategoryVO item : getPostCategory()) {
@@ -232,6 +241,7 @@ public class BoardServiceImp implements BoardService {
 			System.out.println("등록된 게시판 번호가 아닙니다.");
 			return false;
 		}
+
 		if(boardDAO.selectPostCategory().contains(uPostCategoryVo)) {
 			System.out.println("중복된 말머리 이름입니다.");
 			return false;
@@ -250,6 +260,7 @@ public class BoardServiceImp implements BoardService {
 			System.out.println("말머리 번호를 입력하지 않았습니다.");
 			return false;
 		}
+
 		List<Integer> list = new ArrayList<Integer>();
 		
 		for(PostCategoryVO item : getPostCategory()) {
@@ -260,6 +271,7 @@ public class BoardServiceImp implements BoardService {
 			System.out.println("등록된 게시판 번호가 아닙니다.");
 			return false;
 		}
+
 		if(boardDAO.selectPostCategory().size() == 1) {
 			System.out.println("최소 하나의 말머리는 존재해야합니다.");
 			return false;
@@ -271,6 +283,7 @@ public class BoardServiceImp implements BoardService {
 		return res;
 	}
 	
+
 	//게시판 데이터 받아오는 메서드
 	@Override
 	public ArrayList<BoardVO> getBoard() {
@@ -283,6 +296,7 @@ public class BoardServiceImp implements BoardService {
 		return boardDAO.selectBoardCategory();
 	}
 	
+
 	//말머리 데이터 받아오는 메서드
 	@Override
 	public ArrayList<PostCategoryVO> getPostCategory() {
@@ -319,6 +333,7 @@ public class BoardServiceImp implements BoardService {
 	//말머리 출력
 	@Override
 	public void printPostCategory() {
+
 		ArrayList<PostCategoryVO> postCategoryList = getPostCategory();
 		if(postCategoryList.size() == 0) {
 			System.out.println("등록된 말머리가 없습니다.");
@@ -329,4 +344,6 @@ public class BoardServiceImp implements BoardService {
 		}
 	}
 
+
 }
+
