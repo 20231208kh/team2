@@ -43,7 +43,7 @@ import project1.board.service.PrintServiceImp;
 
 
 public class Main {
-	private static BoardController boardController = new BoardController();
+	private static BoardController boardController = new BoardController();;
 	private static MemberController memberController = new MemberController();
 	private static PostController postController = new PostController();
 	private static PrintService printService = new PrintServiceImp();
@@ -161,7 +161,6 @@ public class Main {
 			// 게시판 관리
 			boardController.run();
 			break;
-
 		case 2:
 			// 게시글 작성
 			
@@ -182,6 +181,7 @@ public class Main {
 		case 6: break;
 		default:
 			throw new InputMismatchException();
+
 		}
 		
 	}
