@@ -21,21 +21,6 @@ public class PrintServiceImp implements PrintService {
 		
 	}
 
-	@Override
-	public void printBoard() {
-		boardService.printBoard();
-	}
-
-	@Override
-	public void printBoardCategory() {
-		boardService.printBoardCategory();
-	}
-
-	@Override
-	public void printPostCategory() {
-		boardService.printPostCategory();
-	}
-
 
 	@Override
 	public void mainMenu() {

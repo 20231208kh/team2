@@ -284,11 +284,6 @@ public class BoardServiceImp implements BoardService {
 	}
 	
 
-	//게시판 데이터 받아오는 메서드
-	@Override
-	public ArrayList<BoardVO> getBoard() {
-		return boardDAO.selectBoard();
-	}
 	
 	//카테고리 데이터 받아오는 메서드
 	@Override

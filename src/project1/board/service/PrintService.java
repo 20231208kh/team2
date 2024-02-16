@@ -17,9 +17,6 @@ public interface PrintService {
 	void updateMyInfo();
 
 	void manageBoardCategory();
-	void printBoardCategory();
-	void printBoard();
-	void printPostCategory();
 	void manageBoard();
 
 
