@@ -1,9 +1,11 @@
 package project1.board.model.vo;
 
+
 import java.util.Objects;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 @Data
 @NoArgsConstructor

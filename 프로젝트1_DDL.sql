@@ -9,7 +9,7 @@ CREATE TABLE `member` (
 	`mb_id`	varchar(20)	PRIMARY KEY,
 	`mb_pw`	varchar(20)	NOT NULL,
 	`mb_email`	varchar(30)	NOT NULL,
-	`mb_age`	int	NULL,
+	`mb_age`	int not NULL,
 	`mb_localnum`	varchar(15)	NOT NULL,
 	`mb_right`	varchar(10)	DEFAULT "USER"
 );
@@ -30,7 +30,7 @@ CREATE TABLE `post` (
 	`po_num`	int	PRIMARY KEY AUTO_INCREMENT,
 	`po_viewcount`	int	DEFAULT 0,
 	`po_title`	varchar(20)	NOT NULL,
-	`po_content`	text	NOT NULL,
+	`po_content` text NOT NULL,
 	`po_date`	date not null,
 	`po_notice`	int	DEFAULT 0,
 	`po_mb_id`	varchar(20)	NOT NULL,
