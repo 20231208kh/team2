@@ -111,8 +111,12 @@ public class PostController {
 		int menu = scan.nextInt();
 		switch(menu) {
 		case 1: break;
-		case 2: break;
-		case 3: break;
+		case 2: 
+			// 게시글 수정
+			break;
+		case 3: 
+			// 게시글 삭제
+			break;
 		default:
 			throw new InputMismatchException();
 		}
@@ -417,7 +421,9 @@ public class PostController {
 				case 0: page++; break;
 				case -1: page--; break;
 				case -2: return;
-				case -3: writePostInBoard(tmpBoard,tmpMember); return;
+				case -3: 
+					//일반 사용자가 게시판을 특정한 뒤 게시글 작성
+					writePostInBoard(tmpBoard,tmpMember); return;
 				default:
 					throw new InputMismatchException();
 				}
@@ -466,7 +472,9 @@ public class PostController {
 				case 0: page++; break;
 				case -1: page--; break;
 				case -2: return;
-				case -3: writePostInBoard(tmpBoard,tmpMember); return;
+				case -3: 
+					//관리자가 게시판을 특정한 뒤 게시글 작성
+					writePostInBoard(tmpBoard,tmpMember); return;
 				default:
 					throw new InputMismatchException();
 				}
@@ -952,7 +960,7 @@ public class PostController {
 			}
 			System.out.println("현재 페이지 : " + page);
 			System.out.println("[뒤로가기(-3) 댓글작성(-2)"+ btn +"]");
-			System.out.print("입력(댓글 번호 입력시 삭제) : ");
+			System.out.print("입력(삭제할 댓글 혹은 메뉴) : ");
 			menu = scan.nextInt();
 			if( menu < 11 && menu > 0) {
 				ReplyVO tmpReply = replyList.get(menu-1);
