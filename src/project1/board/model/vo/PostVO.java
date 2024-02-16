@@ -1,6 +1,5 @@
 package project1.board.model.vo;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import lombok.Data;

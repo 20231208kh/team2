@@ -149,25 +149,7 @@ public class Main {
 		}
 	}
 
-	private static void runUserMenu() {
-		int menu =0;
-		do {
-			memberVo = memberController.getMemberInfo();
-			if(memberVo == null) {
-				break;
-			}
-			printService.loggedinUserMenu();
-			try {
-				menu = scan.nextInt();
-				loggedInUserMenu(menu);
-			}catch(InputMismatchException e) {
-				scan.nextLine();
-				System.out.println("잘못된 입력");
-			}
-		}while(menu !=6);
-		
-	}
-
+	
 
 
 	private static void runAdminMenu() {
