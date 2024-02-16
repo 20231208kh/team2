@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import project1.board.dao.PostDAO;
+import project1.board.model.vo.PostVO;
 
 public class PostServiceImp implements PostService {
 	private PostDAO postDAO;
@@ -25,6 +26,16 @@ public class PostServiceImp implements PostService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void writePost(PostVO tmp) {
+		boolean res = postDAO.insertPost(tmp);
+		if(res) {
+			session.commit();
+		}
+		
+		
 	}
 
 }
