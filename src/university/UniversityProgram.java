@@ -207,7 +207,7 @@ public class UniversityProgram implements Program{
 		printService.printProfessorLectuerSearch();
 		menu=scan.nextInt();
 		runProfessorLectureSearch(menu);
-		}while(menu!=4);
+		}while(menu!=3);
 	}
 	
 	//학생 강의 조회
@@ -1302,7 +1302,7 @@ public class UniversityProgram implements Program{
 	private boolean insertScore(String professorID) {
 		Professor tmp = usi.selectUpdateProfessor(professorID);
 		printService.printProfessorLectureList(tmp);
-		System.out.print("강의 선택 : ");
+		System.out.print("선택할 강의명 : ");
 		String lectureName = scan.next();
 		if(!usi.matchLectureWithStudent(tmp, lectureName)) {
 			System.out.println("등록한 학생이 없습니다.");
@@ -1324,7 +1324,7 @@ public class UniversityProgram implements Program{
 	private boolean updateScore(String professorID) {
 		Professor tmp = usi.selectUpdateProfessor(professorID);
 		printService.printProfessorLectureList(tmp);
-		System.out.print("강의 선택 : ");
+		System.out.print("선택할 강의명 : ");
 		String lectureName = scan.next();
 		if(!usi.matchLectureWithStudent(tmp, lectureName)) {
 			System.out.println("등록한 학생이 없습니다.");

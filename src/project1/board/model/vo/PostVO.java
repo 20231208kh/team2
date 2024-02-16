@@ -7,19 +7,38 @@ import java.util.Objects;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class PostVO {	//게시글
+public class PostVO {
 	int po_num,po_viewCount;
-	
 	String po_title,po_content;
-	String po_date;
+	Date po_date;
 	int po_notice;
-	String po_mb_id; //외래키들
+	String po_mb_id;
 	int po_bo_num,po_pc_num;
+	String po_pc_title;
 	@Override
+	public String toString() {
+		
+		StringBuffer sb = new StringBuffer(po_title);
+		
+		int limit = 20;
+		
+		sb.setLength(limit);
+		sb.append("...");
+		
+		if(po_pc_title == null) {
+			return sb  + " [작성자: " + po_mb_id + "][" +  po_date  +"] 조회수(" + po_viewCount+ ")" ;
+		}
+		return "["+po_pc_title+"]"+ sb  + " [작성자: " + po_mb_id + "][" +  po_date  +"] 조회수(" + po_viewCount+ ")" ;
+
+	}
+	
+	
+
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -50,11 +69,5 @@ public class PostVO {	//게시글
 	}
 
 
-	@Override
-	public String toString() {
-		return "PostVO [게시글번호 : " + po_num + ", 조회수 : " + po_viewCount + ", 게시글 제목 : " + po_title
-				+ ", 게시글 내용 : " + po_content + ", 게시작성일 : " + po_date + ", 게시글공지사항유무" + po_notice + ", 게시판 번호 : "
-				+ po_bo_num + ", 게시글분류번호 : " + po_pc_num + "]\n";
-	}
-
+	
 }

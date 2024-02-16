@@ -1,15 +1,16 @@
 package project1.board.service;
 
-import project1.board.controller.BoardController;
-import project1.board.controller.MemberController;
-import project1.board.controller.PostController;
+
+import java.util.ArrayList;
+
+import project1.board.model.vo.BoardVO;
 
 public class PrintServiceImp implements PrintService {
-	
+
 	MemberService memberService=new MemberServiceImp();
 	BoardService boardService=new BoardServiceImp();
 	PostService  postService=new PostServiceImp();
-	
+
 	@Override
 	public void startMenu() {
 		System.out.println("메뉴");
@@ -19,7 +20,7 @@ public class PrintServiceImp implements PrintService {
 		System.out.print("메뉴 선택 : ");
 		
 	}
-	
+
 	@Override
 	public void printBoard() {
 		boardService.printBoard();
@@ -34,6 +35,7 @@ public class PrintServiceImp implements PrintService {
 	public void printPostCategory() {
 		boardService.printPostCategory();
 	}
+
 
 	@Override
 	public void mainMenu() {
@@ -90,6 +92,7 @@ public class PrintServiceImp implements PrintService {
 		
 	}
 
+
 	//일반 회원 전용 메뉴
 	@Override
 	public void loggedinUserMenu() {
@@ -129,6 +132,9 @@ public class PrintServiceImp implements PrintService {
 	}
 
 	@Override
+	public ArrayList<BoardVO> getBoard() {
+		return boardService.getBoard();
+  }
 	public void myCommunityUsed() {
 		System.out.println("--나의 커뮤니티 이용내역--");
 		System.out.println("1.게시글 수정");
@@ -143,6 +149,7 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("2.게시글 내용 수정");
 		System.out.println("3.돌아가기");
 		System.out.print("메뉴 선택 : ");
+
 	}
 
 

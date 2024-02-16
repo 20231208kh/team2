@@ -3,7 +3,9 @@ package project1.board.service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+
 import java.util.List;
+
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -11,7 +13,13 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import project1.board.dao.PostDAO;
+
+
+import project1.board.model.vo.BoardVO;
+import project1.board.model.vo.MemberVO;
 import project1.board.model.vo.PostVO;
+import project1.board.model.vo.ReplyVO;
+
 
 public class PostServiceImp implements PostService {
 	private PostDAO postDAO;
@@ -31,6 +39,100 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
+
+
+	public PostVO increaseVeiwCount(PostVO tmpPost) {
+		postDAO.increaseVeiwCount(tmpPost);
+		PostVO post = postDAO.getPost(tmpPost).get(0);
+		return post;
+	}
+
+	@Override
+	public ArrayList<PostVO> getMyPost(MemberVO memberVo, int page) {
+		page = (page-1)*10;
+		ArrayList<PostVO> postList = postDAO.getMyPost(memberVo,page);
+		return postList;
+	}
+
+	@Override
+	public ArrayList<ReplyVO> getMyReply(MemberVO memberVo, int page) {
+		page = (page-1)*10;
+		ArrayList<ReplyVO> replyList = postDAO.getMyReply(memberVo,page);
+		return replyList;
+	}
+
+	@Override
+	public ArrayList<PostVO> getAllPost(int page) {
+		page = (page-1)*10;
+		ArrayList<PostVO> postList = postDAO.getAllPost(page);
+		return postList;
+	}
+
+	@Override
+	public boolean writeReply(String content, MemberVO tmpMember, PostVO tmpPost) {
+		if(content == null 
+				|| content.length() == 0 
+				|| tmpMember == null 
+				|| tmpPost == null) {
+			return false;			
+		}
+		postDAO.insertReply(content, tmpMember, tmpPost);
+		return true;
+	}
+
+	@Override
+	public ArrayList<ReplyVO> getPostReply(PostVO tmpPost, int page) {
+		page = (page-1)*10;
+		ArrayList<ReplyVO> replyList = postDAO.getPostReply(tmpPost, page);
+		return replyList;
+	}
+
+	@Override
+	public ArrayList<PostVO> getPostByTitle(String keyword, int page) {
+		page = (page-1)*10;
+		ArrayList<PostVO> postList = postDAO.getPostByTitle(keyword,page);
+		return postList;
+	}
+
+	@Override
+	public ArrayList<PostVO> getPostByWriter(String keyword, int page) {
+		page = (page-1)*10;
+		ArrayList<PostVO> postList = postDAO.getPostByWriter(keyword,page);
+		return postList;
+	}
+
+	@Override
+	public ArrayList<PostVO> getPostByDate(String year, String month, String day, int page) {
+		page = (page-1)*10;
+		if(year.length() != 4) {
+			year = null;
+		}
+		ArrayList<PostVO> postList = postDAO.getPostByDate(year, month, day,page);
+		return postList;
+	}
+
+	@Override
+	public ArrayList<PostVO> getPostByBoard(BoardVO tmpBoard, int page) {
+		page = (page-1)*10;
+		ArrayList<PostVO> postList = postDAO.getPostByBoard(tmpBoard,page);
+		return postList;
+	}
+
+	@Override
+	public void deleteReply(ReplyVO tmpReply) {
+		postDAO.deleteReply(tmpReply);
+		
+	}
+
+	@Override
+	public boolean updateReply(ReplyVO tmpReply, String content) {
+		if(postDAO.updateReply(tmpReply,content)) {
+			return true;
+		}
+		return false;
+
+	}
+
 	public boolean write(PostVO postVo) {
 		if(postVo == null 
 				|| postVo.getPo_title() == null 
@@ -59,5 +161,6 @@ public class PostServiceImp implements PostService {
 		return postDAO.setPo_Title(po_num);
 	}
 	
+
 
 }
