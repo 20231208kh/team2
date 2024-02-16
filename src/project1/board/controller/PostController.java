@@ -71,6 +71,7 @@ public class PostController {
 			for(int i = 0 ; i < postList.size() ; i++) {
 				System.out.println((i+1)+". "+ postList.get(i));
 			}
+			System.out.println("현재 페이지 : " + page);
 			if(postList.size() < 10 && page == 1) {
 				System.out.println("상위메뉴(-2)");
 			}else if(postList.size() < 10) {
@@ -133,6 +134,7 @@ public class PostController {
 			for(int i = 0 ; i < myReplyList.size() ; i++) {
 				System.out.println((i+1)+". "+ myReplyList.get(i));
 			}
+			System.out.println("현재 페이지 : " + page);
 			if(myReplyList.size() < 10 && page == 1) {
 				System.out.println("상위메뉴(-2)");
 			}else if(myReplyList.size() < 10) {
@@ -222,6 +224,7 @@ public class PostController {
 			for(int i = 0 ; i < postList.size() ; i++) {
 				System.out.println((i+1)+". "+ postList.get(i));
 			}
+			System.out.println("현재 페이지 : " + page);
 			if(postList.size() < 10 && page == 1) {
 				System.out.println("상위메뉴(-2)");
 			}else if(postList.size() < 10) {
@@ -277,7 +280,7 @@ public class PostController {
 	private void selectedBoardMenu(BoardVO tmpBoard, MemberVO tmpMember) {
 		ArrayList<PostVO> postList = new ArrayList<PostVO>();
 		int page = 1;
-		int num = -3;
+		int num = -4;
 		while(true) {
 			postList = postService.getPostByBoard(tmpBoard,page);
 			if((postList == null || postList.size() == 0) && page == 1) {
@@ -288,6 +291,7 @@ public class PostController {
 					System.out.println((i+1)+". "+ postList.get(i));
 				}
 			}
+			System.out.println("현재 페이지 : " + page);
 			System.out.println("해당 게시판에 게시글 작성(-3)");
 			if(postList.size() < 10 && page == 1) {
 				System.out.println("상위메뉴(-2)");
@@ -310,7 +314,7 @@ public class PostController {
 				case 0: page++; break;
 				case -1: page--; break;
 				case -2: return;
-				case -3: postService.writePostInBoard(tmpBoard,tmpMember);
+				case -3: writePostInBoard(tmpBoard,tmpMember); return;
 				default:
 					throw new InputMismatchException();
 				}
@@ -366,6 +370,7 @@ public class PostController {
 			for(int i = 0 ; i < postList.size() ; i++) {
 				System.out.println((i+1)+". "+ postList.get(i));
 			}
+			System.out.println("현재 페이지 : " + page);
 			if(postList.size() < 10 && page == 1) {
 				System.out.println("상위메뉴(-2)");
 			}else if(postList.size() < 10) {
@@ -415,6 +420,7 @@ public class PostController {
 			for(int i = 0 ; i < postList.size() ; i++) {
 				System.out.println((i+1)+". "+ postList.get(i));
 			}
+			System.out.println("현재 페이지 : " + page);
 			if(postList.size() < 10 && page == 1) {
 				System.out.println("상위메뉴(-2)");
 			}else if(postList.size() < 10) {
@@ -468,6 +474,7 @@ public class PostController {
 			for(int i = 0 ; i < postList.size() ; i++) {
 				System.out.println((i+1)+". "+ postList.get(i));
 			}
+			System.out.println("현재 페이지 : " + page);
 			if(postList.size() < 10 && page == 1) {
 				System.out.println("상위메뉴(-2)");
 			}else if(postList.size() < 10) {
@@ -553,6 +560,7 @@ public class PostController {
 			for(ReplyVO tmp : replyList) {
 				System.out.println(tmp);
 			}
+			System.out.println("현재 페이지 : " + page);
 			System.out.println("[뒤로가기(0) 댓글작성(1)"+ btn +"]");
 			System.out.print("입력 : ");
 			menu = scan.nextInt();
