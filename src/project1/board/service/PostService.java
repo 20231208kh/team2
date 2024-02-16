@@ -42,6 +42,10 @@ public interface PostService {
 
 	boolean setPost(PostVO tmpPost); //제목 수정
 
+	boolean deletePost(int po_num);	//게시글 삭제
+
+	
+
 
 
 }

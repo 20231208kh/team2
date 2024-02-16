@@ -164,7 +164,7 @@ public class Main {
 
 		case 2:
 			// 게시글 작성
-			postController.writePostAdminMenu();
+			//postController.writePostAdminMenu();
 			//공지or게시글 작성 선택메뉴 
 			break;
 		case 3: 

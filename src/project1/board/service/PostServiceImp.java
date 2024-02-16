@@ -168,6 +168,12 @@ public class PostServiceImp implements PostService {
 		
 		
 	}
+
+	@Override //게시글 삭제
+	public boolean deletePost(int po_num) {
+		
+		return postDAO.deletePost(po_num);
+	}
 	
 
 

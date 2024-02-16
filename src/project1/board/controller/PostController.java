@@ -90,7 +90,7 @@ public class PostController {
 			
 			if(num > 0 && num < 11) {
 				PostVO tmpPost = postList.get(num-1); //인덱스 번호0~9표현
-				manageMyPost(tmpPost);	//내가 입력한 번호-1인덱스 번호를 넣은 PostVo 객체를 넘겨줌
+				manageMyPost(tmpPost,num);	//내가 입력한 번호-1인덱스 번호를 넣은 PostVo 객체를 넘겨줌
 				return;
 			}
 			else {
@@ -108,8 +108,8 @@ public class PostController {
 		}
 	}
 
-	//게시글 수정 삭제
-	private void manageMyPost(PostVO tmpPost) {
+	//게시글 수정 삭제메뉴
+	private void manageMyPost(PostVO tmpPost,int num) {
 		postDetail(tmpPost);		//상세 조회
 		System.out.println("[뒤로가기(1) 수정(2) 삭제(3)] : ");
 		System.out.print("입력 : ");
@@ -122,7 +122,7 @@ public class PostController {
 			updatePost(tmpPost);	//게시글 수정
 			break;
 		case 3: 
-			deletePost(tmpPost);	//게시글 삭제
+			deletePost(tmpPost,num);	//게시글 삭제
 			break;
 		default:
 			throw new InputMismatchException();
@@ -160,6 +160,7 @@ public class PostController {
 		private void updatePostPoTitle(PostVO tmpPost) {
 			//제목을 수정하기 위해 뭐부터 보여줘야 되는가?
 			//->게시글 리스트를 보여주고
+			
 			postDetail(tmpPost);
 			tmpPost.getPo_title(); //현재 제목.
 			System.out.println("수정할 제목을 입력하세요.");
@@ -170,6 +171,7 @@ public class PostController {
 				System.out.println("잘못 입력됐습니다.");
 				return;
 			}
+			
 			
 		}
 		
@@ -187,9 +189,18 @@ public class PostController {
 			}
 			
 		}
-		
-		private void deletePost(PostVO tmpPost) { //게시글 삭제
+		 //게시글 삭제
+		private void deletePost(PostVO tmpPost,int num) {
+			postDetail(tmpPost);
+			System.out.println("이 게시글을 정말 삭제하시겠습니까? (삭제:1,삭제취소:0 을 누르세요)");
+			int menuselect=scan.nextInt();
+			if(postService.deletePost(num) && menuselect==1) {
+				System.out.println("게시글 삭제에 성공했습니다.");
+			}else {
+				System.out.println("게시글 삭제에 실패했습니다.");
+			}
 			
+			//예외처리1 기본키-게시글 번호가 일치하지 않는지 확인->일단 후순위
 		}
 
 		//보류
@@ -199,24 +210,28 @@ public class PostController {
 			System.out.println("게시글을 작성합니다.");
 			printService.printBoard();
 			System.out.println("게시판 번호 머임?");
+			
 			int po_bo_num = scan.nextInt();
 			List<Integer> list = new ArrayList<Integer>();
+			
 			for(BoardVO item : printService.getBoard()) {
-				list.add(item.getBo_num());
+			list.add(item.getBo_num());
 			}
+			
 			if(!list.contains(po_bo_num)) {
 				System.out.println("게시판 번호 없음ㅋㅋ");
-				return false;
+			return false;
 			}
 			
 			printService.printPostCategory();
-			System.out.println("게시글 말머리 번호를 입력하세요.");
+			System.out.print("게시글 말머리 번호를 입력하세요.");
 			int po_pc_num=scan.nextInt();
 			
+			scan.nextLine();
 			System.out.print("게시글 제목을 입력하세요.");
-			String po_title=scan.next();
+			String po_title=scan.nextLine();
 			System.out.print("게시글 내용을 입력하세요.");;
-			String po_content=scan.next();
+			String po_content=scan.nextLine();
 
 			PostVO postVo = new PostVO(po_title,po_content,member.getMb_id(),po_bo_num,po_pc_num);
 			
@@ -530,7 +545,7 @@ public class PostController {
 				case -2: return;
 				case -3: 
 					//일반 사용자가 게시판을 특정한 뒤 게시글 작성
-					writePostInBoard(tmpBoard,tmpMember); return;
+				//	writePostInBoard(tmpBoard,tmpMember); return;
 				default:
 					throw new InputMismatchException();
 				}
@@ -581,7 +596,7 @@ public class PostController {
 				case -2: return;
 				case -3: 
 					//관리자가 게시판을 특정한 뒤 게시글 작성
-					writePostInBoard(tmpBoard,tmpMember); return;
+				//	writePostInBoard(tmpBoard,tmpMember); return;
 				default:
 					throw new InputMismatchException();
 				}

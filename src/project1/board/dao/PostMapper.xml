@@ -128,4 +128,8 @@ WHERE
     po_num = #{postVo.po_num}	
   </update>
   
+  <delete id="deletePost">
+ 	 delete from post where po_num = #{po_num}
+  </delete>
+  
 </mapper>
