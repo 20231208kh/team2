@@ -44,8 +44,6 @@ public interface PostService {
 
 	boolean deletePost(int po_num);	//게시글 삭제
 
-	boolean writeAnnoucement(PostVO postVoa);	//공지사항 작성
-
 	
 
 

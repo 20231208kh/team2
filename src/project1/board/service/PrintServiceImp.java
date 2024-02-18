@@ -154,13 +154,13 @@ public class PrintServiceImp implements PrintService {
 	}
 
 	@Override
-	public void adminChoosePostMenu() {
-		System.out.println("--게시글 관리+작성--");
-		System.out.println("1.공지사항 작성 : ");
-		System.out.println("2.게시글 작성 : ");
-		System.out.println("3.게시글 관리 : ");
-		System.out.println("4.돌아가기 : ");
-		System.out.print("5.메뉴선택 : ");
+	public void adminChoosePostMenu() {	
+		
+		System.out.println("--관리자 작성 메뉴--");
+		System.out.println("1.공지사항 작성");
+		System.out.println("2.게시글 작성");
+		System.out.println("3.돌아가기");
+		System.out.println("메뉴 선택 : ");
 		
 	}
 

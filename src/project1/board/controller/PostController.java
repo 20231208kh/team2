@@ -127,6 +127,7 @@ public class PostController {
 			throw new InputMismatchException();
 		}
 	}
+	
 		private void updatePost(PostVO tmpPost) {
 			int menu;
 		
@@ -157,9 +158,7 @@ public class PostController {
 		
 		//게시글 제목 수정
 		private void updatePostPoTitle(PostVO tmpPost) {
-			//제목을 수정하기 위해 뭐부터 보여줘야 되는가?
-			//->게시글 리스트를 보여주고
-			
+	
 			postDetail(tmpPost);
 			tmpPost.getPo_title(); //현재 제목.
 			System.out.println("수정할 제목을 입력하세요.");
@@ -463,31 +462,6 @@ public class PostController {
 		selectedBoardAdminMenu(tmpBoard,tmpMember);
 	}
 	
-	//게시글 작성
-	public boolean writePost(MemberVO member) {
-		
-		System.out.println("게시글 작성을 시작합니다.");
-		printService.printPostCategory();
-		System.out.print("게시글 말머리 번호를 입력하세요.");
-		int po_pc_num=scan.nextInt();
-		
-		scan.nextLine();
-		System.out.print("게시글 제목을 입력하세요.");
-		String po_title=scan.nextLine();
-		System.out.print("게시글 내용을 입력하세요.");
-		String po_content=scan.nextLine();
-
-		PostVO postVo = new PostVO(po_title,po_content,member.getMb_id(),po_pc_num);
-		
-		if(postService.writePost(postVo)) {	
-			System.out.println("게시글 추가 성공!");
-			
-			return true;
-		}
-			System.out.println("게시글 추가 실패!");
-			return false;
-	}
-	
 	// 사용자
 	private void selectedBoardMenu(BoardVO tmpBoard, MemberVO tmpMember) {
 		ArrayList<PostVO> postList = new ArrayList<PostVO>();
@@ -505,7 +479,7 @@ public class PostController {
 				System.out.println("현재 페이지 : " + page);
 			}
 			System.out.println("해당 게시판에 게시글 작성(-3)");
-			if(postList.size() < 10 && page == 1) {
+			if(postList.size() < 10 && page == 1) {	//페이지 크기
 				System.out.println("상위메뉴(-2)");
 			}else if(postList.size() < 10) {
 				System.out.println("상위메뉴(-2) 이전페이지(-1)");
@@ -527,87 +501,44 @@ public class PostController {
 				case -1: page--; break;
 				case -2: return;
 				case -3: 
-					//일반 사용자가 게시판을 특정한 뒤 게시글 작성
-				writePostInBoard(tmpBoard,tmpMember); 
+				writePostInBoard(tmpBoard,tmpMember); 	//일반 사용자가 게시판을 특정한 뒤 게시글 작성
 				
 				return;	//게시글 말머리와 게시글을 조인한 것을 가져옴
 				default:
 					throw new InputMismatchException();
 				}
 			}
-			if(page<1) {
+			if(page<1) {	//page가 
 				page = 1;
 			}
 		}
 	}
-	
 
-	public void writePostAdminMenu(MemberVO memberVo) {
+	private void writePostInBoard(BoardVO tmpBoard, MemberVO tmpMember) {	//게시글 작성
 		
-	int menu;
-	do {
-	printService.adminChoosePostMenu();
-	menu=scan.nextInt();
-	adminChoosePostMenu(menu,memberVo);
-	}while(menu!=4);
-	}
-
-
-		//관리자 게시글,공지사항 작성, 게시글 관리 메뉴
-	private void adminChoosePostMenu(int menu,MemberVO tmpMember) {
-	
-		switch(menu) {
-		case 1:
-			//공지사항 작성
-			 writeAnnouncementtInBoard(tmpMember);
-			break;
-		case 2:
-			//게시글 작성
-			 writePostInBoard(tmpMember);
-			break;
-		case 3:
-			// 게시글 관리
-			break;
-		case 4:
-			System.out.println("돌아갑니다.");
-			break;
-		default:
-			throw new InputMismatchException();
-		}
-	}
-
-	
-	//공지사항을 작성
-	private boolean writeAnnouncementtInBoard(MemberVO tmpMember) {
-		
-		System.out.println("공지사항 작성을 시작합니다.");
-		int po_notice=1; 	//공지사항 작성 번호 1번 게시글은 0번으로 기본값임
+		int po_notice=0;
+		System.out.println("게시글 작성을 시작합니다.");
 		printService.printPostCategory();
-		System.out.print("공지사항 말머리 번호를 입력하세요.");
+		System.out.print("게시글 말머리 번호를 입력하세요.");
 		int po_pc_num=scan.nextInt();
+		
 		scan.nextLine();
-		System.out.print("공지사항 제목을 입력하세요.");
+		System.out.print("게시글 제목을 입력하세요.");
 		String po_title=scan.nextLine();
-		System.out.print("공지사항 내용을 입력하세요.");
+		System.out.print("게시글 내용을 입력하세요.");
 		String po_content=scan.nextLine();
 
 		PostVO postVo = new PostVO(po_title,po_content,tmpMember.getMb_id(),po_pc_num,po_notice);
 		
-		if(postService.writeAnnoucement(postVo)) {	
-			System.out.println("공지사항 추가 성공!");
-			return true;
+		if(postService.writePost(postVo)) {	
+			System.out.println("게시글 추가 성공!");
+			return;
 		}
-			System.out.println("공지사항 추가 실패!");
-			return false;
+			System.out.println("게시글 추가 실패!");
 		
 	}
 
 
-	//게시글을 작성
-	private void writePostInBoard(MemberVO tmpMember) {
-		writePost(tmpMember);
-	}
-	
 	// 관리자
 	private void selectedBoardAdminMenu(BoardVO tmpBoard, MemberVO tmpMember) {
 		ArrayList<PostVO> postList = new ArrayList<PostVO>();
@@ -648,7 +579,7 @@ public class PostController {
 				case -2: return;
 				case -3: 
 					//관리자가 게시판을 특정한 뒤 게시글 작성
-				writePostInBoard(tmpBoard,tmpMember); return;
+				writeMenuInAdmin(tmpBoard,tmpMember); return;		//여기서 공지사항과 게시글을 선택하게 만들어야 됨
 				default:
 					throw new InputMismatchException();
 				}
@@ -659,6 +590,71 @@ public class PostController {
 		}
 	}
 	
+	private void writeMenuInAdmin(BoardVO tmpBoard, MemberVO tmpMember) {	//공지사항메뉴
+		int menu;
+		menu=scan.nextInt();
+		printService.adminChoosePostMenu();
+		switch(menu) {
+		case 1:	//공지사항 작성
+			writeAnnouncement(tmpBoard,tmpMember);
+			break;
+		case 2:	//게시글 작성
+			writePost(tmpBoard,tmpMember);
+				break;
+		case 3:
+			System.out.println("돌아갑니다.");
+			break;
+		default:
+			throw new InputMismatchException();
+		}
+	}
+
+
+	private void writePost(BoardVO tmpBoard, MemberVO tmpMember) {	//관리자 게시글 작성 1번 선택시
+		int po_notice=0;
+		System.out.println("게시글 작성을 시작합니다.");
+		printService.printPostCategory();
+		System.out.print("게시글 말머리 번호를 입력하세요.");
+		int po_pc_num=scan.nextInt();
+		
+		scan.nextLine();
+		System.out.print("게시글 제목을 입력하세요.");
+		String po_title=scan.nextLine();
+		System.out.print("게시글 내용을 입력하세요.");
+		String po_content=scan.nextLine();
+
+		PostVO postVo = new PostVO(po_title,po_content,tmpMember.getMb_id(),po_pc_num,po_notice);
+		
+		if(postService.writePost(postVo)) {	
+			System.out.println("게시글 추가 성공!");
+			return;
+		}
+			System.out.println("게시글 추가 실패!");
+	}
+
+
+	private void writeAnnouncement(BoardVO tmpBoard, MemberVO tmpMember) {	//관리자 공지사항 작성 2번 선택시
+		int po_notice=1;
+		System.out.println("공지사항 작성을 시작합니다.");
+		printService.printPostCategory();
+		System.out.print("공지사항 말머리 번호를 입력하세요.");
+		int po_pc_num=scan.nextInt();
+		
+		scan.nextLine();
+		System.out.print("공지사항 제목을 입력하세요.");
+		String po_title=scan.nextLine();
+		System.out.print("공지사항 내용을 입력하세요.");
+		String po_content=scan.nextLine();
+
+		PostVO postVo = new PostVO(po_title,po_content,tmpMember.getMb_id(),po_pc_num,po_notice);
+		
+		if(postService.writePost(postVo)) {	
+			System.out.println("공지사항 추가 성공!");
+			return;
+		}
+			System.out.println("공지사항 추가 실패!");
+	}
+
 	//사용자
 	public void searchMenu(MemberVO tmpMember) {
 		int menu = 0;
@@ -1056,13 +1052,27 @@ public class PostController {
 		switch(menu) {
 		case 1: break;
 		case 2: replyAdminMenu(tmpPost, tmpMember); break;
-		case 3: break;
+		case 3: deletePost(tmpPost); break;	//박석훈 해야될 것 게시글 삭제
 		default:
 			throw new InputMismatchException();
 		}
 	}
 	
 	
+	private void deletePost(PostVO tmpPost) {
+		postDetail(tmpPost);
+		System.out.println("이 게시글을 정말 삭제하시겠습니까? (삭제:1,삭제취소:0 을 누르세요)");
+		int menuselect=scan.nextInt();
+		if(postService.deletePost(tmpPost.getPo_num()) && menuselect==1) {
+			System.out.println("게시글 삭제에 성공했습니다.");
+		}else {
+			System.out.println("게시글 삭제에 실패했습니다.");
+		}
+		
+		//예외처리1 기본키-게시글 번호가 일치하지 않는지 확인->일단 후순위
+	}
+
+
 	//사용자
 	private void replyMenu(PostVO tmpPost, MemberVO tmpMember) {
 		int menu = 0;
@@ -1183,6 +1193,11 @@ public class PostController {
 			return;
 		}
 		System.out.println("댓글 등록에 실패했습니다.");
+	}
+
+	public void writePost(MemberVO memberVo) {
+		
+		
 	}
 
 

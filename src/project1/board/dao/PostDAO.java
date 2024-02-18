@@ -39,7 +39,7 @@ public interface PostDAO {
 
 	boolean updateReply(@Param("reply")ReplyVO tmpReply, @Param("content")String content);
 	
-	boolean writePost(@Param("postVo")PostVO postVo);	//게시글 작성
+	boolean writePost(@Param("postVo")PostVO postVo);	//게시글 작성,공지사항 작성
 
 	List<PostVO> selectPostList();
 
@@ -47,7 +47,6 @@ public interface PostDAO {
 
 	boolean deletePost(@Param("po_num") int po_num);
 
-	boolean writeAnnouncement(@Param("postVo")PostVO postVoa); //공지사항 작성
 
 	
 

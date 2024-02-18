@@ -57,16 +57,9 @@ public class PostVO {
 	
 	
 
-	public PostVO(String po_title, String po_content,String po_mb_id, int po_pc_num){	//게시글 작성
-
-	this.po_title=po_title;
-	this.po_content=po_content;
-	this.po_mb_id=po_mb_id;
-	this.po_pc_num=po_pc_num;
 	
-	}
 
-	public PostVO(String po_title, String po_content,String po_mb_id, int po_pc_num,int po_notice){	//공지사항 작성
+	public PostVO(String po_title, String po_content,String po_mb_id, int po_pc_num,int po_notice){	//공지사항 작성 1번(po_notice), 게시글 작성 0번(po_notice)
 
 	this.po_title=po_title;
 	this.po_content=po_content;

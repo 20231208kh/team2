@@ -159,25 +159,8 @@ public class PostServiceImp implements PostService {
 		return postDAO.deletePost(po_num);
 	}
 
-	//공지사항 작성
-	@Override
-	public boolean writeAnnoucement(PostVO postVo) {
-		if(postVo == null 
-				|| postVo.getPo_title() == null 
-				|| postVo.getPo_content() == null
-				|| postVo.getPo_mb_id() == null) {
-			return false;
-		}
-		
-		boolean res = postDAO.writeAnnouncement(postVo);
-		if(res) {
-			session.commit();
-		return false;
-	}
-		return res;
-	}
 	
-	//게시글 작성
+	//(공지사항 작성,게시글 작성)
 	@Override
 		public boolean writePost(PostVO postVo) {
 			if(postVo == null 
