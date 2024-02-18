@@ -32,30 +32,30 @@ public class MemberServiceImp implements MemberService {
 	}
 
 	@Override
-	public MemberVO login(MemberVO memberVo) {
+	public MemberVO login(MemberVO memberVo) {	//MemberVO 
 		
-		List<MemberVO> memberList = new ArrayList<MemberVO>();
-		memberList = memberDAO.selectMemberList();
-		if(memberList.contains(memberVo)) {
-			int index = memberList.indexOf(memberVo);
-			MemberVO tmp = memberList.get(index);
-			return tmp;
+		List<MemberVO> memberList = new ArrayList<MemberVO>();  //MemberVo 클래스를 기반으로 한 리스트 memberList를 정의
+		memberList = memberDAO.selectMemberList();	//memberList에 memberDAO가 가지고 오는 멤버의 정보 모두를 넣어줌
+		if(memberList.contains(memberVo)) { //memberList에 memberVo 객체를 가지는 것이 있다면
+			int index = memberList.indexOf(memberVo);	//그 인덱스 번호를 변수 index에 저장
+			MemberVO tmp = memberList.get(index);	//memberList에서 가져온 해당 인덱스의 객체를 tmp 객체 넣어줌
+			return tmp;	//tmp를 반환
 		}
 		
 		return null;
 	}
 
 	@Override
-	public boolean signIn(MemberVO member) {
-		if(member == null 
+	public boolean signIn(MemberVO member) {	
+		if(member == null 	//member 객체와 member 객체가 가지는 id,pw,email이 null이라면
 				|| member.getMb_id() == null 
 				|| member.getMb_pw() == null
 				|| member.getMb_email() == null) {
-			return false;
+			return false;		
 		}
-		boolean res = memberDAO.insertMember(member);
+		boolean res = memberDAO.insertMember(member);	// boolean 변수 res에 memberDAO의 insertMember(member 객체) 반환 값을 넣어줌 
 		if(res) {
-			session.commit();
+			session.commit();	//
 		}
 		return res;
 	}
@@ -127,13 +127,7 @@ public class MemberServiceImp implements MemberService {
 		return null;
 	}
 
-//	@Override
-//	public List<MemberVO> getMemberList(String mb_id) {
-//		if(mb_id == null) {
-//			return null;
-//		}
-//		return memberDAO.selectMemberList(mb_id);
-//	}
+
 
 
 	

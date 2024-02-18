@@ -23,7 +23,7 @@ public class BoardController {
 	public void run() {
 		int menu;
 		do {
-			printService.manageBoardMenu();
+			printService.manageBoardMenu();	//게시판 관리 메뉴
 			menu = scan.nextInt();
 			runManageBoard(menu);
 		}while(menu != 6);
@@ -43,7 +43,7 @@ public class BoardController {
 			updateBoard();
 			break;
 		case 4:
-			deleteBoard(); //최소 하나는 남겨둬야한다
+			deleteBoard(); //조건:게시판을 최소 하나는 남겨둬야한다
 			break;
 		case 5:
 			managePostCategory();
@@ -106,7 +106,7 @@ public class BoardController {
 	private void manageBoardCategory() {
 		int menu;
 		do {
-			printService.manageBoardCategory();
+			printService.manageBoardCategory();	//게시판 게시글말머리 수정 메뉴
 			menu = scan.nextInt();
 			runManageBoardCategory(menu);
 		}while(menu != 4);
@@ -116,13 +116,13 @@ public class BoardController {
 	private void runManageBoardCategory(int menu) {
 		switch(menu) {
 		case 1:
-			insertBoardCategory();
+			insertBoardCategory();		//게시글 말머리 입력
 			break;
 		case 2:
-			updateBoardCategory();
+			updateBoardCategory();	//게시글 말머리 수정
 			break;
 		case 3:
-			deleteBoardCategory();
+			deleteBoardCategory();	//게시글 말머리 삭제
 			break;
 		case 4:
 			System.out.println("돌아가기");
@@ -137,7 +137,7 @@ public class BoardController {
 	private void insertBoardCategory() {
 		System.out.print("카테고리 이름 입력 : ");
 		String boardCategory = scan.next();
-		BoardCategoryVO boardCategoryVO = new BoardCategoryVO(boardCategory);
+		BoardCategoryVO boardCategoryVO = new BoardCategoryVO(boardCategory);	//카테고리 이름을 생성자로 하는 boardCategoryVO 객체를 생성
 		if(boardService.insertBoardCategory(boardCategoryVO)) {
 			System.out.println("카테고리 추가 성공!");
 			return;
@@ -184,7 +184,7 @@ public class BoardController {
 		
 	}
 
-	//말미러 관리 실행
+	//말머리 관리 실행
 	private void runManagePostCategory(int menu) {
 		switch(menu) {
 		case 1:

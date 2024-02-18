@@ -17,10 +17,8 @@ public interface MemberService {
 
 	boolean deleteMember(MemberVO memberVo);
 
-
 	MemberVO getMember(MemberVO memberVo);
 
-	//List<MemberVO> getMemberList(String mb_id);
 
 
 }

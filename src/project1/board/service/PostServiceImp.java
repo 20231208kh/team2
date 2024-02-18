@@ -43,28 +43,28 @@ public class PostServiceImp implements PostService {
 
 	public PostVO increaseVeiwCount(PostVO tmpPost) {
 		postDAO.increaseVeiwCount(tmpPost);
-		PostVO post = postDAO.getPost(tmpPost).get(0);
+		PostVO post = postDAO.getPost(tmpPost).get(0);	//무슨 뜻이에요 이거 .. 이게 왜 되죠?
 		return post;
 	}
 
 	@Override
 	public ArrayList<PostVO> getMyPost(MemberVO memberVo, int page) {
-		page = (page-1)*10;
-		ArrayList<PostVO> postList = postDAO.getMyPost(memberVo,page);
-		return postList;
+		page = (page-1)*10;		//이거 왜 하신 거에요 준수님 모르겠는데요 이거
+		ArrayList<PostVO> postList = postDAO.getMyPost(memberVo,page);	//PostVO를 클래스로 가지는 postList객체에 저장<-(postDAO->postMapper에서 limit page,10을 해놨으므로 page행번호부터 10개를 가져옴)
+		return postList;	//postList 반환
 	}
 
 	@Override
 	public ArrayList<ReplyVO> getMyReply(MemberVO memberVo, int page) {
 		page = (page-1)*10;
-		ArrayList<ReplyVO> replyList = postDAO.getMyReply(memberVo,page);
+		ArrayList<ReplyVO> replyList = postDAO.getMyReply(memberVo,page);	//댓글 가져오는 것도 똑같은 방식
 		return replyList;
 	}
 
 	@Override
 	public ArrayList<PostVO> getAllPost(int page) {
 		page = (page-1)*10;
-		ArrayList<PostVO> postList = postDAO.getAllPost(page);
+		ArrayList<PostVO> postList = postDAO.getAllPost(page);	
 		return postList;
 	}
 
@@ -133,22 +133,6 @@ public class PostServiceImp implements PostService {
 
 	}
 
-	public boolean write(PostVO postVo) {
-		if(postVo == null 
-				|| postVo.getPo_title() == null 
-				|| postVo.getPo_content() == null
-				|| postVo.getPo_mb_id() == null) {
-			return false;
-		}
-		
-		boolean res = postDAO.writePost(postVo);
-		if(res) {
-			session.commit();
-		}
-		
-		return res;
-	}
-
 	@Override
 	public List<PostVO> getPostList() {
 		
@@ -174,7 +158,42 @@ public class PostServiceImp implements PostService {
 		
 		return postDAO.deletePost(po_num);
 	}
+
+	//공지사항 작성
+	@Override
+	public boolean writeAnnoucement(PostVO postVo) {
+		if(postVo == null 
+				|| postVo.getPo_title() == null 
+				|| postVo.getPo_content() == null
+				|| postVo.getPo_mb_id() == null) {
+			return false;
+		}
+		
+		boolean res = postDAO.writeAnnouncement(postVo);
+		if(res) {
+			session.commit();
+		return false;
+	}
+		return res;
+	}
 	
+	//게시글 작성
+	@Override
+		public boolean writePost(PostVO postVo) {
+			if(postVo == null 
+					|| postVo.getPo_title() == null 
+					|| postVo.getPo_content() == null
+					|| postVo.getPo_mb_id() == null) {
+				return false;
+			}
+			
+			boolean res = postDAO.writePost(postVo);
+			if(res) {
+				session.commit();
+			}
+			
+			return res;
+		}
 
 
 }

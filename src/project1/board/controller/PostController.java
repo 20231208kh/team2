@@ -31,7 +31,6 @@ public class PostController {
 	private PostService postService = new PostServiceImp();
 	private PrintService printService = new PrintServiceImp();
 	
-	
 	public void myPageMenu(MemberVO tmpMember) {
 		int menu = 0;
 		System.out.println("1.내가 작성한 게시글");
@@ -67,15 +66,15 @@ public class PostController {
 		int page = 1;
 		int num = -3;
 		while(true) {
-			postList = postService.getMyPost(tmpMember, page);
+			postList = postService.getMyPost(tmpMember, page);	//몇행부터 10개 출력할지 가져온 것 select문
 			if((postList == null || postList.size() == 0) && page == 1) {
 				System.out.println("작성한 게시글이 없습니다.");
 				return;
 			}
-			for(int i = 0 ; i < postList.size() ; i++) {
-				System.out.println((i+1)+". "+ postList.get(i));
+			for(int i = 0 ; i < postList.size() ; i++) {	//postList에는 10개가 있을거 같음
+				System.out.println((i+1)+". "+ postList.get(i));	//1번 postList 0번지 객체 ~ 10번 postList 9번지 객체
 			}
-			System.out.println("현재 페이지 : " + page);
+			System.out.println("현재 페이지 : " + page);  // 77~ 86번줄 의미를 모르겠음
 			if(postList.size() < 10 && page == 1) {
 				System.out.println("상위메뉴(-2)");
 			}else if(postList.size() < 10) {
@@ -203,60 +202,21 @@ public class PostController {
 			//예외처리1 기본키-게시글 번호가 일치하지 않는지 확인->일단 후순위
 		}
 
-		//보류
-		
-		//게시글 작성
-		public boolean writePost(MemberVO member) {
-			System.out.println("게시글을 작성합니다.");
-			printService.printBoard();
-			System.out.println("게시판 번호 머임?");
-			
-			int po_bo_num = scan.nextInt();
-			List<Integer> list = new ArrayList<Integer>();
-			
-			for(BoardVO item : printService.getBoard()) {
-			list.add(item.getBo_num());
-			}
-			
-			if(!list.contains(po_bo_num)) {
-				System.out.println("게시판 번호 없음ㅋㅋ");
-			return false;
-			}
-			
-			printService.printPostCategory();
-			System.out.print("게시글 말머리 번호를 입력하세요.");
-			int po_pc_num=scan.nextInt();
-			
-			scan.nextLine();
-			System.out.print("게시글 제목을 입력하세요.");
-			String po_title=scan.nextLine();
-			System.out.print("게시글 내용을 입력하세요.");;
-			String po_content=scan.nextLine();
-
-			PostVO postVo = new PostVO(po_title,po_content,member.getMb_id(),po_bo_num,po_pc_num);
-			
-			if(postService.write(postVo)) {	
-				System.out.println("게시글 추가 성공!");
-				return true;
-			}
-				System.out.println("게시글 추가 실패!");
-				return false;
-				
-		}
-		
+	
 	
 	//나의 댓글
 	private void myReply(MemberVO tmpMember) {
-		ArrayList<ReplyVO> myReplyList = new ArrayList<ReplyVO>();
+		ArrayList<ReplyVO> myReplyList = new ArrayList<ReplyVO>();	//게시글 클래스 리스트 정의 myReplyList
 		int page = 1;
 		int num = -3;
 		while(true) {
-			myReplyList = postService.getMyReply(tmpMember, page);
-			if((myReplyList == null || myReplyList.size() == 0) && page == 1) {
+			myReplyList = postService.getMyReply(tmpMember, page);	//myreplyList에 내가 해당 아이디를 가지는 사람을 기준으로 댓글을 모두 가져옴
+			
+			if((myReplyList == null || myReplyList.size() == 0) && page == 1) {	 
 				System.out.println("작성한 댓글이 없습니다.");
 				return;
 			}
-			for(int i = 0 ; i < myReplyList.size() ; i++) {
+			for(int i = 0 ; i < myReplyList.size() ; i++) {	
 				System.out.println((i+1)+". "+ myReplyList.get(i));
 			}
 			System.out.println("현재 페이지 : " + page);
@@ -272,10 +232,10 @@ public class PostController {
 			System.out.print("입력 : ");
 			num = scan.nextInt();				
 			
-			if(num > 0 && num < 11) {
+			if(num > 0 && num < 11) {	//
 				ReplyVO tmpReply = myReplyList.get(num-1);
-				manageMyReply(tmpReply);
-				return;
+				manageMyReply(tmpReply);		
+				return;					//이거는 작동이 어떻게 되는지 궁굼합니다.
 			}
 			else {
 				switch(num) {
@@ -309,7 +269,7 @@ public class PostController {
 		scan.nextLine();
 		System.out.println("수정할 내용:");
 		String content = scan.nextLine();
-		content = "[수정됨] " + content;
+		content = "[수정됨] " + content;	//content를 수정한 후에 content 수정된 내용을 다시 넣어줌
 		if(postService.updateReply(tmpReply,content)) {
 			System.out.println("수정 성공");
 			return;
@@ -483,7 +443,7 @@ public class PostController {
 			return;
 		}
 		BoardVO tmpBoard = boardList.get(num-1);
-		selectedBoardMenu(tmpBoard,tmpMember);
+		selectedBoardMenu(tmpBoard,tmpMember);		//게시판 하나를 특정해서 가져온 것
 	}
 	
 	//관리자
@@ -503,7 +463,30 @@ public class PostController {
 		selectedBoardAdminMenu(tmpBoard,tmpMember);
 	}
 	
-	
+	//게시글 작성
+	public boolean writePost(MemberVO member) {
+		
+		System.out.println("게시글 작성을 시작합니다.");
+		printService.printPostCategory();
+		System.out.print("게시글 말머리 번호를 입력하세요.");
+		int po_pc_num=scan.nextInt();
+		
+		scan.nextLine();
+		System.out.print("게시글 제목을 입력하세요.");
+		String po_title=scan.nextLine();
+		System.out.print("게시글 내용을 입력하세요.");
+		String po_content=scan.nextLine();
+
+		PostVO postVo = new PostVO(po_title,po_content,member.getMb_id(),po_pc_num);
+		
+		if(postService.writePost(postVo)) {	
+			System.out.println("게시글 추가 성공!");
+			
+			return true;
+		}
+			System.out.println("게시글 추가 실패!");
+			return false;
+	}
 	
 	// 사용자
 	private void selectedBoardMenu(BoardVO tmpBoard, MemberVO tmpMember) {
@@ -545,7 +528,9 @@ public class PostController {
 				case -2: return;
 				case -3: 
 					//일반 사용자가 게시판을 특정한 뒤 게시글 작성
-				//	writePostInBoard(tmpBoard,tmpMember); return;
+				writePostInBoard(tmpBoard,tmpMember); 
+				
+				return;	//게시글 말머리와 게시글을 조인한 것을 가져옴
 				default:
 					throw new InputMismatchException();
 				}
@@ -554,6 +539,73 @@ public class PostController {
 				page = 1;
 			}
 		}
+	}
+	
+
+	public void writePostAdminMenu(MemberVO memberVo) {
+		
+	int menu;
+	do {
+	printService.adminChoosePostMenu();
+	menu=scan.nextInt();
+	adminChoosePostMenu(menu,memberVo);
+	}while(menu!=4);
+	}
+
+
+		//관리자 게시글,공지사항 작성, 게시글 관리 메뉴
+	private void adminChoosePostMenu(int menu,MemberVO tmpMember) {
+	
+		switch(menu) {
+		case 1:
+			//공지사항 작성
+			 writeAnnouncementtInBoard(tmpMember);
+			break;
+		case 2:
+			//게시글 작성
+			 writePostInBoard(tmpMember);
+			break;
+		case 3:
+			// 게시글 관리
+			break;
+		case 4:
+			System.out.println("돌아갑니다.");
+			break;
+		default:
+			throw new InputMismatchException();
+		}
+	}
+
+	
+	//공지사항을 작성
+	private boolean writeAnnouncementtInBoard(MemberVO tmpMember) {
+		
+		System.out.println("공지사항 작성을 시작합니다.");
+		int po_notice=1; 	//공지사항 작성 번호 1번 게시글은 0번으로 기본값임
+		printService.printPostCategory();
+		System.out.print("공지사항 말머리 번호를 입력하세요.");
+		int po_pc_num=scan.nextInt();
+		scan.nextLine();
+		System.out.print("공지사항 제목을 입력하세요.");
+		String po_title=scan.nextLine();
+		System.out.print("공지사항 내용을 입력하세요.");
+		String po_content=scan.nextLine();
+
+		PostVO postVo = new PostVO(po_title,po_content,tmpMember.getMb_id(),po_pc_num,po_notice);
+		
+		if(postService.writeAnnoucement(postVo)) {	
+			System.out.println("공지사항 추가 성공!");
+			return true;
+		}
+			System.out.println("공지사항 추가 실패!");
+			return false;
+		
+	}
+
+
+	//게시글을 작성
+	private void writePostInBoard(MemberVO tmpMember) {
+		writePost(tmpMember);
 	}
 	
 	// 관리자
@@ -596,7 +648,7 @@ public class PostController {
 				case -2: return;
 				case -3: 
 					//관리자가 게시판을 특정한 뒤 게시글 작성
-				//	writePostInBoard(tmpBoard,tmpMember); return;
+				writePostInBoard(tmpBoard,tmpMember); return;
 				default:
 					throw new InputMismatchException();
 				}
@@ -606,7 +658,6 @@ public class PostController {
 			}
 		}
 	}
-	
 	
 	//사용자
 	public void searchMenu(MemberVO tmpMember) {
@@ -1134,9 +1185,5 @@ public class PostController {
 		System.out.println("댓글 등록에 실패했습니다.");
 	}
 
-
-
-
-	
 
 }
