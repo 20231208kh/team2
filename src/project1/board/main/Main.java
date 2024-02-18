@@ -166,7 +166,7 @@ public class Main {
 
 		case 2:
 			//공지or게시글 작성 선택메뉴 
-			//postController.writePostAdminMenu(memberVo);
+			postController.writePostAdminMenu(memberVo);
 			break;
 		case 3: 
 			// 마이페이지

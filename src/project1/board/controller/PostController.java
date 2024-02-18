@@ -31,7 +31,7 @@ public class PostController {
 	private PostService postService = new PostServiceImp();
 	private PrintService printService = new PrintServiceImp();
 	
-	public void myPageMenu(MemberVO tmpMember) {
+	public void myPageMenu(MemberVO tmpMember) {	//일반회원 마이페이지 메뉴
 		int menu = 0;
 		System.out.println("1.내가 작성한 게시글");
 		System.out.println("2.내가 작성한 댓글");
@@ -48,7 +48,7 @@ public class PostController {
 	}
 
 
-	private void runMyPageMenu(int menu, MemberVO tmpMember) {
+	private void runMyPageMenu(int menu, MemberVO tmpMember) {	
 		switch(menu){
 		case 1: myPost(tmpMember); break;
 		case 2: myReply(tmpMember); break;
@@ -62,12 +62,12 @@ public class PostController {
 	
 	//나의 게시글
 	private void myPost(MemberVO tmpMember) {
-		ArrayList<PostVO> postList = new ArrayList<PostVO>();	//postVO 리스트 정의,내가 작성한 게시글
+		ArrayList<PostVO> postList = new ArrayList<PostVO>();	//postVO 리스트 정의-> 데이터베이스에서 가져올 정보를 담기 위함
 		int page = 1;
 		int num = -3;
 		while(true) {
 			postList = postService.getMyPost(tmpMember, page);	//몇행부터 10개 출력할지 가져온 것 select문
-			if((postList == null || postList.size() == 0) && page == 1) {
+			if((postList == null || postList.size() == 0) && page == 1) { 	//데이터베스에서 가져온 게시글이 비어있고 페이지가 1페이지면
 				System.out.println("작성한 게시글이 없습니다.");
 				return;
 			}
@@ -85,7 +85,7 @@ public class PostController {
 				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
 			}
 			System.out.print("입력 : ");
-			num = scan.nextInt();				
+			num = scan.nextInt();	//가져올 
 			
 			if(num > 0 && num < 11) {
 				PostVO tmpPost = postList.get(num-1); //인덱스 번호0~9표현
@@ -94,21 +94,21 @@ public class PostController {
 			}
 			else {
 				switch(num) {
-				case 0: page++; break;
-				case -1: page--; break;
+				case 0: page++; break;	//0번을 누르면 페이지 증가 
+				case -1: page--; break;	//1번을 누르면 페이지 감소
 				case -2: return;
 				default:
 					throw new InputMismatchException();
 				}
 			}
-			if(page<1) {
+			if(page<1) {	//페이지가 -로 내려갔을 시 페이지가 1이 되게끔 작동이 안 될 것을 우려해서 조건 걸어줌 
 				page = 1;
 			}
 		}
 	}
 
 	//게시글 수정 삭제메뉴
-	private void manageMyPost(PostVO tmpPost,int num) {
+	private void manageMyPost(PostVO tmpPost,int num) {	//
 		postDetail(tmpPost);		//상세 조회
 		System.out.println("[뒤로가기(1) 수정(2) 삭제(3)] : ");
 		System.out.print("입력 : ");
@@ -118,7 +118,7 @@ public class PostController {
 			System.out.println("뒤로갑니다.");
 			break;
 		case 2: 
-			updatePost(tmpPost);	//게시글 수정
+			updatePostMenu(tmpPost);	//게시글 수정 메뉴
 			break;
 		case 3: 
 			deletePost(tmpPost,num);	//게시글 삭제
@@ -128,7 +128,8 @@ public class PostController {
 		}
 	}
 	
-		private void updatePost(PostVO tmpPost) {
+//게시글 수정 삭제 구현 시작
+		private void updatePostMenu(PostVO tmpPost) {	//게시글 수정 메뉴
 			int menu;
 		
 			do{
@@ -200,7 +201,7 @@ public class PostController {
 			
 			//예외처리1 기본키-게시글 번호가 일치하지 않는지 확인->일단 후순위
 		}
-
+//게시글 수정 삭제 끝
 	
 	
 	//나의 댓글
@@ -209,14 +210,14 @@ public class PostController {
 		int page = 1;
 		int num = -3;
 		while(true) {
-			myReplyList = postService.getMyReply(tmpMember, page);	//myreplyList에 내가 해당 아이디를 가지는 사람을 기준으로 댓글을 모두 가져옴
+			myReplyList = postService.getMyReply(tmpMember, page);	//myreplyList에 넣어줌 <-댓글(main에서 로그인을 성공한 사람의 아이디와 같은 댓글을 가져옴)
 			
-			if((myReplyList == null || myReplyList.size() == 0) && page == 1) {	 
+			if((myReplyList == null || myReplyList.size() == 0) && page == 1) {	 	//댓글 예외처리 (게시글과 같음)
 				System.out.println("작성한 댓글이 없습니다.");
 				return;
 			}
 			for(int i = 0 ; i < myReplyList.size() ; i++) {	
-				System.out.println((i+1)+". "+ myReplyList.get(i));
+				System.out.println((i+1)+". "+ myReplyList.get(i)); 
 			}
 			System.out.println("현재 페이지 : " + page);
 			if(myReplyList.size() < 10 && page == 1) {
@@ -229,12 +230,12 @@ public class PostController {
 				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
 			}
 			System.out.print("입력 : ");
-			num = scan.nextInt();				
+			num = scan.nextInt();	//댓글 번호 입력
 			
-			if(num > 0 && num < 11) {	//
-				ReplyVO tmpReply = myReplyList.get(num-1);
-				manageMyReply(tmpReply);		
-				return;					//이거는 작동이 어떻게 되는지 궁굼합니다.
+			if(num > 0 && num < 11) {	//1번부터 10번 페이지를 10개 행으로 제한해둬서
+				ReplyVO tmpReply = myReplyList.get(num-1);	//댓글 하나를 선택해서 tmpReply에 넣어줌
+				manageMyReply(tmpReply);	//해당 댓글 수정 삭제
+				return;					
 			}
 			else {
 				switch(num) {
@@ -252,7 +253,7 @@ public class PostController {
 	}
 
 
-	private void manageMyReply(ReplyVO tmpReply) {
+	private void manageMyReply(ReplyVO tmpReply) {	//위에 해당 댓글 수정 삭제 메뉴 구현
 		System.out.print("입력[뒤로가기(1) 수정(2) 삭제(3)] : ");
 		int menu = scan.nextInt();
 		switch(menu) {
@@ -264,7 +265,7 @@ public class PostController {
 		}
 	}
 
-	private void updateMyReply(ReplyVO tmpReply) {
+	private void updateMyReply(ReplyVO tmpReply) {	//댓글 수정
 		scan.nextLine();
 		System.out.println("수정할 내용:");
 		String content = scan.nextLine();
@@ -277,7 +278,7 @@ public class PostController {
 	}
 
 	//사용자
-	public void boardMenu(MemberVO tmpMember) {
+	public void boardMenu(MemberVO tmpMember) {	//main131번줄 게시판 조회 메뉴 구현
 		int menu = 0;
 		System.out.println("1.전체 게시글");
 		System.out.println("2.게시판 보기");
@@ -285,7 +286,7 @@ public class PostController {
 		System.out.print("입력 : ");
 		try {
 			menu = scan.nextInt();
-			runBoardMenu(menu, tmpMember);
+			runBoardMenu(menu, tmpMember);	
 		}
 		catch (InputMismatchException e) {
 			System.out.println("잘못된 입력입니다");
@@ -296,13 +297,60 @@ public class PostController {
 	//사용자
 	private void runBoardMenu(int menu, MemberVO tmpMember) {
 		switch(menu) {
-		case 1: allPost(tmpMember); break;
-		case 2: allBoard(tmpMember); break;
+		case 1: allPost(tmpMember); break;	//모든 게시글
+		case 2: allBoard(tmpMember); break; //모든 게시판
 		case 3: System.out.println("뒤로가기"); break;
 		default:
 			throw new InputMismatchException();
 		}
 	}
+	
+	//사용자,모든 게시글 구현
+		private void allPost(MemberVO tmpMember) {
+			ArrayList<PostVO> postList = new ArrayList<PostVO>();
+			int page = 1;
+			int num = -3;
+			while(true) {
+				postList = postService.getAllPost(page);  
+				if((postList == null || postList.size() == 0) && page == 1) {
+					System.out.println("작성된 게시글이 없습니다.");
+					return;
+				}
+				for(int i = 0 ; i < postList.size() ; i++) {
+					System.out.println((i+1)+". "+ postList.get(i));
+				}
+				System.out.println("현재 페이지 : " + page);
+				if(postList.size() < 10 && page == 1) {
+					System.out.println("상위메뉴(-2)");
+				}else if(postList.size() < 10) {
+					System.out.println("상위메뉴(-2) 이전페이지(-1)");
+				}else if(page == 1) {
+					System.out.println("상위메뉴(-2) 다음페이지(0)");
+				}else {
+					System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
+				}
+				System.out.print("입력 : ");
+				num = scan.nextInt();				
+				
+				if(num > 0 && num < 11) {
+					PostVO tmpPost = postList.get(num-1);
+					viewPost(tmpPost , tmpMember);
+					return;
+				}
+				else {
+					switch(num) {
+					case 0: page++; break;
+					case -1: page--; break;
+					case -2: return;
+					default:
+						throw new InputMismatchException();
+					}
+				}
+				if(page<1) {
+					page = 1;
+				}
+			}
+		}
 	
 	//관리자
 	public void boardAdminMenu(MemberVO tmpMember) {
@@ -325,62 +373,17 @@ public class PostController {
 	//관리자
 	private void runBoardAdminMenu(int menu, MemberVO tmpMember) {
 		switch(menu) {
-		case 1: allPostAdmin(tmpMember); break;
-		case 2: allBoardAdmin(tmpMember); break;
+		case 1: allPostAdmin(tmpMember); break;		//전체 게시글
+		case 2: allBoardAdmin(tmpMember); break;	//게시판 보기
 		case 3: System.out.println("뒤로가기"); break;
 		default:
 			throw new InputMismatchException();
 		}
 	}
 	
-	//사용자
-	private void allPost(MemberVO tmpMember) {
-		ArrayList<PostVO> postList = new ArrayList<PostVO>();
-		int page = 1;
-		int num = -3;
-		while(true) {
-			postList = postService.getAllPost(page);
-			if((postList == null || postList.size() == 0) && page == 1) {
-				System.out.println("작성된 게시글이 없습니다.");
-				return;
-			}
-			for(int i = 0 ; i < postList.size() ; i++) {
-				System.out.println((i+1)+". "+ postList.get(i));
-			}
-			System.out.println("현재 페이지 : " + page);
-			if(postList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
-			}else if(postList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
-			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
-			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
-			}
-			System.out.print("입력 : ");
-			num = scan.nextInt();				
-			
-			if(num > 0 && num < 11) {
-				PostVO tmpPost = postList.get(num-1);
-				viewPost(tmpPost , tmpMember);
-				return;
-			}
-			else {
-				switch(num) {
-				case 0: page++; break;
-				case -1: page--; break;
-				case -2: return;
-				default:
-					throw new InputMismatchException();
-				}
-			}
-			if(page<1) {
-				page = 1;
-			}
-		}
-	}
 	
-	//관리자
+	
+	//관리자, 전체 게시글 
 	private void allPostAdmin(MemberVO tmpMember) {
 		ArrayList<PostVO> postList = new ArrayList<PostVO>();
 		int page = 1;
@@ -445,35 +448,19 @@ public class PostController {
 		selectedBoardMenu(tmpBoard,tmpMember);		//게시판 하나를 특정해서 가져온 것
 	}
 	
-	//관리자
-	private void allBoardAdmin(MemberVO tmpMember) {
-		int num = 0;
-		ArrayList<BoardVO> boardList = printService.getBoard();
-		for(int i = 0 ; i < boardList.size() ; i++) {
-			System.out.println((i+1)+". "+ boardList.get(i));
-		}
-		System.out.print("게시판 입력 : ");
-		num = scan.nextInt();
-		if(num <= 0 || num > boardList.size()) {
-			System.out.println("게시판을 잘못 선택했습니다. ");
-			return;
-		}
-		BoardVO tmpBoard = boardList.get(num-1);
-		selectedBoardAdminMenu(tmpBoard,tmpMember);
-	}
-	
 	// 사용자
-	private void selectedBoardMenu(BoardVO tmpBoard, MemberVO tmpMember) {
-		ArrayList<PostVO> postList = new ArrayList<PostVO>();
+	private void selectedBoardMenu(BoardVO tmpBoard, MemberVO tmpMember) {	// 게시판을 선택한 것과,회원의 정보를 들고 있음
+		ArrayList<PostVO> postList = new ArrayList<PostVO>();	//게시글 리스트 선언
 		int page = 1;
 		int num = -4;
+		
 		while(true) {
-			postList = postService.getPostByBoard(tmpBoard,page);
+			postList = postService.getPostByBoard(tmpBoard,page);	//게시글 전체와 게시글 말머리 제목을 가져옴 
 			if((postList == null || postList.size() == 0) && page == 1) {
 				System.out.println("해당 게시판에 등록된 게시글이 없습니다.");
 			}
 			else {
-				for(int i = 0 ; i < postList.size() ; i++) {
+				for(int i = 0 ; i < postList.size() ; i++) {	//게시글 크기만큼 게시글을 출력
 					System.out.println((i+1)+". "+ postList.get(i));
 				}
 				System.out.println("현재 페이지 : " + page);
@@ -491,7 +478,7 @@ public class PostController {
 			System.out.print("입력 : ");
 			num = scan.nextInt();				
 			if(num > 0 && num < 11) {
-				PostVO tmpPost = postList.get(num-1);
+				PostVO tmpPost = postList.get(num-1);  //게시글 하나 선택해서 tmpPost에 저장
 				viewPost(tmpPost , tmpMember);
 				return;
 			}
@@ -508,10 +495,35 @@ public class PostController {
 					throw new InputMismatchException();
 				}
 			}
-			if(page<1) {	//page가 
+			if(page<1) {	//page가 0보다 작을 경우 예외처리로 페이지를 1로 바꿔줌+
+				
 				page = 1;
 			}
 		}
+	}
+	
+	//관리자
+	private void allBoardAdmin(MemberVO tmpMember) {
+		int num = 0;
+		ArrayList<BoardVO> boardList = printService.getBoard();
+		for(int i = 0 ; i < boardList.size() ; i++) {
+			System.out.println((i+1)+". "+ boardList.get(i));
+		}
+		System.out.print("게시판 입력 : ");
+		num = scan.nextInt();
+		if(num <= 0 || num > boardList.size()) {
+			System.out.println("게시판을 잘못 선택했습니다. ");
+			return;
+		}
+		BoardVO tmpBoard = boardList.get(num-1);	//게시판 1개를 선택했음
+		selectedBoardAdminMenu(tmpBoard,tmpMember);
+	}
+	
+	
+	//일반 회원 게시글 작성
+	public void writePost(MemberVO memberVo) {
+		
+		
 	}
 
 	private void writePostInBoard(BoardVO tmpBoard, MemberVO tmpMember) {	//게시글 작성
@@ -1195,10 +1207,6 @@ public class PostController {
 		System.out.println("댓글 등록에 실패했습니다.");
 	}
 
-	public void writePost(MemberVO memberVo) {
-		
-		
-	}
 
 
 }

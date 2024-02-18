@@ -57,7 +57,7 @@ public class PostServiceImp implements PostService {
 	@Override
 	public ArrayList<ReplyVO> getMyReply(MemberVO memberVo, int page) {
 		page = (page-1)*10;
-		ArrayList<ReplyVO> replyList = postDAO.getMyReply(memberVo,page);	//댓글 가져오는 것도 똑같은 방식
+		ArrayList<ReplyVO> replyList = postDAO.getMyReply(memberVo,page);	//댓글 (main에서 로그인을 성공한 사람의 아이디와 같은 댓글을 가져옴)
 		return replyList;
 	}
 
