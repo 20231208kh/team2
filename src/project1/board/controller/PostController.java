@@ -400,15 +400,16 @@ public class PostController {
 				case -1: page--; break;
 				case -2: return;
 				case -3: 
-					writePost(tmpBoard,tmpMember); 	//일반 사용자가 게시판을 특정한 뒤 게시글 작성
-				
-				return;	//게시글 말머리와 게시글을 조인한 것을 가져옴
+					if(tmpMember.getMb_right().equals("ADMIN")  && tmpBoard.getBo_num()==1 ) {
+						writePost(tmpBoard,tmpMember,1);
+					}
+					writePost(tmpBoard,tmpMember,0); 	//일반 사용자가 게시판을 특정한 뒤 게시글 작성
+					return;	//게시글 말머리와 게시글을 조인한 것을 가져옴
 				default:
 					throw new InputMismatchException();
 				}
 			}
 			if(page<1) {	//page가 0보다 작을 경우 예외처리로 페이지를 1로 바꿔줌+
-				
 				page = 1;
 			}
 		}
@@ -535,7 +536,6 @@ public class PostController {
 	public void writePost(MemberVO memberVo) {
 		ArrayList<BoardVO> boardList = new ArrayList<BoardVO>();
 		int numBoard = -1;
-		int numPostCategory = -1;
 		int po_notice = 0;
 		boardList = printService.getBoard();
 		if(boardList == null || boardList.size() == 0) {
@@ -554,6 +554,14 @@ public class PostController {
 		if(numBoard== 1 && memberVo.getMb_right().equals("ADMIN")) {
 			po_notice = 1;
 		}
+		writePost(tmpBoard,memberVo,po_notice);
+	}
+	
+	
+	//게시판 확정 후 게시글 작성
+	private void writePost(BoardVO tmpBoard, MemberVO tmpMember, int po_notice) {	
+		
+		int numPostCategory = -1;
 		
 		ArrayList<PostCategoryVO> pCList = printService.getPostCategoryByBoard(tmpBoard);
 		if(pCList == null || pCList.size() == 0) {
@@ -575,39 +583,11 @@ public class PostController {
 		System.out.print("게시글 내용을 입력하세요.");
 		String po_content=scan.nextLine();
 
-		if(postService.writePost(po_title, po_content, memberVo, tmpBoard , tmpPostCategory, po_notice)) {	
+		if(postService.writePost(po_title, po_content, tmpMember, tmpBoard , tmpPostCategory, po_notice)) {	
 			System.out.println("게시글 추가 성공!");
 			return;
 		}
 			System.out.println("게시글 추가 실패!");
-	}
-	
-	
-	//게시판 확정 후 게시글 작성
-	private void writePost(BoardVO tmpBoard, MemberVO tmpMember) {	
-		
-		
-		int po_notice=0;
-		
-		System.out.println("게시글 작성을 시작합니다.");
-		printService.printPostCategory();
-		System.out.print("게시글 말머리 번호를 입력하세요.");
-		int po_pc_num=scan.nextInt();
-		
-		scan.nextLine();
-		System.out.print("게시글 제목을 입력하세요.");
-		String po_title=scan.nextLine();
-		System.out.print("게시글 내용을 입력하세요.");
-		String po_content=scan.nextLine();
-
-		PostVO postVo = new PostVO(po_title,po_content,tmpMember.getMb_id(),po_pc_num,po_notice);
-		
-		if(postService.writePostMain(postVo)) {	
-			System.out.println("게시글 추가 성공!");
-			return;
-		}
-			System.out.println("게시글 추가 실패!");
-			
 	}
 	
 

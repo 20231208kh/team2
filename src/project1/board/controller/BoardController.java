@@ -1,5 +1,6 @@
 package project1.board.controller;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import project1.board.model.vo.BoardCategoryVO;
@@ -51,11 +52,16 @@ public class BoardController {
 	}
 
 	private void manageBoard() {
-		int menu;
+		int menu = 0;
 		do {
 			printService.manageBoard();
-			menu = scan.nextInt();
-			runManageBoard(menu);
+			try {
+				menu = scan.nextInt();
+				runManageBoard(menu);
+			}
+			catch (InputMismatchException e) {
+				System.out.println("잘못된 입력입니다.");
+			}
 		}while(menu != 4);
 	}
 

@@ -12,7 +12,7 @@ public class PostCategoryVO {
 	int pc_num;
 	String pc_title;
 	int pc_bo_num;
-
+	
 	public PostCategoryVO(int postCategoryNum) {
 		this.pc_num = postCategoryNum;
 	}
