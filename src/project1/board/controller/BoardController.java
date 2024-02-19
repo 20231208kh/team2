@@ -19,36 +19,58 @@ public class BoardController {
 	private Scanner scan = new Scanner(System.in);
 	private BoardService boardService = new BoardServiceImp();
 	private PrintService printService = new PrintServiceImp();
+
 	
 	public void run() {
 		int menu;
 		do {
 			printService.manageBoardMenu();	//게시판 관리 메뉴
 			menu = scan.nextInt();
-			runManageBoard(menu);
-		}while(menu != 6);
-		
+			runManager(menu);
+		}while(menu != 4);
 	}
 	
 	//게시판 관리자 실행
-	public void runManageBoard(int menu) {
+	public void runManager(int menu) {
 		switch (menu) {
 		case 1:
 			manageBoardCategory();
 			break;
 		case 2:
-			insertBoard();
+			manageBoard();
 			break;
 		case 3:
-			updateBoard();
-			break;
-		case 4:
-			deleteBoard(); //조건:게시판을 최소 하나는 남겨둬야한다
-			break;
-		case 5:
 			managePostCategory();
 			break;
-		case 6:
+		case 4:
+			System.out.println("돌아가기");
+			break;
+		default:
+			System.out.println("잘못된 메뉴 선택");
+		}
+	}
+
+	private void manageBoard() {
+		int menu;
+		do {
+			printService.manageBoard();
+			menu = scan.nextInt();
+			runManageBoard(menu);
+		}while(menu != 4);
+	}
+
+	private void runManageBoard(int menu) {
+		switch(menu) {
+		case 1:
+			insertBoard();
+			break;
+		case 2:
+			updateBoard();
+			break;
+		case 3:
+			deleteBoard();
+			break;
+		case 4:
 			System.out.println("돌아가기");
 			break;
 		default:
@@ -69,7 +91,7 @@ public class BoardController {
 		if(boardService.insertBoard(boardVo)) {			
 			System.out.println("게시판 추가 성공!");
 			return;
-		};
+		}
 		System.out.println("게시판 추가 실패!");
 	}
 	
@@ -84,9 +106,8 @@ public class BoardController {
 		if(boardService.updateBoard(uBoardVo)) {			
 			System.out.println("게시판 수정 성공!");
 			return;
-		};
+		}
 		System.out.println("게시판 수정 실패!");
-		
 	}
 	
 	//게시판 삭제
@@ -98,7 +119,7 @@ public class BoardController {
 		if(boardService.deleteBoard(dBoardVo)) {			
 			System.out.println("게시판 삭제 성공!");
 			return;
-		};
+		}
 		System.out.println("게시판 삭제 실패!");
 	}
 
@@ -121,6 +142,7 @@ public class BoardController {
 		case 2:
 			updateBoardCategory();	//게시글 말머리 수정
 			break;
+
 		case 3:
 			deleteBoardCategory();	//게시글 말머리 삭제
 			break;
@@ -130,7 +152,6 @@ public class BoardController {
 		default:
 			System.out.println("잘못된 메뉴 선택");
 		}
-		
 	}
 
 	//카테고리 추가
@@ -181,7 +202,6 @@ public class BoardController {
 			menu = scan.nextInt();
 			runManagePostCategory(menu);
 		}while(menu != 4);
-		
 	}
 
 	//말머리 관리 실행

@@ -3,9 +3,7 @@ package project1.board.service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-
 import java.util.List;
-
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -13,8 +11,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import project1.board.dao.PostDAO;
-
-
 import project1.board.model.vo.BoardVO;
 import project1.board.model.vo.MemberVO;
 import project1.board.model.vo.PostVO;
@@ -76,8 +72,11 @@ public class PostServiceImp implements PostService {
 				|| tmpPost == null) {
 			return false;			
 		}
-		postDAO.insertReply(content, tmpMember, tmpPost);
-		return true;
+		boolean res = postDAO.insertReply(content, tmpMember, tmpPost);
+		if(res) {
+			session.commit();
+		}
+		return res;
 	}
 
 	@Override

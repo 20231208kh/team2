@@ -11,11 +11,14 @@ import project1.board.model.vo.BoardVO;
 import project1.board.model.vo.MemberVO;
 import project1.board.model.vo.PostVO;
 import project1.board.model.vo.ReplyVO;
+
+import java.sql.Date;
+import java.util.List;
+
 import project1.board.service.PostService;
 import project1.board.service.PostServiceImp;
 import project1.board.service.PrintService;
 import project1.board.service.PrintServiceImp;
-
 
 //게시글 작성을 하는 컨트롤러
 //ADMIN과 USER 모두 사용 가능한 컨트롤러
@@ -71,18 +74,16 @@ public class PostController {
 				System.out.println("작성한 게시글이 없습니다.");
 				return;
 			}
-			for(int i = 0 ; i < postList.size() ; i++) {	//postList에는 10개가 있을거 같음
-				System.out.println((i+1)+". "+ postList.get(i));	//1번 postList 0번지 객체 ~ 10번 postList 9번지 객체
-			}
-			System.out.println("현재 페이지 : " + page);  // 77~ 86번줄 의미를 모르겠음
+			printService.printPostList(postList);
+			System.out.println("현재 페이지 : " + page);
 			if(postList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
+				System.out.println("뒤로가기(-2)");
 			}else if(postList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1)");
 			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 다음페이지(0)");
 			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
 			}
 			System.out.print("입력 : ");
 			num = scan.nextInt();	//가져올 
@@ -107,9 +108,9 @@ public class PostController {
 		}
 	}
 
-	//게시글 수정 삭제메뉴
-	private void manageMyPost(PostVO tmpPost,int num) {	//
-		postDetail(tmpPost);		//상세 조회
+  
+	private void manageMyPost(PostVO tmpPost) {
+		printService.myPostDetail(tmpPost);
 		System.out.println("[뒤로가기(1) 수정(2) 삭제(3)] : ");
 		System.out.print("입력 : ");
 		int menu = scan.nextInt();
@@ -216,18 +217,16 @@ public class PostController {
 				System.out.println("작성한 댓글이 없습니다.");
 				return;
 			}
-			for(int i = 0 ; i < myReplyList.size() ; i++) {	
-				System.out.println((i+1)+". "+ myReplyList.get(i)); 
-			}
+			printService.printReply(myReplyList);
 			System.out.println("현재 페이지 : " + page);
 			if(myReplyList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
+				System.out.println("뒤로가기(-2)");
 			}else if(myReplyList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1)");
 			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 다음페이지(0)");
 			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
 			}
 			System.out.print("입력 : ");
 			num = scan.nextInt();	//댓글 번호 입력
@@ -381,6 +380,52 @@ public class PostController {
 		}
 	}
 	
+
+	//사용자
+	private void allPost(MemberVO tmpMember) {
+		ArrayList<PostVO> postList = new ArrayList<PostVO>();
+		int page = 1;
+		int num = -3;
+		while(true) {
+			postList = postService.getAllPost(page);
+			if((postList == null || postList.size() == 0) && page == 1) {
+				System.out.println("작성된 게시글이 없습니다.");
+				return;
+			}
+			printService.printPostList(postList);
+			System.out.println("현재 페이지 : " + page);
+			if(postList.size() < 10 && page == 1) {
+				System.out.println("뒤로가기(-2)");
+			}else if(postList.size() < 10) {
+				System.out.println("뒤로가기(-2) 이전페이지(-1)");
+			}else if(page == 1) {
+				System.out.println("뒤로가기(-2) 다음페이지(0)");
+			}else {
+				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
+			}
+			System.out.print("입력 : ");
+			num = scan.nextInt();				
+			
+			if(num > 0 && num < 11) {
+				PostVO tmpPost = postList.get(num-1);
+				viewPost(tmpPost , tmpMember);
+				return;
+			}
+			else {
+				switch(num) {
+				case 0: page++; break;
+				case -1: page--; break;
+				case -2: return;
+				default:
+					throw new InputMismatchException();
+				}
+			}
+			if(page<1) {
+				page = 1;
+			}
+		}
+	}
+
 	
 	
 	//관리자, 전체 게시글 
@@ -394,18 +439,16 @@ public class PostController {
 				System.out.println("작성된 게시글이 없습니다.");
 				return;
 			}
-			for(int i = 0 ; i < postList.size() ; i++) {
-				System.out.println((i+1)+". "+ postList.get(i));
-			}
+			printService.printPostList(postList);
 			System.out.println("현재 페이지 : " + page);
 			if(postList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
+				System.out.println("뒤로가기(-2)");
 			}else if(postList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1)");
 			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 다음페이지(0)");
 			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
 			}
 			System.out.print("입력 : ");
 			num = scan.nextInt();				
@@ -435,9 +478,7 @@ public class PostController {
 	private void allBoard(MemberVO tmpMember) {
 		int num = 0;
 		ArrayList<BoardVO> boardList = printService.getBoard();
-		for(int i = 0 ; i < boardList.size() ; i++) {
-			System.out.println((i+1)+". "+ boardList.get(i));
-		}
+		printService.printBoardList(boardList);
 		System.out.print("게시판 입력 : ");
 		num = scan.nextInt();
 		if(num <= 0 || num > boardList.size()) {
@@ -447,7 +488,24 @@ public class PostController {
 		BoardVO tmpBoard = boardList.get(num-1);
 		selectedBoardMenu(tmpBoard,tmpMember);		//게시판 하나를 특정해서 가져온 것
 	}
+
+	//관리자
+	private void allBoardAdmin(MemberVO tmpMember) {
+		int num = 0;
+		ArrayList<BoardVO> boardList = printService.getBoard();
+		printService.printBoardList(boardList);
+		System.out.print("게시판 입력 : ");
+		num = scan.nextInt();
+		if(num <= 0 || num > boardList.size()) {
+			System.out.println("게시판을 잘못 선택했습니다. ");
+			return;
+		}
+		BoardVO tmpBoard = boardList.get(num-1);
+		selectedBoardAdminMenu(tmpBoard,tmpMember);
+	}
 	
+	
+
 	// 사용자
 	private void selectedBoardMenu(BoardVO tmpBoard, MemberVO tmpMember) {	// 게시판을 선택한 것과,회원의 정보를 들고 있음
 		ArrayList<PostVO> postList = new ArrayList<PostVO>();	//게시글 리스트 선언
@@ -460,20 +518,18 @@ public class PostController {
 				System.out.println("해당 게시판에 등록된 게시글이 없습니다.");
 			}
 			else {
-				for(int i = 0 ; i < postList.size() ; i++) {	//게시글 크기만큼 게시글을 출력
-					System.out.println((i+1)+". "+ postList.get(i));
-				}
+				printService.printPostList(postList);
 				System.out.println("현재 페이지 : " + page);
 			}
 			System.out.println("해당 게시판에 게시글 작성(-3)");
-			if(postList.size() < 10 && page == 1) {	//페이지 크기
-				System.out.println("상위메뉴(-2)");
+			if(postList.size() < 10 && page == 1) {
+				System.out.println("뒤로가기(-2)");
 			}else if(postList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1)");
 			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 다음페이지(0)");
 			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
 			}
 			System.out.print("입력 : ");
 			num = scan.nextInt();				
@@ -672,20 +728,18 @@ public class PostController {
 				System.out.println("해당 게시판에 등록된 게시글이 없습니다.");
 			}
 			else {
-				for(int i = 0 ; i < postList.size() ; i++) {
-					System.out.println((i+1)+". "+ postList.get(i));
-				}
+				printService.printPostList(postList);
 				System.out.println("현재 페이지 : " + page);
 			}
 			System.out.println("해당 게시판에 게시글 작성(-3)");
 			if(postList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
+				System.out.println("뒤로가기(-2)");
 			}else if(postList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1)");
 			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 다음페이지(0)");
 			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
 			}
 			System.out.print("입력 : ");
 			num = scan.nextInt();				
@@ -756,38 +810,12 @@ public class PostController {
 		}
 	}
 	
-	//관리자
-	public void searchAdminMenu(MemberVO tmpMember) {
-		int menu = 0;
-		System.out.println("1. 제목 검색");
-		System.out.println("2. 작성자 검색");
-		System.out.println("3. 일자 검색");
-		System.out.print("입력 : ");
-		try {
-			menu = scan.nextInt();
-			runSearchAdminMenu(menu, tmpMember);
-		}
-		catch (InputMismatchException e) {
-			System.out.println("잘못된 입력입니다");
-		}
-	}
-	
 	//사용자
 	private void runSearchMenu(int menu, MemberVO tmpMember) {
 		switch(menu) {
 		case 1: searchTitle(tmpMember); break;
 		case 2: searchWriter(tmpMember); break;
 		case 3: searchDate(tmpMember); break;
-		default:
-			throw new InputMismatchException();
-		}
-	}
-	
-	private void runSearchAdminMenu(int menu, MemberVO tmpMember) {
-		switch(menu) {
-		case 1: searchTitleAdmin(tmpMember); break;
-		case 2: searchWriterAdmin(tmpMember); break;
-		case 3: searchDateAdmin(tmpMember); break;
 		default:
 			throw new InputMismatchException();
 		}
@@ -807,74 +835,27 @@ public class PostController {
 				System.out.println("제목에 검색어가 포함된 게시글이 없습니다.");
 				return;
 			}
-			for(int i = 0 ; i < postList.size() ; i++) {
-				System.out.println((i+1)+". "+ postList.get(i));
-			}
+			printService.printPostList(postList);
 			System.out.println("현재 페이지 : " + page);
 			if(postList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
+				System.out.println("뒤로가기(-2)");
 			}else if(postList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1)");
 			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 다음페이지(0)");
 			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
 			}
 			System.out.print("입력 : ");
 			num = scan.nextInt();				
 			
 			if(num > 0 && num < 11) {
 				PostVO tmpPost = postList.get(num-1);
-				viewPost(tmpPost , tmpMember);
-				return;
-			}
-			else {
-				switch(num) {
-				case 0: page++; break;
-				case -1: page--; break;
-				case -2: return;
-				default:
-					throw new InputMismatchException();
+				if(tmpMember.getMb_right().equals("ADMIN")) {
+					viewPostAdmin(tmpPost , tmpMember);
+					return;
 				}
-			}
-			if(page<1) {
-				page = 1;
-			}
-		}
-	}
-
-	private void searchTitleAdmin(MemberVO tmpMember) {
-		ArrayList<PostVO> postList = new ArrayList<PostVO>();
-		int page = 1;
-		int num = -3;
-		System.out.println("--제목 검색--");
-		System.out.print("검색어(단어) : ");
-		String keyword = scan.next();
-		while(true) {
-			postList = postService.getPostByTitle(keyword,page);
-			if((postList == null || postList.size() == 0) && page == 1) {
-				System.out.println("제목에 검색어가 포함된 게시글이 없습니다.");
-				return;
-			}
-			for(int i = 0 ; i < postList.size() ; i++) {
-				System.out.println((i+1)+". "+ postList.get(i));
-			}
-			System.out.println("현재 페이지 : " + page);
-			if(postList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
-			}else if(postList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
-			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
-			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
-			}
-			System.out.print("입력 : ");
-			num = scan.nextInt();				
-			
-			if(num > 0 && num < 11) {
-				PostVO tmpPost = postList.get(num-1);
-				viewPostAdmin(tmpPost , tmpMember);
+				viewPost(tmpPost , tmpMember);					
 				return;
 			}
 			else {
@@ -893,7 +874,6 @@ public class PostController {
 	}
 
 	
-
 	private void searchWriter(MemberVO tmpMember) {
 		ArrayList<PostVO> postList = new ArrayList<PostVO>();
 		int page = 1;
@@ -907,25 +887,27 @@ public class PostController {
 				System.out.println("검색어가 포함된 작성자가 게시한 게시글이 없습니다.");
 				return;
 			}
-			for(int i = 0 ; i < postList.size() ; i++) {
-				System.out.println((i+1)+". "+ postList.get(i));
-			}
+			printService.printPostList(postList);
 			System.out.println("현재 페이지 : " + page);
 			if(postList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
+				System.out.println("뒤로가기(-2)");
 			}else if(postList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1)");
 			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 다음페이지(0)");
 			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
 			}
 			System.out.print("입력 : ");
 			num = scan.nextInt();				
 			
 			if(num > 0 && num < 11) {
 				PostVO tmpPost = postList.get(num-1);
-				viewPost(tmpPost , tmpMember);
+				if(tmpMember.getMb_right().equals("ADMIN")) {
+					viewPostAdmin(tmpPost , tmpMember);
+					return;
+				}
+				viewPost(tmpPost , tmpMember);					
 				return;
 			}
 			else {
@@ -943,54 +925,6 @@ public class PostController {
 		}
 	}
 
-	private void searchWriterAdmin(MemberVO tmpMember) {
-		ArrayList<PostVO> postList = new ArrayList<PostVO>();
-		int page = 1;
-		int num = -3;
-		System.out.println("--작성자 검색--");
-		System.out.print("검색어 : ");
-		String keyword = scan.next();
-		while(true) {
-			postList = postService.getPostByWriter(keyword,page);
-			if((postList == null || postList.size() == 0) && page == 1) {
-				System.out.println("검색어가 포함된 작성자가 게시한 게시글이 없습니다.");
-				return;
-			}
-			for(int i = 0 ; i < postList.size() ; i++) {
-				System.out.println((i+1)+". "+ postList.get(i));
-			}
-			System.out.println("현재 페이지 : " + page);
-			if(postList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
-			}else if(postList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
-			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
-			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
-			}
-			System.out.print("입력 : ");
-			num = scan.nextInt();				
-			
-			if(num > 0 && num < 11) {
-				PostVO tmpPost = postList.get(num-1);
-				viewPostAdmin(tmpPost , tmpMember);
-				return;
-			}
-			else {
-				switch(num) {
-				case 0: page++; break;
-				case -1: page--; break;
-				case -2: return;
-				default:
-					throw new InputMismatchException();
-				}
-			}
-			if(page<1) {
-				page = 1;
-			}
-		}
-	}
 	
 	private void searchDate(MemberVO tmpMember) {
 		ArrayList<PostVO> postList = new ArrayList<PostVO>();
@@ -1009,25 +943,27 @@ public class PostController {
 				System.out.println("검색어가 포함된 작성자가 게시한 게시글이 없습니다.");
 				return;
 			}
-			for(int i = 0 ; i < postList.size() ; i++) {
-				System.out.println((i+1)+". "+ postList.get(i));
-			}
+			printService.printPostList(postList);
 			System.out.println("현재 페이지 : " + page);
 			if(postList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
+				System.out.println("뒤로가기(-2)");
 			}else if(postList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1)");
 			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 다음페이지(0)");
 			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
+				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
 			}
 			System.out.print("입력 : ");
 			num = scan.nextInt();				
 			
 			if(num > 0 && num < 11) {
 				PostVO tmpPost = postList.get(num-1);
-				viewPost(tmpPost , tmpMember);
+				if(tmpMember.getMb_right().equals("ADMIN")) {
+					viewPostAdmin(tmpPost , tmpMember);
+					return;
+				}
+				viewPost(tmpPost , tmpMember);					
 				return;
 			}
 			else {
@@ -1045,79 +981,11 @@ public class PostController {
 		}
 	}
 
-	private void searchDateAdmin(MemberVO tmpMember) {
-		ArrayList<PostVO> postList = new ArrayList<PostVO>();
-		int page = 1;
-		int num = -3;
-		System.out.println("--일자 검색--");
-		System.out.print("작성 연도 : ");
-		String year = scan.next();
-		System.out.print("월 : ");
-		String month = scan.next();
-		System.out.print("일 : ");
-		String day = scan.next();
-		while(true) {
-			postList = postService.getPostByDate(year, month, day, page);
-			if((postList == null || postList.size() == 0) && page == 1) {
-				System.out.println("검색어가 포함된 작성자가 게시한 게시글이 없습니다.");
-				return;
-			}
-			for(int i = 0 ; i < postList.size() ; i++) {
-				System.out.println((i+1)+". "+ postList.get(i));
-			}
-			System.out.println("현재 페이지 : " + page);
-			if(postList.size() < 10 && page == 1) {
-				System.out.println("상위메뉴(-2)");
-			}else if(postList.size() < 10) {
-				System.out.println("상위메뉴(-2) 이전페이지(-1)");
-			}else if(page == 1) {
-				System.out.println("상위메뉴(-2) 다음페이지(0)");
-			}else {
-				System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
-			}
-			System.out.print("입력 : ");
-			num = scan.nextInt();				
-			
-			if(num > 0 && num < 11) {
-				PostVO tmpPost = postList.get(num-1);
-				viewPostAdmin(tmpPost , tmpMember);
-				return;
-			}
-			else {
-				switch(num) {
-				case 0: page++; break;
-				case -1: page--; break;
-				case -2: return;
-				default:
-					throw new InputMismatchException();
-				}
-			}
-			if(page<1) {
-				page = 1;
-			}
-		}
-	}
-	
-	// 게시글 상세조회
-	private void postDetail(PostVO tmpPost) {
-		// 조회수 증가 후 동일한 게시글 재호출
-		PostVO post = postService.increaseVeiwCount(tmpPost);
-		if(post == null) {
-			System.out.println("상세조회 실패");
-			return;
-		}
-		System.out.println("["+post.getPo_pc_title()+"]"+post.getPo_title());
-		System.out.println(post.getPo_mb_id() + "  " + post.getPo_date() + " 조회수 : " 
-							+ post.getPo_viewCount());
-		System.out.println(post.getPo_content());		// [말머리] 제목
-														// 아이디 날짜 조회수 : 조회한수
-														// 내용
-	}
 	
 	//사용자
 	private void viewPost(PostVO tmpPost, MemberVO tmpMember) {
 		int menu = 0;
-		postDetail(tmpPost);
+		printService.postDetail(tmpPost);
 		System.out.print("입력[뒤로가기(1) 댓글(2)] : ");
 		menu = scan.nextInt();
 		switch(menu) {
@@ -1131,7 +999,7 @@ public class PostController {
 	//관리자
 	private void viewPostAdmin(PostVO tmpPost, MemberVO tmpMember) {
 		int menu = 0;
-		postDetail(tmpPost);
+		printService.postDetail(tmpPost);
 		System.out.print("입력[뒤로가기(1) 댓글(2) 게시글 삭제(3)] : ");
 		menu = scan.nextInt();
 		switch(menu) {
@@ -1180,10 +1048,11 @@ public class PostController {
 			else {
 				btn = " 이전페이지(2)  다음페이지(3)";
 			}
-			
+			System.out.println("==============================");
 			for(ReplyVO tmp : replyList) {
 				System.out.println(tmp);
 			}
+			System.out.println("==============================");
 			System.out.println("현재 페이지 : " + page);
 			System.out.println("[뒤로가기(0) 댓글작성(1)"+ btn +"]");
 			System.out.print("입력 : ");
@@ -1224,10 +1093,10 @@ public class PostController {
 			else {
 				btn = " 이전페이지(-1)  다음페이지(0)";
 			}
+			System.out.println("==============================");
 			
-			for(int i = 0 ; i < replyList.size(); i++) {
-				System.out.println((i+1)+". "+ replyList.get(i));
-			}
+			printService.printReply(replyList);
+			System.out.println("==============================");
 			System.out.println("현재 페이지 : " + page);
 			System.out.println("[뒤로가기(-3) 댓글작성(-2)"+ btn +"]");
 			System.out.print("입력(삭제할 댓글 혹은 메뉴) : ");
@@ -1269,6 +1138,7 @@ public class PostController {
 	private void writeReply(PostVO tmpPost, MemberVO tmpMember) {
 		System.out.println("댓글 작성");
 		System.out.print("내용 : ");
+		scan.nextLine();
 		String content = scan.nextLine();
 		if(content == null || content.length() ==0) {
 			System.out.println("내용이 있어야 댓글에 등록됩니다.");
@@ -1279,10 +1149,6 @@ public class PostController {
 		}
 		System.out.println("댓글 등록에 실패했습니다.");
 	}
-
-
-	
-
 
 
 }

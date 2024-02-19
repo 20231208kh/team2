@@ -27,17 +27,21 @@ public class PostVO {
 		int limit = 20;
 		
 		sb.setLength(limit);
-		sb.append("...");
-		
+		if(sb.length()>20) {
+			sb.append("...");			
+		}
+		else {
+			sb.append("   ");
+		}
 		if(po_pc_title == null) {
 			return sb  + " [작성자: " + po_mb_id + "][" +  po_date  +"] 조회수(" + po_viewCount+ ")" ;
 		}
-		return "["+po_pc_title+"]"+ sb  + " [작성자: " + po_mb_id + "][" +  po_date  +"] 조회수(" + po_viewCount+ ")" ;
+		return "["+po_pc_title+"] "+ sb  + " [작성자: " + po_mb_id + "][" +  po_date  +"] 조회수(" + po_viewCount+ ")" ;
 
 	}
 	
 	
-
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;

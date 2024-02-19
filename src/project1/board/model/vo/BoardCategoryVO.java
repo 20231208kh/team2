@@ -47,4 +47,6 @@ public class BoardCategoryVO {
 		return Objects.hash(bc_title);
 	}
 
+
 }
+

@@ -43,7 +43,7 @@ import project1.board.service.PrintServiceImp;
 
 
 public class Main {
-	private static BoardController boardController = new BoardController();
+	private static BoardController boardController = new BoardController();;
 	private static MemberController memberController = new MemberController();
 	private static PostController postController = new PostController();
 	private static PrintService printService = new PrintServiceImp();
@@ -147,7 +147,6 @@ public class Main {
 	}
 
 
-
 	private static void runAdminMenu() {
 		int menu =0;
 		do {
@@ -179,11 +178,12 @@ public class Main {
 			break;
 		case 5: 
 			// 검색 메뉴
-			postController.searchAdminMenu(memberVo);
+			postController.searchMenu(memberVo);
 			break;
 		case 6: break;
 		default:
 			throw new InputMismatchException();
+
 		}
 		
 	}

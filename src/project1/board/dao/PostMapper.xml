@@ -32,7 +32,7 @@
 		po_num desc 
 	limit #{page},10
   </select>
-  <select id="getMyReply" resultType="project1.board.model.vo.PostVO">
+  <select id="getMyReply" resultType="project1.board.model.vo.ReplyVO">
   	select * from reply where re_mb_id = #{member.mb_id} order by re_num desc limit #{page},10
   </select>
   <select id="getAllPost" resultType="project1.board.model.vo.PostVO">
@@ -49,7 +49,7 @@
   <insert id="insertReply">
   	insert into reply(re_content, re_date, re_mb_id, re_po_num)	values(#{content}, now(), #{member.mb_id}, #{post.po_num})
   </insert>
-  <select id="getPostReply" resultType="project1.board.model.vo.PostVO">
+  <select id="getPostReply" resultType="project1.board.model.vo.ReplyVO">
   	select * from reply where re_po_num = #{post.po_num} limit #{page},10
   </select>
   <select id="getPostByTitle" resultType="project1.board.model.vo.PostVO">
@@ -111,8 +111,8 @@
   </update>
   
   <insert id="writePost">
-	insert into post(po_title,po_content,po_date,po_mb_id,po_bo_num,po_pc_num,po_notice)
-  	value(#{postVo.po_title},#{postVo.po_content},now(),#{postVo.po_mb_id},#{postVo.po_bo_num},#{postVo.po_pc_num} ,#{postVo.po_notice))
+	  insert into post(po_title,po_content,po_date,po_mb_id,po_bo_num,po_pc_num,po_notice)
+  	values(#{postVo.po_title},#{postVo.po_content},now(),#{postVo.po_mb_id},#{postVo.po_bo_num},#{postVo.po_pc_num} ,#{postVo.po_notice})
   </insert>
   
   <select id="selectPostList" resultType="project1.board.model.vo.PostVO">

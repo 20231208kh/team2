@@ -49,5 +49,5 @@ public class BoardVO {
 		BoardVO other = (BoardVO) obj;
 		return Objects.equals(bo_title, other.bo_title);
 	}
-
 }
+

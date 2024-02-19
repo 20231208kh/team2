@@ -26,13 +26,6 @@ public interface BoardService {
 	void printBoardCategory();
 	void printBoard();
 	void printPostCategory();
-	
-	void printAdminPostCategory();	//공지사항 게시글 카테고리s
 
-
-	
-
-
-
-	
 }
+
