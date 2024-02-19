@@ -24,22 +24,6 @@ public class PrintServiceImp implements PrintService {
 	}
 
 
-	@Override
-	public void printBoard() {
-		boardService.printBoard();
-	}
-
-	@Override
-	public void printBoardCategory() {
-		boardService.printBoardCategory();
-	}
-
-	@Override
-	public void printPostCategory() {
-		boardService.printPostCategory();
-	}
-	
-
 
 	@Override
 	public void mainMenu() {
@@ -230,11 +214,13 @@ public class PrintServiceImp implements PrintService {
 
 	@Override
 	public void printReply(ArrayList<ReplyVO> replyList) {
+		System.out.println("==============================");
 		for(int i = 0 ; i < replyList.size(); i++) {
 			System.out.println((i+1)+". "+ replyList.get(i));
 		}
+		System.out.println("==============================");
 	}
-}
+
 
 	@Override
 	public void adminChoosePostMenu() {	
@@ -249,3 +235,7 @@ public class PrintServiceImp implements PrintService {
 
 
 
+	
+
+
+}

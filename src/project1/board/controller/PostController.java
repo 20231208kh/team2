@@ -4,7 +4,6 @@ package project1.board.controller;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 import project1.board.model.vo.BoardVO;
@@ -13,7 +12,6 @@ import project1.board.model.vo.PostVO;
 import project1.board.model.vo.ReplyVO;
 
 import java.sql.Date;
-import java.util.List;
 
 import project1.board.service.PostService;
 import project1.board.service.PostServiceImp;
@@ -90,7 +88,7 @@ public class PostController {
 			
 			if(num > 0 && num < 11) {
 				PostVO tmpPost = postList.get(num-1); //인덱스 번호0~9표현
-				manageMyPost(tmpPost,num);	//내가 입력한 번호-1인덱스 번호를 넣은 PostVo 객체를 넘겨줌
+				manageMyPost(tmpPost);	//내가 입력한 번호-1인덱스 번호를 넣은 PostVo 객체를 넘겨줌
 				return;
 			}
 			else {
@@ -122,7 +120,7 @@ public class PostController {
 			updatePostMenu(tmpPost);	//게시글 수정 메뉴
 			break;
 		case 3: 
-			deletePost(tmpPost,num);	//게시글 삭제
+			deletePost(tmpPost);	//게시글 삭제
 			break;
 		default:
 			throw new InputMismatchException();
@@ -130,79 +128,65 @@ public class PostController {
 	}
 	
 //게시글 수정 삭제 구현 시작
-		private void updatePostMenu(PostVO tmpPost) {	//게시글 수정 메뉴
-			int menu;
-		
-			do{
-				printService.manageMyPostUpdateMenu();
-				menu = scan.nextInt();
-				runmanageMyPostUpdateMenu(menu,tmpPost);
-				
-			}while(menu !=3);
-			
-		}
-
-		private void runmanageMyPostUpdateMenu(int menu,PostVO tmpPost) {
-			switch(menu) {
-			case 1:
-				updatePostPoTitle(tmpPost);	//게시글 제목 수정
-				break;
-			case 2:
-				updatePostPoContent(tmpPost); //게시글 내용 수정
-				break;
-			case 3:
-				System.out.println("이전으로 돌아갑니다.");
-				break;
-			default:
-				throw new InputMismatchException();
-			}
-		}
-		
-		//게시글 제목 수정
-		private void updatePostPoTitle(PostVO tmpPost) {
+	private void updatePostMenu(PostVO tmpPost) {	//게시글 수정 메뉴
+		int menu;
 	
-			postDetail(tmpPost);
-			tmpPost.getPo_title(); //현재 제목.
-			System.out.println("수정할 제목을 입력하세요.");
-			String po_title=scan.next();
-			tmpPost.setPo_title(po_title);
+		do{
+			printService.manageMyPostUpdateMenu();
+			menu = scan.nextInt();
+			runmanageMyPostUpdateMenu(menu,tmpPost);
 			
-			if(!postService.setPost(tmpPost)){ 	
-				System.out.println("잘못 입력됐습니다.");
-				return;
-			}
-			
-			
+		}while(menu !=3);
+		
+	}
+
+	private void runmanageMyPostUpdateMenu(int menu,PostVO tmpPost) {
+		switch(menu) {
+		case 1:
+			updatePostPoTitle(tmpPost);	//게시글 제목 수정
+			break;
+		case 2:
+			updatePostPoContent(tmpPost); //게시글 내용 수정
+			break;
+		case 3:
+			System.out.println("이전으로 돌아갑니다.");
+			break;
+		default:
+			throw new InputMismatchException();
+		}
+	}
+
+	//게시글 제목 수정
+	private void updatePostPoTitle(PostVO tmpPost) {
+
+		printService.postDetail(tmpPost);
+		tmpPost.getPo_title(); //현재 제목.
+		System.out.println("수정할 제목을 입력하세요.");
+		String po_title=scan.next();
+		tmpPost.setPo_title(po_title);
+		
+		if(!postService.setPost(tmpPost)){ 	
+			System.out.println("잘못 입력됐습니다.");
+			return;
 		}
 		
-		//게시글 내용 수정
-		private void updatePostPoContent(PostVO tmpPost) {
-			postDetail(tmpPost);
-			tmpPost.getPo_content();
-			System.out.println("수정할 내용을 입력하세요.");
-			String po_content=scan.nextLine();
-			tmpPost.setPo_content(po_content);
-			
-			if(!postService.setPost(tmpPost)){	
-				System.out.println("잘못 입력됐습니다.");
-				return;
-			}
-			
+		
+	}
+
+	//게시글 내용 수정
+	private void updatePostPoContent(PostVO tmpPost) {
+		printService.postDetail(tmpPost);
+		tmpPost.getPo_content();
+		System.out.println("수정할 내용을 입력하세요.");
+		String po_content=scan.nextLine();
+		tmpPost.setPo_content(po_content);
+		
+		if(!postService.setPost(tmpPost)){	
+			System.out.println("잘못 입력됐습니다.");
+			return;
 		}
-		 //게시글 삭제
-		private void deletePost(PostVO tmpPost,int num) {
-			postDetail(tmpPost);
-			System.out.println("이 게시글을 정말 삭제하시겠습니까? (삭제:1,삭제취소:0 을 누르세요)");
-			int menuselect=scan.nextInt();
-			if(postService.deletePost(num) && menuselect==1) {
-				System.out.println("게시글 삭제에 성공했습니다.");
-			}else {
-				System.out.println("게시글 삭제에 실패했습니다.");
-			}
-			
-			//예외처리1 기본키-게시글 번호가 일치하지 않는지 확인->일단 후순위
-		}
-//게시글 수정 삭제 끝
+		
+	}
 	
 	
 	//나의 댓글
@@ -304,52 +288,6 @@ public class PostController {
 		}
 	}
 	
-	//사용자,모든 게시글 구현
-		private void allPost(MemberVO tmpMember) {
-			ArrayList<PostVO> postList = new ArrayList<PostVO>();
-			int page = 1;
-			int num = -3;
-			while(true) {
-				postList = postService.getAllPost(page);  
-				if((postList == null || postList.size() == 0) && page == 1) {
-					System.out.println("작성된 게시글이 없습니다.");
-					return;
-				}
-				for(int i = 0 ; i < postList.size() ; i++) {
-					System.out.println((i+1)+". "+ postList.get(i));
-				}
-				System.out.println("현재 페이지 : " + page);
-				if(postList.size() < 10 && page == 1) {
-					System.out.println("상위메뉴(-2)");
-				}else if(postList.size() < 10) {
-					System.out.println("상위메뉴(-2) 이전페이지(-1)");
-				}else if(page == 1) {
-					System.out.println("상위메뉴(-2) 다음페이지(0)");
-				}else {
-					System.out.println("상위메뉴(-2) 이전페이지(-1) 다음페이지(0)");
-				}
-				System.out.print("입력 : ");
-				num = scan.nextInt();				
-				
-				if(num > 0 && num < 11) {
-					PostVO tmpPost = postList.get(num-1);
-					viewPost(tmpPost , tmpMember);
-					return;
-				}
-				else {
-					switch(num) {
-					case 0: page++; break;
-					case -1: page--; break;
-					case -2: return;
-					default:
-						throw new InputMismatchException();
-					}
-				}
-				if(page<1) {
-					page = 1;
-				}
-			}
-		}
 	
 	//관리자
 	public void boardAdminMenu(MemberVO tmpMember) {
@@ -558,22 +496,6 @@ public class PostController {
 		}
 	}
 	
-	//관리자
-	private void allBoardAdmin(MemberVO tmpMember) {
-		int num = 0;
-		ArrayList<BoardVO> boardList = printService.getBoard();
-		for(int i = 0 ; i < boardList.size() ; i++) {
-			System.out.println((i+1)+". "+ boardList.get(i));
-		}
-		System.out.print("게시판 입력 : ");
-		num = scan.nextInt();
-		if(num <= 0 || num > boardList.size()) {
-			System.out.println("게시판을 잘못 선택했습니다. ");
-			return;
-		}
-		BoardVO tmpBoard = boardList.get(num-1);	//게시판 1개를 선택했음
-		selectedBoardAdminMenu(tmpBoard,tmpMember);
-	}
 	
 
 	//게시글 작성
@@ -624,63 +546,63 @@ public class PostController {
 		}
 }
 	//관리자가 게시글을 작성
-		public void writePostInMain(MemberVO memberVo) {
-			//게시판 선택
-			//공지 게시판은 1번으로 설정
-			//나머지 게시판은 2~ 끝 게시판
-			
-			int po_notice=0;
-			
-			System.out.println("게시판을 선택해주세요.");
-			System.out.println(printService.getBoard());
-			int po_bo_num=scan.nextInt();
-			
-			
-			while(po_bo_num == 1) {
-				System.out.println("공지사항 게시판 선택함");
-				System.out.println("공지사항 작성할거임?");
-				System.out.println("1. O");
-				System.out.println("2. X(일반게시글 작성");
-				int menu = scan.nextInt();
-				if (menu ==1) {
-					writeAnnouncementInMain(memberVo);
-					return;
-				}else if(menu==2) {
-					System.out.println("새로운 게시판 번호");
-					po_bo_num = scan.nextInt();
-				}else {
-					System.out.println("잘못된 입력");
-					break;
-				}
-			}
-			printService.printPostCategory();
-			System.out.print("게시글 말머리 번호를 입력하세요.");
-			int po_pc_num=scan.nextInt();
-			
-			scan.nextLine();
-			
-			
-			
-			System.out.print("게시글 제목을 입력하세요.");
-			String po_title=scan.nextLine();
-			
-			System.out.print("게시글 내용을 입력하세요.");
-			String po_content=scan.nextLine();
-			
-			
-			PostVO postVo = new PostVO(po_title,po_content, po_notice,memberVo.getMb_id(),po_bo_num,po_pc_num);
-			
-			if(postService.writePostMain(postVo)) {	
-				System.out.println("게시글 추가 성공!");
+	public void writePostInMain(MemberVO memberVo) {
+		//게시판 선택
+		//공지 게시판은 1번으로 설정
+		//나머지 게시판은 2~ 끝 게시판
+		
+		int po_notice=0;
+		
+		System.out.println("게시판을 선택해주세요.");
+		System.out.println(printService.getBoard());
+		int po_bo_num=scan.nextInt();
+		
+		
+		while(po_bo_num == 1) {
+			System.out.println("공지사항 게시판 선택함");
+			System.out.println("공지사항 작성할거임?");
+			System.out.println("1. O");
+			System.out.println("2. X(일반게시글 작성");
+			int menu = scan.nextInt();
+			if (menu ==1) {
+				writeAnnouncementInMain(memberVo);
 				return;
+			}else if(menu==2) {
+				System.out.println("새로운 게시판 번호");
+				po_bo_num = scan.nextInt();
+			}else {
+				System.out.println("잘못된 입력");
+				break;
 			}
-				System.out.println("게시글 추가 실패!");
-			
-			
-			
-			//아래 똑같음
-			
 		}
+		printService.printPostCategory();
+		System.out.print("게시글 말머리 번호를 입력하세요.");
+		int po_pc_num=scan.nextInt();
+		
+		scan.nextLine();
+		
+		
+		
+		System.out.print("게시글 제목을 입력하세요.");
+		String po_title=scan.nextLine();
+		
+		System.out.print("게시글 내용을 입력하세요.");
+		String po_content=scan.nextLine();
+		
+		
+		PostVO postVo = new PostVO(po_title,po_content, po_notice,memberVo.getMb_id(),po_bo_num,po_pc_num);
+		
+		if(postService.writePostMain(postVo)) {	
+			System.out.println("게시글 추가 성공!");
+			return;
+		}
+			System.out.println("게시글 추가 실패!");
+		
+		
+		
+		//아래 똑같음
+		
+	}
 	
 	
 	
@@ -1013,7 +935,7 @@ public class PostController {
 	
 	
 	private void deletePost(PostVO tmpPost) {
-		postDetail(tmpPost);
+		printService.postDetail(tmpPost);
 		System.out.println("이 게시글을 정말 삭제하시겠습니까? (삭제:1,삭제취소:0 을 누르세요)");
 		int menuselect=scan.nextInt();
 		if(postService.deletePost(tmpPost.getPo_num()) && menuselect==1) {
@@ -1093,10 +1015,7 @@ public class PostController {
 			else {
 				btn = " 이전페이지(-1)  다음페이지(0)";
 			}
-			System.out.println("==============================");
-			
 			printService.printReply(replyList);
-			System.out.println("==============================");
 			System.out.println("현재 페이지 : " + page);
 			System.out.println("[뒤로가기(-3) 댓글작성(-2)"+ btn +"]");
 			System.out.print("입력(삭제할 댓글 혹은 메뉴) : ");
