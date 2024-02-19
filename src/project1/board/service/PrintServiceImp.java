@@ -4,6 +4,7 @@ package project1.board.service;
 import java.util.ArrayList;
 
 import project1.board.model.vo.BoardVO;
+import project1.board.model.vo.PostVO;
 
 public class PrintServiceImp implements PrintService {
 
@@ -156,4 +157,41 @@ public class PrintServiceImp implements PrintService {
 	}
 
 
+	@Override
+	public void postDetail(PostVO tmpPost) {
+		// 조회수 증가 후 동일한 게시글 재호출
+		PostVO post = postService.increaseVeiwCount(tmpPost);
+		if(post == null) {
+			System.out.println("상세조회 실패");
+			return;
+		}
+		System.out.println("==============================");
+		System.out.println("["+post.getPo_pc_title()+"]"+post.getPo_title());
+		System.out.println(post.getPo_mb_id() + "  " + post.getPo_date() + " 조회수 : " 
+							+ post.getPo_viewCount());
+		System.out.println(post.getPo_content());
+		System.out.println("==============================");
+	}
+
+
+	@Override
+	public void printPostList(ArrayList<PostVO> postList) {
+		System.out.println("==============================");
+		for(int i = 0 ; i < postList.size() ; i++) {
+			System.out.println((i+1)+". "+ postList.get(i));
+		}
+		System.out.println("==============================");
+	}
+
+
+	@Override
+	public void printBoardList(ArrayList<BoardVO> boardList) {
+		System.out.println("==============================");
+		for(int i = 0 ; i < boardList.size() ; i++) {
+			System.out.println((i+1)+". "+ boardList.get(i));
+		}
+		System.out.println("==============================");
+	}
 }
+
+
