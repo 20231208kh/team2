@@ -113,7 +113,7 @@ public class PostController {
 	}
 
 	private void manageMyPost(PostVO tmpPost) {
-		printService.postDetail(tmpPost);
+		printService.myPostDetail(tmpPost);
 		System.out.println("[뒤로가기(1) 수정(2) 삭제(3)] : ");
 		System.out.print("입력 : ");
 		int menu = scan.nextInt();
@@ -143,9 +143,7 @@ public class PostController {
 				System.out.println("작성한 댓글이 없습니다.");
 				return;
 			}
-			for(int i = 0 ; i < myReplyList.size() ; i++) {
-				System.out.println((i+1)+". "+ myReplyList.get(i));
-			}
+			printService.printReply(myReplyList);
 			System.out.println("현재 페이지 : " + page);
 			if(myReplyList.size() < 10 && page == 1) {
 				System.out.println("뒤로가기(-2)");
@@ -926,9 +924,8 @@ public class PostController {
 				btn = " 이전페이지(-1)  다음페이지(0)";
 			}
 			System.out.println("==============================");
-			for(int i = 0 ; i < replyList.size(); i++) {
-				System.out.println((i+1)+". "+ replyList.get(i));
-			}
+			
+			printService.printReply(replyList);
 			System.out.println("==============================");
 			System.out.println("현재 페이지 : " + page);
 			System.out.println("[뒤로가기(-3) 댓글작성(-2)"+ btn +"]");
