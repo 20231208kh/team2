@@ -10,10 +10,8 @@ import project1.board.model.vo.ReplyVO;
 public interface PrintService {
 
 	void startMenu();
-	void mainMenu();
 	void manageMemberMenu();
 	void manageBoardMenu();
-	void postMenu();
 	void managePostCategory();
 	void loggedinUserMenu();
 	void loggedinAdminMenu();

@@ -91,6 +91,9 @@ public class Main {
 			}
 			System.out.println("회원가입 실패");
 			break;
+		case 3: 
+			System.out.println("프로그램이 종료됩니다.");
+			break;
 		default:
 			throw new InputMismatchException();
 		}
@@ -165,7 +168,7 @@ public class Main {
 			break;
 		case 2:
 			//공지or게시글 작성 선택메뉴 
-			postController.writePostAdminMenu(memberVo);
+			postController.writePost(memberVo);
 
 			break;
 		case 3: 
@@ -182,7 +185,10 @@ public class Main {
 			postController.searchMenu(memberVo);
 			break;
 		case 6: memberController.updateMemberRight();
-				break;
+			break;
+		case 7:	
+			System.out.println("로그아웃 합니다.");
+			memberVo = null;
 		default:
 			throw new InputMismatchException();
 

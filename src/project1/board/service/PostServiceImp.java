@@ -46,6 +46,7 @@ public class PostServiceImp implements PostService {
 
 	@Override
 	public ArrayList<PostVO> getMyPost(MemberVO memberVo, int page) {
+		session.commit();
 		page = (page-1)*10;		
 		ArrayList<PostVO> postList = postDAO.getMyPost(memberVo,page);	//PostVO를 클래스로 가지는 postList객체에 저장<-(postDAO->postMapper에서 limit page,10을 해놨으므로 page행번호부터 10개를 가져옴)
 		return postList;	//postList 반환

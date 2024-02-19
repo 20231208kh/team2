@@ -26,64 +26,62 @@ public class PrintServiceImp implements PrintService {
 
 
 
-	@Override
-	public void mainMenu() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void postMenu() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	//관리자 전용 메뉴
 	@Override
 	public void manageMemberMenu() {
+		System.out.println("================");
 		System.out.println("--회원 관리 메뉴--");
 		System.out.println("1. 회원 권한 수정");
 		System.out.println("2. 뒤로 가기");
+		System.out.println("================");
 	}
 
 	//관리자 전용 메뉴
 	@Override
 	public void manageBoardMenu() {
+		System.out.println("================");
 		System.out.println("--게시판 관리 메뉴--");
 		System.out.println("1. 카테고리(그룹) 설정");
 		System.out.println("2. 게시판 설정");
 		System.out.println("3. 말머리 설정");
 		System.out.println("4. 뒤로 가기");
+		System.out.println("================");
 		System.out.print("메뉴 선택 : ");
 	}
 	
 	@Override
 	public void manageBoardCategory() {
+		System.out.println("================");
 		System.out.println("--카테고리 설정--");
 		System.out.println("1. 카테고리 추가");
 		System.out.println("2. 카테고리 수정");
 		System.out.println("3. 카테고리 삭제");
 		System.out.println("4. 뒤로 가기");
+		System.out.println("================");
 		System.out.print("메뉴 선택 : ");
 	}
 
 	@Override
 	public void manageBoard() {
+		System.out.println("================");
 		System.out.println("--게시판 설정--");
 		System.out.println("1. 게시판 추가");
 		System.out.println("2. 게시판 수정");
 		System.out.println("3. 게시판 삭제");
 		System.out.println("4. 뒤로 가기");
+		System.out.println("================");
 		System.out.print("메뉴 선택 : ");
 	}
 	
 	@Override
 	public void managePostCategory() {
+		System.out.println("================");
 		System.out.println("--말머리 설정--");
 		System.out.println("1. 게시글 말머리 등록");
 		System.out.println("2. 게시글 말머리 수정");
 		System.out.println("3. 게시글 말머리 삭제");
 		System.out.println("4. 뒤로 가기");
+		System.out.println("================");
 		System.out.print("메뉴 선택 : ");
 	}
 
@@ -91,6 +89,7 @@ public class PrintServiceImp implements PrintService {
 	//일반 회원 전용 메뉴
 	@Override
 	public void loggedinUserMenu() {
+		System.out.println("================");
 		System.out.println("--회원 메뉴--");
 		System.out.println("1. 게시글 작성");
 		System.out.println("2. 나의 커뮤니티 이용내역");
@@ -98,29 +97,35 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("4. 검색 기능");
 		System.out.println("5. 내 정보 수정");
 		System.out.println("6. 로그아웃");
+		System.out.println("================");
 		System.out.print("메뉴 선택 : ");
 	}
 
 	@Override
 	public void loggedinAdminMenu() {
+		System.out.println("================");
 		System.out.println("--관리자 메뉴--");
 		System.out.println("1. 게시판 관리");
 		System.out.println("2. 게시글 작성");
 		System.out.println("3. 나의 커뮤니티 이용내역");
 		System.out.println("4. 게시판 보기");
 		System.out.println("5. 검색 기능");
-		System.out.println("6. 로그아웃");
+		System.out.println("6. 권한부여기능");
+		System.out.println("7. 로그아웃");
+		System.out.println("================");
 		System.out.print("메뉴 선택 : ");
 	}
 
 	@Override
 	public void updateMyInfo() {
+		System.out.println("==============================");
 		System.out.println("--내 정보 수정--");
 		System.out.println("1. 비밀번호 수정");
 		System.out.println("2. 이메일 수정");
 		System.out.println("3. 나이 수정");
 		System.out.println("4. 회원 탈퇴");
 		System.out.println("5. 돌아가기");
+		System.out.println("==============================");
 		System.out.print("메뉴 선택 : ");
 	}
 
@@ -144,18 +149,22 @@ public class PrintServiceImp implements PrintService {
 		return boardService.getBoard();
   }
 	public void myCommunityUsed() {
+		System.out.println("==============================");
 		System.out.println("--나의 커뮤니티 이용내역--");
 		System.out.println("1.게시글 수정");
 		System.out.println("2.게시글 삭제");
 		System.out.println("3.돌아가기");
+		System.out.println("==============================");
 		System.out.print("메뉴 선택 : ");
 	}
 	
 	public void manageMyPostUpdateMenu() {
+		System.out.println("==============================");
 		System.out.println("--게시글 수정-");
 		System.out.println("1.게시글 제목 수정");
 		System.out.println("2.게시글 내용 수정");
 		System.out.println("3.돌아가기");
+		System.out.println("==============================");
 		System.out.print("메뉴 선택 : ");
 
 	}
@@ -207,7 +216,7 @@ public class PrintServiceImp implements PrintService {
 	public void printBoardList(ArrayList<BoardVO> boardList) {
 		System.out.println("==============================");
 		for(int i = 0 ; i < boardList.size() ; i++) {
-			System.out.println((i+1)+". "+ boardList.get(i));
+			System.out.println((i+1)+". "+ boardList.get(i).getBo_title());
 		}
 		System.out.println("==============================");
 	}
