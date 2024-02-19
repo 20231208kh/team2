@@ -154,7 +154,7 @@ public class Main {
 			printService.loggedinAdminMenu();
 			menu = scan.nextInt();
 			loggedInAddminMenu(menu);
-		}while(menu != 6);
+		}while(menu != 7);
 	}
 
 	private static void loggedInAddminMenu(int menu) {
@@ -166,6 +166,7 @@ public class Main {
 		case 2:
 			//공지or게시글 작성 선택메뉴 
 			postController.writePostAdminMenu(memberVo);
+
 			break;
 		case 3: 
 			// 마이페이지
@@ -180,7 +181,8 @@ public class Main {
 			// 검색 메뉴
 			postController.searchMenu(memberVo);
 			break;
-		case 6: break;
+		case 6: memberController.updateMemberRight();
+				break;
 		default:
 			throw new InputMismatchException();
 

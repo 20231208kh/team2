@@ -132,7 +132,6 @@ public class PostController {
 //게시글 수정 삭제 구현 시작
 		private void updatePostMenu(PostVO tmpPost) {	//게시글 수정 메뉴
 			int menu;
-		
 			do{
 				printService.manageMyPostUpdateMenu();
 				menu = scan.nextInt();
@@ -174,6 +173,7 @@ public class PostController {
 			
 			
 		}
+
 		
 		//게시글 내용 수정
 		private void updatePostPoContent(PostVO tmpPost) {

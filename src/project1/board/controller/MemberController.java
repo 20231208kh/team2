@@ -60,6 +60,13 @@ public class MemberController {
 			System.out.println("ID는 영어,숫자 5~15자리");
 			return false;
 		}
+		for(MemberVO item : memberService.getMember()) {
+			if(item.getMb_id().equals(id)) {
+				System.out.println("중복된 아이디입니다.");
+				return false;
+			}
+		}
+		
 		System.out.print("PW를 입력해주세요 : ");
 		String pw = scan.next();
 		if(!Pattern.matches(regex, pw)) {	//pw(비밀번호)가 유효성 검사 regex에 들어간 것과 일치하지 않다면
@@ -81,11 +88,9 @@ public class MemberController {
 			System.out.println("올바르지 않은 주민등록번호 양식입니다.");
 			return false;
 		}
-		System.out.print("권한을 입력해주세요");
-		String role = scan.next();
-		MemberVO member = new MemberVO(id,pw,email,age,localnum,role);	//모든 조건을 만족한 것을 memberVO의 객체 member에 입력받은 것을 생성자로 받음 
-		
 
+
+		MemberVO member = new MemberVO(id,pw,email,age,localnum);
 		if(memberService.signIn(member)) {	//등록이 성공한다면 
 			return true;
 		};
@@ -112,6 +117,21 @@ public class MemberController {
 			System.out.println("뒤로 돌아갑니다.");
 			break;
 		}
+		
+	}
+
+	public void updateMemberRight() {
+		if(!memberVo.getMb_right().equals("ADMIN")) {
+			System.out.println("관리자 전용 메뉴입니다.");
+			return;
+		}
+		System.out.println("권한을 수정할 유저의 ID를 입력해주세요.");
+		String id = scan.next();
+		if(memberService.updateMemberRight(id)) {
+			System.out.println("권한 수정 성공");
+			return;
+		}
+		System.out.println("권한 수정 실패");
 		
 	}
 
