@@ -15,10 +15,6 @@ import project1.board.model.vo.ReplyVO;
 import java.sql.Date;
 import java.util.List;
 
-
-import project1.board.service.MemberService;
-import project1.board.service.MemberServiceImp;
-
 import project1.board.service.PostService;
 import project1.board.service.PostServiceImp;
 import project1.board.service.PrintService;
