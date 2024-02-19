@@ -13,6 +13,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import project1.board.dao.PostDAO;
 import project1.board.model.vo.BoardVO;
 import project1.board.model.vo.MemberVO;
+import project1.board.model.vo.PostCategoryVO;
 import project1.board.model.vo.PostVO;
 import project1.board.model.vo.ReplyVO;
 
@@ -161,22 +162,22 @@ public class PostServiceImp implements PostService {
 	
 	//(공지사항 작성,게시글 작성)
 	@Override
-		public boolean writePost(PostVO postVo) {
-			if(postVo == null 
-					|| postVo.getPo_title() == null 
-					|| postVo.getPo_content() == null
-					|| postVo.getPo_mb_id() == null) {
-				System.out.println("모든 정보를 입력하지 않았습니다.");
-				return false;
-			}
-			
-			boolean res = postDAO.writePost(postVo);
-			if(res) {
-				session.commit();
-			}
-			
-			return res;
+	public boolean writePost(PostVO postVo) {
+		if(postVo == null 
+				|| postVo.getPo_title() == null 
+				|| postVo.getPo_content() == null
+				|| postVo.getPo_mb_id() == null) {
+			System.out.println("모든 정보를 입력하지 않았습니다.");
+			return false;
 		}
+		
+		boolean res = postDAO.writePost(postVo);
+		if(res) {
+			session.commit();
+		}
+		
+		return res;
+	}
 
 	@Override
 	public boolean writePostMain(PostVO postVo) {
@@ -195,6 +196,17 @@ public class PostServiceImp implements PostService {
 			
 			return res;
 		}
+
+	@Override
+	public boolean writePost(String po_title, String po_content, MemberVO memberVo, BoardVO tmpBoard,
+			PostCategoryVO tmpPostCategory, int po_notice) {
+		boolean res =postDAO.writePostA(po_title, po_content, memberVo, tmpBoard, tmpPostCategory, po_notice);
+		if(res) {
+			session.commit();
+		}
+		
+		return res;
+	}
 
 	
 }

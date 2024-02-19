@@ -26,6 +26,7 @@ public interface BoardService {
 	void printBoardCategory();
 	void printBoard();
 	void printPostCategory();
+	ArrayList<PostCategoryVO> getPostCategoryByBoard(BoardVO tmpBoard);
 
 }
 

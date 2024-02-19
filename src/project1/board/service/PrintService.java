@@ -3,6 +3,7 @@ package project1.board.service;
 import java.util.ArrayList;
 
 import project1.board.model.vo.BoardVO;
+import project1.board.model.vo.PostCategoryVO;
 import project1.board.model.vo.PostVO;
 import project1.board.model.vo.ReplyVO;
 
@@ -40,6 +41,8 @@ public interface PrintService {
 	void printBoardList(ArrayList<BoardVO> boardList);
 	void myPostDetail(PostVO tmpPost);
 	void printReply(ArrayList<ReplyVO> replyList);
+	ArrayList<PostCategoryVO> getPostCategoryByBoard(BoardVO tmpBoard);
+	void printPostCategoryList(ArrayList<PostCategoryVO> pCList);
 
 
 

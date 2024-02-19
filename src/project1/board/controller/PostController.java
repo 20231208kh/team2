@@ -8,10 +8,9 @@ import java.util.Scanner;
 
 import project1.board.model.vo.BoardVO;
 import project1.board.model.vo.MemberVO;
+import project1.board.model.vo.PostCategoryVO;
 import project1.board.model.vo.PostVO;
 import project1.board.model.vo.ReplyVO;
-
-import java.sql.Date;
 
 import project1.board.service.PostService;
 import project1.board.service.PostServiceImp;
@@ -291,36 +290,6 @@ public class PostController {
 	}
 	
 	
-	//관리자
-	public void boardAdminMenu(MemberVO tmpMember) {
-		int menu = 0;
-		System.out.println("1.전체 게시글");
-		System.out.println("2.게시판 보기");
-		System.out.println("3.뒤로 가기");
-		System.out.print("입력 : ");
-		try {
-			menu = scan.nextInt();
-			runBoardAdminMenu(menu, tmpMember);
-		}
-		catch (InputMismatchException e) {
-			System.out.println("잘못된 입력입니다");
-		}
-		
-	}
-
-	
-	//관리자
-	private void runBoardAdminMenu(int menu, MemberVO tmpMember) {
-		switch(menu) {
-		case 1: allPostAdmin(tmpMember); break;		//전체 게시글
-		case 2: allBoardAdmin(tmpMember); break;	//게시판 보기
-		case 3: System.out.println("뒤로가기"); break;
-		default:
-			throw new InputMismatchException();
-		}
-	}
-	
-
 	//사용자
 	private void allPost(MemberVO tmpMember) {
 		ArrayList<PostVO> postList = new ArrayList<PostVO>();
@@ -345,9 +314,12 @@ public class PostController {
 			}
 			System.out.print("입력 : ");
 			num = scan.nextInt();				
-			
 			if(num > 0 && num < 11) {
-				PostVO tmpPost = postList.get(num-1);
+				PostVO tmpPost = postList.get(num-1);  //게시글 하나 선택해서 tmpPost에 저장
+				if(tmpMember.getMb_right().equals("ADMIN")) {
+					viewPostAdmin(tmpPost, tmpMember);
+					return;
+				}
 				viewPost(tmpPost , tmpMember);
 				return;
 			}
@@ -368,50 +340,6 @@ public class PostController {
 
 	
 	
-	//관리자, 전체 게시글 
-	private void allPostAdmin(MemberVO tmpMember) {
-		ArrayList<PostVO> postList = new ArrayList<PostVO>();
-		int page = 1;
-		int num = -3;
-		while(true) {
-			postList = postService.getAllPost(page);
-			if((postList == null || postList.size() == 0) && page == 1) {
-				System.out.println("작성된 게시글이 없습니다.");
-				return;
-			}
-			printService.printPostList(postList);
-			System.out.println("현재 페이지 : " + page);
-			if(postList.size() < 10 && page == 1) {
-				System.out.println("뒤로가기(-2)");
-			}else if(postList.size() < 10) {
-				System.out.println("뒤로가기(-2) 이전페이지(-1)");
-			}else if(page == 1) {
-				System.out.println("뒤로가기(-2) 다음페이지(0)");
-			}else {
-				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
-			}
-			System.out.print("입력 : ");
-			num = scan.nextInt();				
-			
-			if(num > 0 && num < 11) {
-				PostVO tmpPost = postList.get(num-1);
-				viewPostAdmin(tmpPost , tmpMember);
-				return;
-			}
-			else {
-				switch(num) {
-				case 0: page++; break;
-				case -1: page--; break;
-				case -2: return;
-				default:
-					throw new InputMismatchException();
-				}
-			}
-			if(page<1) {
-				page = 1;
-			}
-		}
-	}
 	
 	
 	//사용자
@@ -429,22 +357,6 @@ public class PostController {
 		selectedBoardMenu(tmpBoard,tmpMember);		//게시판 하나를 특정해서 가져온 것
 	}
 
-	//관리자
-	private void allBoardAdmin(MemberVO tmpMember) {
-		int num = 0;
-		ArrayList<BoardVO> boardList = printService.getBoard();
-		printService.printBoardList(boardList);
-		System.out.print("게시판 입력 : ");
-		num = scan.nextInt();
-		if(num <= 0 || num > boardList.size()) {
-			System.out.println("게시판을 잘못 선택했습니다. ");
-			return;
-		}
-		BoardVO tmpBoard = boardList.get(num-1);
-		selectedBoardAdminMenu(tmpBoard,tmpMember);
-	}
-	
-	
 
 	// 사용자
 	private void selectedBoardMenu(BoardVO tmpBoard, MemberVO tmpMember) {	// 게시판을 선택한 것과,회원의 정보를 들고 있음
@@ -475,6 +387,10 @@ public class PostController {
 			num = scan.nextInt();				
 			if(num > 0 && num < 11) {
 				PostVO tmpPost = postList.get(num-1);  //게시글 하나 선택해서 tmpPost에 저장
+				if(tmpMember.getMb_right().equals("ADMIN")) {
+					viewPostAdmin(tmpPost, tmpMember);
+					return;
+				}
 				viewPost(tmpPost , tmpMember);
 				return;
 			}
@@ -484,7 +400,7 @@ public class PostController {
 				case -1: page--; break;
 				case -2: return;
 				case -3: 
-				userWritePostInSelectedBoard(tmpBoard,tmpMember); 	//일반 사용자가 게시판을 특정한 뒤 게시글 작성
+					writePost(tmpBoard,tmpMember); 	//일반 사용자가 게시판을 특정한 뒤 게시글 작성
 				
 				return;	//게시글 말머리와 게시글을 조인한 것을 가져옴
 				default:
@@ -498,31 +414,6 @@ public class PostController {
 		}
 	}
 	
-	
-
-	//게시글 작성
-	private void userWritePostInSelectedBoard(BoardVO tmpBoard, MemberVO tmpMember) {	
-		
-		int po_notice=0;
-		printService.printPostCategory();
-		System.out.print("게시글 말머리 번호를 입력하세요.");
-		int po_pc_num=scan.nextInt();
-		
-		scan.nextLine();
-		System.out.print("게시글 제목을 입력하세요.");
-		String po_title=scan.nextLine();
-		System.out.print("게시글 내용을 입력하세요.");
-		String po_content=scan.nextLine();
-
-		PostVO postVo = new PostVO(po_title,po_content,tmpMember.getMb_id(),po_pc_num,po_notice);
-		
-		if(postService.writePost(postVo)) {	
-			System.out.println("게시글 추가 성공!");
-			return;
-		}
-			System.out.println("게시글 추가 실패!");
-		
-	}
 	
 	//main 게시글 작성 또는 공지 작성
 	public void writePostAdminMenu(MemberVO memberVo) {
@@ -640,57 +531,59 @@ public class PostController {
 		
 	}
 	
-
-	// 관리자
-	private void selectedBoardAdminMenu(BoardVO tmpBoard, MemberVO tmpMember) {
-		ArrayList<PostVO> postList = new ArrayList<PostVO>();
-		int page = 1;
-		int num = -4;
-		while(true) {
-			postList = postService.getPostByBoard(tmpBoard,page);
-			if((postList == null || postList.size() == 0) && page == 1) {
-				System.out.println("해당 게시판에 등록된 게시글이 없습니다.");
-			}
-			else {
-				printService.printPostList(postList);
-				System.out.println("현재 페이지 : " + page);
-			}
-			System.out.println("해당 게시판에 게시글 작성(-3)");
-			if(postList.size() < 10 && page == 1) {
-				System.out.println("뒤로가기(-2)");
-			}else if(postList.size() < 10) {
-				System.out.println("뒤로가기(-2) 이전페이지(-1)");
-			}else if(page == 1) {
-				System.out.println("뒤로가기(-2) 다음페이지(0)");
-			}else {
-				System.out.println("뒤로가기(-2) 이전페이지(-1) 다음페이지(0)");
-			}
-			System.out.print("입력 : ");
-			num = scan.nextInt();				
-			if(num > 0 && num < 11) {
-				PostVO tmpPost = postList.get(num-1);
-				viewPostAdmin(tmpPost , tmpMember);
-				return;
-			}
-			else {
-				switch(num) {
-				case 0: page++; break;
-				case -1: page--; break;
-				case -2: return;
-				case -3: 
-					//관리자가 게시판을 특정한 뒤 게시글 작성
-				writePost(tmpBoard,tmpMember); return;		//여기서 공지사항과 게시글을 선택하게 만들어야 됨
-				default:
-					throw new InputMismatchException();
-				}
-			}
-			if(page<1) {
-				page = 1;
-			}
+	//게시글 작성
+	public void writePost(MemberVO memberVo) {
+		ArrayList<BoardVO> boardList = new ArrayList<BoardVO>();
+		int numBoard = -1;
+		int numPostCategory = -1;
+		int po_notice = 0;
+		boardList = printService.getBoard();
+		if(boardList == null || boardList.size() == 0) {
+			System.out.println("등록된 게시판이 없습니다.");
+			return;
 		}
+		
+		printService.printBoardList(boardList);
+		System.out.print("선택 : ");
+		numBoard = scan.nextInt();
+		if(numBoard <= 0 || boardList.size() < numBoard) {
+			System.out.println("잘못 입력했습니다.");
+			return;
+		}
+		BoardVO tmpBoard = boardList.get(numBoard-1);
+		if(numBoard== 1 && memberVo.getMb_right().equals("ADMIN")) {
+			po_notice = 1;
+		}
+		
+		ArrayList<PostCategoryVO> pCList = printService.getPostCategoryByBoard(tmpBoard);
+		if(pCList == null || pCList.size() == 0) {
+			System.out.println("해당 게시판에 등록된 말머리가 없습니다.");
+			return;
+		}
+		printService.printPostCategoryList(pCList);
+		System.out.print("선택 : ");
+		numPostCategory = scan.nextInt();
+		if(numPostCategory <= 0 || pCList.size() < numPostCategory) {
+			System.out.println("잘못 입력했습니다.");
+			return;
+		}
+		PostCategoryVO tmpPostCategory =  pCList.get(numPostCategory-1);
+		
+		scan.nextLine();
+		System.out.print("게시글 제목을 입력하세요.");
+		String po_title=scan.nextLine();
+		System.out.print("게시글 내용을 입력하세요.");
+		String po_content=scan.nextLine();
+
+		if(postService.writePost(po_title, po_content, memberVo, tmpBoard , tmpPostCategory, po_notice)) {	
+			System.out.println("게시글 추가 성공!");
+			return;
+		}
+			System.out.println("게시글 추가 실패!");
 	}
 	
-	//관리자 게시글 작성
+	
+	//게시판 확정 후 게시글 작성
 	private void writePost(BoardVO tmpBoard, MemberVO tmpMember) {	
 		
 		
@@ -1070,6 +963,9 @@ public class PostController {
 		}
 		System.out.println("댓글 등록에 실패했습니다.");
 	}
+
+
+	
 
 
 }

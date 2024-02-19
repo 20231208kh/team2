@@ -19,14 +19,10 @@ public interface MemberService {
 
 	boolean deleteMember(MemberVO memberVo);
 
-<<<<<<< Updated upstream
-	MemberVO getMember(MemberVO memberVo);
-=======
-
 	ArrayList<MemberVO> getMember();
 
 	boolean updateMemberRight(String id);
->>>>>>> Stashed changes
+
 
 
 

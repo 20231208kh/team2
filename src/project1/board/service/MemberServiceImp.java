@@ -137,7 +137,6 @@ public class MemberServiceImp implements MemberService {
 				if(memberDAO.updateMemberRight(id)) {
 				   return true;
 				}
-				
 			}
 		}
 		return false;

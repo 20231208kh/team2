@@ -175,7 +175,7 @@ public class Main {
 		case 4:
 			// 게시판 메뉴
 			// 전체, 게시판 
-			postController.boardAdminMenu(memberVo);
+			postController.boardMenu(memberVo);
 			break;
 		case 5: 
 			// 검색 메뉴

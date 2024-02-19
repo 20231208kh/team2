@@ -22,6 +22,9 @@
   <select id="selectPostCategory" resultType="project1.board.model.vo.PostCategoryVO">
   	select * from post_category
   </select>
+  <select id="selectPostCategoryByBoard" resultType="project1.board.model.vo.PostCategoryVO">
+  	select * from post_category where pc_bo_num = #{board.bo_num}
+  </select>
   <update id="updateBoardCategory">
   	update board_category set bc_title = (#{boardCategoryVO.bc_title}) where bc_num = (#{boardCategoryVO.bc_num})
   </update>

@@ -111,9 +111,15 @@
   </update>
   
   <insert id="writePost">
-	  insert into post(po_title,po_content,po_date,po_mb_id,po_bo_num,po_pc_num,po_notice)
+  	insert into post(po_title,po_content,po_date,po_mb_id,po_bo_num,po_pc_num,po_notice)
   	values(#{postVo.po_title},#{postVo.po_content},now(),#{postVo.po_mb_id},#{postVo.po_bo_num},#{postVo.po_pc_num} ,#{postVo.po_notice})
   </insert>
+  
+  <insert id="writePostA">
+  	insert into post(po_title,po_content,po_date,po_mb_id,po_bo_num,po_pc_num,po_notice)
+  	values(#{title},#{content},now(),#{member.po_mb_id},#{board.po_bo_num},#{postCategory.po_pc_num} ,#{notice})
+  </insert>
+  
   
   <select id="selectPostList" resultType="project1.board.model.vo.PostVO">
 		select * from post

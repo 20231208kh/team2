@@ -4,6 +4,7 @@ package project1.board.service;
 import java.util.ArrayList;
 
 import project1.board.model.vo.BoardVO;
+import project1.board.model.vo.PostCategoryVO;
 import project1.board.model.vo.PostVO;
 import project1.board.model.vo.ReplyVO;
 
@@ -232,6 +233,28 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("메뉴 선택 : ");
 		
 	}
+
+
+
+	@Override
+	public ArrayList<PostCategoryVO> getPostCategoryByBoard(BoardVO tmpBoard) {
+		return boardService.getPostCategoryByBoard(tmpBoard);
+	}
+
+
+
+	@Override
+	public void printPostCategoryList(ArrayList<PostCategoryVO> pCList) {
+		System.out.println("==============================");
+		for(int i = 0 ; i < pCList.size() ; i++) {
+			System.out.println((i+1)+". "+ pCList.get(i));
+		}
+		System.out.println("==============================");
+	}
+
+
+
+	
 
 
 
