@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import project1.board.model.vo.BoardVO;
 import project1.board.model.vo.PostVO;
+import project1.board.model.vo.ReplyVO;
 
 public interface PrintService {
 
@@ -32,6 +33,8 @@ public interface PrintService {
 	void postDetail(PostVO tmpPost);
 	void printPostList(ArrayList<PostVO> postList);
 	void printBoardList(ArrayList<BoardVO> boardList);
+	void myPostDetail(PostVO tmpPost);
+	void printReply(ArrayList<ReplyVO> replyList);
 
 
 

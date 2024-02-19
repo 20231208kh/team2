@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import project1.board.model.vo.BoardVO;
 import project1.board.model.vo.PostVO;
+import project1.board.model.vo.ReplyVO;
 
 public class PrintServiceImp implements PrintService {
 
@@ -191,6 +192,29 @@ public class PrintServiceImp implements PrintService {
 			System.out.println((i+1)+". "+ boardList.get(i));
 		}
 		System.out.println("==============================");
+	}
+
+
+	@Override
+	public void myPostDetail(PostVO tmpPost) {
+		if(tmpPost == null) {
+			System.out.println("상세조회 실패");
+			return;
+		}
+		System.out.println("==============================");
+		System.out.println("["+tmpPost.getPo_pc_title()+"]"+tmpPost.getPo_title());
+		System.out.println(tmpPost.getPo_mb_id() + "  " + tmpPost.getPo_date() + " 조회수 : " 
+							+ tmpPost.getPo_viewCount());
+		System.out.println(tmpPost.getPo_content());
+		System.out.println("==============================");
+	}
+
+
+	@Override
+	public void printReply(ArrayList<ReplyVO> replyList) {
+		for(int i = 0 ; i < replyList.size(); i++) {
+			System.out.println((i+1)+". "+ replyList.get(i));
+		}
 	}
 }
 
