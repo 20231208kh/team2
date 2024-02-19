@@ -1,6 +1,8 @@
 package project1.board.service;
 
 
+import java.util.ArrayList;
+
 import project1.board.model.vo.MemberVO;
 
 public interface MemberService {
@@ -17,7 +19,14 @@ public interface MemberService {
 
 	boolean deleteMember(MemberVO memberVo);
 
+<<<<<<< Updated upstream
 	MemberVO getMember(MemberVO memberVo);
+=======
+
+	ArrayList<MemberVO> getMember();
+
+	boolean updateMemberRight(String id);
+>>>>>>> Stashed changes
 
 
 

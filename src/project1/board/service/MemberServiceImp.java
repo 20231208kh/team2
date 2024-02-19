@@ -122,9 +122,26 @@ public class MemberServiceImp implements MemberService {
 
 
 	@Override
-	public MemberVO getMember(MemberVO memberVo) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<MemberVO> getMember() {
+		return memberDAO.selectMemberList();
+	}
+
+	@Override
+	public boolean updateMemberRight(String id) {
+		if(getMember().size()==0) {
+			return false;
+		}
+		
+		for(int i=0; i<getMember().size(); i++) {
+			if(getMember().get(i).getMb_id().equals(id)&&!getMember().get(i).getMb_right().equals("ADMIN")) {
+				if(memberDAO.updateMemberRight(id)) {
+				   return true;
+				}
+				
+			}
+		}
+		return false;
+
 	}
 
 

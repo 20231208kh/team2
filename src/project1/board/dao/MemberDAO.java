@@ -18,6 +18,7 @@ public interface MemberDAO {
 	boolean updateMemberEmail(@Param("memberVo")MemberVO memberVo, @Param("updateEmail")String updateEmail);
 	boolean updateMemberPw(@Param("memberVo")MemberVO memberVo, @Param("updatePw")String updatePw);
 	boolean deleteMember(@Param("memberVo")MemberVO memberVo);
+	boolean updateMemberRight(@Param("id")String id);
 
 
 	

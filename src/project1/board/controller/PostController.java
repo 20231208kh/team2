@@ -128,6 +128,7 @@ public class PostController {
 	}
 	
 //게시글 수정 삭제 구현 시작
+
 	private void updatePostMenu(PostVO tmpPost) {	//게시글 수정 메뉴
 		int menu;
 	
@@ -135,7 +136,7 @@ public class PostController {
 			printService.manageMyPostUpdateMenu();
 			menu = scan.nextInt();
 			runmanageMyPostUpdateMenu(menu,tmpPost);
-			
+	
 		}while(menu !=3);
 		
 	}
@@ -169,6 +170,7 @@ public class PostController {
 			System.out.println("잘못 입력됐습니다.");
 			return;
 		}
+
 		
 		
 	}
