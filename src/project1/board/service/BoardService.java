@@ -1,7 +1,6 @@
 package project1.board.service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import project1.board.model.vo.BoardCategoryVO;
 import project1.board.model.vo.BoardVO;
@@ -28,10 +27,5 @@ public interface BoardService {
 	void printBoard();
 	void printPostCategory();
 
-
-	
-
-
-
-	
 }
+

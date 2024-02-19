@@ -1,6 +1,5 @@
 package project1.board.controller;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import project1.board.model.vo.BoardCategoryVO;
@@ -20,36 +19,58 @@ public class BoardController {
 	private Scanner scan = new Scanner(System.in);
 	private BoardService boardService = new BoardServiceImp();
 	private PrintService printService = new PrintServiceImp();
+
 	
 	public void run() {
 		int menu;
 		do {
-			printService.manageBoardMenu();
+			printService.manageBoardMenu();	//게시판 관리 메뉴
 			menu = scan.nextInt();
-			runManageBoard(menu);
-		}while(menu != 6);
-		
+			runManager(menu);
+		}while(menu != 4);
 	}
 	
 	//게시판 관리자 실행
-	public void runManageBoard(int menu) {
+	public void runManager(int menu) {
 		switch (menu) {
 		case 1:
 			manageBoardCategory();
 			break;
 		case 2:
-			insertBoard();
+			manageBoard();
 			break;
 		case 3:
-			updateBoard();
-			break;
-		case 4:
-			deleteBoard(); //최소 하나는 남겨둬야한다
-			break;
-		case 5:
 			managePostCategory();
 			break;
-		case 6:
+		case 4:
+			System.out.println("돌아가기");
+			break;
+		default:
+			System.out.println("잘못된 메뉴 선택");
+		}
+	}
+
+	private void manageBoard() {
+		int menu;
+		do {
+			printService.manageBoard();
+			menu = scan.nextInt();
+			runManageBoard(menu);
+		}while(menu != 4);
+	}
+
+	private void runManageBoard(int menu) {
+		switch(menu) {
+		case 1:
+			insertBoard();
+			break;
+		case 2:
+			updateBoard();
+			break;
+		case 3:
+			deleteBoard();
+			break;
+		case 4:
 			System.out.println("돌아가기");
 			break;
 		default:
@@ -70,7 +91,7 @@ public class BoardController {
 		if(boardService.insertBoard(boardVo)) {			
 			System.out.println("게시판 추가 성공!");
 			return;
-		};
+		}
 		System.out.println("게시판 추가 실패!");
 	}
 	
@@ -85,9 +106,8 @@ public class BoardController {
 		if(boardService.updateBoard(uBoardVo)) {			
 			System.out.println("게시판 수정 성공!");
 			return;
-		};
+		}
 		System.out.println("게시판 수정 실패!");
-		
 	}
 	
 	//게시판 삭제
@@ -99,7 +119,7 @@ public class BoardController {
 		if(boardService.deleteBoard(dBoardVo)) {			
 			System.out.println("게시판 삭제 성공!");
 			return;
-		};
+		}
 		System.out.println("게시판 삭제 실패!");
 	}
 
@@ -107,7 +127,7 @@ public class BoardController {
 	private void manageBoardCategory() {
 		int menu;
 		do {
-			printService.manageBoardCategory();
+			printService.manageBoardCategory();	//게시판 게시글말머리 수정 메뉴
 			menu = scan.nextInt();
 			runManageBoardCategory(menu);
 		}while(menu != 4);
@@ -117,13 +137,14 @@ public class BoardController {
 	private void runManageBoardCategory(int menu) {
 		switch(menu) {
 		case 1:
-			insertBoardCategory();
+			insertBoardCategory();		//게시글 말머리 입력
 			break;
 		case 2:
-			updateBoardCategory();
+			updateBoardCategory();	//게시글 말머리 수정
 			break;
+
 		case 3:
-			deleteBoardCategory();
+			deleteBoardCategory();	//게시글 말머리 삭제
 			break;
 		case 4:
 			System.out.println("돌아가기");
@@ -131,14 +152,13 @@ public class BoardController {
 		default:
 			System.out.println("잘못된 메뉴 선택");
 		}
-		
 	}
 
 	//카테고리 추가
 	private void insertBoardCategory() {
 		System.out.print("카테고리 이름 입력 : ");
 		String boardCategory = scan.next();
-		BoardCategoryVO boardCategoryVO = new BoardCategoryVO(boardCategory);
+		BoardCategoryVO boardCategoryVO = new BoardCategoryVO(boardCategory);	//카테고리 이름을 생성자로 하는 boardCategoryVO 객체를 생성
 		if(boardService.insertBoardCategory(boardCategoryVO)) {
 			System.out.println("카테고리 추가 성공!");
 			return;
@@ -182,10 +202,9 @@ public class BoardController {
 			menu = scan.nextInt();
 			runManagePostCategory(menu);
 		}while(menu != 4);
-		
 	}
 
-	//말미러 관리 실행
+	//말머리 관리 실행
 	private void runManagePostCategory(int menu) {
 		switch(menu) {
 		case 1:

@@ -1,6 +1,5 @@
 package project1.board.service;
 
-import java.util.ArrayList;
 
 import java.util.ArrayList;
 
@@ -30,4 +29,6 @@ public interface MemberService {
 >>>>>>> Stashed changes
 
 
+
 }
+

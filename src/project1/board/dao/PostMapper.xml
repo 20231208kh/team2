@@ -4,8 +4,135 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="project1.board.dao.PostDAO">
 	<!-- 태그에는 insert, select, update, delete가 들어감 -->
-	<insert id="insertPost">
-  		insert into post(po_title,po_content,po_date,po_mb_id,po_bo_num,po_pc_num) value(#{tmp.po_title},
-  		#{tmp.po_content},#{tmp.po_date},#{tmp.po_mb_id},#{tmp.po_bo_num},#{tmp.po_pc_num})
-  	</insert>
+
+
+  <update id="increaseVeiwCount">
+  	update post set po_viewcount = po_viewcount + 1 where po_num = #{post.po_num} 
+  </update>
+  <select id="getPost" resultType="project1.board.model.vo.PostVO">
+  	select 
+  		post.*, pc_title as po_pc_title
+	from 
+		post 
+			join
+		post_category on po_pc_num = pc_num
+  	where 
+  		po_num = #{post.po_num}
+  </select>
+  <select id="getMyPost" resultType="project1.board.model.vo.PostVO">
+  	select 
+  		post.*, pc_title as po_pc_title
+	from 
+		post
+  			join
+		post_category on po_pc_num = pc_num
+  	where 
+  		po_mb_id = #{member.mb_id} 
+	order by 
+		po_num desc 
+	limit #{page},10
+  </select>
+  <select id="getMyReply" resultType="project1.board.model.vo.ReplyVO">
+  	select * from reply where re_mb_id = #{member.mb_id} order by re_num desc limit #{page},10
+  </select>
+  <select id="getAllPost" resultType="project1.board.model.vo.PostVO">
+  	select 
+  		post.*, pc_title as po_pc_title
+  	from 
+  		post 
+  			join
+		post_category on po_pc_num = pc_num
+  	order by 
+  		po_num desc 
+  	limit #{page},10
+  </select>
+  <insert id="insertReply">
+  	insert into reply(re_content, re_date, re_mb_id, re_po_num)	values(#{content}, now(), #{member.mb_id}, #{post.po_num})
+  </insert>
+  <select id="getPostReply" resultType="project1.board.model.vo.ReplyVO">
+  	select * from reply where re_po_num = #{post.po_num} limit #{page},10
+  </select>
+  <select id="getPostByTitle" resultType="project1.board.model.vo.PostVO">
+  	select 
+  		post.*, pc_title as po_pc_title
+ 	from post 
+ 			join
+		post_category on po_pc_num = pc_num
+ 	where 
+ 		po_title like concat("%", #{keyword}, "%") 
+	order by 
+		po_num desc 
+	limit #{page},10
+  </select>
+  <select id="getPostByWriter" resultType="project1.board.model.vo.PostVO">
+  	select 
+  		post.*, pc_title as po_pc_title
+  	from 
+  		post 
+  			join
+		post_category on po_pc_num = pc_num
+  	where 
+  		po_mb_id like concat("%", #{keyword}, "%") 
+  	order by 
+  		po_num desc 
+ 	limit #{page},10
+  </select>
+  <select id="getPostByDate" resultType="project1.board.model.vo.PostVO">
+  	select 
+  		post.*, pc_title as po_pc_title
+  	from post 
+  			join
+		post_category on po_pc_num = pc_num
+  	where 
+  		po_date like concat(ifnull(#{year},"%"),"-",lpad(#{month},2,0),"-",lpad(#{day},2,0),"%") 
+  	order by 
+  		po_num desc 
+  	limit #{page},10
+  </select>
+  <select id="getPostByBoard" resultType="project1.board.model.vo.PostVO">
+  	select 
+  		post.*, pc_title as po_pc_title
+  	from post 
+  			join
+		post_category on po_pc_num = pc_num
+  	where 
+  		po_bo_num = #{board.bo_num}
+  	order by 
+  		po_num desc 
+  	limit #{page},10
+  </select>
+  
+  <delete id="deleteReply">
+  	delete from reply where re_num = #{reply.re_num}
+  </delete> 
+  
+  <update id="updateReply">
+  	update reply set re_content = #{content} where re_num = #{reply.re_num}
+  </update>
+  
+  <insert id="writePost">
+	  insert into post(po_title,po_content,po_date,po_mb_id,po_bo_num,po_pc_num,po_notice)
+  	values(#{postVo.po_title},#{postVo.po_content},now(),#{postVo.po_mb_id},#{postVo.po_bo_num},#{postVo.po_pc_num} ,#{postVo.po_notice})
+  </insert>
+  
+  <select id="selectPostList" resultType="project1.board.model.vo.PostVO">
+		select * from post
+  </select>
+  
+  <update id="updatePost">
+  	UPDATE post 
+SET 
+    po_title = #{postVo.po_title},
+    po_content = #{postVo.po_content}
+WHERE
+    po_num = #{postVo.po_num}	
+  </update>
+  
+  <delete id="deletePost">
+ 	 delete from post where po_num = #{po_num}
+  </delete>
+  <insert id="writePostMain">
+  	insert into post(po_title,po_content,po_date,po_mb_id,po_bo_num,po_pc_num,po_notice)
+  	values(#{postVo.po_title},#{postVo.po_content},now(),#{postVo.po_mb_id},#{postVo.po_bo_num},#{postVo.po_pc_num},#{postVo.po_notice})
+  </insert>
 </mapper>

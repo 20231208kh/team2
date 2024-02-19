@@ -1,8 +1,10 @@
 package university;
 
 
-import java.util.ArrayList;
-import java.util.List;
+
+
+
+
 import java.util.Objects;
 
 import lombok.Data;
@@ -24,6 +26,20 @@ public class Lecture {
 	int lectureLT; // 1~3 강의 지속(1< lectureST + lectureLT < 9)
 	//점수
 	int lectureScore; // 학생인스턴스의 과목리스트에 넣을 점수
+
+	public Lecture() {
+		
+	}
+
+	public Lecture(int lecture) {
+		this.lectureScore = lecture;
+	}
+	public Lecture(String lectureName) {
+		this.lectureName = lectureName;
+	}
+	
+
+
 	
 	// 강의 등록 생성자
 	public Lecture(String professorID,String lectureName, int lectureMaxCount, String lectureDay, int lectureST, int lectureLT) {
@@ -51,6 +67,7 @@ public class Lecture {
 
 	@Override
 	public int hashCode() {
+
 		return Objects.hash(lectureDay, lectureST, professorID);
 	}
 
@@ -66,5 +83,6 @@ public class Lecture {
 	
 	
 
-	
+
 }
+

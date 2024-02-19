@@ -36,11 +36,7 @@ public class MemberVO {
 	public int hashCode() {
 		return Objects.hash(mb_id, mb_pw);
 	}
-<<<<<<< Updated upstream
-	
-	
-	
-=======
+
 	public MemberVO(String mb_id, String mb_pw, String mb_email, int mb_age, String mb_localnum) {
 		super();
 		this.mb_id = mb_id;
@@ -50,5 +46,5 @@ public class MemberVO {
 		this.mb_localnum = mb_localnum;
 	}
 
->>>>>>> Stashed changes
 }
+

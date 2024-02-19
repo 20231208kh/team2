@@ -2,6 +2,7 @@ package university;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.Objects;
 
 import lombok.Data;
@@ -11,6 +12,7 @@ public class Student {
 	
 	List<Lecture> lectureList = new ArrayList<Lecture>();
 	Major major ;
+
 
 	
 	//학생 이름
@@ -22,14 +24,34 @@ public class Student {
 	//입학년도
 	int year;
 	//점수
-	int avgScore;
-	
+	int Score;
 
 	int age;
 	
 	String lastNum;
 
+	public Student(String studentId) {
+		super();
+		this.studentId = studentId;
+	}
 	
+
+	public Student(String stdName, String stdId) {
+		this.studentName = stdName;
+		this.studentId = stdId;
+	}
+		
+	
+	public boolean printScore() {
+		if(lectureList == null) {
+			System.out.println("등록된 정보가 없습니다.");
+			return false;
+		}
+		System.out.println("[학번 : " + studentId + " ] " + "[이름 : " + studentName + " ] " + "[전공 : " + major.majorName + " ] " + lectureList);
+		return false;
+	}
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -46,8 +68,7 @@ public class Student {
 	public int hashCode() {
 		return Objects.hash(studentId);
 	}
-	
-	
+
 	
 	public Student(String studentName,int grade, int year, int age, Major major,String lastNum) {
 		super();
@@ -60,13 +81,11 @@ public class Student {
 	}
 	@Override
 	public String toString() {
-		return "학번 : "+studentId+ " 이름 : "+studentName+ " 나이 : "+age+" 학년 : "+grade+ " 전공 : "+major.getMajorName()+" / 수강중인 강의 : "+lectureList;
-	}
-	public Student(String studentId) {
-		super();
-		this.studentId = studentId;
+		return "학번 : "+studentId+ " 이름 : "+studentName+ " 나이 : "+age+" 학년 : "+grade+ " 전공 : "+major.getMajorName()+" / 수강중인 강의 : " + lectureList + "\n";
 	}
 	
 
 	
+
 }
+
