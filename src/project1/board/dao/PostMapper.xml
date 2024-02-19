@@ -111,8 +111,8 @@
   </update>
   
   <insert id="writePost">
-  			insert into post(po_title,po_content,po_date,po_mb_id,po_bo_num,po_pc_num,po_notice)
-  		value(#{postVo.po_title},#{postVo.po_content},now(),#{postVo.po_mb_id},#{postVo.po_bo_num},#{postVo.po_pc_num} ,#{postVo.po_notice))
+	insert into post(po_title,po_content,po_date,po_mb_id,po_bo_num,po_pc_num,po_notice)
+  	value(#{postVo.po_title},#{postVo.po_content},now(),#{postVo.po_mb_id},#{postVo.po_bo_num},#{postVo.po_pc_num} ,#{postVo.po_notice))
   </insert>
   
   <select id="selectPostList" resultType="project1.board.model.vo.PostVO">
@@ -131,5 +131,8 @@ WHERE
   <delete id="deletePost">
  	 delete from post where po_num = #{po_num}
   </delete>
-  
+  <insert id="writePostMain">
+  	insert into post(po_title,po_content,po_date,po_mb_id,po_bo_num,po_pc_num,po_notice)
+  	values(#{postVo.po_title},#{postVo.po_content},now(),#{postVo.po_mb_id},#{postVo.po_bo_num},#{postVo.po_pc_num},#{postVo.po_notice})
+  </insert>
 </mapper>

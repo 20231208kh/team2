@@ -39,13 +39,16 @@ public interface PostDAO {
 
 	boolean updateReply(@Param("reply")ReplyVO tmpReply, @Param("content")String content);
 	
-	boolean writePost(@Param("postVo")PostVO postVo);	//게시글 작성,공지사항 작성
-
 	List<PostVO> selectPostList();
 
 	boolean updatePost(@Param("postVo")PostVO tmpPost);
 
 	boolean deletePost(@Param("po_num") int po_num);
+
+	boolean writePostMain(@Param("postVo")PostVO postVo); //main에서 게시판을 고르고 게시글 작성 
+
+	boolean writePost(@Param("postVo")PostVO postVo);	//게시글 작성,공지사항 작성
+	
 
 
 	

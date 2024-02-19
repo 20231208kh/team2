@@ -29,6 +29,7 @@ public interface PrintService {
 	
 	void adminChoosePostMenu(); //관리자가 일반 게시판을 쓸 지 아니면 공지사항을 쓸지 고르는 메뉴
 	
+	
 
 
 }

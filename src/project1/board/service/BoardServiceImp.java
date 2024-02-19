@@ -265,4 +265,18 @@ public class BoardServiceImp implements BoardService {
 
 }
 		}
+
+		@Override
+		public void printAdminPostCategory() {
+			ArrayList<PostCategoryVO> postCategoryList = getPostCategory();
+			if(postCategoryList.size() == 0) {
+				System.out.println("등록된 말머리가 없습니다.");
+				return;
+			}
+			for(PostCategoryVO tmp : postCategoryList) {
+				System.out.println(tmp);
+			}
+			
+			
+		}
 }

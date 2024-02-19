@@ -43,13 +43,13 @@ public class PostServiceImp implements PostService {
 
 	public PostVO increaseVeiwCount(PostVO tmpPost) {
 		postDAO.increaseVeiwCount(tmpPost);
-		PostVO post = postDAO.getPost(tmpPost).get(0);	//무슨 뜻이에요 이거 .. 이게 왜 되죠?
+		PostVO post = postDAO.getPost(tmpPost).get(0);	
 		return post;
 	}
 
 	@Override
 	public ArrayList<PostVO> getMyPost(MemberVO memberVo, int page) {
-		page = (page-1)*10;		//이거 왜 하신 거에요 준수님 모르겠는데요 이거
+		page = (page-1)*10;		
 		ArrayList<PostVO> postList = postDAO.getMyPost(memberVo,page);	//PostVO를 클래스로 가지는 postList객체에 저장<-(postDAO->postMapper에서 limit page,10을 해놨으므로 page행번호부터 10개를 가져옴)
 		return postList;	//postList 반환
 	}
@@ -167,6 +167,7 @@ public class PostServiceImp implements PostService {
 					|| postVo.getPo_title() == null 
 					|| postVo.getPo_content() == null
 					|| postVo.getPo_mb_id() == null) {
+				System.out.println("모든 정보를 입력하지 않았습니다.");
 				return false;
 			}
 			
@@ -178,5 +179,23 @@ public class PostServiceImp implements PostService {
 			return res;
 		}
 
+	@Override
+	public boolean writePostMain(PostVO postVo) {
+		if(postVo == null 
+				|| postVo.getPo_title() == null 
+				|| postVo.getPo_content() == null
+				|| postVo.getPo_mb_id() == null) {
+			System.out.println("모든 정보를 입력하지 않았습니다.");
+			return false;
+		}
+	
+			boolean res =postDAO.writePostMain(postVo);
+			if(res) {
+				session.commit();
+			}
+			
+			return res;
+		}
 
+	
 }

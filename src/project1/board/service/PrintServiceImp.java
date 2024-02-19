@@ -35,6 +35,7 @@ public class PrintServiceImp implements PrintService {
 	public void printPostCategory() {
 		boardService.printPostCategory();
 	}
+	
 
 
 	@Override
@@ -111,7 +112,7 @@ public class PrintServiceImp implements PrintService {
 	public void loggedinAdminMenu() {
 		System.out.println("--관리자 메뉴--");
 		System.out.println("1. 게시판 관리");
-		System.out.println("2. 게시글 관리+작성");
+		System.out.println("2. 게시글 작성");
 		System.out.println("3. 나의 커뮤니티 이용내역");
 		System.out.println("4. 게시판 보기");
 		System.out.println("5. 검색 기능");

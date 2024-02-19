@@ -69,5 +69,21 @@ public class PostVO {
 	
 	}
 
+
+
+	public PostVO(String po_title, String po_content, int po_notice, String po_mb_id, int po_bo_num,int po_pc_num) {
+		this.po_title = po_title;
+		this.po_content = po_content;
+		this.po_notice = po_notice;
+		this.po_mb_id = po_mb_id;
+		this.po_bo_num = po_bo_num;
+		this.po_pc_num = po_pc_num;
+	}
+
+
+
+
+	
+
 	
 }

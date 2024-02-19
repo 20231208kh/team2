@@ -488,7 +488,7 @@ public class PostController {
 				case -1: page--; break;
 				case -2: return;
 				case -3: 
-				writePostInBoard(tmpBoard,tmpMember); 	//일반 사용자가 게시판을 특정한 뒤 게시글 작성
+				userWritePostInSelectedBoard(tmpBoard,tmpMember); 	//일반 사용자가 게시판을 특정한 뒤 게시글 작성
 				
 				return;	//게시글 말머리와 게시글을 조인한 것을 가져옴
 				default:
@@ -519,17 +519,11 @@ public class PostController {
 		selectedBoardAdminMenu(tmpBoard,tmpMember);
 	}
 	
-	
-	//일반 회원 게시글 작성
-	public void writePost(MemberVO memberVo) {
-		
-		
-	}
 
-	private void writePostInBoard(BoardVO tmpBoard, MemberVO tmpMember) {	//게시글 작성
+	//게시글 작성
+	private void userWritePostInSelectedBoard(BoardVO tmpBoard, MemberVO tmpMember) {	
 		
 		int po_notice=0;
-		System.out.println("게시글 작성을 시작합니다.");
 		printService.printPostCategory();
 		System.out.print("게시글 말머리 번호를 입력하세요.");
 		int po_pc_num=scan.nextInt();
@@ -549,7 +543,123 @@ public class PostController {
 			System.out.println("게시글 추가 실패!");
 		
 	}
+	
+	//main 게시글 작성 또는 공지 작성
+	public void writePostAdminMenu(MemberVO memberVo) {
 
+		if(!memberVo.getMb_right().equals("ADMIN")) {
+			return;
+		}
+		int menu;
+		menu=scan.nextInt();
+		printService.adminChoosePostMenu();
+		switch(menu) {
+		case 1:	//공지사항 작성
+			writeAnnouncementInMain(memberVo);
+			break;
+		case 2:	//게시글 작성
+			writePostInMain(memberVo);
+				break;
+		case 3:
+			System.out.println("돌아갑니다.");
+			break;
+		default:
+			throw new InputMismatchException();
+		}
+}
+	//관리자가 게시글을 작성
+		public void writePostInMain(MemberVO memberVo) {
+			//게시판 선택
+			//공지 게시판은 1번으로 설정
+			//나머지 게시판은 2~ 끝 게시판
+			
+			int po_notice=0;
+			
+			System.out.println("게시판을 선택해주세요.");
+			System.out.println(printService.getBoard());
+			int po_bo_num=scan.nextInt();
+			
+			
+			while(po_bo_num == 1) {
+				System.out.println("공지사항 게시판 선택함");
+				System.out.println("공지사항 작성할거임?");
+				System.out.println("1. O");
+				System.out.println("2. X(일반게시글 작성");
+				int menu = scan.nextInt();
+				if (menu ==1) {
+					writeAnnouncementInMain(memberVo);
+					return;
+				}else if(menu==2) {
+					System.out.println("새로운 게시판 번호");
+					po_bo_num = scan.nextInt();
+				}else {
+					System.out.println("잘못된 입력");
+					break;
+				}
+			}
+			printService.printPostCategory();
+			System.out.print("게시글 말머리 번호를 입력하세요.");
+			int po_pc_num=scan.nextInt();
+			
+			scan.nextLine();
+			
+			
+			
+			System.out.print("게시글 제목을 입력하세요.");
+			String po_title=scan.nextLine();
+			
+			System.out.print("게시글 내용을 입력하세요.");
+			String po_content=scan.nextLine();
+			
+			
+			PostVO postVo = new PostVO(po_title,po_content, po_notice,memberVo.getMb_id(),po_bo_num,po_pc_num);
+			
+			if(postService.writePostMain(postVo)) {	
+				System.out.println("게시글 추가 성공!");
+				return;
+			}
+				System.out.println("게시글 추가 실패!");
+			
+			
+			
+			//아래 똑같음
+			
+		}
+	
+	
+	
+	//관리자 공지사항 작성
+	private void writeAnnouncementInMain(MemberVO memberVo) {	//관리자 공지사항 작성 2번 선택시
+		
+		if(!memberVo.getMb_right().equals("ADMIN") || memberVo==null  ) {
+			return;
+		}
+		
+		System.out.println("공지사항 작성을 시작합니다.");
+		
+		int po_bo_num=1; 	//1번을 공지사항 게시판으로 넣어서
+		int po_notice=1;
+		
+		printService.printPostCategory();
+		System.out.print("공지사항 말머리 번호를 입력하세요.");
+		int po_pc_num=scan.nextInt();
+		
+		scan.nextLine();
+		System.out.print("공지사항 제목을 입력하세요.");
+		String po_title=scan.nextLine();
+		System.out.print("공지사항 내용을 입력하세요.");
+		String po_content=scan.nextLine();
+
+		PostVO postVo = new PostVO(po_title,po_content, po_notice,memberVo.getMb_id(),po_bo_num,po_pc_num);
+		
+		if(postService.writePostMain(postVo)) {	
+			System.out.println("공지사항 추가 성공!");
+			return;
+		}
+			System.out.println("공지사항 추가 실패!");
+		
+	}
+	
 
 	// 관리자
 	private void selectedBoardAdminMenu(BoardVO tmpBoard, MemberVO tmpMember) {
@@ -591,7 +701,7 @@ public class PostController {
 				case -2: return;
 				case -3: 
 					//관리자가 게시판을 특정한 뒤 게시글 작성
-				writeMenuInAdmin(tmpBoard,tmpMember); return;		//여기서 공지사항과 게시글을 선택하게 만들어야 됨
+				writePost(tmpBoard,tmpMember); return;		//여기서 공지사항과 게시글을 선택하게 만들어야 됨
 				default:
 					throw new InputMismatchException();
 				}
@@ -602,28 +712,12 @@ public class PostController {
 		}
 	}
 	
-	private void writeMenuInAdmin(BoardVO tmpBoard, MemberVO tmpMember) {	//공지사항메뉴
-		int menu;
-		menu=scan.nextInt();
-		printService.adminChoosePostMenu();
-		switch(menu) {
-		case 1:	//공지사항 작성
-			writeAnnouncement(tmpBoard,tmpMember);
-			break;
-		case 2:	//게시글 작성
-			writePost(tmpBoard,tmpMember);
-				break;
-		case 3:
-			System.out.println("돌아갑니다.");
-			break;
-		default:
-			throw new InputMismatchException();
-		}
-	}
-
-
-	private void writePost(BoardVO tmpBoard, MemberVO tmpMember) {	//관리자 게시글 작성 1번 선택시
+	//관리자 게시글 작성
+	private void writePost(BoardVO tmpBoard, MemberVO tmpMember) {	
+		
+		
 		int po_notice=0;
+		
 		System.out.println("게시글 작성을 시작합니다.");
 		printService.printPostCategory();
 		System.out.print("게시글 말머리 번호를 입력하세요.");
@@ -637,35 +731,14 @@ public class PostController {
 
 		PostVO postVo = new PostVO(po_title,po_content,tmpMember.getMb_id(),po_pc_num,po_notice);
 		
-		if(postService.writePost(postVo)) {	
+		if(postService.writePostMain(postVo)) {	
 			System.out.println("게시글 추가 성공!");
 			return;
 		}
 			System.out.println("게시글 추가 실패!");
+			
 	}
-
-
-	private void writeAnnouncement(BoardVO tmpBoard, MemberVO tmpMember) {	//관리자 공지사항 작성 2번 선택시
-		int po_notice=1;
-		System.out.println("공지사항 작성을 시작합니다.");
-		printService.printPostCategory();
-		System.out.print("공지사항 말머리 번호를 입력하세요.");
-		int po_pc_num=scan.nextInt();
-		
-		scan.nextLine();
-		System.out.print("공지사항 제목을 입력하세요.");
-		String po_title=scan.nextLine();
-		System.out.print("공지사항 내용을 입력하세요.");
-		String po_content=scan.nextLine();
-
-		PostVO postVo = new PostVO(po_title,po_content,tmpMember.getMb_id(),po_pc_num,po_notice);
-		
-		if(postService.writePost(postVo)) {	
-			System.out.println("공지사항 추가 성공!");
-			return;
-		}
-			System.out.println("공지사항 추가 실패!");
-	}
+	
 
 	//사용자
 	public void searchMenu(MemberVO tmpMember) {
@@ -1206,6 +1279,9 @@ public class PostController {
 		}
 		System.out.println("댓글 등록에 실패했습니다.");
 	}
+
+
+	
 
 
 

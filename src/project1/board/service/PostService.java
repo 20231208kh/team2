@@ -38,11 +38,18 @@ public interface PostService {
 
 	boolean writePost(PostVO postVo);	//게시글 작성
 
+	boolean writePostMain(PostVO postVo); //main에서 가져온거 작성
+	
 	List<PostVO> getPostList(); //게시글 가져오기
 
 	boolean setPost(PostVO tmpPost); //제목 수정
 
 	boolean deletePost(int po_num);	//게시글 삭제
+
+
+	
+
+
 
 	
 

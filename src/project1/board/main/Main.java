@@ -151,6 +151,7 @@ public class Main {
 	private static void runAdminMenu() {
 		int menu =0;
 		do {
+			scan.nextLine();
 			printService.loggedinAdminMenu();
 			menu = scan.nextInt();
 			loggedInAddminMenu(menu);
@@ -163,7 +164,6 @@ public class Main {
 			// 게시판 관리
 			boardController.run();
 			break;
-
 		case 2:
 			//공지or게시글 작성 선택메뉴 
 			postController.writePostAdminMenu(memberVo);
