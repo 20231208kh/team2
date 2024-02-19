@@ -67,23 +67,24 @@ public class Main {
 	}
 	
 	private static void runMenu(int menu) {
+		
 		switch(menu) {
 		case 1:
-			memberVo = memberController.login();
-			if(memberVo==null) {
-				System.out.println("로그인 실패");
-				return;
+			memberVo = memberController.login();	//memberVo에 login()을 넣어주고 memberController에서 login을 정의한다
+			if(memberVo==null) {	//memberVo가 리턴값으로 null을 가지고 있다면
+				System.out.println("로그인 실패");	//로그인 실패
+				return;	//다시 id,pw 입력으로 돌아감
 			}
 			System.out.println("로그인 성공");
-			if(memberVo.getMb_right().equals("ADMIN")) {
-				runAdminMenu();
+			if(memberVo.getMb_right().equals("ADMIN")) { //memberVo 객체에 담긴 회원의 사용자 권한이 ADMIN으로 되어 있다면
+				runAdminMenu();	//관리자 메뉴 실행
 			}else {
-				runUserMenu();
+				runUserMenu();	//일반 회원 메뉴 실행
 
 			}
 			break;
 		case 2:
-			if(memberController.signIn()) {
+			if(memberController.signIn()) {	//리턴값이 true라면
 				System.out.println("회원가입 성공");
 				return;
 
@@ -98,7 +99,7 @@ public class Main {
 	private static void runUserMenu() {
 		int menu =0;
 		do {
-			memberVo = memberController.getMemberInfo();
+			memberVo = memberController.getMemberInfo();   
 			if(memberVo == null) {
 				break;
 			}
@@ -108,12 +109,13 @@ public class Main {
 				loggedInUserMenu(menu);
 			}catch(InputMismatchException e) {
 				scan.nextLine();
-				System.out.println("잘못된 입력");
+				System.out.println("잘못된 입력입니다.");
 			}
 		}while(menu !=6);
 		
 	}
 
+	//일반 회원인 경우
 	private static void loggedInUserMenu(int menu) {
 		switch(menu) {
 		case 1:
@@ -121,7 +123,6 @@ public class Main {
 			postController.writePost(memberVo);
 			break;
 		case 2:
-
 			// 마이페이지메뉴
 			postController.myPageMenu(memberVo);
 			break;
@@ -149,6 +150,7 @@ public class Main {
 	private static void runAdminMenu() {
 		int menu =0;
 		do {
+			scan.nextLine();
 			printService.loggedinAdminMenu();
 			menu = scan.nextInt();
 			loggedInAddminMenu(menu);
@@ -162,8 +164,8 @@ public class Main {
 			boardController.run();
 			break;
 		case 2:
-			// 게시글 작성
-			
+			//공지or게시글 작성 선택메뉴 
+			postController.writePostAdminMenu(memberVo);
 			break;
 		case 3: 
 			// 마이페이지
