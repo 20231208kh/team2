@@ -146,7 +146,7 @@ public class Main {
 			printService.loggedinAdminMenu();
 			menu = scan.nextInt();
 			loggedInAddminMenu(menu);
-		}while(menu != 6);
+		}while(menu != 7);
 	}
 
 	private static void loggedInAddminMenu(int menu) {
@@ -154,7 +154,32 @@ public class Main {
 		case 1:
 			boardController.run();
 			break;
+<<<<<<< Updated upstream
 		
+=======
+		case 2:
+			// 게시글 작성
+			
+			break;
+		case 3: 
+			// 마이페이지
+			postController.myPageMenu(memberVo);
+			break;
+		case 4:
+			// 게시판 메뉴
+			// 전체, 게시판 
+			postController.boardAdminMenu(memberVo);
+			break;
+		case 5: 
+			// 검색 메뉴
+			postController.searchAdminMenu(memberVo);
+			break;
+		case 6: memberController.updateMemberRight();
+				break;
+		default:
+			throw new InputMismatchException();
+
+>>>>>>> Stashed changes
 		}
 		
 	}

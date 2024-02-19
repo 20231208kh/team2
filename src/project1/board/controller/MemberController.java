@@ -55,6 +55,13 @@ public class MemberController {
 			System.out.println("ID는 영어,숫자 5~15자리");
 			return false;
 		}
+		for(MemberVO item : memberService.getMember()) {
+			if(item.getMb_id().equals(id)) {
+				System.out.println("중복된 아이디입니다.");
+				return false;
+			}
+		}
+		
 		System.out.print("PW를 입력해주세요 : ");
 		String pw = scan.next();
 		if(!Pattern.matches(regex, pw)) {
@@ -75,10 +82,15 @@ public class MemberController {
 			System.out.println("올바르지 않은 주민등록번호 양식입니다.");
 			return false;
 		}
+<<<<<<< Updated upstream
 		
 		System.out.print("권한을 입력해주세요");
 		String role = scan.next();
 		MemberVO member = new MemberVO(id,pw,email,age,localnum,role);
+=======
+
+		MemberVO member = new MemberVO(id,pw,email,age,localnum);
+>>>>>>> Stashed changes
 		
 		if(memberService.signIn(member)) {
 			return true;
@@ -106,6 +118,21 @@ public class MemberController {
 			System.out.println("뒤로 돌아갑니다.");
 			break;
 		}
+		
+	}
+
+	public void updateMemberRight() {
+		if(!memberVo.getMb_right().equals("ADMIN")) {
+			System.out.println("관리자 전용 메뉴입니다.");
+			return;
+		}
+		System.out.println("권한을 수정할 유저의 ID를 입력해주세요.");
+		String id = scan.next();
+		if(memberService.updateMemberRight(id)) {
+			System.out.println("권한 수정 성공");
+			return;
+		}
+		System.out.println("권한 수정 실패");
 		
 	}
 

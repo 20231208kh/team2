@@ -5,7 +5,7 @@
 <mapper namespace="project1.board.dao.MemberDAO">
 	<!-- 태그에는 insert, select, update, delete가 들어감 -->
 	<insert id="insertMember">
-  		insert into member values(#{member.mb_id},#{member.mb_pw} ,#{member.mb_email},#{member.mb_age},#{member.mb_localnum},#{member.mb_right})
+  		insert into member values(#{member.mb_id},#{member.mb_pw} ,#{member.mb_email},#{member.mb_age},#{member.mb_localnum},"USER")
   	</insert>
 	<select id="selectMemberList" resultType="project1.board.model.vo.MemberVO">
   		select * from member
@@ -25,5 +25,13 @@
   	<delete id="deleteMember">
   		delete from member where mb_id =#{memberVo.mb_id};
   	</delete>
+<<<<<<< Updated upstream
   	
+=======
+  	  	<update id="updateMemberRight">
+  		update member set mb_right = "ADMIN"
+  		where mb_id = #{id}
+  	</update>
+
+>>>>>>> Stashed changes
 </mapper>
