@@ -156,7 +156,22 @@ public class PrintServiceImp implements PrintService {
 		System.out.print("메뉴 선택 : ");
 
 	}
-
+	
+	
+	@Override
+	public void myPostDetail(PostVO tmpPost) {
+		if(tmpPost == null) {
+			System.out.println("상세조회 실패");
+			return;
+		}
+		System.out.println("==============================");
+		System.out.println("["+tmpPost.getPo_pc_title()+"]"+tmpPost.getPo_title());
+		System.out.println(tmpPost.getPo_mb_id() + "  " + tmpPost.getPo_date() + " 조회수 : " 
+							+ tmpPost.getPo_viewCount());
+		System.out.println(tmpPost.getPo_content());
+		System.out.println("==============================");
+	}
+	
 
 	@Override
 	public void postDetail(PostVO tmpPost) {
@@ -191,21 +206,6 @@ public class PrintServiceImp implements PrintService {
 		for(int i = 0 ; i < boardList.size() ; i++) {
 			System.out.println((i+1)+". "+ boardList.get(i));
 		}
-		System.out.println("==============================");
-	}
-
-
-	@Override
-	public void myPostDetail(PostVO tmpPost) {
-		if(tmpPost == null) {
-			System.out.println("상세조회 실패");
-			return;
-		}
-		System.out.println("==============================");
-		System.out.println("["+tmpPost.getPo_pc_title()+"]"+tmpPost.getPo_title());
-		System.out.println(tmpPost.getPo_mb_id() + "  " + tmpPost.getPo_date() + " 조회수 : " 
-							+ tmpPost.getPo_viewCount());
-		System.out.println(tmpPost.getPo_content());
 		System.out.println("==============================");
 	}
 
