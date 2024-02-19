@@ -36,15 +36,15 @@ public class BoardServiceImp implements BoardService {
 	//카테고리 입력
 	@Override
 	public boolean insertBoardCategory(BoardCategoryVO boardCategoryVO) {
-		if(boardCategoryVO == null || boardCategoryVO.getBc_title() == null) {
+		if(boardCategoryVO == null || boardCategoryVO.getBc_title() == null) {  //boardCategoryVO 객체가 null이고 boardCategoryVO의 게시글 분류 이름이 null이면
 			System.out.println("카테고리 이름을 입력하지 않았습니다.");
 			return false;
 		}
-		if(boardDAO.selectBoardCategory().contains(boardCategoryVO)) {
+		if(boardDAO.selectBoardCategory().contains(boardCategoryVO)) {	//boardDAO의 함수 selectBoardCategory()가 가진 것과 boardCategoryVO가 똑같다면
 			System.out.println("중복된 카테고리 이름입니다.");
 			return false;
 		}
-		boolean res = boardDAO.insertBoardType(boardCategoryVO);
+		boolean res = boardDAO.insertBoardType(boardCategoryVO);	//추가를 성공또는 실패 여부를 res 변수에 넣어줌
 		if(res) {
 			session.commit();
 		}
@@ -322,19 +322,21 @@ public class BoardServiceImp implements BoardService {
 	}
 	
 	//말머리 출력
-	@Override
-	public void printPostCategory() {
+		@Override
+		public void printPostCategory() {
 
-		ArrayList<PostCategoryVO> postCategoryList = getPostCategory();
-		if(postCategoryList.size() == 0) {
-			System.out.println("등록된 말머리가 없습니다.");
-			return;
+			ArrayList<PostCategoryVO> postCategoryList = getPostCategory();
+			if(postCategoryList.size() == 0) {
+				System.out.println("등록된 말머리가 없습니다.");
+				return;
+			}
+			for(PostCategoryVO tmp : postCategoryList) {
+				System.out.println(tmp);
+
 		}
-		for(PostCategoryVO tmp : postCategoryList) {
-			System.out.println(tmp);
-		}
-	}
+
 
 
 }
+
 

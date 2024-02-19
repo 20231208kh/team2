@@ -25,6 +25,23 @@ public class PrintServiceImp implements PrintService {
 
 
 	@Override
+	public void printBoard() {
+		boardService.printBoard();
+	}
+
+	@Override
+	public void printBoardCategory() {
+		boardService.printBoardCategory();
+	}
+
+	@Override
+	public void printPostCategory() {
+		boardService.printPostCategory();
+	}
+	
+
+
+	@Override
 	public void mainMenu() {
 		// TODO Auto-generated method stub
 		
@@ -103,7 +120,7 @@ public class PrintServiceImp implements PrintService {
 	public void loggedinAdminMenu() {
 		System.out.println("--관리자 메뉴--");
 		System.out.println("1. 게시판 관리");
-		System.out.println("2. 게시글 관리");
+		System.out.println("2. 게시글 작성");
 		System.out.println("3. 나의 커뮤니티 이용내역");
 		System.out.println("4. 게시판 보기");
 		System.out.println("5. 검색 기능");
@@ -118,6 +135,7 @@ public class PrintServiceImp implements PrintService {
 		System.out.println("2. 이메일 수정");
 		System.out.println("3. 나이 수정");
 		System.out.println("4. 회원 탈퇴");
+		System.out.println("5. 돌아가기");
 		System.out.print("메뉴 선택 : ");
 	}
 
@@ -148,7 +166,7 @@ public class PrintServiceImp implements PrintService {
 		System.out.print("메뉴 선택 : ");
 	}
 	
-	public void myCoummunityUsedUpdateMenu() {
+	public void manageMyPostUpdateMenu() {
 		System.out.println("--게시글 수정-");
 		System.out.println("1.게시글 제목 수정");
 		System.out.println("2.게시글 내용 수정");
@@ -217,5 +235,17 @@ public class PrintServiceImp implements PrintService {
 		}
 	}
 }
+
+	@Override
+	public void adminChoosePostMenu() {	
+		
+		System.out.println("--관리자 작성 메뉴--");
+		System.out.println("1.공지사항 작성");
+		System.out.println("2.게시글 작성");
+		System.out.println("3.돌아가기");
+		System.out.println("메뉴 선택 : ");
+		
+	}
+
 
 

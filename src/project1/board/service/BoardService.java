@@ -26,5 +26,6 @@ public interface BoardService {
 	void printBoardCategory();
 	void printBoard();
 	void printPostCategory();
+
 }
 
