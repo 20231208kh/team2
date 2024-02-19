@@ -3,6 +3,7 @@ package project1.board.service;
 import java.util.ArrayList;
 
 import project1.board.model.vo.BoardVO;
+import project1.board.model.vo.PostVO;
 
 public interface PrintService {
 
@@ -28,6 +29,9 @@ public interface PrintService {
 	void printBoardCategory();
 	void printBoard();
 	void myCoummunityUsedUpdateMenu();
+	void postDetail(PostVO tmpPost);
+	void printPostList(ArrayList<PostVO> postList);
+	void printBoardList(ArrayList<BoardVO> boardList);
 
 
 
