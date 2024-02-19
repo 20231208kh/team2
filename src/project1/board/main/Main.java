@@ -176,7 +176,7 @@ public class Main {
 			break;
 		case 5: 
 			// 검색 메뉴
-			postController.searchAdminMenu(memberVo);
+			postController.searchMenu(memberVo);
 			break;
 		case 6: break;
 		default:
