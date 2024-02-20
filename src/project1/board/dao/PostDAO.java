@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 
 import project1.board.model.vo.BoardVO;
 import project1.board.model.vo.MemberVO;
+import project1.board.model.vo.PostCategoryVO;
 import project1.board.model.vo.PostVO;
 import project1.board.model.vo.ReplyVO;
 
@@ -23,7 +24,7 @@ public interface PostDAO {
 
 	ArrayList<PostVO> getAllPost(@Param("page")int page);
 
-	void insertReply(@Param("content")String content, @Param("member")MemberVO tmpMember, @Param("post")PostVO tmpPost);
+	boolean insertReply(@Param("content")String content, @Param("member")MemberVO tmpMember, @Param("post")PostVO tmpPost);
 
 	ArrayList<ReplyVO> getPostReply(@Param("post")PostVO tmpPost, @Param("page")int page);
 
@@ -39,13 +40,20 @@ public interface PostDAO {
 
 	boolean updateReply(@Param("reply")ReplyVO tmpReply, @Param("content")String content);
 	
-
-
-	boolean writePost(@Param("postVo")PostVO postVo);
-
 	List<PostVO> selectPostList();
 
-	List<PostVO> setPo_Title(int po_num);
+	boolean updatePost(@Param("postVo")PostVO tmpPost);
+
+	boolean deletePost(@Param("po_num") int po_num);
+
+	boolean writePostMain(@Param("postVo")PostVO postVo); //main에서 게시판을 고르고 게시글 작성 
+
+	boolean writePost(@Param("postVo")PostVO postVo);	//게시글 작성,공지사항 작성
+
+	boolean writePostA(@Param("title")String po_title, @Param("content")String po_content, @Param("member")MemberVO memberVo, 
+			@Param("board")BoardVO tmpBoard, @Param("postCategory")PostCategoryVO tmpPostCategory, @Param("notice")int po_notice);
+	
+
 
 	
 

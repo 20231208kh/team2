@@ -7,6 +7,7 @@ import java.util.List;
 
 import project1.board.model.vo.BoardVO;
 import project1.board.model.vo.MemberVO;
+import project1.board.model.vo.PostCategoryVO;
 import project1.board.model.vo.PostVO;
 import project1.board.model.vo.ReplyVO;
 
@@ -36,11 +37,26 @@ public interface PostService {
 
 	boolean updateReply(ReplyVO tmpReply, String content);
 
-	boolean write(PostVO postVo);
+	boolean writePost(PostVO postVo);	//게시글 작성
 
+	boolean writePostMain(PostVO postVo); //main에서 가져온거 작성
+	
 	List<PostVO> getPostList(); //게시글 가져오기
 
-	List<PostVO> getPo_Title(int po_num);	//제목 수정을 위함
+	boolean setPost(PostVO tmpPost); //제목 수정
+
+	boolean deletePost(int po_num);	//게시글 삭제
+
+	boolean writePost(String po_title, String po_content, MemberVO memberVo, BoardVO tmpBoard,
+			PostCategoryVO tmpPostCategory, int po_notice);
+
+
+	
+
+
+
+	
+
 
 
 }

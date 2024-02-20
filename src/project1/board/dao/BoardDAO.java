@@ -24,6 +24,7 @@ public interface BoardDAO {
 	boolean updatePostCategory(@Param("postCategoryVO")PostCategoryVO uPostCategoryVo);
 	boolean deletePostCategory(@Param("postCategoryVO")PostCategoryVO dPostCategoryVo);
 	ArrayList<PostCategoryVO> selectPostCategory();
+	ArrayList<PostCategoryVO> selectPostCategoryByBoard(@Param("board")BoardVO tmpBoard);
 
 }
 

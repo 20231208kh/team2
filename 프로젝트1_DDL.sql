@@ -29,7 +29,7 @@ DROP TABLE IF EXISTS `post`;
 CREATE TABLE `post` (
 	`po_num`	int	PRIMARY KEY AUTO_INCREMENT,
 	`po_viewcount`	int	DEFAULT 0,
-	`po_title`	varchar(20)	NOT NULL,
+	`po_title`	varchar(50)	NOT NULL,
 	`po_content` text NOT NULL,
 	`po_date`	date not null,
 	`po_notice`	int	DEFAULT 0,

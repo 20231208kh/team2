@@ -1,6 +1,8 @@
 package project1.board.service;
 
 
+import java.util.ArrayList;
+
 import project1.board.model.vo.MemberVO;
 
 public interface MemberService {
@@ -17,10 +19,11 @@ public interface MemberService {
 
 	boolean deleteMember(MemberVO memberVo);
 
+	ArrayList<MemberVO> getMember();
 
-	MemberVO getMember(MemberVO memberVo);
+	boolean updateMemberRight(String id);
 
-	//List<MemberVO> getMemberList(String mb_id);
+
 
 
 }

@@ -1,6 +1,5 @@
 package project1.board.model.vo;
 
-import java.util.Date;
 import java.util.Objects;
 
 import lombok.AllArgsConstructor;
@@ -14,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class PostVO {
 	int po_num,po_viewCount;
 	String po_title,po_content;
-	Date po_date;
+	String po_date;
 	int po_notice;
 	String po_mb_id;
 	int po_bo_num,po_pc_num;
@@ -27,17 +26,21 @@ public class PostVO {
 		int limit = 20;
 		
 		sb.setLength(limit);
-		sb.append("...");
-		
+		if(sb.length()>20) {
+			sb.append("...");			
+		}
+		else {
+			sb.append("   ");
+		}
 		if(po_pc_title == null) {
 			return sb  + " [작성자: " + po_mb_id + "][" +  po_date  +"] 조회수(" + po_viewCount+ ")" ;
 		}
-		return "["+po_pc_title+"]"+ sb  + " [작성자: " + po_mb_id + "][" +  po_date  +"] 조회수(" + po_viewCount+ ")" ;
+		return "["+po_pc_title+"] "+ sb  + " [작성자: " + po_mb_id + "][" +  po_date  +"] 조회수(" + po_viewCount+ ")" ;
 
 	}
 	
 	
-
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -57,16 +60,33 @@ public class PostVO {
 	
 	
 
-	public PostVO(String po_title, String po_content,String po_mb_id, int po_bo_num, int po_pc_num){
+	
+
+	public PostVO(String po_title, String po_content,String po_mb_id, int po_pc_num,int po_notice){	//공지사항 작성 1번(po_notice), 게시글 작성 0번(po_notice)
 
 	this.po_title=po_title;
 	this.po_content=po_content;
 	this.po_mb_id=po_mb_id;
-	this.po_bo_num=po_bo_num;
 	this.po_pc_num=po_pc_num;
+	this.po_notice=po_notice;
 	
 	}
 
+
+
+	public PostVO(String po_title, String po_content, int po_notice, String po_mb_id, int po_bo_num,int po_pc_num) {
+		this.po_title = po_title;
+		this.po_content = po_content;
+		this.po_notice = po_notice;
+		this.po_mb_id = po_mb_id;
+		this.po_bo_num = po_bo_num;
+		this.po_pc_num = po_pc_num;
+	}
+
+
+
+
+	
 
 	
 }
