@@ -1,3 +1,5 @@
+
+
 use team_2_board;
 
 insert into `board_category` (bc_title)
