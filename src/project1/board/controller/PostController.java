@@ -161,7 +161,7 @@ public class PostController {
 	//게시글 제목 수정
 	private void updatePostPoTitle(PostVO tmpPost) {
 
-		printService.postDetail(tmpPost);
+		printService.myPostDetail(tmpPost);
 		tmpPost.getPo_title(); //현재 제목.
 		System.out.println("수정할 제목을 입력하세요.");
 		System.out.print("입력 : ");
@@ -180,7 +180,7 @@ public class PostController {
 
 	//게시글 내용 수정
 	private void updatePostPoContent(PostVO tmpPost) {
-		printService.postDetail(tmpPost);
+		printService.myPostDetail(tmpPost);
 		tmpPost.getPo_content();
 		System.out.println("수정할 내용을 입력하세요.");
 		System.out.print("입력 : ");
