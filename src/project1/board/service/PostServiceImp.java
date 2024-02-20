@@ -54,6 +54,7 @@ public class PostServiceImp implements PostService {
 
 	@Override
 	public ArrayList<ReplyVO> getMyReply(MemberVO memberVo, int page) {
+		session.commit();
 		page = (page-1)*10;
 		ArrayList<ReplyVO> replyList = postDAO.getMyReply(memberVo,page);	//댓글 (main에서 로그인을 성공한 사람의 아이디와 같은 댓글을 가져옴)
 		return replyList;
@@ -61,6 +62,7 @@ public class PostServiceImp implements PostService {
 
 	@Override
 	public ArrayList<PostVO> getAllPost(int page) {
+		session.commit();
 		page = (page-1)*10;
 		ArrayList<PostVO> postList = postDAO.getAllPost(page);	
 		return postList;
@@ -83,6 +85,7 @@ public class PostServiceImp implements PostService {
 
 	@Override
 	public ArrayList<ReplyVO> getPostReply(PostVO tmpPost, int page) {
+		session.commit();
 		page = (page-1)*10;
 		ArrayList<ReplyVO> replyList = postDAO.getPostReply(tmpPost, page);
 		return replyList;
@@ -90,6 +93,7 @@ public class PostServiceImp implements PostService {
 
 	@Override
 	public ArrayList<PostVO> getPostByTitle(String keyword, int page) {
+		session.commit();
 		page = (page-1)*10;
 		ArrayList<PostVO> postList = postDAO.getPostByTitle(keyword,page);
 		return postList;
@@ -97,6 +101,7 @@ public class PostServiceImp implements PostService {
 
 	@Override
 	public ArrayList<PostVO> getPostByWriter(String keyword, int page) {
+		session.commit();
 		page = (page-1)*10;
 		ArrayList<PostVO> postList = postDAO.getPostByWriter(keyword,page);
 		return postList;
@@ -104,6 +109,7 @@ public class PostServiceImp implements PostService {
 
 	@Override
 	public ArrayList<PostVO> getPostByDate(String year, String month, String day, int page) {
+		session.commit();
 		page = (page-1)*10;
 		if(year.length() != 4) {
 			year = null;
@@ -114,6 +120,7 @@ public class PostServiceImp implements PostService {
 
 	@Override
 	public ArrayList<PostVO> getPostByBoard(BoardVO tmpBoard, int page) {
+		session.commit();
 		page = (page-1)*10;
 		ArrayList<PostVO> postList = postDAO.getPostByBoard(tmpBoard,page);
 		return postList;
@@ -128,6 +135,7 @@ public class PostServiceImp implements PostService {
 	@Override
 	public boolean updateReply(ReplyVO tmpReply, String content) {
 		if(postDAO.updateReply(tmpReply,content)) {
+			session.commit();
 			return true;
 		}
 		return false;
@@ -136,7 +144,7 @@ public class PostServiceImp implements PostService {
 
 	@Override
 	public List<PostVO> getPostList() {
-		
+		session.commit();
 		return postDAO.selectPostList();
 	}
 
