@@ -129,7 +129,7 @@ public class PostServiceImp implements PostService {
 	@Override
 	public void deleteReply(ReplyVO tmpReply) {
 		postDAO.deleteReply(tmpReply);
-		
+		session.commit();
 	}
 
 	@Override
