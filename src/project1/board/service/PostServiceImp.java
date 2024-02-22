@@ -13,6 +13,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import project1.board.dao.PostDAO;
 import project1.board.model.vo.BoardVO;
 import project1.board.model.vo.MemberVO;
+import project1.board.model.vo.PostCategoryVO;
 import project1.board.model.vo.PostVO;
 import project1.board.model.vo.ReplyVO;
 
@@ -179,7 +180,9 @@ public class PostServiceImp implements PostService {
 		}
 
 	@Override
+
 	public boolean writePostMain(PostVO postVo) {
+		
 		if(postVo == null 
 				|| postVo.getPo_title() == null 
 				|| postVo.getPo_content() == null
@@ -195,6 +198,18 @@ public class PostServiceImp implements PostService {
 			
 			return res;
 		}
+
+	@Override
+<<<<<<< HEAD
+	public ArrayList<PostCategoryVO> getAllPostCategory(BoardVO board) {
+		
+		return postDAO.getAllPostCategory(board);
+=======
+	public ArrayList<PostCategoryVO> getPC(int num) {
+		
+		return postDAO.selectPC(num);
+>>>>>>> c0a82aa11cdf35c37c798373516aca66f2be1517
+	}
 
 	
 }

@@ -3,7 +3,9 @@ package project1.board.service;
 
 import java.util.ArrayList;
 
+import project1.board.dao.PostDAO;
 import project1.board.model.vo.BoardVO;
+import project1.board.model.vo.PostCategoryVO;
 import project1.board.model.vo.PostVO;
 import project1.board.model.vo.ReplyVO;
 
@@ -23,22 +25,6 @@ public class PrintServiceImp implements PrintService {
 		
 	}
 
-
-	@Override
-	public void printBoard() {
-		boardService.printBoard();
-	}
-
-	@Override
-	public void printBoardCategory() {
-		boardService.printBoardCategory();
-	}
-
-	@Override
-	public void printPostCategory() {
-		boardService.printPostCategory();
-	}
-	
 
 
 	@Override
@@ -139,25 +125,6 @@ public class PrintServiceImp implements PrintService {
 		System.out.print("메뉴 선택 : ");
 	}
 
-	@Override
-
-	public void printBoard() {
-		boardService.printBoard();
-	}
-
-	@Override
-	public void printBoardCategory() {
-		boardService.printBoardCategory();
-	}
-
-	@Override
-	public void printPostCategory() {
-		boardService.printPostCategory();
-	}
-
-	public ArrayList<BoardVO> getBoard() {
-		return boardService.getBoard();
-  }
 	public void myCommunityUsed() {
 		System.out.println("--나의 커뮤니티 이용내역--");
 		System.out.println("1.게시글 수정");
@@ -230,11 +197,13 @@ public class PrintServiceImp implements PrintService {
 
 	@Override
 	public void printReply(ArrayList<ReplyVO> replyList) {
+		System.out.println("==============================");
 		for(int i = 0 ; i < replyList.size(); i++) {
 			System.out.println((i+1)+". "+ replyList.get(i));
 		}
+		System.out.println("==============================");
 	}
-}
+
 
 	@Override
 	public void adminChoosePostMenu() {	
@@ -248,4 +217,39 @@ public class PrintServiceImp implements PrintService {
 	}
 
 
+	@Override
+	public ArrayList<PostCategoryVO> getpostList() {
+		
+		return postService.getPostList() ;
+	}
 
+
+	@Override
+	public ArrayList<BoardVO> getBoard() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	
+
+	
+
+
+	
+	
+}
+
+	@Override
+	public ArrayList<PostCategoryVO> getPC(int num) {
+	
+		return postService.getPC(num);
+	}
+
+
+
+	
+
+
+}

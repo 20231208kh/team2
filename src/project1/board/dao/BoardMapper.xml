@@ -16,9 +16,6 @@
   <select id="selectBoardCategory" resultType="project1.board.model.vo.BoardCategoryVO">
   	select * from board_category
   </select>
-  <select id="selectBoard" resultType="project1.board.model.vo.BoardVO">
-  	select * from board
-  </select>
   <select id="selectPostCategory" resultType="project1.board.model.vo.PostCategoryVO">
   	select * from post_category
   </select>
@@ -40,4 +37,15 @@
   <delete id="deletePostCategory">
   	delete from post_Category where pc_num = (#{postCategoryVO.pc_num})
   </delete>
+<<<<<<< HEAD
+  <select id="selectBoard" resultType="project1.board.model.vo.BoardVO">
+  	select * from board;
+  </select>
+  
+=======
+  
+  <select id="selectAnnouncementBoardCategory" resultType="project1.board.model.vo.BoardVO">
+  	select * from board where bo_num=#{bo_num}
+  </select>
+>>>>>>> c0a82aa11cdf35c37c798373516aca66f2be1517
 </mapper>

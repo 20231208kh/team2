@@ -183,12 +183,8 @@ public class BoardServiceImp implements BoardService {
 	}
 	
 
-	//게시판 데이터 받아오는 메서드
-	@Override
-	public ArrayList<BoardVO> getBoard() {
-		return boardDAO.selectBoard();
-	}
-
+	//게시판 데이터 받아오는 메서드	getboard
+	
 	//말머리 입력
 	@Override
 	public boolean insertPostCategory(PostCategoryVO postCategoryVo) {
@@ -333,10 +329,26 @@ public class BoardServiceImp implements BoardService {
 			for(PostCategoryVO tmp : postCategoryList) {
 				System.out.println(tmp);
 
+			}
+			
 		}
 
-
-
+	@Override
+	public ArrayList<BoardVO> getBoard() {
+		
+		return boardDAO.selectBoard();
+	}
+	
 }
 
+		@Override
+		public void printAdminPostCategory() {
+			// TODO Auto-generated method stub
+			
+		}
 
+<<<<<<< HEAD
+
+=======
+}
+>>>>>>> c0a82aa11cdf35c37c798373516aca66f2be1517

@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 
 import project1.board.model.vo.BoardVO;
 import project1.board.model.vo.MemberVO;
+import project1.board.model.vo.PostCategoryVO;
 import project1.board.model.vo.PostVO;
 import project1.board.model.vo.ReplyVO;
 
@@ -48,6 +49,14 @@ public interface PostDAO {
 	boolean writePostMain(@Param("postVo")PostVO postVo); //main에서 게시판을 고르고 게시글 작성 
 
 	boolean writePost(@Param("postVo")PostVO postVo);	//게시글 작성,공지사항 작성
+
+<<<<<<< HEAD
+	ArrayList<PostCategoryVO> getAllPostCategory(@Param("board")BoardVO board);	//postcategoryList를 가져온다.
+
+
+=======
+	ArrayList<PostCategoryVO> selectPC(@Param("num")int num);
+>>>>>>> c0a82aa11cdf35c37c798373516aca66f2be1517
 	
 
 

@@ -16,7 +16,7 @@ public interface BoardService {
 	boolean insertBoard(BoardVO boardVo);
 	boolean updateBoard(BoardVO uBoardVo);
 	boolean deleteBoard(BoardVO dBoardVo);
-	ArrayList<BoardVO> getBoard();
+
 
 	boolean insertPostCategory(PostCategoryVO postCategoryVo);
 	boolean updatePostCategory(PostCategoryVO uPostCategoryVo);
@@ -26,6 +26,13 @@ public interface BoardService {
 	void printBoardCategory();
 	void printBoard();
 	void printPostCategory();
+	
+	ArrayList<BoardVO> getBoard();	//전체 게시판에 대한 정보를 가져오는 함수
+
+	
+	void printAdminPostCategory();	//공지사항 게시글 카테고리s
+
+
 
 }
 

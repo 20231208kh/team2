@@ -76,12 +76,12 @@ public class PostVO {
 
 
 	public PostVO(String po_title, String po_content, int po_notice, String po_mb_id, int po_bo_num,int po_pc_num) {
-		this.po_title = po_title;
-		this.po_content = po_content;
-		this.po_notice = po_notice;
-		this.po_mb_id = po_mb_id;
-		this.po_bo_num = po_bo_num;
-		this.po_pc_num = po_pc_num;
+		this.po_title = po_title;	//제목
+		this.po_content = po_content; //내용
+		this.po_notice = po_notice; //공지사항 유무
+		this.po_mb_id = po_mb_id; 	//유저 아이디
+		this.po_bo_num = po_bo_num;	//게시판 번호
+		this.po_pc_num = po_pc_num;	//
 	}
 
 

@@ -157,6 +157,8 @@ public class Main {
 		}while(menu != 6);
 	}
 
+	
+	//관리자 메뉴
 	private static void loggedInAddminMenu(int menu) {
 		switch (menu) {
 		case 1:

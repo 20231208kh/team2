@@ -7,6 +7,7 @@ import java.util.List;
 
 import project1.board.model.vo.BoardVO;
 import project1.board.model.vo.MemberVO;
+import project1.board.model.vo.PostCategoryVO;
 import project1.board.model.vo.PostVO;
 import project1.board.model.vo.ReplyVO;
 
@@ -40,11 +41,26 @@ public interface PostService {
 
 	boolean writePostMain(PostVO postVo); //main에서 가져온거 작성
 	
-	List<PostVO> getPostList(); //게시글 가져오기
+	ArrayList<PostCategoryVO> getPostList(); //게시글 가져오기
 
 	boolean setPost(PostVO tmpPost); //제목 수정
 
 	boolean deletePost(int po_num);	//게시글 삭제
+
+<<<<<<< HEAD
+	ArrayList<PostCategoryVO> getAllPostCategory(BoardVO board);	
+
+
+
+
+
+
+
+=======
+	ArrayList<PostCategoryVO> getPC(int num);
+
+	
+>>>>>>> c0a82aa11cdf35c37c798373516aca66f2be1517
 
 
 	
